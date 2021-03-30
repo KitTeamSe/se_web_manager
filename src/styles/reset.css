@@ -2,28 +2,28 @@
 	font-family: 'NanumSquareL';
 	font-weight: 300;
 	src: local('NanumSquareL'),
-		url('./fonts/NanumSquareL.ttf') format('truetype');
+		url('../assets/fonts/NanumSquareL.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: 'NanumSquareR';
 	font-weight: 400;
 	src: local('NanumSquareR'),
-		url('./fonts/NanumSquareR.ttf') format('truetype');
+		url('../assets/fonts/NanumSquareR.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: 'NanumSquareB';
 	font-weight: 700;
 	src: local('NanumSquareB'),
-		url('./fonts/NanumSquareB.ttf') format('truetype');
+		url('../assets/fonts/NanumSquareB.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: 'NanumSquareEB';
 	font-weight: 800;
 	src: local('NanumSquareEB'),
-		url('./fonts/NanumSquareEB.ttf') format('truetype');
+		url('../assets/fonts/NanumSquareEB.ttf') format('truetype');
 }
 
 
