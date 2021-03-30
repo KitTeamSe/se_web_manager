@@ -1,23 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const LogoStyled = styled.text`
+  user-select: none;
   dominant-baseline: hanging;
-  font: 2.5vw NanumSquareEB;
+  font: 1.9rem NanumSquareEB;
+  fill: ${({ color }) => color || (props => props.theme.mainColor)};
 `;
 
 const SecondStyled = styled.tspan`
-  font: NanumSquareR;
+  font-family: NanumSquareR;
 `;
 
-const Logo = () => {
+const Logo = ({ color }) => {
   return (
-    <svg width="350" height="60" xmlns="http://www.w3.org/2000/svg">
-      <LogoStyled>
-        SE<SecondStyled>Board</SecondStyled>
+    <svg width="230" height="35" xmlns="http://www.w3.org/2000/svg">
+      <LogoStyled y="5" color={color}>
+        SE&nbsp;<SecondStyled>Board 관리자</SecondStyled>
       </LogoStyled>
     </svg>
   );
+};
+
+Logo.propTypes = {
+  color: PropTypes.string
+};
+
+Logo.defaultProps = {
+  color: null
 };
 
 export default Logo;
