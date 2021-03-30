@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { StylesProvider } from '@material-ui/core';
+import { ThemeProvider } from 'styled-components';
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
+// import rootReducer from './reducer';
+import './styles/reset.css';
 import App from './App';
+import theme from './styles/theme';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      {/* <Provider store={createStore(rootReducer)}> */}
+      <StylesProvider injectFirst>
+        <App />
+      </StylesProvider>
+      {/* </Provider> */}
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
