@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 // import Toolbar from './components/atoms/Toolbar/Toolbar';
 // import MyButton from './components/atoms/Button/Button';
 import AppBar from './components/modules/AppBar/AppBar';
-// import Drawer from './components/modules/Drawer/Drawer';
+import Drawer from './components/modules/Drawer/Drawer';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
@@ -30,7 +30,7 @@ function App() {
     <Wrapper>
       <CssBaseline />
       <AppBar open={open} setOpen={setOpen} />
-      {/* <Drawer open={open} setOpen={setOpen} /> */}
+      <Drawer open={open} setOpen={setOpen} />
 
       {/* <Main open={open}>
         <Toolbar height="72" />
