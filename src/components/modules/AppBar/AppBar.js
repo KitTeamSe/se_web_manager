@@ -1,16 +1,13 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import {
-  Menu,
-  Person,
-  Info,
-  Notifications,
-  FirstPage
-} from '@material-ui/icons';
-import { Typography, Badge, Link } from '@material-ui/core';
+import styled from 'styled-components';
+import { Typography, Link } from '@material-ui/core';
 import Bar from '../../atoms/Bar/Bar';
 import IconButton from '../../atoms/IconButton/IconButton';
+import InfoIcon from '../../atoms/Icons/InfoIcon';
+import SideMenuIcon from '../../atoms/Icons/SideMenuIcon';
+import NotificationIcon from '../../atoms/Icons/NotificationIcon';
+import PersonIcon from '../../atoms/Icons/PersonIcon';
 import Logo from '../../../statics/svg/Logo';
 
 const LogoWrapper = styled(Typography)`
@@ -19,32 +16,10 @@ const LogoWrapper = styled(Typography)`
   font-size: 1rem;
 `;
 
-const iconSize = css`
-  width: 30px;
-  height: 30px;
-`;
-
-const MenuIcon = styled(Menu)`
-  ${iconSize}
-`;
-
-const CloseIcon = styled(FirstPage)`
-  ${iconSize}
-`;
-
-const InfoIcon = styled(Info)`
-  ${iconSize}
-`;
-
-const NotificationsIcon = styled(Notifications)`
-  ${iconSize}
-`;
-
-const PersonIcon = styled(Person)`
-  ${iconSize}
-`;
-
 const AppBar = ({ open, setOpen }) => {
+  // const [badgeContent, setBadgeContent] = useState(2);
+  const badgeContent = 2;
+
   const handleDrawerOpen = useCallback(() => {
     setOpen(true);
   }, [open]);
@@ -59,15 +34,11 @@ const AppBar = ({ open, setOpen }) => {
 
   return (
     <Bar open={open}>
-      {open ? (
-        <IconButton onClick={() => handleDrawerClose()}>
-          <CloseIcon onClick={() => handleDrawerClose()} />
-        </IconButton>
-      ) : (
-        <IconButton onClick={() => handleDrawerOpen()}>
-          <MenuIcon onClick={() => handleDrawerOpen()} />
-        </IconButton>
-      )}
+      <IconButton
+        onClick={() => (open ? handleDrawerClose() : handleDrawerOpen())}
+      >
+        <SideMenuIcon open={open} setOpen={setOpen} />
+      </IconButton>
 
       <LogoWrapper variant="h6">
         <Link href="./">
@@ -79,9 +50,7 @@ const AppBar = ({ open, setOpen }) => {
         <InfoIcon />
       </IconButton>
       <IconButton onClick={() => doNothing()}>
-        <Badge badgeContent={1} color="secondary">
-          <NotificationsIcon />
-        </Badge>
+        <NotificationIcon badgeContent={badgeContent} />
       </IconButton>
       <IconButton onClick={() => doNothing()}>
         <PersonIcon />
