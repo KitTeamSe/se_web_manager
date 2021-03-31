@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { StylesProvider } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 // import { Provider } from 'react-redux';
 // import { createStore } from 'redux';
 // import rootReducer from './reducer';
@@ -15,7 +16,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       {/* <Provider store={createStore(rootReducer)}> */}
       <StylesProvider injectFirst>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </StylesProvider>
       {/* </Provider> */}
     </ThemeProvider>
