@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Typography, Link } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import Bar from '../../atoms/Bar/Bar';
 import IconButton from '../../atoms/IconButton/IconButton';
 import InfoIcon from '../../atoms/Icons/InfoIcon';
@@ -16,7 +17,7 @@ const LogoWrapper = styled(Typography)`
   font-size: 1rem;
 `;
 
-const AppBar = ({ open, setOpen }) => {
+const AppBar = ({ open, setOpen, path }) => {
   // const [badgeContent, setBadgeContent] = useState(2);
   const badgeContent = 2;
 
@@ -41,7 +42,7 @@ const AppBar = ({ open, setOpen }) => {
       </IconButton>
 
       <LogoWrapper variant="h6">
-        <Link href="./">
+        <Link to={path}>
           <Logo />
         </Link>
       </LogoWrapper>
@@ -61,9 +62,12 @@ const AppBar = ({ open, setOpen }) => {
 
 AppBar.propTypes = {
   open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired
+  setOpen: PropTypes.func.isRequired,
+  path: PropTypes.string
 };
 
-AppBar.defaultProps = {};
+AppBar.defaultProps = {
+  path: '/'
+};
 
 export default AppBar;

@@ -1,45 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 import { Divider, List } from '@material-ui/core';
-// import { Inbox, Mail } from '@material-ui/icons';
-import {
-  Menu,
-  Dashboard,
-  Label,
-  Work,
-  ViewList,
-  Equalizer,
-  Block,
-  Notifications,
-  Report,
-  Person,
-  Group
-} from '@material-ui/icons';
 import SideMenuListItem from '../../atoms/SideMenuListItem/SideMenuListItem';
+import SideMenuListData from '../../../statics/data/SideMenuListData';
 
-const icons = {
-  menu: <Menu />,
-  board: <Dashboard />,
-  tag: <Label />,
-  job: <Work />,
-  log: <ViewList />,
-  statistics: <Equalizer />,
-  blacklist: <Block />,
-  notice: <Notifications />,
-  report: <Report />,
-  authority_group: <Person />,
-  authority: <Group />
-};
-
-const SideMenuList = ({ data }) => {
+const SideMenuList = () => {
+  const menuItems = SideMenuListData;
   return (
     <>
       <Divider />
       <List>
-        {data.map((el, index) => (
-          <SideMenuListItem count={index} data={el}>
-            <>{icons[el.id]}</>
+        {menuItems.items.map((el, index) => (
+          <SideMenuListItem count={index} data={el} path={menuItems.path}>
+            <>{el.icon}</>
           </SideMenuListItem>
         ))}
       </List>
@@ -47,12 +19,8 @@ const SideMenuList = ({ data }) => {
   );
 };
 
-SideMenuList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
-};
+SideMenuList.propTypes = {};
 
-SideMenuList.defaultProps = {
-  data: []
-};
+SideMenuList.defaultProps = {};
 
 export default SideMenuList;
