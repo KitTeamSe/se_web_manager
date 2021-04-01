@@ -5,28 +5,33 @@ import { Badge } from '@material-ui/core';
 import { Notifications } from '@material-ui/icons';
 import { appbarIconSize } from './iconSize';
 
-const NotificationIconStyles = styled(Notifications)`
+const NotificationIconStyled = styled(Notifications)`
   ${appbarIconSize}
 `;
 
-const NotificationIcon = ({ badgeContent, state, func }) => {
+const BadgeStyled = styled(Badge)`
+  & span {
+    height: 16px;
+    min-width: 16px;
+    font-size: 0.5rem;
+    padding: 0 3px;
+  }
+`;
+
+const NotificationIcon = ({ badgeContent }) => {
   return (
-    <Badge badgeContent={badgeContent} color="secondary">
-      <NotificationIconStyles state={state} func={func} />
-    </Badge>
+    <BadgeStyled badgeContent={badgeContent} overlap="circle" color="secondary">
+      <NotificationIconStyled />
+    </BadgeStyled>
   );
 };
 
 NotificationIcon.propTypes = {
-  badgeContent: PropTypes.number,
-  state: PropTypes.bool,
-  func: PropTypes.func
+  badgeContent: PropTypes.number
 };
 
 NotificationIcon.defaultProps = {
-  badgeContent: null,
-  state: '',
-  func: () => {}
+  badgeContent: null
 };
 
 export default NotificationIcon;

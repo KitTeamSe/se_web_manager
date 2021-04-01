@@ -16,12 +16,12 @@ const Toolbar = ({ children, height }) => {
 
 Toolbar.propTypes = {
   children: PropTypes.string,
-  height: PropTypes.number
+  height: PropTypes.string
 };
 
 Toolbar.defaultProps = {
   children: null,
-  height: props => props.theme.appbarWidth
+  height: 48
 };
 
 export default Toolbar;

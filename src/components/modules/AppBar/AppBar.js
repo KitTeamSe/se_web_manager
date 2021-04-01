@@ -14,7 +14,7 @@ import Logo from '../../../statics/svg/Logo';
 const LogoWrapper = styled(Typography)`
   flex-grow: 1;
   line-height: 0;
-  font-size: 1rem;
+  font-size: 2rem;
 `;
 
 const AppBar = ({ open, setOpen, path }) => {

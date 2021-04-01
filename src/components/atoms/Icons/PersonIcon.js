@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Person } from '@material-ui/icons';
 import { appbarIconSize } from './iconSize';
 
@@ -8,18 +8,12 @@ const PersonIconStyles = styled(Person)`
   ${appbarIconSize}
 `;
 
-const PersonIcon = ({ state, func }) => {
-  return <PersonIconStyles state={state} func={func} />;
+const PersonIcon = () => {
+  return <PersonIconStyles />;
 };
 
-PersonIcon.propTypes = {
-  state: PropTypes.bool,
-  func: PropTypes.func
-};
+PersonIcon.propTypes = {};
 
-PersonIcon.defaultProps = {
-  state: '',
-  func: () => {}
-};
+PersonIcon.defaultProps = {};
 
 export default PersonIcon;
