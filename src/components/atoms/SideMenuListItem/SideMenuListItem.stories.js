@@ -1,12 +1,12 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import React from 'react';
+import StoryRouter from 'storybook-react-router';
 
 import SideMenuListItem from './SideMenuListItem';
 
 export default {
   component: SideMenuListItem,
-  title: 'atoms/SideMenuListItem'
+  title: 'atoms/SideMenuListItem',
+  decorators: [StoryRouter()]
 };
 
 const Template = args => <SideMenuListItem {...args} />;
