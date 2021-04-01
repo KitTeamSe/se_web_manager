@@ -7,7 +7,7 @@ const IconButtonStyled = styled(IconButtons)`
   edge: start;
   color: inherit;
   aria-label: menu;
-  margin: 0 0.5%;
+  margin: 0 5px;
   padding: 8px;
 `;
 
