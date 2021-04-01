@@ -6,6 +6,7 @@ import Buttons from '@material-ui/core/Button';
 const ButtonStyled = styled(Buttons)`
   border-radius: 32px;
   font-weight: bold;
+
   background: ${({ color }) =>
     color === 'primary' ? props => props.theme.mainColor : color};
   &:hover {

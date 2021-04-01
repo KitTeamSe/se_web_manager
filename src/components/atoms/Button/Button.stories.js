@@ -14,7 +14,7 @@ const Template = args => <Button {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  children: '',
+  children: null,
   variant: null,
   color: null,
   disabled: false,
