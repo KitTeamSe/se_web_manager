@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Buttons from '@material-ui/core/Button';
 
 const ButtonStyled = styled(Buttons)`
+  margin: 0 2px;
   border-radius: 32px;
   font-weight: bold;
   background: ${({ color }) =>
@@ -14,13 +15,14 @@ const ButtonStyled = styled(Buttons)`
   }
 `;
 
-const Button = ({ children, variant, color, disabled, href }) => {
+const Button = ({ children, variant, color, disabled, href, size }) => {
   return (
     <ButtonStyled
       variant={variant}
       color={color}
       disabled={disabled}
       href={href}
+      size={size}
     >
       {children}
     </ButtonStyled>
@@ -32,15 +34,17 @@ Button.propTypes = {
   variant: PropTypes.string,
   color: PropTypes.string,
   disabled: PropTypes.bool,
-  href: PropTypes.string
+  href: PropTypes.string,
+  size: PropTypes.string
 };
 
 Button.defaultProps = {
-  children: null,
-  variant: null,
-  color: null,
+  children: '',
+  variant: 'contained',
+  color: 'primary',
   disabled: false,
-  href: null
+  href: null,
+  size: 'small'
 };
 
 export default Button;
