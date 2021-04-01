@@ -37,11 +37,11 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  children: null,
-  variant: null,
-  color: null,
+  children: '',
+  variant: '',
+  color: '',
   disabled: false,
-  href: null
+  href: ''
 };
 
 export default Button;
