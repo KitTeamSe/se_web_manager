@@ -15,7 +15,7 @@ export const Default = Template.bind({});
 Default.args = {
     children: '1',
     variant: 'contained',
-    color: 'black',
+    color: 'primary',
     disabled: false,
     href: ''
 };

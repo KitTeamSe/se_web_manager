@@ -1,5 +1,6 @@
 import React from 'react';
 import {ThemeProvider} from 'styled-components';
+import { StylesProvider } from '@material-ui/core';
 import theme from '../src/styles/theme';
 
 export const parameters = {
@@ -14,8 +15,10 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <Story />
-    </ThemeProvider>
+    <StylesProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    </StylesProvider>
   )
 ]
