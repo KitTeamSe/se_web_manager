@@ -6,7 +6,7 @@ import AppBar from './AppBar';
 
 export default {
   component: AppBar,
-  title: 'atoms/AppBar',
+  title: 'modules/AppBar',
   decorators: [StoryRouter()]
 };
 

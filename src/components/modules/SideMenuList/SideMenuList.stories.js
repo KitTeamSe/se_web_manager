@@ -6,7 +6,7 @@ import SideMenuList from './SideMenuList';
 
 export default {
   component: SideMenuList,
-  title: 'atoms/SideMenuList',
+  title: 'modules/SideMenuList',
   decorators: [StoryRouter()]
 };
 
