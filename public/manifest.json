@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SE 게시판 관리자",
+  "name": "SE 게시판 관리자 페이지",
   "icons": [
     {
       "src": "favicon.ico",
