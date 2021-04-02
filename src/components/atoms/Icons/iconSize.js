@@ -1,11 +1,11 @@
 import { css } from 'styled-components';
 
 export const appbarIconSize = css`
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
 `;
 
 export const defaultIconSize = css`
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
 `;

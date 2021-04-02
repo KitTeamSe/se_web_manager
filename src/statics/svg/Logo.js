@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const LogoStyled = styled.text`
   user-select: none;
   dominant-baseline: hanging;
-  font: 1.9rem NanumSquareEB;
+  font: 1.5rem NanumSquareEB;
   fill: ${({ color }) => color || (props => props.theme.mainColor)};
 `;
 
@@ -15,7 +15,7 @@ const SecondStyled = styled.tspan`
 
 const Logo = ({ color }) => {
   return (
-    <svg width="230" height="35" xmlns="http://www.w3.org/2000/svg">
+    <svg width="230" height="28" xmlns="http://www.w3.org/2000/svg">
       <LogoStyled y="5" color={color}>
         SE&nbsp;<SecondStyled>Board 관리자</SecondStyled>
       </LogoStyled>

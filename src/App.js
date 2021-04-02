@@ -3,25 +3,20 @@ import styled from 'styled-components';
 import './App.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Toolbar from './components/atoms/Toolbar/Toolbar';
+import ContentContainer from './components/atoms/ContentContainer/ContentContainer';
 import AppBar from './components/modules/AppBar/AppBar';
-import SideMenu from './components/modules/SideMenu.js/SideMenu';
-import SideMenuListData from './statics/data/SideMenuListData';
+import SideMenu from './components/modules/SideMenu/SideMenu';
+import { defaultPath, SideMenuListData } from './statics/data/SideMenuListData';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
   white-space: nowrap;
 `;
 
-const Main = styled.main`
-  flex-grow: 1;
-  margin: 0 104px;
-  margin-left: ${props => (props.open ? 250 : 104)}px;
-  padding: 1%;
-`;
-
 function App() {
   const menuItems = SideMenuListData;
+  const path = defaultPath;
+  const firstPage = menuItems[0].id;
   const [open, setOpen] = useState(false);
 
   // const doNothing = () => {
@@ -32,22 +27,25 @@ function App() {
     <Wrapper>
       <CssBaseline />
       <AppBar open={open} setOpen={setOpen} path={menuItems.path} />
-      <SideMenu open={open} setOpen={setOpen} />
+      <SideMenu open={open} items={menuItems} path={path} />
 
-      <Main open={open}>
-        <Toolbar height="72" />
+      <ContentContainer open={open} setOpen={setOpen}>
         <Switch>
-          <Route exact path={menuItems.path}>
-            메인
-          </Route>
-          {menuItems.items.map(el => (
-            <Route path={`${menuItems.path}/${el.id}`}>{el.page}</Route>
+          {menuItems.map(el => (
+            <Route exact path={`${path}/${el.id}`} key={el.id}>
+              {el.page}
+            </Route>
           ))}
-          <Redirect path="*" to={menuItems.path} />
+          <Redirect path="*" to={`${path}/${firstPage}`} />
         </Switch>
-      </Main>
+      </ContentContainer>
     </Wrapper>
   );
 }
+
+// menuItems: PropTypes.shape({
+//   path: PropTypes.string,
+//   items: PropTypes.arrayOf(PropTypes.object)
+// })
 
 export default App;

@@ -26,82 +26,80 @@ import BlacklistListView from '../../components/templates/BlacklistManagement/Bl
 import NoticeListView from '../../components/templates/NoticeManagement/NoticeListView';
 import ReportListView from '../../components/templates/ReportManagement/ReportListView';
 
-const SideMenuListData = {
-  path: '/m',
-  items: [
-    {
-      id: 'menu',
-      name: '메뉴 관리',
-      icon: <Menu />,
-      page: <MenuListView />
-    },
-    {
-      id: 'board',
-      name: '게시판 관리',
-      icon: <Dashboard />,
-      page: <BoardListView />
-    },
-    {
-      id: 'post',
-      name: '게시글 관리',
-      icon: <PostAdd />,
-      page: <PostMoveView />
-    },
-    {
-      id: 'tag',
-      name: '태그 관리',
-      icon: <Label />,
-      page: <TagListView />
-    },
-    {
-      id: 'job',
-      name: '취업정보 업로드',
-      icon: <Work />,
-      page: <JobInfoUploadView />
-    },
-    {
-      id: 'log',
-      name: '로그 관리',
-      icon: <ViewList />,
-      page: <LogListView />
-    },
-    {
-      id: 'statistics',
-      name: '통계 관리',
-      icon: <Equalizer />,
-      page: <StatisticsView />
-    },
-    {
-      id: 'blacklist',
-      name: 'IP차단 관리',
-      icon: <Block />,
-      page: <BlacklistListView />
-    },
-    {
-      id: 'notice',
-      name: '알림 관리',
-      icon: <Notifications />,
-      page: <NoticeListView />
-    },
-    {
-      id: 'report',
-      name: '신고 관리',
-      icon: <Report />,
-      page: <ReportListView />
-    },
-    {
-      id: 'authority_group',
-      name: '권한그룹 관리',
-      icon: <Person />,
-      page: <AuthGroupListView />
-    },
-    {
-      id: 'authority',
-      name: '권한 관리',
-      icon: <Group />,
-      page: <AuthListView />
-    }
-  ]
-};
+const defaultPath = '/m';
+const SideMenuListData = [
+  {
+    id: 'menu',
+    name: '메뉴 관리',
+    icon: <Menu />,
+    page: <MenuListView />
+  },
+  {
+    id: 'board',
+    name: '게시판 관리',
+    icon: <Dashboard />,
+    page: <BoardListView />
+  },
+  {
+    id: 'post',
+    name: '게시글 이동',
+    icon: <PostAdd />,
+    page: <PostMoveView />
+  },
+  {
+    id: 'tag',
+    name: '태그 관리',
+    icon: <Label />,
+    page: <TagListView />
+  },
+  {
+    id: 'job',
+    name: '취업정보 업로드',
+    icon: <Work />,
+    page: <JobInfoUploadView />
+  },
+  {
+    id: 'log',
+    name: '로그 관리',
+    icon: <ViewList />,
+    page: <LogListView />
+  },
+  {
+    id: 'statistics',
+    name: '통계 관리',
+    icon: <Equalizer />,
+    page: <StatisticsView />
+  },
+  {
+    id: 'blacklist',
+    name: 'IP차단 관리',
+    icon: <Block />,
+    page: <BlacklistListView />
+  },
+  {
+    id: 'notice',
+    name: '알림 관리',
+    icon: <Notifications />,
+    page: <NoticeListView />
+  },
+  {
+    id: 'report',
+    name: '신고 관리',
+    icon: <Report />,
+    page: <ReportListView />
+  },
+  {
+    id: 'authority_group',
+    name: '권한그룹 관리',
+    icon: <Group />,
+    page: <AuthGroupListView />
+  },
+  {
+    id: 'authority',
+    name: '권한 관리',
+    icon: <Person />,
+    page: <AuthListView />
+  }
+];
 
-export default SideMenuListData;
+export { defaultPath, SideMenuListData };

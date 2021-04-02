@@ -2,26 +2,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import styled from 'styled-components';
 
-const SideMenuList = ({ children, data, path }) => {
+const ListItemStyled = styled(ListItem)`
+  padding: 4px 12px;
+`;
+
+const ListItemIconStyled = styled(ListItemIcon)`
+  min-width: 40px;
+  key: ${({ key }) => key};
+`;
+
+const SideMenuListItem = ({ children, data, path }) => {
   return (
-    <ListItem button key={data.name} component={Link} to={`${path}/${data.id}`}>
-      <ListItemIcon>{children}</ListItemIcon>
+    <ListItemStyled
+      dense
+      button
+      key={data.name}
+      component={Link}
+      to={`${path}/${data.id}`}
+    >
+      <ListItemIconStyled>{children}</ListItemIconStyled>
       <ListItemText primary={data.name} />
-    </ListItem>
+    </ListItemStyled>
   );
 };
 
-SideMenuList.propTypes = {
-  children: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.object),
+SideMenuListItem.propTypes = {
+  children: PropTypes.shape({ root: PropTypes.string }),
+  data: PropTypes.shape({ name: PropTypes.string, id: PropTypes.string }),
   path: PropTypes.string
 };
 
-SideMenuList.defaultProps = {
-  children: '',
-  data: [],
+SideMenuListItem.defaultProps = {
+  children: {},
+  data: {},
   path: '/'
 };
 
-export default SideMenuList;
+export default SideMenuListItem;
