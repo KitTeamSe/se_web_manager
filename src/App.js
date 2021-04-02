@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import './App.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ContentContainer from './components/atoms/ContentContainer/ContentContainer';
