@@ -109,7 +109,7 @@ const ManageListData = [
 const ScheduleListData = [
   {
     to: 'schedule',
-    name: '시간표 관리',
+    name: '시간표 관리1',
     icon: <Schedule />,
     page: <>시간표 메인</>
   },

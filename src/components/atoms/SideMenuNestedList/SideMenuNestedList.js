@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   ListItem,
@@ -26,7 +25,7 @@ const ListItemTextStyled = styled(ListItemText)`
 
 const SideMenuNestedList = ({ children, name, open, onClick }) => {
   return (
-    <ListItemStyled dense button component={Link} onClick={onClick}>
+    <ListItemStyled dense button key={name} onClick={onClick}>
       <ListItemIconStyled>{children}</ListItemIconStyled>
       <ListItemTextStyled
         primary={

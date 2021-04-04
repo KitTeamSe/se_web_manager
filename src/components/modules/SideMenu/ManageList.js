@@ -21,9 +21,10 @@ const ManageList = ({ items, path }) => {
   return (
     <ListStyled>
       <SideMenuNestedList
-        name={manageNestedItem.name}
         open={openManageList}
         onClick={handleManageList}
+        name={manageNestedItem.name}
+        key={manageNestedItem.name}
       >
         {manageNestedItem.icon}
       </SideMenuNestedList>
@@ -34,6 +35,7 @@ const ManageList = ({ items, path }) => {
               count={index}
               to={`${path}/${el.to}`}
               name={el.name}
+              key={el.name}
             >
               {el.icon}
             </SideMenuListItem>

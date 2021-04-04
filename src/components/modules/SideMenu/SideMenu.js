@@ -6,8 +6,6 @@ import ScheduleList from './ScheduleList';
 
 const SideMenu = ({ open, items, path }) => {
   const [scheduleItem, manageItem] = items;
-  console.log(scheduleItem);
-  console.log(manageItem);
 
   return (
     <SideMenuContainer open={open}>
@@ -19,7 +17,7 @@ const SideMenu = ({ open, items, path }) => {
 
 SideMenu.propTypes = {
   open: PropTypes.bool.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.array),
   path: PropTypes.string
 };
 

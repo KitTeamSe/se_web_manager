@@ -24,6 +24,7 @@ const ScheduleList = ({ items, path }) => {
         name={scheduleNestedItem.name}
         open={openScheduleList}
         onClick={handleScheduleList}
+        key={scheduleNestedItem.name}
       >
         {scheduleNestedItem.icon}
       </SideMenuNestedList>
@@ -34,6 +35,7 @@ const ScheduleList = ({ items, path }) => {
               count={index}
               to={`${path}/${el.to}`}
               name={el.name}
+              key={el.name}
             >
               {el.icon}
             </SideMenuListItem>
