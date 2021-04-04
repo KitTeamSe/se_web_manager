@@ -11,7 +11,10 @@ import {
   Notifications,
   Report,
   Person,
-  Group
+  Group,
+  Schedule,
+  Build,
+  CalendarToday
 } from '@material-ui/icons';
 import AuthGroupListView from '../../components/templates/AuthGroupManagement/AuthGroupListView';
 import AuthListView from '../../components/templates/AuthManagement/AuthListView';
@@ -27,79 +30,123 @@ import NoticeListView from '../../components/templates/NoticeManagement/NoticeLi
 import ReportListView from '../../components/templates/ReportManagement/ReportListView';
 
 const defaultPath = '/m';
-const SideMenuListData = [
+
+const ManageListData = [
   {
-    id: 'menu',
+    to: 'menu',
     name: '메뉴 관리',
     icon: <Menu />,
     page: <MenuListView />
   },
   {
-    id: 'board',
+    to: 'board',
     name: '게시판 관리',
     icon: <Dashboard />,
     page: <BoardListView />
   },
   {
-    id: 'post',
+    to: 'post',
     name: '게시글 이동',
     icon: <PostAdd />,
     page: <PostMoveView />
   },
   {
-    id: 'tag',
+    to: 'tag',
     name: '태그 관리',
     icon: <Label />,
     page: <TagListView />
   },
   {
-    id: 'job',
+    to: 'job',
     name: '취업정보 업로드',
     icon: <Work />,
     page: <JobInfoUploadView />
   },
   {
-    id: 'log',
+    to: 'log',
     name: '로그 관리',
     icon: <ViewList />,
     page: <LogListView />
   },
   {
-    id: 'statistics',
+    to: 'statistics',
     name: '통계 관리',
     icon: <Equalizer />,
     page: <StatisticsView />
   },
   {
-    id: 'blacklist',
+    to: 'blacklist',
     name: 'IP차단 관리',
     icon: <Block />,
     page: <BlacklistListView />
   },
   {
-    id: 'notice',
+    to: 'notice',
     name: '알림 관리',
     icon: <Notifications />,
     page: <NoticeListView />
   },
   {
-    id: 'report',
+    to: 'report',
     name: '신고 관리',
     icon: <Report />,
     page: <ReportListView />
   },
   {
-    id: 'authority_group',
+    to: 'authority_group',
     name: '권한그룹 관리',
     icon: <Group />,
     page: <AuthGroupListView />
   },
   {
-    id: 'authority',
+    to: 'authority',
     name: '권한 관리',
     icon: <Person />,
     page: <AuthListView />
   }
 ];
 
-export { defaultPath, SideMenuListData };
+const ScheduleListData = [
+  {
+    to: 'schedule',
+    name: '시간표 관리',
+    icon: <Schedule />,
+    page: <>시간표 메인</>
+  },
+  {
+    to: 'schedule_2',
+    name: '시간표 관리2',
+    icon: <Schedule />,
+    page: <>시간2표</>
+  },
+  {
+    to: 'schedule_3',
+    name: '시간표 관리3',
+    icon: <Schedule />,
+    page: <>시간3표</>
+  },
+  {
+    to: 'schedule_4',
+    name: '시간표 관리4',
+    icon: <Schedule />,
+    page: <>시간4표</>
+  }
+];
+
+const ManageNestedData = {
+  name: '사이트 관리',
+  icon: <Build />
+};
+
+const ScheduleNestedData = {
+  name: '시간표 관리',
+  icon: <CalendarToday />
+};
+
+export {
+  defaultPath,
+  ManageListData,
+  ScheduleListData,
+  ManageNestedData,
+  ScheduleNestedData
+};
