@@ -16,7 +16,7 @@ const DrawerStyled = styled(Drawer)`
 
 const ListWrapper = styled.div`
   width: 100%;
-  min-width: 250px;
+  min-width: 200px;
 `;
 
 const SideMenuContainer = ({ children, open }) => {
@@ -32,10 +32,12 @@ const SideMenuContainer = ({ children, open }) => {
 };
 
 SideMenuContainer.propTypes = {
-  children: PropTypes.shape({ root: PropTypes.string }).isRequired,
+  children: PropTypes.arrayOf(PropTypes.object),
   open: PropTypes.bool.isRequired
 };
 
-SideMenuContainer.defaultProps = {};
+SideMenuContainer.defaultProps = {
+  children: []
+};
 
 export default SideMenuContainer;
