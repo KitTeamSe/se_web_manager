@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from '@material-ui/core';
-import SideMenuListItem from '../../atoms/SideMenuListItem/SideMenuListItem';
 import SideMenuContainer from '../../atoms/SideMenuContainer/SideMenuContainer';
+import ManageList from './ManageList';
+import ScheduleList from './ScheduleList';
 
 const SideMenu = ({ open, items, path }) => {
+  const [scheduleItem, manageItem] = items;
+  console.log(scheduleItem);
+  console.log(manageItem);
+
   return (
     <SideMenuContainer open={open}>
-      <List>
-        {items.map((el, index) => (
-          <SideMenuListItem count={index} data={el} path={path} key={el.name}>
-            {el.icon}
-          </SideMenuListItem>
-        ))}
-      </List>
+      <ScheduleList items={scheduleItem} path={path} />
+      <ManageList items={manageItem} path={path} />
     </SideMenuContainer>
   );
 };
