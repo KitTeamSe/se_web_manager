@@ -134,13 +134,13 @@ const ScheduleListData = [
 ];
 
 const ManageNestedData = {
-  name: '사이트 관리',
-  icon: <Build />
+  name: '시간표 관리',
+  icon: <CalendarToday />
 };
 
 const ScheduleNestedData = {
-  name: '시간표 관리',
-  icon: <CalendarToday />
+  name: '사이트 관리',
+  icon: <Build />
 };
 
 export {
