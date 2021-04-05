@@ -18,6 +18,17 @@ const ScheduleList = ({ items, path }) => {
     setOpenScheduleList(!openScheduleList);
   }, [openScheduleList]);
 
+  const scheduleMenuList = items.map((el, index) => (
+    <SideMenuListItem
+      count={index}
+      to={`${path}/${el.to}`}
+      name={el.name}
+      key={el.name}
+    >
+      {el.icon}
+    </SideMenuListItem>
+  ));
+
   return (
     <ListStyled>
       <SideMenuNestedList
@@ -29,18 +40,7 @@ const ScheduleList = ({ items, path }) => {
         {scheduleNestedItem.icon}
       </SideMenuNestedList>
       <Collapse in={openScheduleList} timeout="auto" unmountOnExit>
-        <ListStyled>
-          {items.map((el, index) => (
-            <SideMenuListItem
-              count={index}
-              to={`${path}/${el.to}`}
-              name={el.name}
-              key={el.name}
-            >
-              {el.icon}
-            </SideMenuListItem>
-          ))}
-        </ListStyled>
+        <ListStyled>{scheduleMenuList}</ListStyled>
       </Collapse>
     </ListStyled>
   );
