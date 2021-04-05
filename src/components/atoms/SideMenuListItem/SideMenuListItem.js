@@ -13,31 +13,25 @@ const ListItemIconStyled = styled(ListItemIcon)`
   key: ${({ key }) => key};
 `;
 
-const SideMenuListItem = ({ children, data, path }) => {
+const SideMenuListItem = ({ children, name, to }) => {
   return (
-    <ListItemStyled
-      dense
-      button
-      key={data.name}
-      component={Link}
-      to={`${path}/${data.id}`}
-    >
+    <ListItemStyled dense button key={name} component={Link} to={to}>
       <ListItemIconStyled>{children}</ListItemIconStyled>
-      <ListItemText primary={data.name} />
+      <ListItemText primary={name} />
     </ListItemStyled>
   );
 };
 
 SideMenuListItem.propTypes = {
   children: PropTypes.shape({ root: PropTypes.string }),
-  data: PropTypes.shape({ name: PropTypes.string, id: PropTypes.string }),
-  path: PropTypes.string
+  name: PropTypes.string,
+  to: PropTypes.string
 };
 
 SideMenuListItem.defaultProps = {
   children: {},
-  data: {},
-  path: '/'
+  name: '',
+  to: '/'
 };
 
 export default SideMenuListItem;

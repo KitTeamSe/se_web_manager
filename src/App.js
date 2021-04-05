@@ -5,7 +5,11 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import ContentContainer from './components/atoms/ContentContainer/ContentContainer';
 import AppBar from './components/modules/AppBar/AppBar';
 import SideMenu from './components/modules/SideMenu/SideMenu';
-import { defaultPath, SideMenuListData } from './statics/data/SideMenuListData';
+import {
+  defaultPath,
+  ManageListData,
+  ScheduleListData
+} from './statics/data/SideMenuData';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
@@ -13,10 +17,13 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const menuItems = SideMenuListData;
-  const path = defaultPath;
-  const firstPage = menuItems[0].id;
+  const manageItems = ManageListData;
+  const scheduleItems = ScheduleListData;
+  const menuItems = [manageItems, scheduleItems];
+
+  const [firstPage, setFirstPage] = useState(manageItems[0].to);
   const [open, setOpen] = useState(false);
+  const path = defaultPath;
 
   // const doNothing = () => {
   //   return '#';
@@ -25,13 +32,23 @@ function App() {
   return (
     <Wrapper>
       <CssBaseline />
-      <AppBar open={open} setOpen={setOpen} path={menuItems.path} />
-      <SideMenu open={open} items={menuItems} path={path} />
+      <AppBar open={open} setOpen={setOpen} path={path} />
+      <SideMenu
+        open={open}
+        setFirstPage={setFirstPage}
+        items={menuItems}
+        path={path}
+      />
 
       <ContentContainer open={open} setOpen={setOpen}>
         <Switch>
-          {menuItems.map(el => (
-            <Route exact path={`${path}/${el.id}`} key={el.id}>
+          {manageItems.map(el => (
+            <Route exact path={`${path}/${el.to}`} key={el.to}>
+              {el.page}
+            </Route>
+          ))}
+          {scheduleItems.map(el => (
+            <Route exact path={`${path}/${el.to}`} key={el.to}>
               {el.page}
             </Route>
           ))}
