@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../../modules/Header/Header';
+import ContentHeader from '../../modules/ContentHeader/ContentHeader';
 
 const Wrapper = styled.div``;
 
 const LogListView = () => {
   return (
     <Wrapper>
-      <Header title="로그 관리" />
+      <ContentHeader title="로그 관리" />
     </Wrapper>
   );
 };
