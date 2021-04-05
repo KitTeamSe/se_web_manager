@@ -13,9 +13,9 @@ const Template = args => <PageNumberButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    children: '1',
+    child: 1,
     variant: 'contained',
-    color: 'primary',
+    backgroundColor: 'white',
     disabled: false,
     href: ''
 };

@@ -13,9 +13,9 @@ const Template = args => <Button {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  children: '',
-  variant: '',
-  color: '',
+  children: 'Button',
+  variant: 'contained',
+  color: '#ffffff',
   disabled: false,
   href: ''
 };

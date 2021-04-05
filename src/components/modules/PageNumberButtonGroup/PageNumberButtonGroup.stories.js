@@ -14,5 +14,14 @@ const Template = args => <PageNumberButtonGroup {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-
+  buttonProps: {
+    variant: '',
+    color: '',
+    backgroundColor: '',
+    disabled: false,
+    href: ''
+  },
+  nowPage: 1,
+  maxPage: 20,
+  range: 5
 };
