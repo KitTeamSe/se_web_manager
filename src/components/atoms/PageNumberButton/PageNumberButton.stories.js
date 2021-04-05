@@ -17,5 +17,6 @@ Default.args = {
     variant: 'contained',
     backgroundColor: 'white',
     disabled: false,
-    href: ''
+    href: '',
+    onClick: ()=>{}
 };

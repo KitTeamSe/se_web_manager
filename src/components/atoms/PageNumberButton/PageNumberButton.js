@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 const ButtonStyled = styled(Button)`
-  background-color: ${props => props.backgroundColor};
+  background: ${props => props.backgroundColor};
 `;
 
 const PageNumberButton = ({
@@ -13,7 +13,8 @@ const PageNumberButton = ({
   color,
   backgroundColor,
   disabled,
-  href
+  href,
+  onClick
 }) => {
   return (
     <ButtonStyled
@@ -22,6 +23,7 @@ const PageNumberButton = ({
       backgroundColor={backgroundColor}
       disabled={disabled}
       href={href}
+      onClick={onClick}
     >
       {child}
     </ButtonStyled>
@@ -33,7 +35,8 @@ PageNumberButton.defaultProps = {
   color: '',
   backgroundColor: '',
   disabled: false,
-  href: ''
+  href: '',
+  onClick: () => {}
 };
 
 PageNumberButton.propTypes = {
@@ -42,7 +45,8 @@ PageNumberButton.propTypes = {
   color: PropTypes.string,
   backgroundColor: PropTypes.string,
   disabled: PropTypes.bool,
-  href: PropTypes.string
+  href: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 export default PageNumberButton;

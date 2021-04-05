@@ -15,13 +15,14 @@ const Template = args => <PageNumberButtonGroup {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   buttonProps: {
-    variant: '',
+    variant: 'contained',
     color: '',
-    backgroundColor: '',
+    backgroundColor: 'white',
     disabled: false,
-    href: ''
+    href: '',
+    onClick: ()=>{console.log('1')}
   },
   nowPage: 1,
   maxPage: 20,
-  range: 5
+  halfRange: 2
 };
