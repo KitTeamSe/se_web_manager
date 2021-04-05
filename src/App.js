@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import './App.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import ContentContainer from './components/atoms/ContentContainer/ContentContainer';
+import ContentWrapper from './components/atoms/ContentWrapper/ContentWrapper';
 import AppBar from './components/modules/AppBar/AppBar';
 import SideMenu from './components/modules/SideMenu/SideMenu';
 import {
@@ -41,7 +41,7 @@ function App() {
         path={path}
       />
 
-      <ContentContainer open={open} setOpen={setOpen}>
+      <ContentWrapper open={open} setOpen={setOpen}>
         <Switch>
           {manageItems.map(el => (
             <Route exact path={`${path}/${el.to}`} key={el.to}>
@@ -55,7 +55,7 @@ function App() {
           ))}
           <Redirect path="*" to={`${path}/${firstPage}`} />
         </Switch>
-      </ContentContainer>
+      </ContentWrapper>
     </Wrapper>
   );
 }
