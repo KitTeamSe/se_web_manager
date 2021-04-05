@@ -8,7 +8,6 @@ import PageNumberButton from '../../atoms/PageNumberButton/PageNumberButton';
 */
 const ButtonGroupStyled = styled.div`
   display: flex;
-  background: rgba();
 `;
 
 const PageNumberButtonGroup = ({

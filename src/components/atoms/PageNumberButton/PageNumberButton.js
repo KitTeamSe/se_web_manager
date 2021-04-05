@@ -24,6 +24,7 @@ const PageNumberButton = ({
       disabled={disabled}
       href={href}
       onClick={onClick}
+      size="small"
     >
       {child}
     </ButtonStyled>
