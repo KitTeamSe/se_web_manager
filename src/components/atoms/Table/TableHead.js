@@ -14,15 +14,15 @@ const TableCellStyled = styled(TableCell)`
 `;
 
 const TableHead = ({ row }) => {
-  const tableCell = row.map((data, index) =>
-    index === 0 ? (
-      <TableCellStyled key={data.name}>{data.name}</TableCellStyled>
-    ) : (
-      <TableCellStyled key={data.name} align="center">
-        {data.name}
-      </TableCellStyled>
-    )
-  );
+  const tableCell = row.map(data => (
+    <TableCellStyled
+      key={data.name}
+      align="center"
+      style={{ width: data.width }}
+    >
+      {data.name}
+    </TableCellStyled>
+  ));
 
   return (
     <TableHeadStyled>
