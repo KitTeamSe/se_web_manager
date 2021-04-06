@@ -7,35 +7,46 @@ const MainStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 20rem;
   justify-content: space-between;
-  > .ButtonGroup {
-    margin-top: 1rem;
-    margin-bottom: 0.1rem;
-  }
 `;
-const TableContainer = styled.div`
-  width: 10rem;
-  height: 10rem;
-  border: 0.1rem solid;
+const MainTop = styled.div`
+  flex: 1 0 0;
 `;
+const MainMid = styled.div`
+  flex: 2 0 0;
+`;
+const MainBottom = styled.div`
+  flex: 1 0 0;
+`;
+
+const TableContainer = styled.div``;
 const MenuListView = ({ nowPage, maxPage, halfRange }) => {
   return (
     <MainStyled>
-      <h1>MenuListView</h1>
-      <TableContainer />
-      <PageNumberButtonGroup
-        nowPage={nowPage}
-        maxPage={maxPage}
-        halfRange={halfRange}
-        className="ButtonGroup"
-      />
+      <MainTop>
+        <h1>MenuListView</h1>
+      </MainTop>
+      <MainMid>
+        <TableContainer>
+          <p>aaaaaaaaaaa</p>
+        </TableContainer>
+      </MainMid>
+      <MainBottom>
+        <PageNumberButtonGroup
+          nowPage={nowPage}
+          maxPage={maxPage}
+          halfRange={halfRange}
+        />
+      </MainBottom>
     </MainStyled>
   );
 };
 MenuListView.defaultProps = {
   nowPage: 1,
-  maxPage: 1,
-  halfRange: 1
+  maxPage: 10,
+  halfRange: 2
 };
 MenuListView.propTypes = {
   nowPage: PropTypes.number,

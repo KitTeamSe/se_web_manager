@@ -37,6 +37,7 @@ const PageNumberButtonGroup = ({
       const isDisabled = !(maxPage >= buttonNums[index]);
       buttons.push(
         <PageNumberButton
+          key={buttonNums[index]}
           child={buttonNums[index]}
           variant={buttonProps.variant}
           color={buttonProps.color}
