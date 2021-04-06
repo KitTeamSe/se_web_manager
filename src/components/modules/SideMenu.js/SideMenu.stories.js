@@ -2,17 +2,15 @@ import StoryRouter from 'storybook-react-router';
 
 import React from 'react';
 
-import AppBar from './AppBar';
+import SideMenu from './SideMenu';
 
 export default {
-  component: AppBar,
-  title: 'modules/AppBar',
+  component: SideMenu,
+  title: 'modules/SideMenu',
   decorators: [StoryRouter()]
 };
 
-const Template = args => <AppBar {...args} />;
+const Template = args => <SideMenu {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-    setOpen:()=>{}
-};
+Default.args = {};
