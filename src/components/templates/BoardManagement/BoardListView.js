@@ -3,34 +3,41 @@ import styled from 'styled-components';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
 import ContentMain from '../../modules/ContentMain/ContentMain';
 import Button from '../../atoms/Button/RoundButton';
-import Table from '../../atoms/Table/Table';
+// import Table from '../../modules/Table/Table';
+import PaginationTable from '../../modules/Table/PaginationTable';
 
 const Wrapper = styled.div``;
 
 const head = [
   {
     key: 'count',
-    name: '#'
+    name: '#',
+    width: '10%'
   },
   {
     key: 'name',
-    name: '게시판 명'
+    name: '게시판 명',
+    width: '25%'
   },
   {
     key: 'state',
-    name: '상태'
+    name: '상태',
+    width: '25%'
   },
   {
     key: 'order',
-    name: '순번'
+    name: '순번',
+    width: '10%'
   },
   {
     key: 'registrant_member_id',
-    name: '등록자'
+    name: '등록자',
+    width: '15%'
   },
   {
     key: 'last_modify_member_id',
-    name: '수정자'
+    name: '수정자',
+    width: '15%'
   }
 ];
 
@@ -96,7 +103,8 @@ const BoardListView = () => {
         </Button>
       </ContentHeader>
       <ContentMain>
-        <Table head={headItem} items={tableItems} />
+        {/* <Table head={headItem} rows={tableItems} /> */}
+        <PaginationTable head={headItem} rows={tableItems} />
       </ContentMain>
     </Wrapper>
   );
