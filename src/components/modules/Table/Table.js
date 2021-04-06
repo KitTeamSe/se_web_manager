@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Table as Tables, TableContainer, Paper } from '@material-ui/core';
-import TableHead from './TableHead';
-import TableContent from './TableContent';
+import TableHead from '../../atoms/Table/TableHead';
+import TableContent from '../../atoms/Table/TableContent';
 
 const TableContainerStyled = styled(TableContainer)`
   margin-top: 20px;
@@ -11,12 +11,12 @@ const TableContainerStyled = styled(TableContainer)`
 
 const TableStyeld = styled(Tables)``;
 
-const Table = ({ head, items }) => {
+const Table = ({ head, rows }) => {
   return (
     <TableContainerStyled component={Paper}>
       <TableStyeld arial-label="table">
         <TableHead row={head} />
-        <TableContent rows={items} head={head} />
+        <TableContent rows={rows} head={head} />
       </TableStyeld>
     </TableContainerStyled>
   );
@@ -24,12 +24,12 @@ const Table = ({ head, items }) => {
 
 Table.propTypes = {
   head: PropTypes.arrayOf(PropTypes.object),
-  items: PropTypes.arrayOf(PropTypes.object)
+  rows: PropTypes.arrayOf(PropTypes.object)
 };
 
 Table.defaultProps = {
   head: [],
-  items: []
+  rows: []
 };
 
 export default Table;
