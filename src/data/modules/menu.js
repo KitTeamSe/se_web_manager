@@ -1,5 +1,3 @@
-// import { delay, put, takeEvery, takeLatest } from 'redux-saga';
-
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getMenuListApi, getMenuByIdApi } from '../api/menu';
 // 액션 타입
@@ -20,17 +18,7 @@ export const getMenuById = () => ({ type: GET_MENU_BY_ID });
 
 // state 초기값
 const initialState = {
-  menuList: [
-    {
-      child: [],
-      description: 'Menu Description',
-      menuId: 0,
-      menuOrder: 0,
-      nameEng: 'Menu Name in Eng',
-      nameKor: 'Menu Name in Kor'
-    }
-  ],
-  menu: {
+  menuList: {
     child: [],
     description: 'Menu Description',
     menuId: 0,
@@ -38,6 +26,15 @@ const initialState = {
     nameEng: 'Menu Name in Eng',
     nameKor: 'Menu Name in Kor'
   }
+  //   ,
+  //   menu: {
+  //     child: [],
+  //     description: 'Menu Description',
+  //     menuId: 0,
+  //     menuOrder: 0,
+  //     nameEng: 'Menu Name in Eng',
+  //     nameKor: 'Menu Name in Kor'
+  //   }
 };
 
 // 사가 정의
@@ -66,14 +63,23 @@ export function* menuSaga() {
 // 리듀서 정의 export default
 export default function menu(state = initialState, action) {
   switch (action.type) {
+    // 메뉴 리스트 조회
     case GET_MENU_LIST:
+      return state;
     case GET_MENU_LIST_SUCCESS:
-    case GET_MENU_LIST:
-      return;
+      return {
+        ...state,
+        menuList: {
+          ...action.payload
+        }
+      };
+    case GET_MENU_LIST_ERROR:
+      return state;
+    // 메뉴 ID로 조회
     case GET_MENU_BY_ID:
-    case GET_MENU_BY_ID:
-    case GET_MENU_BY_ID:
-      return;
+    case GET_MENU_BY_ID_SUCCESS:
+    case GET_MENU_BY_ID_ERROR:
+      return state;
     default:
       return state;
   }
