@@ -1,10 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { TableBody, TableCell, TableRow } from '@material-ui/core';
 
 // Table cell은 각각 Unique한 key 를 가져야 하는데
 // map을 사용할 시 key에 index값을 넣으면 안됨(Airbnb 특)
 // 해서 테이블 제목 + 해당 셀 데이터 +
+
+const TableRowStyled = styled(TableRow)`
+  transition: background-color 100ms;
+  cursor: pointer;
+  &:hover {
+    background-color: #eeeeee;
+  }
+`;
 
 const TableContent = ({ rows, head, page, rowsPerPage }) => {
   const indexCell = (key, index) => {
@@ -36,7 +45,9 @@ const TableContent = ({ rows, head, page, rowsPerPage }) => {
   const tablePaginationRow = rows
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     .map((row, index) => {
-      return <TableRow key={row.name}>{tableCell(row, index)}</TableRow>;
+      return (
+        <TableRowStyled key={row.name}>{tableCell(row, index)}</TableRowStyled>
+      );
     });
 
   return <TableBody>{page > -1 ? tablePaginationRow : tableRow}</TableBody>;
