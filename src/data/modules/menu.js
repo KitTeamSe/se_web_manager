@@ -18,14 +18,16 @@ export const getMenuById = () => ({ type: GET_MENU_BY_ID });
 
 // state 초기값
 const initialState = {
-  menuList: {
-    child: [],
-    description: 'Menu Description',
-    menuId: 0,
-    menuOrder: 0,
-    nameEng: 'Menu Name in Eng',
-    nameKor: 'Menu Name in Kor'
-  }
+  menuList: [
+    {
+      child: [],
+      description: 'Menu Description',
+      menuId: 0,
+      menuOrder: 0,
+      nameEng: 'Menu Name in Eng',
+      nameKor: 'Menu Name in Kor'
+    }
+  ]
   //   ,
   //   menu: {
   //     child: [],
@@ -46,6 +48,7 @@ function* getMenuListSaga(action) {
     yield put({ type: GET_MENU_LIST_ERROR, error: true, payload: e });
   }
 }
+
 function* getMenuByIdSaga(action) {
   try {
     const res = yield call(getMenuByIdApi, action.payload);

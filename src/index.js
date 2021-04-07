@@ -18,6 +18,12 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 // store가 생성된 이후 sagaMiddleware를 run시켜야한다.
 sagaMiddleware.run(rootSaga);
 
+// msw
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line global-require
+  const { worker } = require('./mocks/browser');
+  worker.start();
+}
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
