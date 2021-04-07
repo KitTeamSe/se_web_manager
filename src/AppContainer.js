@@ -1,32 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import App from './App';
-import * as sideMenu from './modules/sideMenu';
+import { sideMenuOpen, sideMenuClose } from './modules/sideMenu';
+import useActions from './libs/useActions';
 
-const AppContainer = ({ open, sideMenuOpen, sideMenuClose }) => {
+const AppContainer = () => {
+  const open = useSelector(state => state.sideMenu.open);
+  const [onSideMenuOpen, onSideMenuClose] = useActions(
+    [sideMenuOpen, sideMenuClose],
+    []
+  );
   return (
     <App
       open={open}
-      sideMenuOpen={sideMenuOpen}
-      sideMenuClose={sideMenuClose}
+      sideMenuOpen={onSideMenuOpen}
+      sideMenuClose={onSideMenuClose}
     />
   );
 };
 
-const mapStateToProps = state => ({
-  open: state.sideMenu.open
-});
-
-const mapDispatchToProps = dispatch => ({
-  sideMenuOpen: () => dispatch(sideMenu.sideMenuOpen()),
-  sideMenuClose: () => dispatch(sideMenu.sideMenuClose())
-});
-
-AppContainer.propTypes = {
-  open: PropTypes.bool.isRequired,
-  sideMenuOpen: PropTypes.func.isRequired,
-  sideMenuClose: PropTypes.func.isRequired
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+export default AppContainer;
+// 성능 최적화 => rerendering 될 때
+// export default React.memo(AppContainer);
