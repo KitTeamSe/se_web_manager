@@ -45,7 +45,10 @@ const SideMenuList = ({ itemData, items, path }) => {
 };
 
 SideMenuList.propTypes = {
-  itemData: PropTypes.arrayOf(PropTypes.object),
+  itemData: PropTypes.shape({
+    name: PropTypes.string,
+    icon: PropTypes.shape({ root: PropTypes.string })
+  }),
   items: PropTypes.arrayOf(PropTypes.object),
   path: PropTypes.string
 };
