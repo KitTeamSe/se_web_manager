@@ -7,6 +7,7 @@ const ButtonStyled = styled(Buttons)`
   margin: 0 2px;
   border-radius: 32px;
   font-weight: bold;
+  padding: ${({ size }) => (size === 'small' ? '4px 12px' : null)};
   background: ${({ color }) =>
     color === 'primary' ? props => props.theme.mainColor : color};
   &:hover {

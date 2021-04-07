@@ -18,29 +18,29 @@ const ManageList = ({ items, path }) => {
     setOpenManageList(!openManageList);
   }, [openManageList]);
 
+  const sideMenuList = items.map((el, index) => (
+    <SideMenuListItem
+      count={index}
+      to={`${path}/${el.to}`}
+      name={el.name}
+      key={el.name}
+    >
+      {el.icon}
+    </SideMenuListItem>
+  ));
+
   return (
     <ListStyled>
       <SideMenuNestedList
+        name={manageNestedItem.name}
         open={openManageList}
         onClick={handleManageList}
-        name={manageNestedItem.name}
         key={manageNestedItem.name}
       >
         {manageNestedItem.icon}
       </SideMenuNestedList>
       <Collapse in={openManageList} timeout="auto" unmountOnExit>
-        <ListStyled>
-          {items.map((el, index) => (
-            <SideMenuListItem
-              count={index}
-              to={`${path}/${el.to}`}
-              name={el.name}
-              key={el.name}
-            >
-              {el.icon}
-            </SideMenuListItem>
-          ))}
-        </ListStyled>
+        <ListStyled>{sideMenuList}</ListStyled>
       </Collapse>
     </ListStyled>
   );

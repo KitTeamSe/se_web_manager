@@ -14,7 +14,7 @@ const Main = styled.main`
 
 const ContainerStyled = styled(Container)``;
 
-const ContentContainer = ({ children, open }) => {
+const ContentWrapper = ({ children, open }) => {
   return (
     <Main open={open}>
       <ContainerStyled>
@@ -25,11 +25,11 @@ const ContentContainer = ({ children, open }) => {
   );
 };
 
-ContentContainer.propTypes = {
+ContentWrapper.propTypes = {
   children: PropTypes.shape({ root: PropTypes.string }).isRequired,
   open: PropTypes.bool.isRequired
 };
 
-ContentContainer.defaultProps = {};
+ContentWrapper.defaultProps = {};
 
-export default ContentContainer;
+export default ContentWrapper;
