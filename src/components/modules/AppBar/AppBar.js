@@ -29,11 +29,11 @@ const AppBar = ({ open, sideMenuOpen, sideMenuClose, path }) => {
     <Bar open={open}>
       {open ? (
         <IconButton onClick={() => sideMenuClose()}>
-          <SideMenuIcon open={open} onClick={sideMenuClose} />
+          <SideMenuIcon open={open} handleOpen={sideMenuClose} />
         </IconButton>
       ) : (
         <IconButton onClick={() => sideMenuOpen()}>
-          <SideMenuIcon open={open} onClick={sideMenuOpen} />
+          <SideMenuIcon open={open} handleOpen={sideMenuOpen} />
         </IconButton>
       )}
 

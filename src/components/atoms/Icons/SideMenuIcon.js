@@ -12,13 +12,13 @@ const CloseIconStyles = styled(FirstPage)`
   ${appbarIconSize}
 `;
 
-const SideMenuIcon = ({ open, onClick }) => {
+const SideMenuIcon = ({ open, handleOpen }) => {
   return (
     <>
       {open ? (
-        <CloseIconStyles onClick={onClick} />
+        <CloseIconStyles onClick={() => handleOpen()} />
       ) : (
-        <MenuIconStyles onClick={onClick} />
+        <MenuIconStyles onClick={() => handleOpen()} />
       )}
     </>
   );
@@ -26,7 +26,7 @@ const SideMenuIcon = ({ open, onClick }) => {
 
 SideMenuIcon.propTypes = {
   open: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
+  handleOpen: PropTypes.func.isRequired
 };
 
 SideMenuIcon.defaultProps = {};
