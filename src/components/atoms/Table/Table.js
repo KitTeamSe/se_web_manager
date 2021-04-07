@@ -33,21 +33,27 @@ const Table = ({ headData, rowData }) => {
   const [rows, setRows] = useState();
 
   const renderHeadCells = () => {
-    const cellArray = headData.map(cellData => (
-      <TableCell>{cellData}</TableCell>
-    ));
+    const cellArray = headData[0].map((cellData, index) => {
+      const tempKey = index;
+      return <TableCell key={tempKey}>{cellData}</TableCell>;
+    });
     setHeadCells(cellArray);
   };
 
   const renderRows = () => {
-    const rowArray = rowData.map(row => (
-      <TableRow key={row[0]}>
-        {row.map(cellData => (
-          <TableCell>{cellData}</TableCell>
-        ))}
-        <TableCell />
-      </TableRow>
-    ));
+    const rowArray = rowData.map((row, index) => {
+      const tempKey = index;
+      return (
+        <TableRow key={tempKey}>
+          {row.map((cellData, innerIndex) => {
+            const innerTempKey = innerIndex;
+            return <TableCell key={innerTempKey}>{cellData}</TableCell>;
+          })}
+          <TableCell />
+        </TableRow>
+      );
+    });
+    console.log(rowArray);
     setRows(rowArray);
   };
 

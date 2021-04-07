@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../modules/Header/Header';
 import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumberButtonGroup';
@@ -20,12 +19,35 @@ headData / rowData
 현재는 props -> useSelector로 redux state 받아온 후 가공.
 */
 
-const MenuListView = ({ headData, rowData }) => {
+const MenuListView = () => {
   const menuList = useSelector(state => state.menu.menuList);
+  const headData = useState([
+    '메뉴ID',
+    '메뉴순서',
+    '영어이름',
+    '한글이름',
+    '설명'
+  ]);
+  const [rowData, setRowData] = useState([['', '', '']]);
+  const renderMenuList = () => {
+    const tempRows = menuList.data.map(menu => [
+      menu.menuId,
+      menu.menuOrder,
+      menu.nameEng,
+      menu.nameKor,
+      menu.description
+    ]);
+    setRowData(tempRows);
+  };
   const dispatch = useDispatch();
   const getMenuListFromStore = () => {
     dispatch(getMenuList());
   };
+  useEffect(() => {
+    console.log('test');
+    renderMenuList();
+  }, [menuList]);
+
   return (
     <Wrapper>
       <Header class="header" title="메뉴 관리">
@@ -68,19 +90,6 @@ const MenuListView = ({ headData, rowData }) => {
       <PageNumberButtonGroup nowPage={1} maxPage={5} halfRange={2} />
     </Wrapper>
   );
-};
-MenuListView.defaultProps = {
-  headData: ['title1', 'title2', 'title3', '4', '5'],
-  rowData: [
-    ['cellData1', 'cellData2', 'cellData3', '4', '5'],
-    ['cellData4', 'cellData5', 'cellData6', '4', '5'],
-    ['cellData7', 'cellData8', 'cellData9', '4', '5']
-  ]
-};
-
-MenuListView.propTypes = {
-  headData: PropTypes.arrayOf(PropTypes.string),
-  rowData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
 };
 
 export default MenuListView;
