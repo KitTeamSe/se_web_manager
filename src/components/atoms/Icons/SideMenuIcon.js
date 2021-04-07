@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Menu, FirstPage } from '@material-ui/icons';
@@ -12,21 +12,13 @@ const CloseIconStyles = styled(FirstPage)`
   ${appbarIconSize}
 `;
 
-const SideMenuIcon = ({ open, setOpen }) => {
-  const handleDrawerOpen = useCallback(() => {
-    setOpen(true);
-  }, [open]);
-
-  const handleDrawerClose = useCallback(() => {
-    setOpen(false);
-  }, [open]);
-
+const SideMenuIcon = ({ open, onClick }) => {
   return (
     <>
       {open ? (
-        <CloseIconStyles onClick={() => handleDrawerClose()} />
+        <CloseIconStyles onClick={onClick} />
       ) : (
-        <MenuIconStyles onClick={() => handleDrawerOpen()} />
+        <MenuIconStyles onClick={onClick} />
       )}
     </>
   );
@@ -34,7 +26,7 @@ const SideMenuIcon = ({ open, setOpen }) => {
 
 SideMenuIcon.propTypes = {
   open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 SideMenuIcon.defaultProps = {};
