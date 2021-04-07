@@ -37,7 +37,7 @@ const menuListMock = [
 ];
 const handlers = [
   rest.get(`${baseUrl}/api/vl/menu`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ data: menuListMock }));
+    return res(ctx.status(200), ctx.json( {data:menuListMock} ));
   })
 ];
 

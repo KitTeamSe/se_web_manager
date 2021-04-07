@@ -21,7 +21,7 @@ headData / rowData
 */
 
 const MenuListView = ({ headData, rowData }) => {
-  const menuList = useSelector(state => state);
+  const menuList = useSelector(state => state.menu.menuList);
   const dispatch = useDispatch();
   const getMenuListFromStore = () => {
     dispatch(getMenuList());

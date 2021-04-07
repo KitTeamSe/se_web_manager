@@ -18,16 +18,26 @@ export const getMenuById = () => ({ type: GET_MENU_BY_ID });
 
 // state 초기값
 const initialState = {
-  menuList: [
-    {
-      child: [],
-      description: 'Menu Description',
-      menuId: 0,
-      menuOrder: 0,
-      nameEng: 'Menu Name in Eng',
-      nameKor: 'Menu Name in Kor'
-    }
-  ]
+  menuList: {
+    data: [
+      {
+        child: [],
+        description: 'Menu Description',
+        menuId: 0,
+        menuOrder: 0,
+        nameEng: 'Menu Name in Eng',
+        nameKor: 'Menu Name in Kor'
+      },
+      {
+        child: [],
+        description: 'Menu Description',
+        menuId: 0,
+        menuOrder: 0,
+        nameEng: 'Menu Name in Eng',
+        nameKor: 'Menu Name in Kor'
+      }
+    ]
+  }
   //   ,
   //   menu: {
   //     child: [],
