@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Table as Tables, TableContainer, Paper } from '@material-ui/core';
-import TableHead from '../../atoms/Table/TableHead';
-import TableContent from '../../atoms/Table/TableContent';
-import Pagination from '../../atoms/Table/Pagination';
+import TableHead from '../../atoms/TableHead/TableHead';
+import TableContent from '../../atoms/TableContent/TableContent';
+import TablePagination from '../../atoms/TablePagination/TablePagination';
 
 const TableContainerStyled = styled(TableContainer)`
   margin-top: 20px;
@@ -48,7 +48,7 @@ const PaginationTable = ({ head, rows }) => {
         />
       </TableStyeld>
       <PaginationWrapper>
-        <Pagination
+        <TablePagination
           count={count}
           page={page}
           handleChangePage={handleChangePage}
