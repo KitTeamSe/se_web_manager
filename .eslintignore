@@ -1,3 +1,4 @@
 **/*.test.js
 **/*.stories.js
 src/reportWebVitals.js
+src/mocks/**/*.js
