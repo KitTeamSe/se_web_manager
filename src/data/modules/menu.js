@@ -23,18 +23,18 @@ const initialState = {
       {
         child: [],
         description: 'Menu Description',
-        menuId: 0,
+        menuId: 1,
         menuOrder: 0,
-        nameEng: 'Menu Name in Eng',
-        nameKor: 'Menu Name in Kor'
+        nameEng: 'Menu1_init Name in Eng',
+        nameKor: 'Menu1_init Name in Kor'
       },
       {
         child: [],
         description: 'Menu Description',
-        menuId: 0,
+        menuId: 2,
         menuOrder: 0,
-        nameEng: 'Menu Name in Eng',
-        nameKor: 'Menu Name in Kor'
+        nameEng: 'Menu2_init Name in Eng',
+        nameKor: 'Menu2_init Name in Kor'
       }
     ]
   }

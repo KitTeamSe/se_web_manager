@@ -20,15 +20,10 @@ headData / rowData
 */
 
 const MenuListView = () => {
+  const dispatch = useDispatch();
   const menuList = useSelector(state => state.menu.menuList);
-  const headData = useState([
-    '메뉴ID',
-    '메뉴순서',
-    '영어이름',
-    '한글이름',
-    '설명'
-  ]);
-  const [rowData, setRowData] = useState([['', '', '']]);
+  const [headData, setHeadData] = useState([]);
+  const [rowData, setRowData] = useState([[]]);
   const renderMenuList = () => {
     const tempRows = menuList.data.map(menu => [
       menu.menuId,
@@ -37,14 +32,17 @@ const MenuListView = () => {
       menu.nameKor,
       menu.description
     ]);
+    setHeadData(['메뉴ID', '메뉴순서', '영어이름', '한글이름', '설명']);
     setRowData(tempRows);
   };
-  const dispatch = useDispatch();
   const getMenuListFromStore = () => {
     dispatch(getMenuList());
   };
+  // useEffect
   useEffect(() => {
-    console.log('test');
+    console.log(
+      'test_MenuList / useEffect / renderMenuList() when menuList change'
+    );
     renderMenuList();
   }, [menuList]);
 
@@ -86,7 +84,7 @@ const MenuListView = () => {
           dispatch
         </button>
       </Header>
-      <Table headData={headData} rowData={rowData} />
+      <Table key={rowData} headData={headData} rowData={rowData} />
       <PageNumberButtonGroup nowPage={1} maxPage={5} halfRange={2} />
     </Wrapper>
   );

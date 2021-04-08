@@ -28,23 +28,16 @@ rowData : [
     ...
 ]
 */
+// key 일단 index 사용하였음 문제시 수정.
 const Table = ({ headData, rowData }) => {
   const [headCells, setHeadCells] = useState();
   const [rows, setRows] = useState();
 
-  const renderHeadCells = () => {
-    const cellArray = headData[0].map((cellData, index) => {
-      const tempKey = index;
-      return <TableCell key={tempKey}>{cellData}</TableCell>;
-    });
-    setHeadCells(cellArray);
-  };
-
   const renderRows = () => {
-    const rowArray = rowData.map((row, index) => {
-      const tempKey = index;
+    const rowArray = rowData.map(row => {
+      // const tempKey = index;
       return (
-        <TableRow key={tempKey}>
+        <TableRow>
           {row.map((cellData, innerIndex) => {
             const innerTempKey = innerIndex;
             return <TableCell key={innerTempKey}>{cellData}</TableCell>;
@@ -57,10 +50,23 @@ const Table = ({ headData, rowData }) => {
     setRows(rowArray);
   };
 
-  useEffect(() => {
-    renderHeadCells();
+  const renderHeadCells = () => {
+    const cellArray = headData.map((cellData, index) => {
+      const tempKey = index;
+      return <TableCell key={tempKey}>{cellData}</TableCell>;
+    });
+    setHeadCells(cellArray);
+
     renderRows();
+  };
+
+  useEffect(() => {
+    console.log('test / when start rendering');
+    renderHeadCells();
   }, []);
+  useEffect(() => {
+    renderRows();
+  }, [headCells]);
   return (
     <TableContainer component={Paper}>
       <StyledTable aria-label="simple table">
