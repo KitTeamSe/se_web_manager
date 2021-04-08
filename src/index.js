@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer, { rootSaga } from './data/modules/index';
 // import rootReducer from './reducer';
 import './styles/reset.css';
@@ -14,7 +15,10 @@ import theme from './styles/theme';
 import reportWebVitals from './reportWebVitals';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
 // store가 생성된 이후 sagaMiddleware를 run시켜야한다.
 sagaMiddleware.run(rootSaga);
 
