@@ -6,18 +6,28 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer, {rootSaga} from '../src/data/modules/index';
 import createSagaMiddleware from 'redux-saga';
-/**
- * msw 사용
- */
-// if(typeof global.process === 'undefined' ){
-//   const {worker} = require('../src/mocks/browser');
-//   worker.start();
-// }
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 /**
  *  redux.
- * 
  */
+
+ const sagaMiddleware = createSagaMiddleware();
+ const store = createStore(
+   rootReducer,
+   composeWithDevTools(applyMiddleware(sagaMiddleware))
+ );
+ // store가 생성된 이후 sagaMiddleware를 run시켜야한다.
+sagaMiddleware.run(rootSaga);
+
+/**
+ * msw 사용
+ */
+if(typeof global.process === 'undefined' ){
+  const {worker} = require('../src/mocks/browser');
+  worker.start();
+}
+
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -31,10 +41,12 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <StylesProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <Story />
-      </ThemeProvider>
-    </StylesProvider>
+    <Provider store={store}>
+      <StylesProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <Story />
+        </ThemeProvider>
+      </StylesProvider>
+    </Provider>
   )
 ]
