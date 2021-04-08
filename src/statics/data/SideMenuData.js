@@ -14,7 +14,9 @@ import {
   Group,
   Schedule,
   Build,
-  CalendarToday
+  CalendarToday,
+  MeetingRoom,
+  Class
 } from '@material-ui/icons';
 import AuthGroupListView from '../../components/templates/AuthGroupManagement/AuthGroupListView';
 import AuthListView from '../../components/templates/AuthManagement/AuthListView';
@@ -28,6 +30,9 @@ import StatisticsView from '../../components/templates/StatisticsManagement/Stat
 import BlacklistListView from '../../components/templates/BlacklistManagement/BlacklistListView';
 import NoticeListView from '../../components/templates/NoticeManagement/NoticeListView';
 import ReportListView from '../../components/templates/ReportManagement/ReportListView';
+import ClassRoomListView from '../../components/templates/ClassRoomManagement/ClassRoomListView';
+import ProfessiorListView from '../../components/templates/ProfessiorManagement/ProfessiorListView';
+import SubjectListView from '../../components/templates/SubjectManagement/SubjectListView';
 
 const defaultPath = '/m';
 
@@ -108,22 +113,22 @@ const ManageListData = [
 
 const ScheduleListData = [
   {
-    to: 'schedule',
-    name: '시간표 관리1',
-    icon: <Schedule />,
-    page: <>시간표 메인</>
+    to: 'classRoom',
+    name: '강의실 관리',
+    icon: <MeetingRoom />,
+    page: <ClassRoomListView />
   },
   {
-    to: 'schedule_2',
-    name: '시간표 관리2',
-    icon: <Schedule />,
-    page: <>시간2표</>
+    to: 'professior',
+    name: '교원 관리',
+    icon: <Person />,
+    page: <ProfessiorListView />
   },
   {
-    to: 'schedule_3',
-    name: '시간표 관리3',
-    icon: <Schedule />,
-    page: <>시간3표</>
+    to: 'Subject',
+    name: '교과 관리',
+    icon: <Class />,
+    page: <SubjectListView />
   },
   {
     to: 'schedule_4',

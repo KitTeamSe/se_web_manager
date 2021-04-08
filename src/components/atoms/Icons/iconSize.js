@@ -9,3 +9,8 @@ export const defaultIconSize = css`
   width: 30px;
   height: 30px;
 `;
+
+export const arrowIconSize = css`
+  width: 30px;
+  height: 30px;
+`;
