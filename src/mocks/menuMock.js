@@ -1,4 +1,4 @@
-const size = 200;
+const size = 20;
 
 export const menuListMock = [];
 for (let index = 0; index < size; index++) {

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../modules/Header/Header';
 import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumberButtonGroup';
 import Button from '../../atoms/Button/Button';
-import Table from '../../atoms/Table/Table';
+import Table from '../../modules/Table/Table';
 // for redux
 import { getMenuList } from '../../../data/modules/menu';
 

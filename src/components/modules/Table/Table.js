@@ -1,49 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import MTable from '@material-ui/core/Table';
+import MuiTable from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import MuiTableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 
-const StyledTable = styled(MTable)`
+const StyledTable = styled(MuiTable)`
   minwidth: 650;
 `;
+const StyledTableRow = styled(MuiTableRow)`
+  > *:hover {
+    cursor: pointer;
+  }
+`;
 
-/*
-상단 제목부분
-headData : [
-    title1, title2, title3 ...
-]
-rowData : [
-    {
-        cellData1, cellData2, cellData3 ...
-    },
-    {
-
-    },
-    ...
-]
-*/
 // key 일단 index 사용하였음 문제시 수정.
-const Table = ({ headData, rowData }) => {
+const Table = ({ headData, rowData, hover }) => {
   const [headCells, setHeadCells] = useState();
   const [rows, setRows] = useState();
 
   const renderRows = () => {
     const rowArray = rowData.map(row => {
-      // const tempKey = index;
       return (
-        <TableRow>
+        <StyledTableRow hover={hover}>
           {row.map((cellData, innerIndex) => {
             const innerTempKey = innerIndex;
             return <TableCell key={innerTempKey}>{cellData}</TableCell>;
           })}
           <TableCell />
-        </TableRow>
+        </StyledTableRow>
       );
     });
     console.log(rowArray);
@@ -71,7 +60,7 @@ const Table = ({ headData, rowData }) => {
     <TableContainer component={Paper}>
       <StyledTable aria-label="simple table">
         <TableHead>
-          <TableRow>{headCells}</TableRow>
+          <StyledTableRow>{headCells}</StyledTableRow>
         </TableHead>
         <TableBody>{rows}</TableBody>
       </StyledTable>
@@ -80,12 +69,14 @@ const Table = ({ headData, rowData }) => {
 };
 Table.defaultProps = {
   headData: [],
-  rowData: [[]]
+  rowData: [[]],
+  hover: true
 };
 
 Table.propTypes = {
   headData: PropTypes.arrayOf(PropTypes.string),
-  rowData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+  rowData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  hover: PropTypes.bool
 };
 
 export default Table;
