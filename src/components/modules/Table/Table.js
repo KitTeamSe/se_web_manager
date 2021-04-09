@@ -13,8 +13,8 @@ const StyledTable = styled(MuiTable)`
   minwidth: 650;
 `;
 const StyledTableRow = styled(MuiTableRow)`
-  > *:hover {
-    cursor: pointer;
+  &:hover {
+    cursor: ${({ hover }) => (hover ? 'pointer' : 'default')};
   }
 `;
 
