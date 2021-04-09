@@ -19,14 +19,14 @@ const StyledTableRow = styled(MuiTableRow)`
 `;
 
 // key 일단 index 사용하였음 문제시 수정.
-const Table = ({ headData, rowData, hover }) => {
+const Table = ({ headData, rowData, hover, onRowClick }) => {
   const [headCells, setHeadCells] = useState();
   const [rows, setRows] = useState();
 
   const renderRows = () => {
     const rowArray = rowData.map(row => {
       return (
-        <StyledTableRow hover={hover}>
+        <StyledTableRow hover={hover} onClick={onRowClick}>
           {row.map((cellData, innerIndex) => {
             const innerTempKey = innerIndex;
             return <TableCell key={innerTempKey}>{cellData}</TableCell>;
@@ -70,13 +70,17 @@ const Table = ({ headData, rowData, hover }) => {
 Table.defaultProps = {
   headData: [],
   rowData: [[]],
-  hover: true
+  hover: true,
+  onRowClick: () => {
+    console.log('onRowClickDefault');
+  }
 };
 
 Table.propTypes = {
   headData: PropTypes.arrayOf(PropTypes.string),
   rowData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  hover: PropTypes.bool
+  hover: PropTypes.bool,
+  onRowClick: PropTypes.func
 };
 
 export default Table;
