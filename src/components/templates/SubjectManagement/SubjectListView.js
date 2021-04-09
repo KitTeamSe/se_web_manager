@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import RoundButton from '../../atoms/Button/RoundButton';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
-import CourseListViewContentMain from '../../modules/ContentMain/CourseListViewContentMain';
+import PreInfoViewContentMain from '../../modules/ContentMain/PreInfoViewContentMain';
 
 const Wrapper = styled.div``;
 
@@ -227,18 +227,26 @@ const active = [
 
 const SubjectListView = () => {
   const headItem = head;
-  const inActiveRows = inActive;
-  const activeRows = active;
+  const [inActiveRows, setInActiveRows] = useState(inActive);
+  const [activeRows, setActiveRows] = useState(active);
+
+  useEffect(() => {
+    setInActiveRows(inActive);
+    setActiveRows(active);
+  }, []);
+
   return (
     <Wrapper>
       <ContentHeader title="교과 관리">
         <RoundButton>엑셀 업로드</RoundButton>
         <RoundButton color="secondary">엑셀 다운로드</RoundButton>
       </ContentHeader>
-      <CourseListViewContentMain
+      <PreInfoViewContentMain
         head={headItem}
         inActiveRows={inActiveRows}
         activeRows={activeRows}
+        setInActiveRows={setInActiveRows}
+        setActiveRows={setActiveRows}
         small
       />
     </Wrapper>

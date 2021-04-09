@@ -5,10 +5,12 @@ import { Card, Typography } from '@material-ui/core';
 
 const CardStyled = styled(Card)`
   margin: 5px 10px;
-  padding: 8px 8px 8px 8px;
+  padding: 8px 8px 8px 2px;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  border: solid #dddddd 1px;
+  box-shadow: none;
   &:hover {
     background-color: #eeeeee;
   }
@@ -20,13 +22,16 @@ const ItemWrapper = styled.div`
 
 const ItemText = styled(Typography)`
   font-size: ${({ small }) => (small ? '0.8vw' : '1.1vw')};
-  text-align: center;
+  text-align: ${({ align }) => align || 'center'};
   font-weight: 500;
 `;
 
 const PreInfoItemCard = ({ children, item, head, index, small }) => {
   const indexItem = i => (
     <ItemWrapper width={head[i].width}>
+      {/* <ItemText align="left" small={small}>
+      &nbsp;&nbsp;{index + 1}
+    </ItemText> */}
       <ItemText small={small}>{index + 1}</ItemText>
     </ItemWrapper>
   );
