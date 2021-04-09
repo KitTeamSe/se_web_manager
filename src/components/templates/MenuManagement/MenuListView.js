@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+
+import ReactRouterPropTypes from 'react-router-prop-types';
 import Header from '../../modules/Header/Header';
 import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumberButtonGroup';
 import Button from '../../atoms/Button/Button';
 import Table from '../../modules/Table/Table';
 // for redux
 import { getMenuList } from '../../../data/modules/menu';
-
+// router
 const Wrapper = styled.div`
   > * {
     margin-bottom: 1rem;
@@ -19,7 +21,7 @@ headData / rowData
 현재는 props -> useSelector로 redux state 받아온 후 가공.
 */
 
-const MenuListView = () => {
+const MenuListView = ({ match }) => {
   const dispatch = useDispatch();
   const menuList = useSelector(state => state.menu.menuList);
   const [headData, setHeadData] = useState([]);
@@ -40,6 +42,7 @@ const MenuListView = () => {
   };
   // useEffect
   useEffect(() => {
+    console.log(match);
     console.log(
       'test_MenuList / useEffect / renderMenuList() when menuList change'
     );
@@ -84,10 +87,13 @@ const MenuListView = () => {
           dispatch
         </button>
       </Header>
-      <Table key={rowData} headData={headData} rowData={rowData} />
+
+      <Table key={rowData} headData={headData} rowData={rowData} hover />
       <PageNumberButtonGroup nowPage={1} maxPage={5} halfRange={2} />
     </Wrapper>
   );
 };
-
+MenuListView.propTypes = {
+  match: ReactRouterPropTypes.match.isRequired
+};
 export default MenuListView;
