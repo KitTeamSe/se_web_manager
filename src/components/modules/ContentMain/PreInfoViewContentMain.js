@@ -1,3 +1,4 @@
+// import React, { useState } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -7,6 +8,7 @@ import ArrowLeftIcon from '../../atoms/Icons/ArrowLeftIcon';
 import IconButton from '../../atoms/IconButton/IconButton';
 import PreInfoItemCard from '../../atoms/Card/PreInfoItemCard';
 import CardListTitle from '../../atoms/CardListTitle/CardListTitle';
+import Selected from '../../atoms/Selected/Selected';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -25,17 +27,17 @@ const IconWrapper = styled.div`
 
 const PaperStyled = styled(Paper)`
   width: 45%;
-  height: 500px;
+  height: 520px;
   justify-content: center;
-  background-color: #f2f2f2;
+  border-radius: 0;
 `;
 
 const PaperWrapper = styled.div`
-  height: 450px;
+  height: 430px;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 1px;
+    height: 1px;
     background: #ffffff;
   }
   &::-webkit-scrollbar-thumb {
@@ -51,12 +53,17 @@ const PaperWrapper = styled.div`
   }
 `;
 
-const CourseListViewContentMain = ({
+const PreInfoViewContentMain = ({
   head,
   inActiveRows,
   activeRows,
+  setInActiveRows,
+  setActiveRows,
   small
 }) => {
+  // const [selectedActiveRows, setSelectedActiveRows] = useState([]);
+  // const [selectedInActiveRows, setSelectedInActiveRows] = useState([]);
+
   const cardList = rows =>
     rows.map((item, index) => {
       const row = Object.values(item);
@@ -65,40 +72,69 @@ const CourseListViewContentMain = ({
       );
     });
 
+  const handleSelectAll = rows => {
+    return console.log(rows);
+  };
+
+  const handleOnActiveRows = () => {
+    setActiveRows(inActiveRows);
+    setInActiveRows(activeRows);
+    handleSelectAll(inActiveRows);
+    handleSelectAll(activeRows);
+  };
+
+  const handleOnInActiveRows = () => {
+    setActiveRows(inActiveRows);
+    setInActiveRows(activeRows);
+  };
+
   return (
     <ContentWrapper>
       <PaperStyled>
-        <CardListTitle head={head} small={small} />
+        <CardListTitle
+          head={head}
+          small={small}
+          handleSelectAll={handleSelectAll(inActiveRows)}
+        />
         <PaperWrapper>{cardList(inActiveRows)}</PaperWrapper>
+
+        <Selected all={inActiveRows.length} count={3} />
       </PaperStyled>
       <IconWrapper>
-        <IconButton>
-          <ArrowRightIcon />
+        <IconButton onClick={() => handleOnInActiveRows()}>
+          <ArrowRightIcon onClick={() => handleOnInActiveRows()} />
         </IconButton>
-        <IconButton>
-          <ArrowLeftIcon />
+        <IconButton onClick={() => handleOnActiveRows()}>
+          <ArrowLeftIcon onClick={() => handleOnActiveRows()} />
         </IconButton>
       </IconWrapper>
       <PaperStyled>
-        <CardListTitle head={head} small={small} />
+        <CardListTitle
+          head={head}
+          small={small}
+          handleSelectAll={handleSelectAll(activeRows)}
+        />
         <PaperWrapper>{cardList(activeRows)}</PaperWrapper>
+        <Selected all={activeRows.length} count={0} />
       </PaperStyled>
     </ContentWrapper>
   );
 };
 
-CourseListViewContentMain.propTypes = {
+PreInfoViewContentMain.propTypes = {
   head: PropTypes.arrayOf(PropTypes.array),
   inActiveRows: PropTypes.arrayOf(PropTypes.array),
   activeRows: PropTypes.arrayOf(PropTypes.array),
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  setInActiveRows: PropTypes.func.isRequired,
+  setActiveRows: PropTypes.func.isRequired
 };
 
-CourseListViewContentMain.defaultProps = {
+PreInfoViewContentMain.defaultProps = {
   head: [],
   inActiveRows: [],
   activeRows: [],
   small: false
 };
 
-export default CourseListViewContentMain;
+export default PreInfoViewContentMain;
