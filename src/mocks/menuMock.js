@@ -13,10 +13,10 @@ for (let index = 0; index < size; index++) {
 }
 
 export const menuByIdMock = {
-    description: `Menu${index} Description`,
-    menuId: `${index}`,
+    description: `Menu_by_id Description`,
+    menuId: `1`,
     menuOrder: 0,
-    nameEng: `Menu${index} Name in Eng`,
-    nameKor: `Menu${index} Name in Kor`
+    nameEng: `Menu_by_id Name in Eng`,
+    nameKor: `Menu_by_id Name in Kor`
 };
 
