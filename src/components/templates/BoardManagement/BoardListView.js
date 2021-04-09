@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
-import ContentMain from '../../modules/ContentMain/ContentMain';
 import Button from '../../atoms/Button/RoundButton';
 // import Table from '../../modules/Table/Table';
 import PaginationTable from '../../modules/Table/PaginationTable';
@@ -84,6 +83,17 @@ const items = [
   }
 ];
 
+// const Wrapper = styled.div`
+//   display: block;
+// `;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 8px;
+`;
+
 const BoardListView = () => {
   const headItem = head;
   const tableItems = items;
@@ -102,10 +112,10 @@ const BoardListView = () => {
           게시판추가
         </Button>
       </ContentHeader>
-      <ContentMain>
+      <ContentWrapper>
         {/* <Table head={headItem} rows={tableItems} /> */}
         <PaginationTable head={headItem} rows={tableItems} />
-      </ContentMain>
+      </ContentWrapper>
     </Wrapper>
   );
 };
