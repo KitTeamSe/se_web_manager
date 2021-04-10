@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 
 const TextContainer = styled.div``;
 const Text = styled.p``;
-const TextInfo = ({ text }) => {
+const TextInfo = ({ text, isBold }) => {
   return (
     <TextContainer>
-      <Text>{text}</Text>
+      <Text>{isBold ? <b>{text}</b> : text}</Text>
     </TextContainer>
   );
 };
-
+TextInfo.defaultProps = {
+  isBold: false
+};
 TextInfo.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  isBold: PropTypes.bool
 };
 
 export default TextInfo;
