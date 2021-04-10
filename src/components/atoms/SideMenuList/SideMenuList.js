@@ -2,21 +2,19 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { List, Collapse } from '@material-ui/core';
-import SideMenuListItem from '../../atoms/SideMenuListItem/SideMenuListItem';
-import SideMenuNestedList from '../../atoms/SideMenuNestedList/SideMenuNestedList';
-import { ScheduleNestedData } from '../../../statics/data/SideMenuData';
+import SideMenuListItem from '../SideMenuListItem/SideMenuListItem';
+import SideMenuNestedList from '../SideMenuNestedList/SideMenuNestedList';
 
 const ListStyled = styled(List)`
   padding: 2px 0;
 `;
 
-const ScheduleList = ({ items, path }) => {
-  const scheduleNestedItem = ScheduleNestedData;
-  const [openScheduleList, setOpenScheduleList] = useState(false);
+const SideMenuList = ({ itemData, items, path }) => {
+  const [openList, setopenList] = useState(false);
 
   const handleScheduleList = useCallback(() => {
-    setOpenScheduleList(!openScheduleList);
-  }, [openScheduleList]);
+    setopenList(!openList);
+  }, [openList]);
 
   const scheduleMenuList = items.map((el, index) => (
     <SideMenuListItem
@@ -32,28 +30,33 @@ const ScheduleList = ({ items, path }) => {
   return (
     <ListStyled>
       <SideMenuNestedList
-        name={scheduleNestedItem.name}
-        open={openScheduleList}
+        name={itemData.name}
+        open={openList}
         onClick={handleScheduleList}
-        key={scheduleNestedItem.name}
+        key={itemData.name}
       >
-        {scheduleNestedItem.icon}
+        {itemData.icon}
       </SideMenuNestedList>
-      <Collapse in={openScheduleList} timeout="auto" unmountOnExit>
+      <Collapse in={openList} timeout="auto" unmountOnExit>
         <ListStyled>{scheduleMenuList}</ListStyled>
       </Collapse>
     </ListStyled>
   );
 };
 
-ScheduleList.propTypes = {
+SideMenuList.propTypes = {
+  itemData: PropTypes.shape({
+    name: PropTypes.string,
+    icon: PropTypes.shape({ root: PropTypes.string })
+  }),
   items: PropTypes.arrayOf(PropTypes.object),
   path: PropTypes.string
 };
 
-ScheduleList.defaultProps = {
+SideMenuList.defaultProps = {
+  itemData: [],
   items: [],
   path: '/'
 };
 
-export default ScheduleList;
+export default SideMenuList;

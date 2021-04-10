@@ -5,7 +5,6 @@ import Buttons from '@material-ui/core/Button';
 
 const ButtonStyled = styled(Buttons)`
   margin: 0 2px;
-  border-radius: 32px;
   font-weight: bold;
   padding: ${({ size }) => (size === 'small' ? '4px 12px' : null)};
   background: ${({ color }) =>
@@ -16,7 +15,7 @@ const ButtonStyled = styled(Buttons)`
   }
 `;
 
-const RoundButton = ({
+const Button = ({
   children,
   variant,
   color,
@@ -39,7 +38,7 @@ const RoundButton = ({
   );
 };
 
-RoundButton.propTypes = {
+Button.propTypes = {
   children: PropTypes.string,
   variant: PropTypes.string,
   color: PropTypes.string,
@@ -49,7 +48,7 @@ RoundButton.propTypes = {
   onClick: PropTypes.func.isRequired
 };
 
-RoundButton.defaultProps = {
+Button.defaultProps = {
   children: '',
   variant: 'contained',
   color: 'primary',
@@ -58,4 +57,4 @@ RoundButton.defaultProps = {
   size: 'small'
 };
 
-export default RoundButton;
+export default Button;

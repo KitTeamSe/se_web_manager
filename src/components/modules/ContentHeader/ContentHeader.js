@@ -30,11 +30,12 @@ const ContentHeader = ({ children, title }) => {
 };
 
 ContentHeader.propTypes = {
-  children: PropTypes.shape({ root: PropTypes.string }).isRequired,
+  children: PropTypes.shape({ root: PropTypes.string }),
   title: PropTypes.string
 };
 
 ContentHeader.defaultProps = {
+  children: null,
   title: null
 };
 
