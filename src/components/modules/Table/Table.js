@@ -18,16 +18,16 @@ const StyledTableRow = styled(MuiTableRow)`
   }
 `;
 
-// key 일단 index 사용하였음 문제시 수정.
-const Table = ({ headData, rowData, hover, onRowClick }) => {
+// key 일단 index 사용하였음 문제시 수정
+const Table = ({ headData, rowData, hover }) => {
   const [headCells, setHeadCells] = useState();
   const [rows, setRows] = useState();
 
   const renderRows = () => {
     const rowArray = rowData.map(row => {
       return (
-        <StyledTableRow hover={hover} onClick={onRowClick}>
-          {row.map((cellData, innerIndex) => {
+        <StyledTableRow hover={hover} onClick={row.onRowClick}>
+          {row.cells.map((cellData, innerIndex) => {
             const innerTempKey = innerIndex;
             return <TableCell key={innerTempKey}>{cellData}</TableCell>;
           })}
@@ -35,8 +35,8 @@ const Table = ({ headData, rowData, hover, onRowClick }) => {
         </StyledTableRow>
       );
     });
-    console.log(rowArray);
     setRows(rowArray);
+    // setRows(hover);
   };
 
   const renderHeadCells = () => {
@@ -69,18 +69,21 @@ const Table = ({ headData, rowData, hover, onRowClick }) => {
 };
 Table.defaultProps = {
   headData: [],
-  rowData: [[]],
-  hover: true,
-  onRowClick: () => {
-    console.log('onRowClickDefault');
-  }
+  rowData: [
+    { onRowClick: () => {}, cells: [1, 2, 3, 4, 5] },
+    { onRowClick: () => {}, cells: [1, 2, 3, 4, 5] }
+  ],
+  hover: true
+  // onRowClick: e => {
+  //   console.log(e.currentNode);
+  // }
 };
 
 Table.propTypes = {
   headData: PropTypes.arrayOf(PropTypes.string),
-  rowData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  hover: PropTypes.bool,
-  onRowClick: PropTypes.func
+  rowData: PropTypes.arrayOf(PropTypes.object),
+  hover: PropTypes.bool
+  // onRowClick: PropTypes.func
 };
 
 export default Table;

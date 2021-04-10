@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { useHistory } from 'react-router-dom'; // router
 import Header from '../../modules/Header/Header';
 import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumberButtonGroup';
 import Button from '../../atoms/Button/Button';
 import Table from '../../modules/Table/Table';
 // for redux
 import { getMenuList } from '../../../data/modules/menu';
-// router
+
 const Wrapper = styled.div`
   > * {
     margin-bottom: 1rem;
@@ -22,18 +23,25 @@ headData / rowData
 */
 
 const MenuListView = ({ match }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const menuList = useSelector(state => state.menu.menuList);
-  const [headData, setHeadData] = useState([]);
-  const [rowData, setRowData] = useState([[]]);
+  const [headData, setHeadData] = useState();
+  const [rowData, setRowData] = useState();
   const renderMenuList = () => {
-    const tempRows = menuList.data.map(menu => [
-      menu.menuId,
-      menu.menuOrder,
-      menu.nameEng,
-      menu.nameKor,
-      menu.description
-    ]);
+    // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
+    const tempRows = menuList.data.map(menu => ({
+      onRowClick: () => {
+        history.push(`${match.url}/${menu.menuId}`);
+      },
+      cells: [
+        menu.menuId,
+        menu.menuOrder,
+        menu.nameEng,
+        menu.nameKor,
+        menu.description
+      ]
+    }));
     setHeadData(['메뉴ID', '메뉴순서', '영어이름', '한글이름', '설명']);
     setRowData(tempRows);
   };
