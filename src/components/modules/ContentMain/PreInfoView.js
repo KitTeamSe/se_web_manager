@@ -7,6 +7,9 @@ import CardListTitle from '../../atoms/CardListTitle/CardListTitle';
 import IconButton from '../../atoms/IconButton/IconButton';
 import AddIcon from '../../atoms/Icons/AddIcon';
 import DeleteIcon from '../../atoms/Icons/DeleteIcon';
+import AddDialog from '../AddDialog/AddDialog';
+import DeleteDialog from '../DeleteDialog/DeleteDialog';
+import NoChecked from '../../atoms/NoChecked/NoChecked';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -50,15 +53,22 @@ const PaperWrapper = styled.div`
   }
 `;
 
-const PreInfoView = ({ head, rows, small }) => {
+const PreInfoView = ({ title, head, rows, small }) => {
   const [select, setSelect] = useState(null);
+  const [addOpen, setAddOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [failOpen, setFailOpen] = useState(false);
 
   useEffect(() => {
-    console.log(select);
-  });
+    setFailOpen(false);
+  }, [addOpen, deleteOpen, select]);
 
   const handleOnSelect = (index, num) =>
     index === num ? setSelect(null) : setSelect(index);
+
+  const handleDeleteOpen = () => {
+    return select !== null ? setDeleteOpen(true) : setFailOpen(true);
+  };
 
   const cardList = () =>
     rows.map((item, index) => {
@@ -80,26 +90,48 @@ const PreInfoView = ({ head, rows, small }) => {
       <PaperStyled>
         <CardListTitle head={head} small={small} />
         <PaperWrapper>{cardList()}</PaperWrapper>
+
+        {failOpen ? <NoChecked del /> : null}
       </PaperStyled>
+
       <ButtonWrapper>
-        <IconButton>
-          <AddIcon />
+        <IconButton onClick={() => setAddOpen(true)}>
+          <AddIcon onClick={() => setAddOpen(true)} />
         </IconButton>
-        <IconButton>
-          <DeleteIcon />
+        <IconButton onClick={() => handleDeleteOpen()}>
+          <DeleteIcon onClick={() => handleDeleteOpen()} />
         </IconButton>
       </ButtonWrapper>
+
+      {addOpen ? (
+        <AddDialog
+          title={title}
+          item={head}
+          open={addOpen}
+          setOpen={setAddOpen}
+        />
+      ) : null}
+      {deleteOpen ? (
+        <DeleteDialog
+          title={title}
+          item={rows[select]}
+          open={deleteOpen}
+          setOpen={setDeleteOpen}
+        />
+      ) : null}
     </ContentWrapper>
   );
 };
 
 PreInfoView.propTypes = {
+  title: PropTypes.string,
   head: PropTypes.arrayOf(PropTypes.array),
   rows: PropTypes.arrayOf(PropTypes.array),
   small: PropTypes.bool
 };
 
 PreInfoView.defaultProps = {
+  title: '',
   head: [],
   rows: [],
   small: false
