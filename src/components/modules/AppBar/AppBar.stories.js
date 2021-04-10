@@ -1,4 +1,3 @@
-import StoryRouter from 'storybook-react-router';
 
 import React from 'react';
 
@@ -7,7 +6,7 @@ import AppBar from './AppBar';
 export default {
   component: AppBar,
   title: 'modules/AppBar',
-  decorators: [StoryRouter()]
+  decorators: []
 };
 
 const Template = args => <AppBar {...args} />;

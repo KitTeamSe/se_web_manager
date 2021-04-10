@@ -7,7 +7,7 @@ import {createStore, applyMiddleware} from 'redux';
 import rootReducer, {rootSaga} from '../src/data/modules/index';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import StoryRouter from 'storybook-react-router';
 /**
  *  redux.
  */
@@ -40,6 +40,7 @@ export const parameters = {
 }
 
 export const decorators = [
+  StoryRouter(),
   (Story) => (
     <Provider store={store}>
       <StylesProvider injectFirst>
