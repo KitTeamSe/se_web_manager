@@ -9,21 +9,25 @@ const head = [
   {
     key: 'teacher_id',
     name: '#',
+    type: 'id',
     width: '10%'
   },
   {
     key: 'name',
     name: '이름',
+    type: 'string',
     width: '20%'
   },
   {
     key: 'type',
     name: '교원구분',
+    type: 'string',
     width: '20%'
   },
   {
     key: 'department',
     name: '소속',
+    type: 'string',
     width: '50%'
   }
 ];
@@ -45,6 +49,7 @@ const active = [
 
 const ProfessiorListView = () => {
   const headItem = head;
+  const title = '교원';
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -53,8 +58,8 @@ const ProfessiorListView = () => {
 
   return (
     <Wrapper>
-      <ContentHeader title="교원 관리" />
-      <PreInfoView head={headItem} rows={rows} />
+      <ContentHeader title={`${title}관리`} />
+      <PreInfoView title={title} head={headItem} rows={rows} />
     </Wrapper>
   );
 };

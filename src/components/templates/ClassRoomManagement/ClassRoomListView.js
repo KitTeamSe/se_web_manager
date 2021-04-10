@@ -8,21 +8,25 @@ const head = [
   {
     key: 'lecture_room_id',
     name: '#',
+    type: 'id',
     width: '10%'
   },
   {
     key: 'building',
     name: '건물',
+    type: 'string',
     width: '30%'
   },
   {
     key: 'room_number',
     name: '호수',
+    type: 'number',
     width: '30%'
   },
   {
     key: 'capacity',
     name: '정원',
+    type: 'number',
     width: '30%'
   }
 ];
@@ -62,6 +66,7 @@ const active = [
 
 const ClassRoomListView = () => {
   const headItem = head;
+  const title = '강의실';
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -70,8 +75,8 @@ const ClassRoomListView = () => {
 
   return (
     <Wrapper>
-      <ContentHeader title="강의실 관리" />
-      <PreInfoView head={headItem} rows={rows} />
+      <ContentHeader title={`${title} 관리`} />
+      <PreInfoView title={title} head={headItem} rows={rows} />
     </Wrapper>
   );
 };

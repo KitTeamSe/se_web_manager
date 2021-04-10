@@ -9,41 +9,49 @@ const head = [
   {
     key: 'subject_id',
     name: '#',
+    type: 'id',
     width: '3%'
   },
   {
     key: 'curriculum',
     name: '교육과정',
+    type: 'string',
     width: '33%'
   },
   {
     key: 'type',
-    name: '타입',
+    name: '교과구분',
+    type: 'string',
     width: '7%'
   },
   {
     key: 'code',
     name: '교과목코드',
+    type: 'string',
     width: '14%'
   },
   {
     key: 'name',
     name: '교과목명',
+    type: 'string',
     width: '19%'
   },
   {
     key: 'grade',
     name: '학년',
+    type: 'number',
     width: '7%'
   },
   {
     key: 'semester',
     name: '학기',
+    type: 'string',
     width: '7%'
   },
   {
     key: 'credit',
     name: '학점',
+    type: 'number',
     width: '7%'
   }
 ];
@@ -193,6 +201,7 @@ const active = [
 
 const SubjectListView = () => {
   const headItem = head;
+  const title = '교과';
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -201,8 +210,8 @@ const SubjectListView = () => {
 
   return (
     <Wrapper>
-      <ContentHeader title="교과 관리" />
-      <PreInfoView head={headItem} rows={rows} />
+      <ContentHeader title={`${title} 관리`} />
+      <PreInfoView title={title} head={headItem} rows={rows} />
     </Wrapper>
   );
 };
