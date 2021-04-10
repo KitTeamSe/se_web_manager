@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import RoundButton from '../../atoms/Button/RoundButton';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
-import PreInfoView from '../../modules/ContentMain/PreInfoView';
+import PreInfoViewContentMain from '../../modules/ContentMain/PreInfoViewContentMain';
 
 const Wrapper = styled.div``;
 const head = [
@@ -27,7 +28,7 @@ const head = [
   }
 ];
 
-const active = [
+const inActive = [
   {
     lecture_room_id: '1',
     building: 'D',
@@ -60,18 +61,38 @@ const active = [
   }
 ];
 
+const active = [
+  {
+    lecture_room_id: '6',
+    building: 'D',
+    room_number: 332,
+    capacity: 50
+  }
+];
+
 const ClassRoomListView = () => {
   const headItem = head;
-  const [rows, setRows] = useState([]);
+  const [inActiveRows, setInActiveRows] = useState([]);
+  const [activeRows, setActiveRows] = useState([]);
 
   useEffect(() => {
-    setRows(active);
+    setInActiveRows(inActive);
+    setActiveRows(active);
   }, []);
 
   return (
     <Wrapper>
-      <ContentHeader title="강의실 관리" />
-      <PreInfoView head={headItem} rows={rows} />
+      <ContentHeader title="강의실 관리">
+        <RoundButton>엑셀 업로드</RoundButton>
+        <RoundButton color="secondary">엑셀 다운로드</RoundButton>
+      </ContentHeader>
+      <PreInfoViewContentMain
+        head={headItem}
+        inActiveRows={inActiveRows}
+        activeRows={activeRows}
+        setInActiveRows={setInActiveRows}
+        setActiveRows={setActiveRows}
+      />
     </Wrapper>
   );
 };

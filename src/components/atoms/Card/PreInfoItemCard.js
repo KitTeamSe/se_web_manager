@@ -12,8 +12,13 @@ const CardStyled = styled(Card)`
   border: solid #dddddd 1px;
   box-shadow: none;
   &:hover {
-    background-color: #eeeeee;
+    background-color: ${({ index, select }) =>
+      index === select ? props => props.theme.mainColor : '#eeeeee'};
   }
+  background-color: ${({ index, select }) =>
+    index === select ? props => props.theme.mainColor : '#ffffff'};
+  color: ${({ index, select }) => (index === select ? '#ffffff' : '#000000')};
+  transition: background-color 0.2s, transform 0.2s;
 `;
 
 const ItemWrapper = styled.div`
@@ -21,17 +26,22 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemText = styled(Typography)`
-  font-size: ${({ small }) => (small ? '0.8vw' : '1.1vw')};
+  font-size: ${({ small }) => (small ? '0.8vw' : '1.0vw')};
   text-align: ${({ align }) => align || 'center'};
   font-weight: 500;
 `;
 
-const PreInfoItemCard = ({ children, item, head, index, small }) => {
+const PreInfoItemCard = ({
+  children,
+  item,
+  head,
+  index,
+  small,
+  select,
+  onClick
+}) => {
   const indexItem = i => (
     <ItemWrapper width={head[i].width}>
-      {/* <ItemText align="left" small={small}>
-      &nbsp;&nbsp;{index + 1}
-    </ItemText> */}
       <ItemText small={small}>{index + 1}</ItemText>
     </ItemWrapper>
   );
@@ -43,7 +53,7 @@ const PreInfoItemCard = ({ children, item, head, index, small }) => {
   );
 
   return (
-    <CardStyled>
+    <CardStyled index={index} select={select} onClick={onClick}>
       {item.map((data, i) => {
         return i === 0 ? indexItem(i) : dataItem(data, i);
       })}
@@ -59,7 +69,9 @@ PreInfoItemCard.propTypes = {
   item: PropTypes.arrayOf(PropTypes.array),
   head: PropTypes.arrayOf(PropTypes.array),
   index: PropTypes.number,
-  small: PropTypes.string
+  small: PropTypes.string,
+  select: PropTypes.number,
+  onClick: PropTypes.func.isRequired
 };
 
 PreInfoItemCard.defaultProps = {
@@ -67,7 +79,8 @@ PreInfoItemCard.defaultProps = {
   item: [],
   head: [],
   index: 1,
-  small: false
+  small: false,
+  select: null
 };
 
 export default PreInfoItemCard;

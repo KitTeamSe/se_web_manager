@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import RoundButton from '../../atoms/Button/RoundButton';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
-import PreInfoViewContentMain from '../../modules/ContentMain/PreInfoViewContentMain';
+import PreInfoView from '../../modules/ContentMain/PreInfoView';
 
 const Wrapper = styled.div``;
 
@@ -29,7 +28,7 @@ const head = [
   }
 ];
 
-const inActive = [
+const active = [
   {
     teacher_id: '1',
     name: '임은기',
@@ -44,44 +43,18 @@ const inActive = [
   }
 ];
 
-const active = [
-  {
-    teacher_id: '3',
-    name: '김성렬',
-    type: '교수',
-    department: '컴퓨터소프트웨어공학과'
-  },
-  {
-    teacher_id: '4',
-    name: '김선명',
-    type: '교수',
-    department: '컴퓨터소프트웨어공학과'
-  }
-];
-
 const ProfessiorListView = () => {
   const headItem = head;
-  const [inActiveRows, setInActiveRows] = useState(inActive);
-  const [activeRows, setActiveRows] = useState(active);
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    setInActiveRows(inActive);
-    setActiveRows(active);
+    setRows(active);
   }, []);
 
   return (
     <Wrapper>
-      <ContentHeader title="교원 관리">
-        <RoundButton>엑셀 업로드</RoundButton>
-        <RoundButton color="secondary">엑셀 다운로드</RoundButton>
-      </ContentHeader>
-      <PreInfoViewContentMain
-        head={headItem}
-        inActiveRows={inActiveRows}
-        activeRows={activeRows}
-        setInActiveRows={setInActiveRows}
-        setActiveRows={setActiveRows}
-      />
+      <ContentHeader title="교원 관리" />
+      <PreInfoView head={headItem} rows={rows} />
     </Wrapper>
   );
 };
