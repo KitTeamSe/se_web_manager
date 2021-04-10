@@ -6,6 +6,7 @@ import TextInfo from '../../atoms/TextInfo/TextInfo';
 const TextListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 const TextLineContainer = styled.div`
   display: flex;
