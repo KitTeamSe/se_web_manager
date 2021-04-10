@@ -6,7 +6,7 @@ import Table from './Table';
 
 export default {
   component: Table,
-  title: 'atoms/Table'
+  title: 'modules/Table'
 };
 
 const Template = args => <Table {...args} />;

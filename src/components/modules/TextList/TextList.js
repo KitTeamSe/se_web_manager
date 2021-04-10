@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import TextLine from '../../atoms/TextInfo/TextInfo';
+import PropTypes from 'prop-types';
+import TextInfo from '../../atoms/TextInfo/TextInfo';
 
 const TextListContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const TextLineContainer = styled.div`
+  display: flex;
+  > * {
+    margin: 0 1rem 0 1rem;
+  }
+`;
 const TextList = ({ textData }) => {
-  return (
-    <TextListContainer>
-      <TextLine />
-    </TextListContainer>
-  );
+  const [textList, setTextList] = useState();
+  const renderTextList = () => {
+    const tempArray = textData.map(data => (
+      <TextLineContainer>
+        {/* label */}
+        <TextInfo text={data.label} isBold />
+        {/* text */}
+        <TextInfo text={data.text} />
+      </TextLineContainer>
+    ));
+    setTextList(tempArray);
+  };
+  useEffect(() => {
+    renderTextList();
+  }, []);
+  return <TextListContainer>{textList}</TextListContainer>;
+};
+
+TextList.defaultProps = {
+  textData: [{ label: 'defaultLabel', text: 'defaultText' }]
+};
+TextList.propTypes = {
+  textData: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
 };
 
 export default TextList;

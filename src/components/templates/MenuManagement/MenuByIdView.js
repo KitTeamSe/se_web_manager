@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import TextInfo from '../../atoms/TextInfo/TextInfo';
+import TextList from '../../modules/TextList/TextList';
 // 메뉴 정보를 표시해줄 틀 module import
 /**
  *  useSelect, useDispatch 사용
@@ -17,7 +17,7 @@ const MenuByIdView = ({ match }) => {
   return (
     <div>
       <p>MenuByIdView {match.params ? match.params.id : ''}</p>
-      <TextInfo text={match.url} />
+      <TextList textData />
     </div>
   );
 };
