@@ -23,6 +23,7 @@ const StyledPaper = styled.div`
   &::-webkit-scrollbar-track {
     background: #ffffff;
   }
+  transition-duration: 0.1s;
 `;
 
 const DrawerStyled = styled(Drawer)`

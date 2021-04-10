@@ -15,6 +15,7 @@ const LogoWrapper = styled(Typography)`
   flex-grow: 1;
   line-height: 0;
   font-size: 2rem;
+  transition-duration: 0.3s;
 `;
 
 const AppBar = ({ open, sideMenuOpen, sideMenuClose, path }) => {
