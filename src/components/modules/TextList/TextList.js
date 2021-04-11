@@ -6,12 +6,13 @@ import TextInfo from '../../atoms/TextInfo/TextInfo';
 const TextListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
+
 const TextLineContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   > * {
-    margin: 0 1rem 0 1rem;
+    margin: 0 1rem 1rem 1rem;
   }
 `;
 const TextList = ({ textData }) => {
@@ -20,16 +21,16 @@ const TextList = ({ textData }) => {
     const tempArray = textData.map(data => (
       <TextLineContainer>
         {/* label */}
-        <TextInfo text={data.label} isBold />
+        <TextInfo className="label" text={data.label} isBold />
         {/* text */}
-        <TextInfo text={data.text} />
+        <TextInfo className="text" text={data.text} />
       </TextLineContainer>
     ));
     setTextList(tempArray);
   };
   useEffect(() => {
     renderTextList();
-  }, []);
+  }, [textData]);
   return <TextListContainer>{textList}</TextListContainer>;
 };
 

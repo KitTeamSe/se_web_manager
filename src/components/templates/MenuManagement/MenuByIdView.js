@@ -1,9 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import TextList from '../../modules/TextList/TextList';
 import Header from '../../modules/Header/Header';
+import { getMenuById } from '../../../data/modules/menu';
 // 메뉴 정보를 표시해줄 틀 module import
 /**
  *  useSelect, useDispatch 사용
@@ -19,18 +20,56 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
   }
 `;
-const MenuByIdView = ({ match, textData }) => {
+const MenuByIdView = ({ match }) => {
+  const menuDataById = useSelector(state => state.menu.menuById.data);
+  const dispatch = useDispatch();
+  const [textData, setTextData] = useState();
+  const arrangeMenuData = () => {
+    const tempMenuData = [
+      { label: '메뉴ID', text: menuDataById.menuId },
+      { label: '메뉴순서', text: menuDataById.menuOrder },
+      { label: '영어이름', text: menuDataById.nameEng },
+      { label: '한글이름', text: menuDataById.nameKor },
+      { label: '설명', text: menuDataById.description }
+    ];
+    setTextData(tempMenuData);
+  };
+  // textData: [{ label: 'defaultLabel', text: 'defaultText' }]
+
+  useEffect(() => {
+    dispatch(getMenuById(match.params.id));
+  }, []);
+  useEffect(() => {
+    console.log('menuDataById changed');
+    arrangeMenuData();
+    console.log('arrangMenuData()');
+  }, [menuDataById]);
   return (
     <Wrapper>
       <Header class="header" title="메뉴 상세 조회" />
       <p>MenuByIdView {match.params ? match.params.id : ''}</p>
+      <button
+        type="button"
+        onClick={() => {
+          console.log(menuDataById);
+        }}
+      >
+        useSelectTest
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          dispatch(getMenuById(1592));
+        }}
+      >
+        useDispatchTest
+      </button>
       <TextList textData={textData} />
     </Wrapper>
   );
 };
 MenuByIdView.propTypes = {
-  match: ReactRouterPropTypes.match.isRequired,
-  textData: PropTypes.arrayOf(PropTypes.object).isRequired
+  match: ReactRouterPropTypes.match.isRequired
 };
 
 export default MenuByIdView;

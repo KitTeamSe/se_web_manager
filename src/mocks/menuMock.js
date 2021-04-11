@@ -12,11 +12,12 @@ for (let index = 0; index < size; index++) {
     })
 }
 
-export const menuByIdMock = {
+export const menuByIdMock = ({id}) => {
+    return {
     description: `Menu_by_id Description`,
-    menuId: `1`,
+    menuId: id,
     menuOrder: 0,
     nameEng: `Menu_by_id Name in Eng`,
     nameKor: `Menu_by_id Name in Kor`
-};
+}};
 

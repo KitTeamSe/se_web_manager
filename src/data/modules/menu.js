@@ -1,6 +1,6 @@
+// 액션 타입
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getMenuListApi, getMenuByIdApi } from '../api/menu';
-// 액션 타입
 
 // 메뉴 리스트 조회 / 성공 / 실패
 const GET_MENU_LIST = 'menu/GET_MENU_LIST';
@@ -14,7 +14,7 @@ const GET_MENU_BY_ID_ERROR = 'menu/GET_MENU_BY_ID_ERROR';
 
 // 액션 생성 함수
 export const getMenuList = () => ({ type: GET_MENU_LIST });
-export const getMenuById = () => ({ type: GET_MENU_BY_ID });
+export const getMenuById = id => ({ type: GET_MENU_BY_ID, id });
 
 // state 초기값
 const initialState = {
@@ -37,22 +37,23 @@ const initialState = {
         nameKor: 'Menu2_init Name in Kor'
       }
     ]
+  },
+  menuById: {
+    data: {
+      child: [],
+      description: 'Menu Description',
+      menuId: 0,
+      menuOrder: 0,
+      nameEng: 'Menu Name in Eng',
+      nameKor: 'Menu Name in Kor'
+    }
   }
-  //   ,
-  //   menu: {
-  //     child: [],
-  //     description: 'Menu Description',
-  //     menuId: 0,
-  //     menuOrder: 0,
-  //     nameEng: 'Menu Name in Eng',
-  //     nameKor: 'Menu Name in Kor'
-  //   }
 };
 
 // 사가 정의
-function* getMenuListSaga(action) {
+function* getMenuListSaga() {
   try {
-    const res = yield call(getMenuListApi, action.payload);
+    const res = yield call(getMenuListApi);
     yield put({ type: GET_MENU_LIST_SUCCESS, payload: res });
   } catch (e) {
     yield put({ type: GET_MENU_LIST_ERROR, error: true, payload: e });
@@ -61,7 +62,7 @@ function* getMenuListSaga(action) {
 
 function* getMenuByIdSaga(action) {
   try {
-    const res = yield call(getMenuByIdApi, action.payload);
+    const res = yield call(getMenuByIdApi, action.id);
     yield put({ type: GET_MENU_BY_ID_SUCCESS, payload: res });
   } catch (e) {
     yield put({ type: GET_MENU_BY_ID_ERROR, error: true, payload: e });
@@ -90,7 +91,14 @@ export default function menu(state = initialState, action) {
       return state;
     // 메뉴 ID로 조회
     case GET_MENU_BY_ID:
+      return state;
     case GET_MENU_BY_ID_SUCCESS:
+      return {
+        ...state,
+        menuById: {
+          ...action.payload
+        }
+      };
     case GET_MENU_BY_ID_ERROR:
       return state;
     default:

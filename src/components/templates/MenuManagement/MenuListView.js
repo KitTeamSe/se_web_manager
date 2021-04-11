@@ -28,7 +28,7 @@ const MenuListView = ({ match }) => {
   const menuList = useSelector(state => state.menu.menuList);
   const [headData, setHeadData] = useState();
   const [rowData, setRowData] = useState();
-  const renderMenuList = () => {
+  const arrangeMenuList = () => {
     // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
     const tempRows = menuList.data.map(menu => ({
       onRowClick: () => {
@@ -52,9 +52,9 @@ const MenuListView = ({ match }) => {
   useEffect(() => {
     console.log(match);
     console.log(
-      'test_MenuList / useEffect / renderMenuList() when menuList change'
+      'test_MenuList / useEffect / arrangeMenuList() when menuList change'
     );
-    renderMenuList();
+    arrangeMenuList();
   }, [menuList]);
 
   return (
