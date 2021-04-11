@@ -7,7 +7,7 @@ const handlers = [
   rest.get(`${baseUrl}/api/vl/menu`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json( {data:menuListMock} ));
   }),
-  rest.post(`${baseUrl}/api/vl/menu/:id`, (req, res, ctx) => {
+  rest.get(`${baseUrl}/api/vl/menu/:id`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json( {data:menuByIdMock(req.params)} ));
   })
 ];
