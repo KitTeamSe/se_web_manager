@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import TextList from '../../modules/TextList/TextList';
 // 메뉴 정보를 표시해줄 틀 module import
@@ -13,16 +13,17 @@ import TextList from '../../modules/TextList/TextList';
  * 받아서 action.payload에 담아서 dispatch.
  *  */
 
-const MenuByIdView = ({ match }) => {
+const MenuByIdView = ({ match, textData }) => {
   return (
     <div>
       <p>MenuByIdView {match.params ? match.params.id : ''}</p>
-      <TextList textData />
+      <TextList textData={textData} />
     </div>
   );
 };
 MenuByIdView.propTypes = {
-  match: ReactRouterPropTypes.match.isRequired
+  match: ReactRouterPropTypes.match.isRequired,
+  textData: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default MenuByIdView;
