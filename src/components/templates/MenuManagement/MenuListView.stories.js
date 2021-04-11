@@ -1,7 +1,4 @@
-import StoryRouter from 'storybook-react-router';
-
 import React from 'react';
-
 import MenuListView from './MenuListView';
 
 export default {

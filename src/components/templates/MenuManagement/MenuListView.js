@@ -60,22 +60,10 @@ const MenuListView = ({ match }) => {
   return (
     <Wrapper>
       <Header class="header" title="메뉴 관리">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            console.log(menuList.menuList);
-          }}
-        >
+        <Button variant="contained" color="primary">
           메뉴추가
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => {
-            getMenuListFromStore();
-          }}
-        >
+        <Button variant="contained" color="secondary">
           메뉴삭제
         </Button>
         <button
