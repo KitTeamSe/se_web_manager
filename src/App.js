@@ -44,7 +44,7 @@ function App() {
 
       <ContentContainer open={open} setOpen={setOpen}>
         <Switch>
-          <Route path={`${path}`} component={MenuRouter} />
+          <Route path={`${path}/menu`} component={MenuRouter} />
           {/* 아래의 방식이 react router의 match, history를 하위 컴포넌트로 내려주지 못해 위쪽 방식으로 일단 진행해보겠음. 추후 구조를 수정해야할것같다. */}
           <Route exact path="" />
           {manageItems.map(el => (

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import styled from 'styled-components';
 import TextList from '../../modules/TextList/TextList';
+import Header from '../../modules/Header/Header';
 // 메뉴 정보를 표시해줄 틀 module import
 /**
  *  useSelect, useDispatch 사용
@@ -12,13 +14,18 @@ import TextList from '../../modules/TextList/TextList';
  * props에서 react-router의 match 속성을 받아서 이중 params로 url 마지막에 /:id로 들어온 부분을
  * 받아서 action.payload에 담아서 dispatch.
  *  */
-
+const Wrapper = styled.div`
+  > * {
+    margin-bottom: 1rem;
+  }
+`;
 const MenuByIdView = ({ match, textData }) => {
   return (
-    <div>
+    <Wrapper>
+      <Header class="header" title="메뉴 상세 조회" />
       <p>MenuByIdView {match.params ? match.params.id : ''}</p>
       <TextList textData={textData} />
-    </div>
+    </Wrapper>
   );
 };
 MenuByIdView.propTypes = {
