@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { List, Collapse } from '@material-ui/core';
+import { List, Collapse, Divider } from '@material-ui/core';
 import SideMenuListItem from '../SideMenuListItem/SideMenuListItem';
 import SideMenuNestedList from '../SideMenuNestedList/SideMenuNestedList';
 
@@ -16,16 +16,30 @@ const SideMenuList = ({ itemData, items, path }) => {
     setopenList(!openList);
   }, [openList]);
 
-  const scheduleMenuList = items.map((el, index) => (
-    <SideMenuListItem
-      count={index}
-      to={`${path}/${el.to}`}
-      name={el.name}
-      key={el.name}
-    >
-      {el.icon}
-    </SideMenuListItem>
-  ));
+  const scheduleMenuList = items.map((el, index) =>
+    index % 4 === 0 ? (
+      <>
+        <Divider />
+        <SideMenuListItem
+          count={index}
+          to={`${path}/${el.to}`}
+          name={el.name}
+          key={el.name}
+        >
+          {el.icon}
+        </SideMenuListItem>
+      </>
+    ) : (
+      <SideMenuListItem
+        count={index}
+        to={`${path}/${el.to}`}
+        name={el.name}
+        key={el.name}
+      >
+        {el.icon}
+      </SideMenuListItem>
+    )
+  );
 
   return (
     <ListStyled>

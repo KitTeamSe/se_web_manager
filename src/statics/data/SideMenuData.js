@@ -30,9 +30,10 @@ import StatisticsView from '../../components/templates/StatisticsManagement/Stat
 import BlacklistListView from '../../components/templates/BlacklistManagement/BlacklistListView';
 import NoticeListView from '../../components/templates/NoticeManagement/NoticeListView';
 import ReportListView from '../../components/templates/ReportManagement/ReportListView';
-import ClassRoomListView from '../../components/templates/ClassRoomManagement/ClassRoomListView';
-import ProfessiorListView from '../../components/templates/ProfessiorManagement/ProfessiorListView';
+import LectureRoomListView from '../../components/templates/LectureRoomManagement/LectureRoomListView';
+import TeacherListView from '../../components/templates/TeacherManagement/TeacherListView';
 import SubjectListView from '../../components/templates/SubjectManagement/SubjectListView';
+import PeriodListView from '../../components/templates/PeriodManagement/PeriodListView';
 
 const defaultPath = '/m';
 
@@ -113,27 +114,33 @@ const ManageListData = [
 
 const ScheduleListData = [
   {
-    to: 'classRoom',
+    to: 'lecture_room',
     name: '강의실 관리',
     icon: <MeetingRoom />,
-    page: <ClassRoomListView />
+    page: <LectureRoomListView />
   },
   {
-    to: 'professior',
+    to: 'teacher',
     name: '교원 관리',
     icon: <Person />,
-    page: <ProfessiorListView />
+    page: <TeacherListView />
   },
   {
-    to: 'Subject',
+    to: 'subject',
     name: '교과 관리',
     icon: <Class />,
     page: <SubjectListView />
   },
   {
-    to: 'schedule_4',
-    name: '시간표 관리4',
+    to: 'period',
+    name: '교시 관리',
     icon: <Schedule />,
+    page: <PeriodListView />
+  },
+  {
+    to: 'schedule',
+    name: '시간표 관리',
+    icon: <CalendarToday />,
     page: <>시간4표</>
   }
 ];

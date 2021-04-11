@@ -1,37 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import RoundButton from '../../atoms/Button/RoundButton';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
-import PreInfoView from '../../modules/ContentMain/PreInfoView';
+import PreInfoViewContentMain from '../../modules/ContentMain/PreInfoViewContentMain';
 
 const Wrapper = styled.div``;
 const head = [
   {
     key: 'lecture_room_id',
     name: '#',
-    type: 'id',
     width: '10%'
   },
   {
     key: 'building',
     name: '건물',
-    type: 'string',
     width: '30%'
   },
   {
     key: 'room_number',
     name: '호수',
-    type: 'number',
     width: '30%'
   },
   {
     key: 'capacity',
     name: '정원',
-    type: 'number',
     width: '30%'
   }
 ];
 
-const active = [
+const inActive = [
   {
     lecture_room_id: '1',
     building: 'D',
@@ -64,21 +61,40 @@ const active = [
   }
 ];
 
-const ClassRoomListView = () => {
+const active = [
+  {
+    lecture_room_id: '6',
+    building: 'D',
+    room_number: 332,
+    capacity: 50
+  }
+];
+
+const LectureRoomListView = () => {
   const headItem = head;
-  const title = '강의실';
-  const [rows, setRows] = useState([]);
+  const [inActiveRows, setInActiveRows] = useState([]);
+  const [activeRows, setActiveRows] = useState([]);
 
   useEffect(() => {
-    setRows(active);
+    setInActiveRows(inActive);
+    setActiveRows(active);
   }, []);
 
   return (
     <Wrapper>
-      <ContentHeader title={`${title} 관리`} />
-      <PreInfoView title={title} head={headItem} rows={rows} />
+      <ContentHeader title="강의실 관리">
+        <RoundButton>엑셀 업로드</RoundButton>
+        <RoundButton color="secondary">엑셀 다운로드</RoundButton>
+      </ContentHeader>
+      <PreInfoViewContentMain
+        head={headItem}
+        inActiveRows={inActiveRows}
+        activeRows={activeRows}
+        setInActiveRows={setInActiveRows}
+        setActiveRows={setActiveRows}
+      />
     </Wrapper>
   );
 };
 
-export default ClassRoomListView;
+export default LectureRoomListView;

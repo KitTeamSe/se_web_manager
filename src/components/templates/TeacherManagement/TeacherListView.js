@@ -47,9 +47,10 @@ const active = [
   }
 ];
 
-const ProfessiorListView = () => {
+const TeacherListView = () => {
   const headItem = head;
   const title = '교원';
+  const headerTitle = `사전정보 - ${title}관리`;
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -58,10 +59,10 @@ const ProfessiorListView = () => {
 
   return (
     <Wrapper>
-      <ContentHeader title={`${title}관리`} />
+      <ContentHeader title={headerTitle} />
       <PreInfoView title={title} head={headItem} rows={rows} />
     </Wrapper>
   );
 };
 
-export default ProfessiorListView;
+export default TeacherListView;

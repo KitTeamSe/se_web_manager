@@ -202,6 +202,7 @@ const active = [
 const SubjectListView = () => {
   const headItem = head;
   const title = '교과';
+  const headerTitle = `사전정보 - ${title}관리`;
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -210,7 +211,7 @@ const SubjectListView = () => {
 
   return (
     <Wrapper>
-      <ContentHeader title={`${title} 관리`} />
+      <ContentHeader title={headerTitle} />
       <PreInfoView title={title} head={headItem} rows={rows} />
     </Wrapper>
   );
