@@ -10,6 +10,8 @@ import {
   ManageListData,
   ScheduleListData
 } from './statics/data/SideMenuData';
+// import MenuListView from './components/templates/MenuManagement/MenuListView';
+import MenuRouter from './components/templates/MenuManagement/MenuRouter';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
@@ -46,9 +48,16 @@ function App({ open, sideMenuOpen, sideMenuClose }) {
         <Container>
           <Toolbar height="72" />
           <Switch>
+            {/* 임시로 사용하는 라우터 */}
+            <Route path={`${path}/menu`} component={MenuRouter} />
             {manageItems.map(el => (
-              <Route exact path={`${path}/${el.to}`} key={el.to}>
-                {el.page}
+              <Route
+                exact
+                path={`${path}/${el.to}`}
+                key={el.to}
+                component={el.page}
+              >
+                {/* {el.page} */}
               </Route>
             ))}
             {scheduleItems.map(el => (

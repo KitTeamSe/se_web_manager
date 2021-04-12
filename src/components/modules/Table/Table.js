@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Table as Tables, TableContainer, Paper } from '@material-ui/core';
-import TableHead from '../../atoms/Table/TableHead';
-import TableContent from '../../atoms/Table/TableContent';
+import TableHead from '../../atoms/TableHead/TableHead';
+import TableContent from '../../atoms/TableContent/TableContent';
 
 const TableContainerStyled = styled(TableContainer)`
   margin-top: 20px;
