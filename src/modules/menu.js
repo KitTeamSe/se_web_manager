@@ -1,6 +1,6 @@
 // 액션 타입
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getMenuListApi, getMenuByIdApi } from '../api/menu';
+import { getMenuListApi, getMenuByIdApi } from '../libs/API/menu';
 
 // 메뉴 리스트 조회 / 성공 / 실패
 const GET_MENU_LIST = 'menu/GET_MENU_LIST';

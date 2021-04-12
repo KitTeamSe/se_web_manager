@@ -11,7 +11,7 @@ import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumbe
 // import Button from '../../atoms/Button/Button';
 import Table from '../../modules/Table/TableWithRowAction';
 // for redux
-import { getMenuList } from '../../../data/modules/menu';
+import { getMenuList } from '../../../modules/menu';
 
 const Wrapper = styled.div`
   > * {

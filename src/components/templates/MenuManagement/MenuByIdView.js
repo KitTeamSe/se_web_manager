@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import TextList from '../../modules/TextList/TextList';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
-import { getMenuById } from '../../../data/modules/menu';
+import { getMenuById } from '../../../modules/menu';
 // 메뉴 정보를 표시해줄 틀 module import
 /**
  *  useSelect, useDispatch 사용

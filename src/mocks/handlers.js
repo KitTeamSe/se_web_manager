@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import baseUrl from '../data/baseUrl';
+import baseUrl from '../libs/baseUrl';
 // menuHandler / userInfoHandler ... 분리?
 import {menuListMock, menuByIdMock} from './menuMock';
 
