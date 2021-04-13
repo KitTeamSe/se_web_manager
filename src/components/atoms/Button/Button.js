@@ -5,9 +5,8 @@ import Buttons from '@material-ui/core/Button';
 
 const ButtonStyled = styled(Buttons)`
   margin: 0 2px;
-  border-radius: 32px;
   font-weight: bold;
-
+  padding: ${({ size }) => (size === 'small' ? '4px 12px' : null)};
   background: ${({ color }) =>
     color === 'primary' ? props => props.theme.mainColor : color};
   &:hover {
@@ -16,7 +15,15 @@ const ButtonStyled = styled(Buttons)`
   }
 `;
 
-const Button = ({ children, variant, color, disabled, href, size }) => {
+const Button = ({
+  children,
+  variant,
+  color,
+  disabled,
+  href,
+  size,
+  onClick
+}) => {
   return (
     <ButtonStyled
       variant={variant}
@@ -24,6 +31,7 @@ const Button = ({ children, variant, color, disabled, href, size }) => {
       disabled={disabled}
       href={href}
       size={size}
+      onClick={onClick}
     >
       {children}
     </ButtonStyled>
@@ -36,7 +44,8 @@ Button.propTypes = {
   color: PropTypes.string,
   disabled: PropTypes.bool,
   href: PropTypes.string,
-  size: PropTypes.string
+  size: PropTypes.string,
+  onClick: PropTypes.func.isRequired
 };
 
 Button.defaultProps = {

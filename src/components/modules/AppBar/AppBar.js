@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Typography } from '@material-ui/core';
@@ -15,19 +15,12 @@ const LogoWrapper = styled(Typography)`
   flex-grow: 1;
   line-height: 0;
   font-size: 2rem;
+  transition-duration: 0.3s;
 `;
 
-const AppBar = ({ open, setOpen, path }) => {
+const AppBar = ({ open, sideMenuOpen, sideMenuClose, path }) => {
   // const [badgeContent, setBadgeContent] = useState(2);
   const badgeContent = 2;
-
-  const handleDrawerOpen = useCallback(() => {
-    setOpen(true);
-  }, [open]);
-
-  const handleDrawerClose = useCallback(() => {
-    setOpen(false);
-  }, [open]);
 
   const doNothing = () => {
     return '#';
@@ -35,11 +28,15 @@ const AppBar = ({ open, setOpen, path }) => {
 
   return (
     <Bar open={open}>
-      <IconButton
-        onClick={() => (open ? handleDrawerClose() : handleDrawerOpen())}
-      >
-        <SideMenuIcon open={open} setOpen={setOpen} />
-      </IconButton>
+      {open ? (
+        <IconButton onClick={() => sideMenuClose()}>
+          <SideMenuIcon open={open} handleOpen={sideMenuClose} />
+        </IconButton>
+      ) : (
+        <IconButton onClick={() => sideMenuOpen()}>
+          <SideMenuIcon open={open} handleOpen={sideMenuOpen} />
+        </IconButton>
+      )}
 
       <LogoWrapper variant="h6">
         <Link to={path}>
@@ -62,7 +59,8 @@ const AppBar = ({ open, setOpen, path }) => {
 
 AppBar.propTypes = {
   open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired,
+  sideMenuOpen: PropTypes.func.isRequired,
+  sideMenuClose: PropTypes.func.isRequired,
   path: PropTypes.string
 };
 

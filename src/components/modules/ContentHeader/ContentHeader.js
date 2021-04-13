@@ -17,7 +17,7 @@ const TitleWrapper = styled.div`
 
 const ButtonWrapper = styled.div``;
 
-const Header = ({ children, title }) => {
+const ContentHeader = ({ children, title }) => {
   return (
     <Wrapper>
       <TitleWrapper>
@@ -29,14 +29,14 @@ const Header = ({ children, title }) => {
   );
 };
 
-Header.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object),
+ContentHeader.propTypes = {
+  children: PropTypes.shape({ root: PropTypes.string }),
   title: PropTypes.string
 };
 
-Header.defaultProps = {
+ContentHeader.defaultProps = {
   children: null,
   title: null
 };
 
-export default Header;
+export default ContentHeader;

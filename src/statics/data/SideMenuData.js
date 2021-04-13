@@ -14,7 +14,9 @@ import {
   Group,
   Schedule,
   Build,
-  CalendarToday
+  CalendarToday,
+  MeetingRoom,
+  Class
 } from '@material-ui/icons';
 import AuthGroupListView from '../../components/templates/AuthGroupManagement/AuthGroupListView';
 import AuthListView from '../../components/templates/AuthManagement/AuthListView';
@@ -28,6 +30,10 @@ import StatisticsView from '../../components/templates/StatisticsManagement/Stat
 import BlacklistListView from '../../components/templates/BlacklistManagement/BlacklistListView';
 import NoticeListView from '../../components/templates/NoticeManagement/NoticeListView';
 import ReportListView from '../../components/templates/ReportManagement/ReportListView';
+import LectureRoomListView from '../../components/templates/LectureRoomManagement/LectureRoomListView';
+import TeacherListView from '../../components/templates/TeacherManagement/TeacherListView';
+import SubjectListView from '../../components/templates/SubjectManagement/SubjectListView';
+import PeriodListView from '../../components/templates/PeriodManagement/PeriodListView';
 
 const defaultPath = '/m';
 
@@ -108,27 +114,33 @@ const ManageListData = [
 
 const ScheduleListData = [
   {
+    to: 'lecture_room',
+    name: '강의실 관리',
+    icon: <MeetingRoom />,
+    page: <LectureRoomListView />
+  },
+  {
+    to: 'teacher',
+    name: '교원 관리',
+    icon: <Person />,
+    page: <TeacherListView />
+  },
+  {
+    to: 'subject',
+    name: '교과 관리',
+    icon: <Class />,
+    page: <SubjectListView />
+  },
+  {
+    to: 'period',
+    name: '교시 관리',
+    icon: <Schedule />,
+    page: <PeriodListView />
+  },
+  {
     to: 'schedule',
-    name: '시간표 관리1',
-    icon: <Schedule />,
-    page: <>시간표 메인</>
-  },
-  {
-    to: 'schedule_2',
-    name: '시간표 관리2',
-    icon: <Schedule />,
-    page: <>시간2표</>
-  },
-  {
-    to: 'schedule_3',
-    name: '시간표 관리3',
-    icon: <Schedule />,
-    page: <>시간3표</>
-  },
-  {
-    to: 'schedule_4',
-    name: '시간표 관리4',
-    icon: <Schedule />,
+    name: '시간표 관리',
+    icon: <CalendarToday />,
     page: <>시간4표</>
   }
 ];

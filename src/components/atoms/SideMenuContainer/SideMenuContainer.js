@@ -7,6 +7,23 @@ import Toolbar from '../Toolbar/Toolbar';
 const StyledPaper = styled.div`
   overflow-x: hidden;
   width: ${props => (props.open ? 200 : 48)}px;
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2.5px;
+    background-color: #dddddd;
+
+    &:hover {
+      background-color: #aaaaaa;
+    }
+  }
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  transition-duration: 0.1s;
 `;
 
 const DrawerStyled = styled(Drawer)`
