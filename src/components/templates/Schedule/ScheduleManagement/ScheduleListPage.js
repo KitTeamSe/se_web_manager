@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import Button from '../../../atoms/Button/RoundButton';
 import DropDown from '../../../atoms/DropDown/DropDown';
+import Tabs from '../../../atoms/Tabs/Tabs';
 // import Table from '../../modules/Table/Table';
 
 const Wrapper = styled.div``;
@@ -11,7 +12,7 @@ const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 8px;
+  padding-top: 8px;
 `;
 
 // const head = [
@@ -119,7 +120,7 @@ const ScheduleListPage = () => {
         </Button>
       </ContentHeader>
       <ContentWrapper>
-        {/* <Table head={headItem} rows={tableItems} /> */}
+        <Tabs />
       </ContentWrapper>
     </Wrapper>
   );
