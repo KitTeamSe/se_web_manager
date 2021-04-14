@@ -12,6 +12,8 @@ import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumbe
 import Table from '../../modules/Table/TableWithRowAction';
 // for redux
 import { getMenuList } from '../../../modules/menu';
+import MenuCreateModal from './MenuCreateModal';
+import MenuDeleteModal from './MenuDeleteModal';
 
 const Wrapper = styled.div`
   > * {
@@ -30,6 +32,21 @@ const MenuListView = ({ match }) => {
   const menuList = useSelector(state => state.menu.menuList);
   const [headData, setHeadData] = useState();
   const [rowData, setRowData] = useState();
+  const [menuCreateModalOpen, setMenuCreateModalOpen] = useState(false);
+  const [menuDeleteModalOpen, setMenuDeleteModalOpen] = useState(false);
+  const menuCreateToggle = () => {
+    setMenuCreateModalOpen(!menuCreateModalOpen);
+  };
+  const menuDeleteToggle = () => {
+    setMenuDeleteModalOpen(!menuDeleteModalOpen);
+  };
+  const [menuCreateFormData, setMenuCreateFormData] = useState();
+  const menuCreateOnChange = e => {
+    setMenuCreateFormData(e.target.value);
+  };
+  useEffect(() => {
+    console.log(`menuCreateFormData 내용: ${menuCreateFormData}`);
+  }, [menuCreateFormData]);
   const arrangeMenuList = () => {
     // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
     const tempRows = menuList.data.map(menu => ({
@@ -62,10 +79,14 @@ const MenuListView = ({ match }) => {
   return (
     <Wrapper>
       <ContentHeader class="header" title="메뉴 관리">
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={menuCreateToggle}>
           메뉴추가
         </Button>
-        <Button variant="contained" color="secondary">
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={menuDeleteToggle}
+        >
           메뉴삭제
         </Button>
         <button
@@ -88,6 +109,24 @@ const MenuListView = ({ match }) => {
 
       <Table key={rowData} headData={headData} rowData={rowData} hover />
       <PageNumberButtonGroup nowPage={1} maxPage={5} halfRange={2} />
+
+      {menuCreateModalOpen ? (
+        <MenuCreateModal
+          open={menuCreateModalOpen}
+          setOpen={menuCreateToggle}
+          onChange={menuCreateOnChange}
+        />
+      ) : (
+        ''
+      )}
+      {menuDeleteModalOpen ? (
+        <MenuDeleteModal
+          open={menuDeleteModalOpen}
+          setOpen={menuDeleteToggle}
+        />
+      ) : (
+        ''
+      )}
     </Wrapper>
   );
 };
