@@ -126,6 +126,7 @@ const MenuListView = ({ match }) => {
         <MenuCreateModal
           open={menuCreateModalOpen}
           setOpen={menuCreateToggle}
+          values={menuCreateFormData}
           onChange={menuCreateOnChange}
         />
       ) : (
