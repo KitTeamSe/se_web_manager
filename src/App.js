@@ -1,73 +1,55 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { CssBaseline, Container } from '@material-ui/core';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Toolbar from './components/atoms/Toolbar/Toolbar';
 import Header from './components/templates/Header/Header';
-import {
-  defaultPath,
-  ManageListData,
-  ScheduleListData
-} from './statics/data/SideMenuData';
+import useToggle from './libs/useToggle';
+import { ManageListData, ScheduleListData } from './statics/data/SideMenuData';
+import { MANAGE_URL } from './statics/data/config';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
   white-space: nowrap;
 `;
 
-const Main = styled.main`
+const MainWrapper = styled.main`
   overflow-x: hidden;
   flex-grow: 1;
-  margin: 0 72px;
-  margin-left: ${props => (props.open ? 260 : 72)}px;
-  padding: 8px;
+  margin: 0 58px;
+  margin-left: ${props => (props.open ? 260 : 58)}px;
 `;
 
-function App({ open, sideMenuOpen, sideMenuClose }) {
+const Routes = ({ items }) =>
+  items.map(el => (
+    <Route exact path={`${MANAGE_URL}/${el.to}`} key={el.to}>
+      {el.page}
+    </Route>
+  ));
+
+function App() {
+  const [open, setOpen] = useToggle();
   const manageItems = ManageListData;
   const scheduleItems = ScheduleListData;
   const menuItems = [manageItems, scheduleItems];
-  const firstPage = manageItems[0].to;
-  const path = defaultPath;
 
   return (
     <Wrapper>
       <CssBaseline />
-      <Header
-        open={open}
-        sideMenuOpen={sideMenuOpen}
-        sideMenuClose={sideMenuClose}
-        menuItems={menuItems}
-        path={path}
-      />
+      <Header open={open} setOpen={setOpen} menuItems={menuItems} />
 
-      <Main open={open}>
-        <Container>
-          <Toolbar height="72" />
-          <Switch>
-            {manageItems.map(el => (
-              <Route exact path={`${path}/${el.to}`} key={el.to}>
-                {el.page}
-              </Route>
-            ))}
-            {scheduleItems.map(el => (
-              <Route exact path={`${path}/${el.to}`} key={el.to}>
-                {el.page}
-              </Route>
-            ))}
-            <Redirect path="*" to={`${path}/${firstPage}`} />
-          </Switch>
-        </Container>
-      </Main>
+      <Switch>
+        <MainWrapper open={open}>
+          <Container>
+            <Toolbar height="72" />
+            <Routes items={manageItems} />
+            <Routes items={scheduleItems} />
+            {/* <Redirect path="*" to={`${path}/${firstPage}`} /> */}
+          </Container>
+        </MainWrapper>
+      </Switch>
     </Wrapper>
   );
 }
-
-App.propTypes = {
-  open: PropTypes.bool.isRequired,
-  sideMenuOpen: PropTypes.func.isRequired,
-  sideMenuClose: PropTypes.func.isRequired
-};
 
 export default App;
