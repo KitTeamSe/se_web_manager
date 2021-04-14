@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SideMenuContainer from '../../atoms/SideMenuContainer/SideMenuContainer';
-import SideMenuList from '../../atoms/SideMenuList/SideMenuList';
+import SideMenuList from './SideMenuList';
 import {
   ScheduleNestedData,
   ManageNestedData
@@ -12,16 +12,8 @@ const SideMenu = ({ open, items }) => {
 
   return (
     <SideMenuContainer open={open}>
-      <SideMenuList
-        type="manage"
-        itemData={ManageNestedData}
-        items={manageItem}
-      />
-      <SideMenuList
-        type="schedule"
-        itemData={ScheduleNestedData}
-        items={scheduleItem}
-      />
+      <SideMenuList itemData={ManageNestedData} items={manageItem} />
+      <SideMenuList itemData={ScheduleNestedData} items={scheduleItem} />
     </SideMenuContainer>
   );
 };

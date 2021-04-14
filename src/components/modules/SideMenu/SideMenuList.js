@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { List, Collapse, Divider } from '@material-ui/core';
-import SideMenuListItem from '../SideMenuListItem/SideMenuListItem';
-import SideMenuNestedList from '../SideMenuNestedList/SideMenuNestedList';
+import SideMenuListItem from '../../atoms/SideMenuListItem/SideMenuListItem';
+import SideMenuNestedList from '../../atoms/SideMenuNestedList/SideMenuNestedList';
 import useToggle from '../../../libs/useToggle';
 import { MANAGE_URL } from '../../../statics/data/config';
 
@@ -11,7 +11,7 @@ const ListStyled = styled(List)`
   padding: 2px 0;
 `;
 
-const ScheduleMenuList = ({ items }) =>
+const MenuList = ({ items }) =>
   items.map((el, index) =>
     index % 4 === 0 ? (
       <>
@@ -52,7 +52,7 @@ const SideMenuList = ({ itemData, items }) => {
       </SideMenuNestedList>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <ListStyled>
-          <ScheduleMenuList items={items} />
+          <MenuList items={items} />
         </ListStyled>
       </Collapse>
     </ListStyled>
