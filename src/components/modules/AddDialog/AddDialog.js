@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogInputContents from '../../atoms/Dialog/DialogInputContents';
-import DialogButtons from '../../atoms/Dialog/DialogButtons';
+import DialogInputContents from '../../atoms/DialogAddContents/DialogInputContents';
+import DialogFooter from '../../atoms/DialogFooter/DialogFooter';
 
 const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
@@ -19,7 +19,7 @@ const AddDialog = ({ title, item, open, setOpen }) => {
     <Dialog open={open}>
       <DialogTitleStyled>{title} 추가</DialogTitleStyled>
       <DialogInputContents item={item} />
-      <DialogButtons handleClose={handleClose} add />
+      <DialogFooter handleClose={handleClose} type="add" />
     </Dialog>
   );
 };

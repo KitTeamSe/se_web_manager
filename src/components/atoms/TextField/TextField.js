@@ -1,45 +1,65 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TextField as TextFields } from '@material-ui/core';
 
-export const TextField = (id, label, err) => (
-  <TextFields id={id} label={label} error={err} />
-);
+const TextField = ({ id, name, value, label, onChange, err, type }) => {
+  const fieldType = () => {
+    if (type === 'search') return 'search';
+    if (type === 'password') return 'password';
+    if (type === 'number') return 'number';
+    return null;
+  };
 
-export const NumberField = (id, label, err) => (
-  <TextFields
-    id={id}
-    label={label}
-    error={err}
-    type="number"
-    InputLabelProps={{
-      shrink: true
-    }}
-    InputProps={{ inputProps: { min: 0 } }}
-  />
-);
+  const fieldInputProps = () => {
+    if (type === 'readonly') return { readOnly: true };
+    if (type === 'number') return { inputProps: { min: 0 } };
+    return null;
+  };
 
-export const ReadOnlyField = (id, label, value, err) => (
-  <TextFields
-    id={id}
-    label={label}
-    error={err}
-    defaultValue={value}
-    InputProps={{
-      readOnly: true
-    }}
-  />
-);
+  const fieldInputLabelProps = () => {
+    if (type === 'number') return { shrink: true };
+    return null;
+  };
 
-export const PasswordField = (id, label, err) => (
-  <TextFields
-    id={id}
-    label={label}
-    error={err}
-    type="password"
-    autoComplete="current-password"
-  />
-);
+  const fieldAutoComplete = () => {
+    if (type === 'password') return 'current-password';
+    return null;
+  };
 
-export const SearchField = (id, label, err) => (
-  <TextFields id={id} label={label} error={err} type="search" />
-);
+  return (
+    <TextFields
+      id={id}
+      name={name}
+      label={label}
+      onChange={onChange}
+      error={err}
+      defaultValue={value}
+      InputProps={fieldInputProps()}
+      InputLabelProps={fieldInputLabelProps()}
+      autoComplete={fieldAutoComplete()}
+      type={fieldType()}
+    />
+  );
+};
+
+TextField.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  value: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func,
+  err: PropTypes.string,
+  type: PropTypes.string
+};
+
+TextField.defaultProps = {
+  id: '',
+  name: '',
+  value: '',
+  label: '',
+  onChange: () => {},
+  err: '',
+  type: 'text'
+};
+
+export default TextField;
