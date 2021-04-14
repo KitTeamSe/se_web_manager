@@ -10,6 +10,7 @@ import DeleteIcon from '../../atoms/Icons/DeleteIcon';
 import AddDialog from '../AddDialog/AddDialog';
 import DeleteDialog from '../DeleteDialog/DeleteDialog';
 import NoChecked from '../../atoms/NoChecked/NoChecked';
+import useToggle from '../../../libs/useToggle';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -53,21 +54,22 @@ const PaperWrapper = styled.div`
   }
 `;
 
-const PreInfoView = ({ title, head, rows, small }) => {
+const PreInfoList = ({ title, head, rows, small, type }) => {
   const [select, setSelect] = useState(null);
-  const [addOpen, setAddOpen] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [failOpen, setFailOpen] = useState(false);
+  const [addOpen, setAddOpen] = useToggle();
+  const [deleteOpen, setDeleteOpen] = useToggle();
+  const [failOpen, setFailOpen] = useToggle();
 
   useEffect(() => {
-    setFailOpen(false);
+    if (failOpen) setFailOpen();
   }, [addOpen, deleteOpen, select]);
 
   const handleOnSelect = (index, num) =>
     index === num ? setSelect(null) : setSelect(index);
 
   const handleDeleteOpen = () => {
-    return select !== null ? setDeleteOpen(true) : setFailOpen(true);
+    if (!select && !failOpen) setFailOpen();
+    if (select !== null) setDeleteOpen();
   };
 
   const cardList = () =>
@@ -90,51 +92,54 @@ const PreInfoView = ({ title, head, rows, small }) => {
       <PaperStyled>
         <CardListTitle head={head} small={small} />
         <PaperWrapper>{cardList()}</PaperWrapper>
-
-        {failOpen ? <NoChecked del /> : null}
+        {failOpen ? <NoChecked /> : null}
       </PaperStyled>
 
       <ButtonWrapper>
-        <IconButton onClick={() => setAddOpen(true)}>
-          <AddIcon onClick={() => setAddOpen(true)} />
+        <IconButton onClick={() => setAddOpen()}>
+          <AddIcon />
         </IconButton>
         <IconButton onClick={() => handleDeleteOpen()}>
-          <DeleteIcon onClick={() => handleDeleteOpen()} />
+          <DeleteIcon />
         </IconButton>
       </ButtonWrapper>
 
-      {addOpen ? (
+      {!addOpen || (
         <AddDialog
           title={title}
           item={head}
           open={addOpen}
           setOpen={setAddOpen}
+          type={type}
         />
-      ) : null}
-      {deleteOpen ? (
+      )}
+
+      {!deleteOpen || (
         <DeleteDialog
           title={title}
           item={rows[select]}
           open={deleteOpen}
           setOpen={setDeleteOpen}
+          type={type}
         />
-      ) : null}
+      )}
     </ContentWrapper>
   );
 };
 
-PreInfoView.propTypes = {
+PreInfoList.propTypes = {
   title: PropTypes.string,
   head: PropTypes.arrayOf(PropTypes.array),
   rows: PropTypes.arrayOf(PropTypes.array),
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  type: PropTypes.string.isRequired
 };
 
-PreInfoView.defaultProps = {
+PreInfoList.defaultProps = {
   title: '',
   head: [],
   rows: [],
   small: false
 };
 
-export default PreInfoView;
+export default PreInfoList;
