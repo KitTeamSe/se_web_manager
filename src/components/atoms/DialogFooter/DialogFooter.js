@@ -9,7 +9,7 @@ const DialogActionsStyled = styled(DialogActions)`
   margin: 10px;
 `;
 
-const DialogButtons = ({ handleClose, add, del }) => {
+const DialogFooter = ({ handleClose, type }) => {
   const addButton = () => (
     <DialogActionsStyled>
       <Button onClick={handleClose} color="secondary" autoFocus>
@@ -39,20 +39,18 @@ const DialogButtons = ({ handleClose, add, del }) => {
     </DialogActionsStyled>
   );
 
-  if (add) return addButton();
-  if (del) return deleteButton();
+  if (type === 'add') return addButton();
+  if (type === 'delete') return deleteButton();
   return defaultButton();
 };
 
-DialogButtons.propTypes = {
+DialogFooter.propTypes = {
   handleClose: PropTypes.func.isRequired,
-  add: PropTypes.bool,
-  del: PropTypes.bool
+  type: PropTypes.string
 };
 
-DialogButtons.defaultProps = {
-  add: false,
-  del: false
+DialogFooter.defaultProps = {
+  type: 'default'
 };
 
-export default DialogButtons;
+export default DialogFooter;
