@@ -32,21 +32,32 @@ const MenuListView = ({ match }) => {
   const menuList = useSelector(state => state.menu.menuList);
   const [headData, setHeadData] = useState();
   const [rowData, setRowData] = useState();
+
+  // Modal의 open state
   const [menuCreateModalOpen, setMenuCreateModalOpen] = useState(false);
   const [menuDeleteModalOpen, setMenuDeleteModalOpen] = useState(false);
+
+  // Modal의 open 상태를 변경하는 함수. props.setOpen으로 전달
   const menuCreateToggle = () => {
     setMenuCreateModalOpen(!menuCreateModalOpen);
   };
   const menuDeleteToggle = () => {
     setMenuDeleteModalOpen(!menuDeleteModalOpen);
   };
+
+  // 모달에서 입력된 값을 받아서 저장할 state.
   const [menuCreateFormData, setMenuCreateFormData] = useState();
+
+  // 모달에서 입력시 변경된 값을 state에 저장하는 함수. 하위 컴포넌트에 props.onChange로 전달
   const menuCreateOnChange = e => {
     setMenuCreateFormData(e.target.value);
   };
+
+  // onChange적용 테스트
   useEffect(() => {
     console.log(`menuCreateFormData 내용: ${menuCreateFormData}`);
   }, [menuCreateFormData]);
+
   const arrangeMenuList = () => {
     // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
     const tempRows = menuList.data.map(menu => ({
@@ -110,6 +121,7 @@ const MenuListView = ({ match }) => {
       <Table key={rowData} headData={headData} rowData={rowData} hover />
       <PageNumberButtonGroup nowPage={1} maxPage={5} halfRange={2} />
 
+      {/* Modal 컴포넌트 */}
       {menuCreateModalOpen ? (
         <MenuCreateModal
           open={menuCreateModalOpen}
