@@ -4,123 +4,171 @@ import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import Button from '../../../atoms/Button/RoundButton';
 import DropDown from '../../../atoms/DropDown/DropDown';
 import Tabs from '../../../atoms/Tabs/Tabs';
-// import Table from '../../modules/Table/Table';
+import PaginationTable from '../../../modules/Table/PaginationTable';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 5px 24px;
+`;
 
 const ContentWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
   align-items: flex-end;
   padding-top: 8px;
 `;
 
-// const head = [
-//   {
-//     key: 'count',
-//     name: '#',
-//     width: '10%'
-//   },
-//   {
-//     key: 'name',
-//     name: '게시판 명',
-//     width: '25%'
-//   },
-//   {
-//     key: 'state',
-//     name: '상태',
-//     width: '25%'
-//   },
-//   {
-//     key: 'order',
-//     name: '순번',
-//     width: '10%'
-//   },
-//   {
-//     key: 'registrant_member_id',
-//     name: '등록자',
-//     width: '15%'
-//   },
-//   {
-//     key: 'last_modify_member_id',
-//     name: '수정자',
-//     width: '15%'
-//   }
-// ];
+const SCHEDULE_STATUS = ['CREATED', 'COMPLETED', 'ALL'];
+const YEAR_STATUS = ['ALL', '2021', '2020', '2019', '2018'];
+const SCHEDULE_ITEMS = [
+  { name: '작성중인 시간표', status: SCHEDULE_STATUS[0] },
+  { name: '작성완료 시간표', status: SCHEDULE_STATUS[1] },
+  { name: '전체보기', status: SCHEDULE_STATUS[2] }
+];
 
-// const items = [
-//   {
-//     id: '1',
-//     name: 'ㄱㄱ 게시판',
-//     state: 'ㄱㄱ 게시판 상태',
-//     order: '1',
-//     registrant_member_id: '1',
-//     last_modify_member_id: '1'
-//   },
-//   {
-//     id: '2',
-//     name: 'ㄴㄴ 게시판',
-//     state: 'ㄴㄴ 게시판 상태',
-//     order: '2',
-//     registrant_member_id: '2',
-//     last_modify_member_id: '2'
-//   },
-//   {
-//     id: '3',
-//     name: 'ㄷㄷ 게시판',
-//     state: 'ㄷㄷ 게시판 상태',
-//     order: '3',
-//     registrant_member_id: '3',
-//     last_modify_member_id: '3'
-//   },
-//   {
-//     id: '4',
-//     name: 'ㄹㄹ 게시판',
-//     state: 'ㄹㄹ 게시판 상태',
-//     order: '4',
-//     registrant_member_id: '4',
-//     last_modify_member_id: '4'
-//   },
-//   {
-//     id: '5',
-//     name: 'ㅇㅇ 게시판',
-//     state: 'ㅇㅇ 게시판 상태',
-//     order: '5',
-//     registrant_member_id: '5',
-//     last_modify_member_id: '5'
-//   }
-// ];
+const head = [
+  {
+    key: 'count',
+    name: '#',
+    width: '10%'
+  },
+  {
+    key: 'name',
+    name: '제목',
+    width: '22.5%'
+  },
+  {
+    key: 'year',
+    name: '연도',
+    width: '22.5%'
+  },
+  {
+    key: 'semester',
+    name: '학기',
+    width: '22.5%'
+  },
+  {
+    key: 'createdBy',
+    name: '생성자',
+    width: '22.5%'
+  }
+];
+
+const items = [
+  {
+    createdBy: '김교수',
+    name: '테스트 시간표 1',
+    semester: '2',
+    status: SCHEDULE_STATUS[0],
+    timeTableId: '1',
+    year: '2021'
+  },
+  {
+    createdBy: '임교수',
+    name: '테스트 시간표 2',
+    semester: '1',
+    status: SCHEDULE_STATUS[1],
+    timeTableId: '2',
+    year: '2021'
+  },
+  {
+    createdBy: '황교수',
+    name: '테스트 시간표 3',
+    semester: '2',
+    status: SCHEDULE_STATUS[0],
+    timeTableId: '3',
+    year: '2020'
+  },
+  {
+    createdBy: '이교수',
+    name: '테스트 시간표 4',
+    semester: '1',
+    status: SCHEDULE_STATUS[0],
+    timeTableId: '4',
+    year: '2020'
+  },
+  {
+    createdBy: '학교수',
+    name: '테스트 시간표 5',
+    semester: '2',
+    status: SCHEDULE_STATUS[1],
+    timeTableId: '5',
+    year: '2019'
+  }
+];
 
 // const Wrapper = styled.div`
 //   display: block;
 // `;
 
 const ScheduleListPage = () => {
-  //   const headItem = head;
-  //   const tableItems = items;
+  const headItem = head;
+  const [tableItems, setTableItems] = useState([]);
   // const [headItem, setHeadItem] = useState(head);
-  // const [tableItems, setTableItems] = useState(items);
-  const items = ['2021', '2020', '2019', '2018'];
-  const [value, setValue] = useState(items[0]);
+  const [status, setSchedule] = useState(null);
+  const [year, setYear] = useState(null);
+  // const [yearItems, setyearItems] = useState([all]);
+
+  const handleTableItems = () => {
+    if (year === YEAR_STATUS[0] && status === 2) {
+      setTableItems(items);
+      return;
+    }
+    if (year === YEAR_STATUS[0]) {
+      const newItems = [];
+      items.forEach(data => {
+        if (SCHEDULE_ITEMS[status].status === data.status) newItems.push(data);
+      });
+      setTableItems(newItems);
+      return;
+    }
+    if (status === 2) {
+      const newItems = [];
+      items.forEach(data => {
+        if (year === data.year) newItems.push(data);
+      });
+      setTableItems(newItems);
+      return;
+    }
+    const newItems = [];
+    items.forEach(data => {
+      if (year === data.year && SCHEDULE_ITEMS[status].status === data.status)
+        newItems.push(data);
+    });
+    setTableItems(newItems);
+  };
+
   useEffect(() => {
-    console.log(value);
-  }, [value]);
+    setSchedule(0);
+    setYear(YEAR_STATUS[1]);
+    handleTableItems();
+  }, []);
+
+  useEffect(() => {
+    handleTableItems();
+  }, [year]);
+
+  useEffect(() => {
+    handleTableItems();
+  }, [status]);
 
   return (
     <Wrapper>
       <ContentHeader title="시간표 관리">
         <DropDown
-          name="asfasf"
-          items={items}
-          value={value}
-          setValue={setValue}
+          items={YEAR_STATUS}
+          value={year}
+          setValue={setYear}
+          first="1"
         />
         <Button variant="contained" color="secondary">
           시간표생성
         </Button>
       </ContentHeader>
       <ContentWrapper>
-        <Tabs />
+        <Tabs select={status} setSelect={setSchedule} items={SCHEDULE_ITEMS} />
+        <PaginationTable
+          head={headItem}
+          rows={tableItems}
+          change={tableItems}
+        />
       </ContentWrapper>
     </Wrapper>
   );
