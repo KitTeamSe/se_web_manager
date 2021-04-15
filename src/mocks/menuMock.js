@@ -21,3 +21,12 @@ export const menuByIdMock = ({id}) => {
     nameKor: `Menu_by_id Name in Kor`
 }};
 
+// 메뉴 생성 여부 성공/실패를 번갈아가면서 반환하도록 함.
+export function* createMenuMockGenerator(){
+    while(true){
+        yield true;
+        yield false;
+    }
+}
+
+
