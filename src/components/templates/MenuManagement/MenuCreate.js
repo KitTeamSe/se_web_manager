@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import MenuCreateDialog from '../../modules/MenuCreateDialog/MenuCreateDialog';
-/**
- *  content를 받아와서 DialogContent 컴포넌트 생성.
- * import PropTypes from 'prop-types';
- * { open, setOpen, values, onChange }
- */
+import { createMenu } from '../../../modules/menu';
 
-/**
-    자식에게 갈것
-    { title, items, open, handleClose, onChange }
- */
 const MenuCreate = ({ open, toggle }) => {
+  const dispatch = useDispatch();
   // 모달에서 입력된 값을 받아서 저장할 state.
   const [menuCreateFormData, setMenuCreateFormData] = useState({
     id: '',
@@ -45,13 +39,24 @@ const MenuCreate = ({ open, toggle }) => {
     },
     { name: 'parent', label: '상위메뉴', value: menuCreateFormData.parent }
   ];
+  // dispatch
+  const dispatchMenuCreate = () => {
+    const formData = new FormData();
+    items.forEach(item => formData.append(item.name, item.value));
+    dispatch(createMenu(formData));
+    items.forEach(value => console.log(value));
+  };
+  const handleClose = () => {
+    dispatchMenuCreate();
+    toggle();
+  };
   return (
     <div>
       <MenuCreateDialog
         title="메뉴생성"
         items={items}
         open={open}
-        handleClose={toggle}
+        handleClose={handleClose}
         onChange={menuCreateOnChange}
       />
     </div>
