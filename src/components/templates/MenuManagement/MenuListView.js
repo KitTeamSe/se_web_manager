@@ -20,6 +20,10 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
   }
 `;
+const PageNumWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 /*
 headData / rowData 
@@ -67,10 +71,9 @@ const MenuListView = ({ match }) => {
   };
   // useEffect
   useEffect(() => {
-    console.log(match);
-    console.log(
-      'test_MenuList / useEffect / arrangeMenuList() when menuList change'
-    );
+    getMenuListFromStore();
+  }, []);
+  useEffect(() => {
     arrangeMenuList();
   }, [menuList]);
 
@@ -87,27 +90,12 @@ const MenuListView = ({ match }) => {
         >
           메뉴삭제
         </Button>
-        <button
-          type="button"
-          onClick={() => {
-            console.log(menuList);
-          }}
-        >
-          출력
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            getMenuListFromStore();
-          }}
-        >
-          dispatch
-        </button>
       </ContentHeader>
 
       <Table key={rowData} headData={headData} rowData={rowData} hover />
-      <PageNumberButtonGroup nowPage={1} maxPage={5} halfRange={2} />
-
+      <PageNumWrapper>
+        <PageNumberButtonGroup nowPage={1} maxPage={5} halfRange={2} />
+      </PageNumWrapper>
       {/* Modal 컴포넌트 */}
       {menuCreateModalOpen ? (
         <MenuCreate open={menuCreateModalOpen} toggle={menuCreateToggle} />
