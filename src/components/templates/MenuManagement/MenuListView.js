@@ -12,7 +12,7 @@ import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumbe
 import Table from '../../modules/Table/TableWithRowAction';
 // for redux
 import { getMenuList } from '../../../modules/menu';
-import MenuCreateModal from './MenuCreateModal';
+import MenuCreate from './MenuCreate';
 import MenuDeleteModal from './MenuDeleteModal';
 
 const Wrapper = styled.div`
@@ -44,19 +44,6 @@ const MenuListView = ({ match }) => {
   const menuDeleteToggle = () => {
     setMenuDeleteModalOpen(!menuDeleteModalOpen);
   };
-
-  // 모달에서 입력된 값을 받아서 저장할 state.
-  const [menuCreateFormData, setMenuCreateFormData] = useState();
-
-  // 모달에서 입력시 변경된 값을 state에 저장하는 함수. 하위 컴포넌트에 props.onChange로 전달
-  const menuCreateOnChange = e => {
-    setMenuCreateFormData(e.target.value);
-  };
-
-  // onChange적용 테스트
-  useEffect(() => {
-    console.log(`menuCreateFormData 내용: ${menuCreateFormData}`);
-  }, [menuCreateFormData]);
 
   const arrangeMenuList = () => {
     // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
@@ -123,12 +110,7 @@ const MenuListView = ({ match }) => {
 
       {/* Modal 컴포넌트 */}
       {menuCreateModalOpen ? (
-        <MenuCreateModal
-          open={menuCreateModalOpen}
-          setOpen={menuCreateToggle}
-          values={menuCreateFormData}
-          onChange={menuCreateOnChange}
-        />
+        <MenuCreate open={menuCreateModalOpen} toggle={menuCreateToggle} />
       ) : (
         ''
       )}
