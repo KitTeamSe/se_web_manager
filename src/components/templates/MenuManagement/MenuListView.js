@@ -12,8 +12,8 @@ import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumbe
 import Table from '../../modules/Table/TableWithRowAction';
 // for redux
 import { getMenuList } from '../../../modules/menu';
-import MenuCreate from './MenuCreate';
-import MenuDeleteModal from './MenuDeleteModal';
+import CreateMenu from './CreateMenu';
+import DeleteMenu from './DeleteMenu';
 
 const Wrapper = styled.div`
   > * {
@@ -98,15 +98,12 @@ const MenuListView = ({ match }) => {
       </PageNumWrapper>
       {/* Modal 컴포넌트 */}
       {menuCreateModalOpen ? (
-        <MenuCreate open={menuCreateModalOpen} toggle={menuCreateToggle} />
+        <CreateMenu open={menuCreateModalOpen} toggle={menuCreateToggle} />
       ) : (
         ''
       )}
       {menuDeleteModalOpen ? (
-        <MenuDeleteModal
-          open={menuDeleteModalOpen}
-          setOpen={menuDeleteToggle}
-        />
+        <DeleteMenu open={menuDeleteModalOpen} setOpen={menuDeleteToggle} />
       ) : (
         ''
       )}

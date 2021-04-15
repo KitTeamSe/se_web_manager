@@ -5,12 +5,25 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
-import DialogButtons from '../../atoms/Dialog/DialogButtons';
+import Button from '../../atoms/Button/Button';
 
 const TextFieldStyled = styled(TextField)`
   margin: 0 1rem 0 1rem;
 `;
-const MenuCreateDialog = ({ title, items, open, handleClose, onChange }) => {
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0 1rem 0;
+  flex-grow: 1;
+`;
+const MenuCreateDialog = ({
+  title,
+  items,
+  open,
+  handleClose,
+  onChange,
+  toggle
+}) => {
   return (
     <Dialog open={open} fullWidth>
       <DialogTitle>{title}</DialogTitle>
@@ -22,40 +35,27 @@ const MenuCreateDialog = ({ title, items, open, handleClose, onChange }) => {
           value={item.value}
         />
       ))}
-      <DialogButtons handleClose={handleClose} add />
+      <ButtonContainer>
+        <Button onClick={handleClose} color="primary" size="lg">
+          확인
+        </Button>
+        <Button onClick={toggle} color="secondary" size="lg">
+          취소
+        </Button>
+      </ButtonContainer>
     </Dialog>
   );
 };
 
 export default MenuCreateDialog;
 
-// import React from 'react';
-// import styled from 'styled-components';
-
-// const DialogTitleStyled = styled(DialogTitle)`
-//   padding: 16px 24px 0 24px;
-// `;
-
-// const AddDialog = ({ title, item, open, setOpen }) => {
-//   const handleClose = () => {
-//     setOpen(false);
-//   };
-
-//   return (
-//     <Dialog open={open}>
-//       <DialogTitleStyled>{title} 추가</DialogTitleStyled>
-//       <DialogInputContents item={item} />
-//       <DialogButtons handleClose={handleClose} add />
-//     </Dialog>
-//   );
-// };
-
 MenuCreateDialog.propTypes = {
   title: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
   handleClose: PropTypes.func,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired
 };
 
 MenuCreateDialog.defaultProps = {
@@ -64,5 +64,3 @@ MenuCreateDialog.defaultProps = {
   items: [],
   open: false
 };
-
-// export default AddDialog;

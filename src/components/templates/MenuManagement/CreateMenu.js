@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import MenuCreateDialog from '../../modules/MenuCreateDialog/MenuCreateDialog';
+import MenuCreateDialog from '../../modules/MenuDialog/MenuCreateDialog';
 import { createMenu } from '../../../modules/menu';
 
 const MenuCreate = ({ open, toggle }) => {
@@ -22,11 +22,6 @@ const MenuCreate = ({ open, toggle }) => {
     setMenuCreateFormData({ ...menuCreateFormData, [name]: value });
   };
 
-  // onChange적용 테스트
-  useEffect(() => {
-    console.log(menuCreateFormData);
-  }, [menuCreateFormData]);
-
   const items = [
     { name: 'id', label: 'ID', value: menuCreateFormData.id },
     { name: 'order', label: '순서', value: menuCreateFormData.order },
@@ -39,6 +34,7 @@ const MenuCreate = ({ open, toggle }) => {
     },
     { name: 'parent', label: '상위메뉴', value: menuCreateFormData.parent }
   ];
+
   // dispatch
   const dispatchMenuCreate = () => {
     const formData = new FormData();
@@ -58,6 +54,7 @@ const MenuCreate = ({ open, toggle }) => {
         open={open}
         handleClose={handleClose}
         onChange={menuCreateOnChange}
+        toggle={toggle}
       />
     </div>
   );
