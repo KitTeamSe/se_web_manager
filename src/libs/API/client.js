@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const client = axios.create();
 
-client.defaults.baseURL = 'http://djh20.ipdisk.co.kr:7070/';
+client.defaults.baseURL = process.env.REACT_APP_API_URL;
 client.defaults.crossDomain = true;
 client.defaults.responseType = 'json';
 client.defaults.headers.Accept = '*/*';
