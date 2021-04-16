@@ -3,7 +3,8 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   getMenuListApi,
   getMenuByIdApi,
-  createMenuApi
+  createMenuApi,
+  deleteMenuApi
 } from '../libs/API/menu';
 
 // 메뉴 리스트 조회 / 성공 / 실패
@@ -21,10 +22,16 @@ const CREATE_MENU = 'menu/CREATE_MENU';
 const CREATE_MENU_SUCCESS = 'menu/CREATE_MENU_SUCCESS';
 const CREATE_MENU_ERROR = 'menu/CREATE_MENU_ERROR';
 
+// 메뉴 삭제 / 성공 / 실패
+const DELETE_MENU = 'menu/DELETE_MENU';
+const DELETE_MENU_SUCCESS = 'menu/DELETE_MENU_SUCCESS';
+const DELETE_MENU_ERROR = 'menu/DELETE_MENU_SUCCESS';
+
 // 액션 생성 함수
 export const getMenuList = () => ({ type: GET_MENU_LIST });
-export const getMenuById = id => ({ type: GET_MENU_BY_ID, id });
+export const getMenuById = menuId => ({ type: GET_MENU_BY_ID, menuId });
 export const createMenu = menuData => ({ type: CREATE_MENU, menuData });
+export const deleteMenu = menuId => ({ type: DELETE_MENU, menuId });
 
 // state 초기값
 const initialState = {
@@ -60,6 +67,9 @@ const initialState = {
   },
   menuCreateResult: {
     data: { result: true }
+  },
+  menuDeleteResult: {
+    data: { result: true }
   }
 };
 
@@ -75,7 +85,7 @@ function* getMenuListSaga() {
 
 function* getMenuByIdSaga(action) {
   try {
-    const res = yield call(getMenuByIdApi, action.id);
+    const res = yield call(getMenuByIdApi, action.menuId);
     yield put({ type: GET_MENU_BY_ID_SUCCESS, payload: res });
   } catch (e) {
     yield put({ type: GET_MENU_BY_ID_ERROR, error: true, payload: e });
@@ -98,11 +108,29 @@ function* createMenuSaga(action) {
     yield put({ type: CREATE_MENU_ERROR, error: true, payload: e });
   }
 }
+
+function* deleteMenuSaga(action) {
+  try {
+    const res = yield call(deleteMenuApi, action.menuId);
+    if (res.data.result === true) {
+      yield put({ type: DELETE_MENU_SUCCESS, payload: res.data });
+    } else {
+      yield new Promise(resolve => {
+        alert('메뉴 삭제 실패');
+        resolve();
+      });
+      yield put({ type: CREATE_MENU_ERROR, payload: res });
+    }
+  } catch (e) {
+    yield put({ type: DELETE_MENU_ERROR, error: true, payload: e });
+  }
+}
 // menu의 사가들을 합친 통합 사가
 export function* menuSaga() {
   yield takeLatest(GET_MENU_LIST, getMenuListSaga);
   yield takeLatest(GET_MENU_BY_ID, getMenuByIdSaga);
   yield takeLatest(CREATE_MENU, createMenuSaga);
+  yield takeLatest(DELETE_MENU, deleteMenuSaga);
 }
 
 // 리듀서 정의 export default
@@ -144,6 +172,17 @@ export default function menu(state = initialState, action) {
       };
     case CREATE_MENU_ERROR:
       return state;
+
+    case DELETE_MENU:
+      return state;
+    case DELETE_MENU_SUCCESS:
+      return {
+        ...state,
+        menuDeleteResult: { ...action.payload }
+      };
+    case DELETE_MENU_ERROR:
+      return state;
+
     default:
       return state;
   }
