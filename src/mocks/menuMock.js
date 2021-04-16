@@ -29,4 +29,9 @@ export function* createMenuMockGenerator(){
     }
 }
 
-
+export function* deleteMenuMockGenerator(){
+    while(true){
+        yield true;
+        yield false;
+    }
+}
