@@ -4,7 +4,7 @@ import { StylesProvider } from '@material-ui/core';
 import theme from '../src/styles/theme';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import rootReducer, {rootSaga} from '../src/data/modules/index';
+import rootReducer, {rootSaga} from '../src/modules/index';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import StoryRouter from 'storybook-react-router';
