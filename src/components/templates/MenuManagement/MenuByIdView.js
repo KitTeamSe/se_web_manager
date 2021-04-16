@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import TextList from '../../modules/TextList/TextList';
 import ContentHeader from '../../modules/ContentHeader/ContentHeader';
 import { getMenuById } from '../../../modules/menu';
+import Button from '../../atoms/Button/RoundButton';
+import DeleteMenu from './DeleteMenu';
 // 메뉴 정보를 표시해줄 틀 module import
 /**
  *  useSelect, useDispatch 사용
@@ -24,6 +26,13 @@ const MenuByIdView = ({ match }) => {
   const menuDataById = useSelector(state => state.menu.menuById.data);
   const dispatch = useDispatch();
   const [textData, setTextData] = useState();
+  // Modal의 open state
+  const [menuDeleteModalOpen, setMenuDeleteModalOpen] = useState(false);
+
+  // Modal의 open 상태를 변경하는 함수. props.setOpen으로 전달
+  const menuDeleteToggle = () => {
+    setMenuDeleteModalOpen(!menuDeleteModalOpen);
+  };
   const arrangeMenuData = () => {
     const tempMenuData = [
       { label: '메뉴ID', text: menuDataById.menuId },
@@ -47,24 +56,20 @@ const MenuByIdView = ({ match }) => {
   return (
     <Wrapper>
       <ContentHeader class="header" title="메뉴 상세 조회" />
-      <p>MenuByIdView {match.params ? match.params.id : ''}</p>
-      <button
-        type="button"
-        onClick={() => {
-          console.log(menuDataById);
-        }}
-      >
-        useSelectTest
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch(getMenuById(1592));
-        }}
-      >
-        useDispatchTest
-      </button>
+
       <TextList textData={textData} />
+      <Button variant="contained" color="secondary" onClick={menuDeleteToggle}>
+        메뉴삭제
+      </Button>
+      {menuDeleteModalOpen ? (
+        <DeleteMenu
+          open={menuDeleteModalOpen}
+          toggle={menuDeleteToggle}
+          deleteData={{ menuId: menuDataById.menuId }}
+        />
+      ) : (
+        ''
+      )}
     </Wrapper>
   );
 };

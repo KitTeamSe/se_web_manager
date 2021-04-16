@@ -8,12 +8,12 @@ const MenuCreate = ({ open, toggle }) => {
   const dispatch = useDispatch();
   // 모달에서 입력된 값을 받아서 저장할 state.
   const [menuCreateFormData, setMenuCreateFormData] = useState({
-    id: '',
-    order: '',
+    menuOrder: '',
     nameEng: '',
     nameKor: '',
     description: '',
-    parent: ''
+    parentId: '',
+    url: ''
   });
 
   // 모달에서 입력시 변경된 값을 state에 저장하는 함수. 하위 컴포넌트에 props.onChange로 전달
@@ -23,8 +23,7 @@ const MenuCreate = ({ open, toggle }) => {
   };
 
   const items = [
-    { name: 'id', label: 'ID', value: menuCreateFormData.id },
-    { name: 'order', label: '순서', value: menuCreateFormData.order },
+    { name: 'menuOrder', label: '순서', value: menuCreateFormData.order },
     { name: 'nameEng', label: '영어이름', value: menuCreateFormData.nameEng },
     { name: 'nameKor', label: '한글이름', value: menuCreateFormData.nameKor },
     {
@@ -32,7 +31,8 @@ const MenuCreate = ({ open, toggle }) => {
       label: '설명',
       value: menuCreateFormData.description
     },
-    { name: 'parent', label: '상위메뉴', value: menuCreateFormData.parent }
+    { name: 'parentId', label: '상위메뉴', value: menuCreateFormData.parent },
+    { name: 'url', label: 'URL', value: menuCreateFormData.url }
   ];
 
   // dispatch
@@ -40,9 +40,9 @@ const MenuCreate = ({ open, toggle }) => {
     const formData = new FormData();
     items.forEach(item => formData.append(item.name, item.value));
     dispatch(createMenu(formData));
-    items.forEach(value => console.log(value));
+    console.log(formData.values);
   };
-  const handleClose = () => {
+  const submitCreateMenu = () => {
     dispatchMenuCreate();
     toggle();
   };
@@ -52,7 +52,7 @@ const MenuCreate = ({ open, toggle }) => {
         title="메뉴생성"
         items={items}
         open={open}
-        handleClose={handleClose}
+        handleClose={submitCreateMenu}
         onChange={menuCreateOnChange}
         toggle={toggle}
       />

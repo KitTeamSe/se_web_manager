@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import DeleteDialog from '../../modules/DeleteDialog/DeleteDialog';
-
+import { useDispatch } from 'react-redux';
+import { deleteMenu } from '../../../modules/menu';
+import MenuDeleteDialog from '../../modules/MenuDialog/MenuDeleteDialog';
 /**
  *  content를 받아와서 DialogContent 컴포넌트 생성.
  */
-const DeleteMenu = ({ open, setOpen }) => {
+
+/**
+ *  deleteData -> 상위 page에서 받아옴.
+ * delete 하는 함수 onClose 에 정의. 버튼 onClick으로 주입
+ *
+ *  */
+const DeleteMenu = ({ open, toggle, deleteData }) => {
+  const dispatch = useDispatch();
+
+  const dispatchMenuDelete = () => {
+    dispatch(deleteMenu(deleteData.menuId));
+  };
+
+  const submitDeleteMenu = () => {
+    dispatchMenuDelete();
+    toggle();
+    // dispatch 후 toggle 되도록 Promise로 만들어야할지?
+  };
+
+  useEffect(() => {
+    console.log(deleteData);
+  }, []);
   return (
     <div>
-      <DeleteDialog open={open} setOpen={setOpen} />
+      <MenuDeleteDialog
+        title="메뉴삭제"
+        text="삭제하시겠습니까?"
+        handleClose={submitDeleteMenu}
+        open={open}
+        toggle={toggle}
+      />
     </div>
   );
 };
@@ -19,7 +47,8 @@ DeleteMenu.defaultProps = {
 
 DeleteMenu.propTypes = {
   open: PropTypes.bool,
-  setOpen: PropTypes.func.isRequired
+  toggle: PropTypes.func.isRequired,
+  deleteData: PropTypes.objectOf(PropTypes.string).isRequired
 };
 
 export default DeleteMenu;
