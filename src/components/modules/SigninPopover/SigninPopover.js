@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import { Typography } from '@material-ui/core';
-import { changeField, initializeForm, signin } from '../../../modules/auth';
-import { account } from '../../../modules/user';
+import {
+  changeField,
+  initializeForm,
+  initializeAuth,
+  signin
+} from '../../../modules/auth';
 import TextField from '../../atoms/TextField/TextField';
 import RoundButton from '../../atoms/Button/RoundButton';
 import { MANAGE_URL } from '../../../statics/data/config';
@@ -38,13 +41,20 @@ const LinkStyled = styled(Link)`
   font-size: 0.8vw;
 `;
 
-const SigninPopover = ({ history, handleClose }) => {
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
+const SigninPopover = ({ handleClose }) => {
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auths, authError, users } = useSelector(({ auth, user }) => ({
+  const { form, auths, authError } = useSelector(({ auth }) => ({
     form: auth.signin,
-    auth: auth.auth,
-    authError: auth.authError,
-    user: user.user
+    auths: auth.auth,
+    authError: auth.authError
   }));
 
   const onChange = e => {
@@ -61,6 +71,15 @@ const SigninPopover = ({ history, handleClose }) => {
   const onSubmit = e => {
     e.preventDefault();
     const { id, pw } = form;
+    if (id === '') {
+      setError('ID 및 비밀번호를 입력하세요');
+      return;
+    }
+    if (pw.length < 4 || pw.length > 12) {
+      setError('비밀번호 4자 이상 12자 이하');
+      return;
+    }
+    localStorage.setItem('id', JSON.stringify(id));
     dispatch(signin({ id, pw }));
   };
 
@@ -70,22 +89,14 @@ const SigninPopover = ({ history, handleClose }) => {
 
   useEffect(() => {
     if (authError) {
-      console.log('오류');
-      console.log(authError);
-      dispatch(initializeForm('signin'));
+      setError('로그인 실패');
     }
     if (auths) {
-      console.log('로그인 성공');
+      localStorage.setItem('token', JSON.stringify(auths.data.token));
+      dispatch(initializeAuth());
       handleClose();
-      dispatch(account());
     }
   }, [auths, authError, dispatch]);
-
-  useEffect(() => {
-    if (users) {
-      handleClose();
-    }
-  }, [history, users]);
 
   return (
     <Wrapper>
@@ -106,6 +117,7 @@ const SigninPopover = ({ history, handleClose }) => {
           value={form.pw}
           type="password"
         />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <ButtonWrapper>
           <RoundButton type="submit">로그인</RoundButton>
         </ButtonWrapper>
@@ -118,8 +130,7 @@ const SigninPopover = ({ history, handleClose }) => {
 };
 
 SigninPopover.propTypes = {
-  handleClose: PropTypes.func.isRequired,
-  history: ReactRouterPropTypes.history.isRequired
+  handleClose: PropTypes.func.isRequired
 };
 
 SigninPopover.defaultProps = {};

@@ -9,6 +9,7 @@ import createRequestSaga, {
 
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
+const INITIALIZE_AUTH = 'auth/INITIALIZE_AUTH';
 
 const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE] = createRequestActionTypes(
   'auth/SIGNUP'
@@ -24,6 +25,7 @@ export const changeField = createAction(
 );
 
 export const initializeForm = createAction(INITIALIZE_FORM, form => form);
+export const initializeAuth = createAction(INITIALIZE_AUTH);
 
 export const signup = createAction(
   SIGNUP,
@@ -96,6 +98,11 @@ export default handleActions(
     [INITIALIZE_FORM]: (state, { payload: form }) => ({
       ...state,
       [form]: initialState[form],
+      authError: null
+    }),
+    [INITIALIZE_AUTH]: state => ({
+      ...state,
+      auth: null,
       authError: null
     }),
     [SIGNUP_SUCCESS]: (state, { payload: auth }) => ({
