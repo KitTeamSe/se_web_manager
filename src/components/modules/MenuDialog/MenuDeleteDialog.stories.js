@@ -13,5 +13,5 @@ const Template = args => <MenuDeleteDialog {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  title:'title', open:true, handleClose:()=>{}, toggle:()=>{}
+  title:'title',text:'text', open:true, handleClose:()=>{}, toggle:()=>{}
 };

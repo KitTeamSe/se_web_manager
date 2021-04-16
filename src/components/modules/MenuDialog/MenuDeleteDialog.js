@@ -13,12 +13,16 @@ const ButtonContainer = styled.div`
   margin: 1rem 0 1rem 0;
   flex-grow: 1;
 `;
-const MenuDeleteDialog = ({ title, open, handleClose, toggle }) => {
+/**
+ *
+ *
+ */
+const MenuDeleteDialog = ({ title, text, open, handleClose, toggle }) => {
   return (
     <Dialog open={open} fullWidth>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>asdfasdfasdf</DialogContentText>
+        <DialogContentText>{text}</DialogContentText>
       </DialogContent>
       <ButtonContainer>
         <Button onClick={handleClose} color="primary" size="lg">
@@ -35,7 +39,8 @@ const MenuDeleteDialog = ({ title, open, handleClose, toggle }) => {
 export default MenuDeleteDialog;
 
 MenuDeleteDialog.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   open: PropTypes.bool,
   handleClose: PropTypes.func,
   toggle: PropTypes.func.isRequired
@@ -43,6 +48,5 @@ MenuDeleteDialog.propTypes = {
 
 MenuDeleteDialog.defaultProps = {
   handleClose: null,
-  title: '',
   open: false
 };

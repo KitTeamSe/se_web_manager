@@ -13,7 +13,6 @@ import Table from '../../modules/Table/TableWithRowAction';
 // for redux
 import { getMenuList } from '../../../modules/menu';
 import CreateMenu from './CreateMenu';
-import DeleteMenu from './DeleteMenu';
 
 const Wrapper = styled.div`
   > * {
@@ -39,14 +38,10 @@ const MenuListView = ({ match }) => {
 
   // Modal의 open state
   const [menuCreateModalOpen, setMenuCreateModalOpen] = useState(false);
-  const [menuDeleteModalOpen, setMenuDeleteModalOpen] = useState(false);
 
   // Modal의 open 상태를 변경하는 함수. props.setOpen으로 전달
   const menuCreateToggle = () => {
     setMenuCreateModalOpen(!menuCreateModalOpen);
-  };
-  const menuDeleteToggle = () => {
-    setMenuDeleteModalOpen(!menuDeleteModalOpen);
   };
 
   const arrangeMenuList = () => {
@@ -83,13 +78,6 @@ const MenuListView = ({ match }) => {
         <Button variant="contained" color="primary" onClick={menuCreateToggle}>
           메뉴추가
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={menuDeleteToggle}
-        >
-          메뉴삭제
-        </Button>
       </ContentHeader>
 
       <Table key={rowData} headData={headData} rowData={rowData} hover />
@@ -99,11 +87,6 @@ const MenuListView = ({ match }) => {
       {/* Modal 컴포넌트 */}
       {menuCreateModalOpen ? (
         <CreateMenu open={menuCreateModalOpen} toggle={menuCreateToggle} />
-      ) : (
-        ''
-      )}
-      {menuDeleteModalOpen ? (
-        <DeleteMenu open={menuDeleteModalOpen} setOpen={menuDeleteToggle} />
       ) : (
         ''
       )}
