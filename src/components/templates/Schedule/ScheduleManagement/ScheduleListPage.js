@@ -5,6 +5,8 @@ import Button from '../../../atoms/Button/RoundButton';
 import DropDown from '../../../atoms/DropDown/DropDown';
 import Tabs from '../../../atoms/Tabs/Tabs';
 import PaginationTable from '../../../modules/Table/PaginationTable';
+import useToggle from '../../../../libs/useToggle';
+import LoadingData from '../../../modules/LoadingData/LoadingData';
 
 const Wrapper = styled.div`
   padding: 5px 24px;
@@ -94,21 +96,20 @@ const items = [
   }
 ];
 
-// const Wrapper = styled.div`
-//   display: block;
-// `;
-
 const ScheduleListPage = () => {
   const headItem = head;
   const [tableItems, setTableItems] = useState([]);
   // const [headItem, setHeadItem] = useState(head);
   const [status, setSchedule] = useState(null);
   const [year, setYear] = useState(null);
+  const [isLoading, setIsLoading] = useToggle();
   // const [yearItems, setyearItems] = useState([all]);
 
   const handleTableItems = () => {
+    setIsLoading(false);
     if (year === YEAR_STATUS[0] && status === 2) {
       setTableItems(items);
+      setIsLoading(true);
       return;
     }
     if (year === YEAR_STATUS[0]) {
@@ -117,6 +118,7 @@ const ScheduleListPage = () => {
         if (SCHEDULE_ITEMS[status].status === data.status) newItems.push(data);
       });
       setTableItems(newItems);
+      setIsLoading(true);
       return;
     }
     if (status === 2) {
@@ -125,6 +127,7 @@ const ScheduleListPage = () => {
         if (year === data.year) newItems.push(data);
       });
       setTableItems(newItems);
+      setIsLoading(true);
       return;
     }
     const newItems = [];
@@ -133,6 +136,7 @@ const ScheduleListPage = () => {
         newItems.push(data);
     });
     setTableItems(newItems);
+    setIsLoading(true);
   };
 
   useEffect(() => {
@@ -164,11 +168,15 @@ const ScheduleListPage = () => {
       </ContentHeader>
       <ContentWrapper>
         <Tabs select={status} setSelect={setSchedule} items={SCHEDULE_ITEMS} />
-        <PaginationTable
-          head={headItem}
-          rows={tableItems}
-          change={tableItems}
-        />
+        {tableItems.length ? (
+          <PaginationTable
+            head={headItem}
+            rows={tableItems}
+            change={tableItems}
+          />
+        ) : (
+          <LoadingData isLoading={isLoading} />
+        )}
       </ContentWrapper>
     </Wrapper>
   );
