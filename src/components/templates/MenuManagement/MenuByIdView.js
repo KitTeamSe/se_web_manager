@@ -7,6 +7,7 @@ import ContentHeader from '../../modules/ContentHeader/ContentHeader';
 import { getMenuById } from '../../../modules/menu';
 import Button from '../../atoms/Button/RoundButton';
 import DeleteMenu from './DeleteMenu';
+import UpdateMenu from './UpdateMenu';
 // 메뉴 정보를 표시해줄 틀 module import
 /**
  *  useSelect, useDispatch 사용
@@ -22,17 +23,27 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
   }
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 const MenuByIdView = ({ match }) => {
   const menuDataById = useSelector(state => state.menu.menuById.data);
   const dispatch = useDispatch();
-  const [textData, setTextData] = useState();
+  const [menuData, setTextData] = useState();
   // Modal의 open state
   const [menuDeleteModalOpen, setMenuDeleteModalOpen] = useState(false);
+  const [menuUpdateModalOpen, setMenuUpdateModalOpen] = useState(false);
 
   // Modal의 open 상태를 변경하는 함수. props.setOpen으로 전달
   const menuDeleteToggle = () => {
     setMenuDeleteModalOpen(!menuDeleteModalOpen);
   };
+
+  const menuUpdateToggle = () => {
+    setMenuUpdateModalOpen(!menuUpdateModalOpen);
+  };
+
   const arrangeMenuData = () => {
     const tempMenuData = [
       { label: '메뉴ID', text: menuDataById.menuId },
@@ -43,7 +54,7 @@ const MenuByIdView = ({ match }) => {
     ];
     setTextData(tempMenuData);
   };
-  // textData: [{ label: 'defaultLabel', text: 'defaultText' }]
+  // menuData: [{ label: 'defaultLabel', text: 'defaultText' }]
 
   useEffect(() => {
     dispatch(getMenuById(match.params.id));
@@ -57,10 +68,24 @@ const MenuByIdView = ({ match }) => {
     <Wrapper>
       <ContentHeader class="header" title="메뉴 상세 조회" />
 
-      <TextList textData={textData} />
-      <Button variant="contained" color="secondary" onClick={menuDeleteToggle}>
-        메뉴삭제
-      </Button>
+      <TextList textData={menuData} />
+      <ButtonContainer>
+        <Button variant="contained" color="#c1ff91" onClick={menuUpdateToggle}>
+          메뉴 수정
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={menuDeleteToggle}
+        >
+          메뉴 삭제
+        </Button>
+      </ButtonContainer>
+      {menuUpdateModalOpen ? (
+        <UpdateMenu open={menuUpdateModalOpen} toggle={menuUpdateToggle} />
+      ) : (
+        ''
+      )}
       {menuDeleteModalOpen ? (
         <DeleteMenu
           open={menuDeleteModalOpen}
