@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const TextContainer = styled.div``;
-const Text = styled.p``;
+const Text = styled.p`
+  > b {
+    font-weight: bold;
+  }
+`;
+
 const TextInfo = ({ text, isBold }) => {
   return (
     <TextContainer>
