@@ -23,7 +23,7 @@ const MenuCreate = ({ open, toggle }) => {
   };
 
   const items = [
-    { name: 'menuOrder', label: '순서', value: menuCreateFormData.order },
+    { name: 'menuOrder', label: '순서', value: menuCreateFormData.menuOrder },
     { name: 'nameEng', label: '영어이름', value: menuCreateFormData.nameEng },
     { name: 'nameKor', label: '한글이름', value: menuCreateFormData.nameKor },
     {
@@ -31,16 +31,17 @@ const MenuCreate = ({ open, toggle }) => {
       label: '설명',
       value: menuCreateFormData.description
     },
-    { name: 'parentId', label: '상위메뉴', value: menuCreateFormData.parent },
+    { name: 'parentId', label: '상위메뉴', value: menuCreateFormData.parentId },
     { name: 'url', label: 'URL', value: menuCreateFormData.url }
   ];
 
   // dispatch
   const dispatchMenuCreate = () => {
-    const formData = new FormData();
-    items.forEach(item => formData.append(item.name, item.value));
-    dispatch(createMenu(formData));
-    console.log(formData.values);
+    const jsonData = {};
+    items.forEach(item => {
+      jsonData[item.name] = item.value;
+    });
+    dispatch(createMenu(jsonData));
   };
   const submitCreateMenu = () => {
     dispatchMenuCreate();
@@ -59,11 +60,6 @@ const MenuCreate = ({ open, toggle }) => {
     </div>
   );
 };
-
-// MenuCreate.defaultProps = {
-//   open: false,
-//   values: [{}]
-// };
 
 MenuCreate.propTypes = {
   open: PropTypes.bool.isRequired,
