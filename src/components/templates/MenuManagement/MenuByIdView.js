@@ -8,16 +8,7 @@ import { getMenuById } from '../../../modules/menu';
 import Button from '../../atoms/Button/RoundButton';
 import DeleteMenu from './DeleteMenu';
 import UpdateMenu from './UpdateMenu';
-// 메뉴 정보를 표시해줄 틀 module import
-/**
- *  useSelect, useDispatch 사용
- * menuById state를 select 하고, dispatch를 통해 getMenuById액션 호출.
- * 이후 데이터를 가공하여 하위 모듈에 props로 전달.
- * presentational component에서 출력.
- *
- * props에서 react-router의 match 속성을 받아서 이중 params로 url 마지막에 /:id로 들어온 부분을
- * 받아서 action.payload에 담아서 dispatch.
- *  */
+
 const Wrapper = styled.div`
   > * {
     margin-bottom: 1rem;
@@ -30,7 +21,8 @@ const ButtonContainer = styled.div`
 const MenuByIdView = ({ match }) => {
   const menuDataById = useSelector(state => state.menu.menuById);
   const dispatch = useDispatch();
-  const [menuData, setTextData] = useState();
+  const [textData, setTextData] = useState();
+
   // Modal의 open state
   const [menuDeleteModalOpen, setMenuDeleteModalOpen] = useState(false);
   const [menuUpdateModalOpen, setMenuUpdateModalOpen] = useState(false);
@@ -55,7 +47,7 @@ const MenuByIdView = ({ match }) => {
     ];
     setTextData(tempMenuData);
   };
-  // menuData: [{ label: 'defaultLabel', text: 'defaultText' }]
+  // textData: [{ label: 'defaultLabel', text: 'defaultText' }]
 
   useEffect(() => {
     dispatch(getMenuById(match.params.id));
@@ -67,7 +59,7 @@ const MenuByIdView = ({ match }) => {
     <Wrapper>
       <ContentHeader class="header" title="메뉴 상세 조회" />
 
-      <TextList textData={menuData} />
+      <TextList textData={textData} />
       <ButtonContainer>
         <Button variant="contained" color="#c1ff91" onClick={menuUpdateToggle}>
           메뉴 수정
@@ -81,7 +73,11 @@ const MenuByIdView = ({ match }) => {
         </Button>
       </ButtonContainer>
       {menuUpdateModalOpen ? (
-        <UpdateMenu open={menuUpdateModalOpen} toggle={menuUpdateToggle} />
+        <UpdateMenu
+          open={menuUpdateModalOpen}
+          toggle={menuUpdateToggle}
+          menuData={menuDataById}
+        />
       ) : (
         ''
       )}
