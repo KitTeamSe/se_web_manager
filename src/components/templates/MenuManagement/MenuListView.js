@@ -43,24 +43,45 @@ const MenuListView = ({ match }) => {
   const menuCreateToggle = () => {
     setMenuCreateModalOpen(!menuCreateModalOpen);
   };
-
+  // bfs 느낌으로 depth와 순서를 표현할 수 있도록 해봤음
+  const fillMenuRows = (menuRows, depth = 0, array) => {
+    let depthStr = '';
+    for (let index = 0; index < depth; index += 1) {
+      depthStr += ' + ';
+    }
+    array.forEach(menu => {
+      menuRows.push({
+        onRowClick: () => {
+          history.push(`${match.url}/${menu.menuId}`);
+        },
+        cells: [
+          depthStr,
+          menu.menuId,
+          menu.menuOrder,
+          menu.nameEng,
+          menu.nameKor,
+          menu.description
+        ]
+      });
+      if (menu.child.length > 0) {
+        fillMenuRows(menuRows, depth + 1, menu.child);
+      }
+    });
+  };
   const arrangeMenuList = () => {
     // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
     const arrayOfMenuList = Object.values(menuList);
-    const tempRows = arrayOfMenuList.map(menu => ({
-      onRowClick: () => {
-        history.push(`${match.url}/${menu.menuId}`);
-      },
-      cells: [
-        menu.menuId,
-        menu.menuOrder,
-        menu.nameEng,
-        menu.nameKor,
-        menu.description
-      ]
-    }));
-    setHeadData(['메뉴ID', '메뉴순서', '영어이름', '한글이름', '설명']);
-    setRowData(tempRows);
+    const menuRows = [];
+    fillMenuRows(menuRows, 0, arrayOfMenuList);
+    setHeadData([
+      'depth',
+      '메뉴ID',
+      '메뉴순서',
+      '영어이름',
+      '한글이름',
+      '설명'
+    ]);
+    setRowData(menuRows);
   };
   const getMenuListFromStore = () => {
     dispatch(getMenuList());
