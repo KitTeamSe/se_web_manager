@@ -4,7 +4,8 @@ import {
   getMenuListApi,
   getMenuByIdApi,
   createMenuApi,
-  deleteMenuApi
+  deleteMenuApi,
+  updateMenuApi
 } from '../libs/API/menu';
 
 // 메뉴 리스트 조회 / 성공 / 실패
@@ -27,11 +28,17 @@ const DELETE_MENU = 'menu/DELETE_MENU';
 const DELETE_MENU_SUCCESS = 'menu/DELETE_MENU_SUCCESS';
 const DELETE_MENU_ERROR = 'menu/DELETE_MENU_SUCCESS';
 
+// 메뉴 수정 / 성공 / 실패
+const UPDATE_MENU = 'menu/UPDATE_MENU';
+const UPDATE_MENU_SUCCESS = 'menu/UPDATE_MENU_SUCCESS';
+const UPDATE_MENU_ERROR = 'menu/UPDATE_MENU_ERROR';
+
 // 액션 생성 함수
 export const getMenuList = () => ({ type: GET_MENU_LIST });
 export const getMenuById = menuId => ({ type: GET_MENU_BY_ID, menuId });
 export const createMenu = menuData => ({ type: CREATE_MENU, menuData });
 export const deleteMenu = menuId => ({ type: DELETE_MENU, menuId });
+export const updateMenu = menuData => ({ type: UPDATE_MENU, menuData });
 
 // state 초기값
 const initialState = {
@@ -119,12 +126,30 @@ function* deleteMenuSaga(action) {
     yield put({ type: DELETE_MENU_ERROR, error: true, payload: e });
   }
 }
+
+function* updateMenuSaga(action) {
+  try {
+    const res = yield call(updateMenuApi, action.menuData);
+    if (res.status === 200 && res.data.code === 1) {
+      yield put({ type: UPDATE_MENU_SUCCESS, payload: res.data });
+    } else {
+      yield new Promise(resolve => {
+        alert('메뉴 생성 실패');
+        resolve();
+      });
+      yield put({ type: UPDATE_MENU_ERROR, payload: res.data });
+    }
+  } catch (e) {
+    yield put({ type: UPDATE_MENU_ERROR, error: true, payload: e });
+  }
+}
 // menu의 사가들을 합친 통합 사가
 export function* menuSaga() {
   yield takeLatest(GET_MENU_LIST, getMenuListSaga);
   yield takeLatest(GET_MENU_BY_ID, getMenuByIdSaga);
   yield takeLatest(CREATE_MENU, createMenuSaga);
   yield takeLatest(DELETE_MENU, deleteMenuSaga);
+  yield takeLatest(UPDATE_MENU, updateMenuSaga);
 }
 
 // 리듀서 정의 export default
@@ -176,7 +201,15 @@ export default function menu(state = initialState, action) {
       };
     case DELETE_MENU_ERROR:
       return state;
-
+    // 하이요~~
+    case UPDATE_MENU_SUCCESS:
+      return {
+        ...state,
+        menuUpdateResult: { ...action.payload }
+      };
+    case UPDATE_MENU:
+    case UPDATE_MENU_ERROR:
+      return state;
     default:
       return state;
   }
