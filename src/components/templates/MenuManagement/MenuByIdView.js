@@ -28,7 +28,7 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 const MenuByIdView = ({ match }) => {
-  const menuDataById = useSelector(state => state.menu.menuById.data);
+  const menuDataById = useSelector(state => state.menu.menuById);
   const dispatch = useDispatch();
   const [menuData, setTextData] = useState();
   // Modal의 open state
@@ -50,7 +50,8 @@ const MenuByIdView = ({ match }) => {
       { label: '메뉴순서', text: menuDataById.menuOrder },
       { label: '영어이름', text: menuDataById.nameEng },
       { label: '한글이름', text: menuDataById.nameKor },
-      { label: '설명', text: menuDataById.description }
+      { label: '설명', text: menuDataById.description },
+      { label: '부모 메뉴', text: menuDataById.parentId }
     ];
     setTextData(tempMenuData);
   };
@@ -60,9 +61,7 @@ const MenuByIdView = ({ match }) => {
     dispatch(getMenuById(match.params.id));
   }, []);
   useEffect(() => {
-    console.log('menuDataById changed');
     arrangeMenuData();
-    console.log('arrangMenuData()');
   }, [menuDataById]);
   return (
     <Wrapper>

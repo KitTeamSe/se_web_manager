@@ -46,7 +46,8 @@ const MenuListView = ({ match }) => {
 
   const arrangeMenuList = () => {
     // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
-    const tempRows = menuList.data.map(menu => ({
+    const arrayOfMenuList = Object.values(menuList);
+    const tempRows = arrayOfMenuList.map(menu => ({
       onRowClick: () => {
         history.push(`${match.url}/${menu.menuId}`);
       },

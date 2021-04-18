@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteMenu } from '../../../modules/menu';
@@ -25,9 +25,6 @@ const DeleteMenu = ({ open, toggle, deleteData }) => {
     // dispatch 후 toggle 되도록 Promise로 만들어야할지?
   };
 
-  useEffect(() => {
-    console.log(deleteData);
-  }, []);
   return (
     <div>
       <MenuDeleteDialog

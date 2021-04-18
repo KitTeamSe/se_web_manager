@@ -35,49 +35,42 @@ export const deleteMenu = menuId => ({ type: DELETE_MENU, menuId });
 
 // state 초기값
 const initialState = {
-  menuList: {
-    data: [
-      {
-        child: [],
-        description: 'Menu Description',
-        menuId: 1,
-        menuOrder: 0,
-        nameEng: 'Menu1_init Name in Eng',
-        nameKor: 'Menu1_init Name in Kor'
-      },
-      {
-        child: [],
-        description: 'Menu Description',
-        menuId: 2,
-        menuOrder: 0,
-        nameEng: 'Menu2_init Name in Eng',
-        nameKor: 'Menu2_init Name in Kor'
-      }
-    ]
-  },
-  menuById: {
-    data: {
+  menuList: [
+    {
       child: [],
       description: 'Menu Description',
-      menuId: 0,
+      menuId: 1,
       menuOrder: 0,
-      nameEng: 'Menu Name in Eng',
-      nameKor: 'Menu Name in Kor'
+      nameEng: 'Menu1_init Name in Eng',
+      nameKor: 'Menu1_init Name in Kor'
+    },
+    {
+      child: [],
+      description: 'Menu Description',
+      menuId: 2,
+      menuOrder: 0,
+      nameEng: 'Menu2_init Name in Eng',
+      nameKor: 'Menu2_init Name in Kor'
     }
+  ],
+  menuById: {
+    child: [],
+    description: 'Menu Description',
+    menuId: 0,
+    menuOrder: 0,
+    nameEng: 'Menu Name in Eng',
+    nameKor: 'Menu Name in Kor',
+    parentId: 1
   },
-  menuCreateResult: {
-    data: { result: true }
-  },
-  menuDeleteResult: {
-    data: { result: true }
-  }
+  menuCreateResult: { result: true },
+  menuDeleteResult: { result: true }
 };
 
 // 사가 정의
 function* getMenuListSaga() {
   try {
     const res = yield call(getMenuListApi);
-    yield put({ type: GET_MENU_LIST_SUCCESS, payload: res });
+    yield put({ type: GET_MENU_LIST_SUCCESS, payload: res.data.data });
   } catch (e) {
     yield put({ type: GET_MENU_LIST_ERROR, error: true, payload: e });
   }
@@ -86,7 +79,7 @@ function* getMenuListSaga() {
 function* getMenuByIdSaga(action) {
   try {
     const res = yield call(getMenuByIdApi, action.menuId);
-    yield put({ type: GET_MENU_BY_ID_SUCCESS, payload: res });
+    yield put({ type: GET_MENU_BY_ID_SUCCESS, payload: res.data });
   } catch (e) {
     yield put({ type: GET_MENU_BY_ID_ERROR, error: true, payload: e });
   }
@@ -95,14 +88,14 @@ function* getMenuByIdSaga(action) {
 function* createMenuSaga(action) {
   try {
     const res = yield call(createMenuApi, action.menuData);
-    if (res.data.result === true) {
-      yield put({ type: CREATE_MENU_SUCCESS, payload: res });
+    if (res.status === 200 && res.data.code === 1) {
+      yield put({ type: CREATE_MENU_SUCCESS, payload: res.data });
     } else {
       yield new Promise(resolve => {
         alert('메뉴 생성 실패');
         resolve();
       });
-      yield put({ type: CREATE_MENU_ERROR, payload: res });
+      yield put({ type: CREATE_MENU_ERROR, payload: res.data });
     }
   } catch (e) {
     yield put({ type: CREATE_MENU_ERROR, error: true, payload: e });
@@ -112,14 +105,15 @@ function* createMenuSaga(action) {
 function* deleteMenuSaga(action) {
   try {
     const res = yield call(deleteMenuApi, action.menuId);
-    if (res.data.result === true) {
+    console.log(res);
+    if (res.status === 200 && res.data.code === 1) {
       yield put({ type: DELETE_MENU_SUCCESS, payload: res.data });
     } else {
       yield new Promise(resolve => {
         alert('메뉴 삭제 실패');
         resolve();
       });
-      yield put({ type: CREATE_MENU_ERROR, payload: res });
+      yield put({ type: CREATE_MENU_ERROR, payload: res.data });
     }
   } catch (e) {
     yield put({ type: DELETE_MENU_ERROR, error: true, payload: e });
