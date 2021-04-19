@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import {
@@ -79,7 +79,6 @@ const SigninPopover = ({ handleClose }) => {
       setError('비밀번호 4자 이상 12자 이하');
       return;
     }
-    localStorage.setItem('id', JSON.stringify(id));
     dispatch(signin({ id, pw }));
   };
 
@@ -135,4 +134,4 @@ SigninPopover.propTypes = {
 
 SigninPopover.defaultProps = {};
 
-export default withRouter(SigninPopover);
+export default SigninPopover;
