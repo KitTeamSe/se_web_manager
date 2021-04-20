@@ -3,7 +3,8 @@ import baseUrl from '../baseUrl';
 
 const option = {
   headers: {
-    'content-type': 'application/json'
+    'content-type': 'application/json',
+    'X-AUTH-TOKEN': ''
   },
   withCredentials: true,
   crossDomain: true,

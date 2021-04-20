@@ -27,7 +27,8 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 // msw
-if (process.env.NODE_ENV === 'development') {
+console.log(process.env.REACT_APP_ENV);
+if (process.env.REACT_APP_ENV === 'development') {
   // eslint-disable-next-line global-require
   const { worker } = require('./mocks/browser');
   worker.start();
