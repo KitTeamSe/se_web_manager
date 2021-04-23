@@ -33,7 +33,11 @@ const MenuCreateDialog = ({
           name={item.name}
           label={item.label}
           value={item.value}
-        />
+          type={item.type}
+          select={item.select || false}
+        >
+          {item.SelectProps}
+        </TextFieldStyled>
       ))}
       <ButtonContainer>
         <Button onClick={handleClose} color="primary" size="lg">
