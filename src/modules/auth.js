@@ -2,8 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
 import * as api from '../libs/api/auth';
-// import { startLoading, finishLoading } from './loading';
-import createRequestSaga, {
+import {
+  createRequestSaga,
   createRequestActionTypes
 } from '../libs/createRequestSaga';
 
