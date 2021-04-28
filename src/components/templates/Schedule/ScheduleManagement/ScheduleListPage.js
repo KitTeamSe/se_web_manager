@@ -112,8 +112,8 @@ const ScheduleListPage = () => {
       setIsLoading(true);
       return;
     }
+    const newItems = [];
     if (year === YEAR_STATUS[0]) {
-      const newItems = [];
       items.forEach(data => {
         if (SCHEDULE_ITEMS[status].status === data.status) newItems.push(data);
       });
@@ -122,7 +122,6 @@ const ScheduleListPage = () => {
       return;
     }
     if (status === 2) {
-      const newItems = [];
       items.forEach(data => {
         if (year === data.year) newItems.push(data);
       });
@@ -130,7 +129,6 @@ const ScheduleListPage = () => {
       setIsLoading(true);
       return;
     }
-    const newItems = [];
     items.forEach(data => {
       if (year === data.year && SCHEDULE_ITEMS[status].status === data.status)
         newItems.push(data);
