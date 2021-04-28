@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SideMenuContainer from '../../atoms/SideMenuContainer/SideMenuContainer';
-import SideMenuList from './SideMenuList';
+import SideMenuList from '../SideMenuList/SideMenuList';
 import {
   ScheduleNestedData,
   ManageNestedData

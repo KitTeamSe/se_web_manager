@@ -10,7 +10,7 @@ const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
 `;
 
-const AddDialog = ({ title, item, open, setOpen }) => {
+const AddDialog = ({ title, head, open, setOpen }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -18,7 +18,7 @@ const AddDialog = ({ title, item, open, setOpen }) => {
   return (
     <Dialog open={open}>
       <DialogTitleStyled>{title} 추가</DialogTitleStyled>
-      <DialogInputContents item={item} />
+      <DialogInputContents head={head} />
       <DialogFooter handleClose={handleClose} type="add" />
     </Dialog>
   );
@@ -26,14 +26,14 @@ const AddDialog = ({ title, item, open, setOpen }) => {
 
 AddDialog.propTypes = {
   title: PropTypes.string,
-  item: PropTypes.arrayOf(PropTypes.array),
+  head: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
   setOpen: PropTypes.func.isRequired
 };
 
 AddDialog.defaultProps = {
   title: '',
-  item: [],
+  head: [],
   open: false
 };
 

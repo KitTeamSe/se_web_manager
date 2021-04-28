@@ -8,10 +8,10 @@ const InputWrapper = styled.div`
   justify-content: center;
 `;
 
-const DialogDeleteContents = ({ item, type }) => {
-  const itemComment = () => {
-    if (type === 'lectureRoom') return `${item.building} ${item.room_number}`;
-    return item.name;
+const DialogDeleteContents = ({ head, type }) => {
+  const headComment = () => {
+    if (type === 'lectureRoom') return `${head.building} ${head.room_number}`;
+    return head.name;
   };
 
   return (
@@ -20,19 +20,19 @@ const DialogDeleteContents = ({ item, type }) => {
         <Typography>삭제하시겠습니까</Typography>
       </InputWrapper>
       <InputWrapper>
-        <Typography>{itemComment(item, type)}</Typography>
+        <Typography>{headComment(head, type)}</Typography>
       </InputWrapper>
     </DialogContent>
   );
 };
 
 DialogDeleteContents.propTypes = {
-  item: PropTypes.arrayOf(PropTypes.array),
+  head: PropTypes.arrayOf(PropTypes.array),
   type: PropTypes.string.isRequired
 };
 
 DialogDeleteContents.defaultProps = {
-  item: []
+  head: []
 };
 
 export default DialogDeleteContents;

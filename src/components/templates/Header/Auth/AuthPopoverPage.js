@@ -5,7 +5,7 @@ import IconButton from '../../../atoms/IconButton/IconButton';
 import SigninPopover from '../../../modules/SigninPopover/SigninPopover';
 import SignoutPopover from '../../../modules/SignoutPopover/SignoutPopover';
 
-const SigninPopoverPage = () => {
+const AuthPopoverPage = () => {
   const [anchor, setAnchor] = useState(null);
 
   const handleClick = event => {
@@ -23,7 +23,7 @@ const SigninPopoverPage = () => {
       </IconButton>
 
       <Popover anchor={anchor} setAnchor={setAnchor} type="signin">
-        {localStorage.getItem('id') ? (
+        {localStorage.getItem('token') ? (
           <SignoutPopover handleClose={handleClose} />
         ) : (
           <SigninPopover handleClose={handleClose} />
@@ -33,4 +33,4 @@ const SigninPopoverPage = () => {
   );
 };
 
-export default SigninPopoverPage;
+export default AuthPopoverPage;

@@ -5,11 +5,9 @@ import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Bar from '../../atoms/Bar/Bar';
 import IconButton from '../../atoms/IconButton/IconButton';
-// import InfoIcon from '../../atoms/Icons/InfoIcon';
-// import NotificationIcon from '../../atoms/Icons/NotificationIcon';
 import SideMenuIcon from '../../atoms/Icons/SideMenuIcon';
 import Logo from '../../../statics/svg/Logo';
-import SigninPopoverPage from '../../templates/Header/Auth/SigninPopoverPage';
+import AuthPopoverPage from '../../templates/Header/Auth/AuthPopoverPage';
 import { HOME_URL } from '../../../statics/data/config';
 
 const LogoWrapper = styled(Typography)`
@@ -32,7 +30,7 @@ const AppBar = ({ open, setOpen }) => {
         </Link>
       </LogoWrapper>
 
-      <SigninPopoverPage />
+      <AuthPopoverPage />
     </Bar>
   );
 };

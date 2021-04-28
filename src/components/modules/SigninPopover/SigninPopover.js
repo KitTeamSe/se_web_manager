@@ -83,16 +83,13 @@ const SigninPopover = ({ handleClose }) => {
   };
 
   useEffect(() => {
-    dispatch(initializeForm('signin'));
-  }, [dispatch]);
-
-  useEffect(() => {
     if (authError) {
       setError('로그인 실패');
     }
     if (auths) {
       localStorage.setItem('token', JSON.stringify(auths.data.token));
       dispatch(initializeAuth());
+      dispatch(initializeForm('signin'));
       handleClose();
     }
   }, [auths, authError, dispatch]);

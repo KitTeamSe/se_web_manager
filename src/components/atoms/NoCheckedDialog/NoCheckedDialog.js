@@ -4,9 +4,9 @@ import { Typography } from '@material-ui/core';
 // import { Delete } from '@material-ui/icons';
 
 const TextStyled = styled(Typography)`
-  font-size: 1vw;
-  font-weight: 600;
-  color: #eeeeee;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
 `;
 
 const Wrapper = styled.div`
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.mainColor};
 `;
 
-const NoChecked = () => {
+const NoCheckedDialog = () => {
   return (
     <Wrapper>
       <TextStyled>삭제할 목록을 선택해주세요.</TextStyled>
@@ -26,8 +26,8 @@ const NoChecked = () => {
   );
 };
 
-NoChecked.propTypes = {};
+NoCheckedDialog.propTypes = {};
 
-NoChecked.defaultProps = {};
+NoCheckedDialog.defaultProps = {};
 
-export default NoChecked;
+export default NoCheckedDialog;

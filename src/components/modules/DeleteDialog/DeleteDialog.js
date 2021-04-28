@@ -10,7 +10,7 @@ const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
 `;
 
-const DeleteDialog = ({ title, item, open, setOpen, type }) => {
+const DeleteDialog = ({ title, head, open, setOpen, type }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -18,7 +18,7 @@ const DeleteDialog = ({ title, item, open, setOpen, type }) => {
   return (
     <Dialog open={open}>
       <DialogTitleStyled>{title} 삭제</DialogTitleStyled>
-      <DialogDeleteContents type={type} item={item} />
+      <DialogDeleteContents type={type} head={head} />
       <DialogFooter handleClose={handleClose} type="delete" />
     </Dialog>
   );
@@ -26,7 +26,7 @@ const DeleteDialog = ({ title, item, open, setOpen, type }) => {
 
 DeleteDialog.propTypes = {
   title: PropTypes.string,
-  item: PropTypes.arrayOf(PropTypes.array),
+  head: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
   setOpen: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired
@@ -34,7 +34,7 @@ DeleteDialog.propTypes = {
 
 DeleteDialog.defaultProps = {
   title: '',
-  item: [],
+  head: [],
   open: false
 };
 

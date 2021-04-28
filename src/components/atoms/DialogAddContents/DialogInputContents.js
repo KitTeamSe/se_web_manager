@@ -9,11 +9,10 @@ const InputWrapper = styled.div`
   justify-content: center;
 `;
 
-const DialogInputContents = ({ item }) => {
-  console.log(item);
+const DialogInputContents = ({ head }) => {
   return (
     <DialogContent>
-      {item.map(
+      {head.map(
         (el, i) =>
           i === 0 || (
             <InputWrapper>
@@ -31,11 +30,11 @@ const DialogInputContents = ({ item }) => {
 };
 
 DialogInputContents.propTypes = {
-  item: PropTypes.arrayOf(PropTypes.array)
+  head: PropTypes.arrayOf(PropTypes.array)
 };
 
 DialogInputContents.defaultProps = {
-  item: []
+  head: []
 };
 
 export default DialogInputContents;
