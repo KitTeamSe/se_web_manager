@@ -86,7 +86,7 @@ function* getMenuListSaga() {
 function* getMenuByIdSaga(action) {
   try {
     const res = yield call(getMenuByIdApi, action.menuId);
-    yield put({ type: GET_MENU_BY_ID_SUCCESS, payload: res.data });
+    yield put({ type: GET_MENU_BY_ID_SUCCESS, payload: res.data.data });
   } catch (e) {
     yield put({ type: GET_MENU_BY_ID_ERROR, error: true, payload: e });
   }
@@ -95,7 +95,7 @@ function* getMenuByIdSaga(action) {
 function* createMenuSaga(action) {
   try {
     const res = yield call(createMenuApi, action.menuData);
-    if (res.status === 200 && res.data.code === 1) {
+    if (res.status === 201 && res.data.code === 1) {
       yield put({ type: CREATE_MENU_SUCCESS, payload: res.data });
     } else {
       yield new Promise(resolve => {

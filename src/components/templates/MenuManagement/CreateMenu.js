@@ -10,6 +10,7 @@ const MenuCreate = ({ open, toggle }) => {
   // 모달에서 입력된 값을 받아서 저장할 state.
   const [menuCreateFormData, setMenuCreateFormData] = useState({
     menuOrder: '',
+    menuType: '',
     nameEng: '',
     nameKor: '',
     description: '',
@@ -47,6 +48,18 @@ const MenuCreate = ({ open, toggle }) => {
       label: '설명',
       type: 'text',
       value: menuCreateFormData.description
+    },
+    {
+      name: 'menuType',
+      label: '메뉴타입',
+      type: 'select',
+      select: true,
+      SelectProps: [
+        <MenuItem value="FOLDER">폴더</MenuItem>,
+        <MenuItem value="BOARD">보드</MenuItem>,
+        <MenuItem value="REDIRECT">리다이렉트(바로가기)</MenuItem>
+      ],
+      value: menuCreateFormData.menuType
     },
     {
       name: 'parentId',

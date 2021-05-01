@@ -20,7 +20,11 @@ export const getMenuListApi = async () => {
 };
 
 export const getMenuByIdApi = async menuId => {
-  const response = await axios.get(`${baseUrl}/api/v1/menu/${menuId}`);
+  const response = await axios({
+    ...option,
+    method: 'GET',
+    url: `${baseUrl}/api/v1/menu/${menuId}`
+  });
   return response;
 };
 
