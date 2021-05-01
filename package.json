@@ -25,8 +25,9 @@
     "xlsx": "^0.16.9"
   },
   "scripts": {
-    "start": "copy .\\.env.dev .\\.env && react-scripts start",
-    "start:production": "copy .\\.env.prod .\\.env && react-scripts start",
+    "start": "react-scripts start",
+    "start:dev": "copy .\\.env.dev .\\.env && react-scripts start",
+    "start:prod": "copy .\\.env.prod .\\.env && react-scripts start",
     
     "build": "react-scripts build",
     "test": "react-scripts test",
