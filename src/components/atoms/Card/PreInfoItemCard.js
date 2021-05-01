@@ -26,7 +26,7 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemText = styled(Typography)`
-  font-size: ${({ small }) => (small ? '0.8vw' : '1.0vw')};
+  font-size: ${({ small }) => (small ? '0.875rem' : '1rem')};
   text-align: ${({ align }) => align || 'center'};
   font-weight: 500;
 `;

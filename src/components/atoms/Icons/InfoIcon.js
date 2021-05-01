@@ -6,6 +6,8 @@ import { appbarIconSize } from './iconSize';
 
 const InfoIconStyles = styled(Info)`
   ${appbarIconSize}
+  color: ${({ color }) =>
+    color === 'primary' ? props => props.theme.mainColor : color};
 `;
 
 const InfoIcon = () => {

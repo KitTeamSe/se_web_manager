@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContents from '../../atoms/Dialog/DialogContents';
-import DialogButtons from '../../atoms/Dialog/DialogButtons';
+import DialogDeleteContents from '../../atoms/DialogDeleteContents/DialogDeleteContents';
+import DialogFooter from '../../atoms/DialogFooter/DialogFooter';
 
 const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
 `;
 
-const DeleteDialog = ({ title, item, open, setOpen, del }) => {
+const DeleteDialog = ({ title, head, open, setOpen, type }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -18,25 +18,24 @@ const DeleteDialog = ({ title, item, open, setOpen, del }) => {
   return (
     <Dialog open={open}>
       <DialogTitleStyled>{title} 삭제</DialogTitleStyled>
-      <DialogContents item={item} del />
-      <DialogButtons handleClose={handleClose} del={del} />
+      <DialogDeleteContents type={type} head={head} />
+      <DialogFooter handleClose={handleClose} type="delete" />
     </Dialog>
   );
 };
 
 DeleteDialog.propTypes = {
   title: PropTypes.string,
-  item: PropTypes.arrayOf(PropTypes.array),
+  head: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
   setOpen: PropTypes.func.isRequired,
-  del: PropTypes.bool
+  type: PropTypes.string.isRequired
 };
 
 DeleteDialog.defaultProps = {
   title: '',
-  item: [],
-  open: false,
-  del: PropTypes.bool
+  head: [],
+  open: false
 };
 
 export default DeleteDialog;

@@ -15,7 +15,11 @@ const TitleWrapper = styled.div`
   padding: 8px;
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const ContentHeader = ({ children, title }) => {
   return (
