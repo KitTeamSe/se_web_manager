@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteMenu } from '../../../modules/menu';
-import MenuDeleteDialog from '../../modules/MenuDialog/MenuDeleteDialog';
+import { deleteMenu } from '../../../../modules/menu';
+import MenuDeleteDialog from '../../../modules/MenuDialog/MenuDeleteDialog';
 /**
  *  content를 받아와서 DialogContent 컴포넌트 생성.
  */

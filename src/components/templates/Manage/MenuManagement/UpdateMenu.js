@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
-import MenuCreateDialog from '../../modules/MenuDialog/MenuCreateDialog';
-import { updateMenu } from '../../../modules/menu';
+import MenuCreateDialog from '../../../modules/MenuDialog/MenuCreateDialog';
+import { updateMenu } from '../../../../modules/menu';
 
 const UpdateMenu = ({ open, toggle, menuData }) => {
   const dispatch = useDispatch();

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import TextList from '../../modules/TextList/TextList';
-import ContentHeader from '../../modules/ContentHeader/ContentHeader';
-import { getMenuById } from '../../../modules/menu';
-import Button from '../../atoms/Button/RoundButton';
+import TextList from '../../../modules/TextList/TextList';
+import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
+import { getMenuById } from '../../../../modules/menu';
+import Button from '../../../atoms/Button/RoundButton';
 import DeleteMenu from './DeleteMenu';
 import UpdateMenu from './UpdateMenu';
 

@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { useHistory } from 'react-router-dom'; // router
-import Button from '../../atoms/Button/RoundButton';
-import ContentHeader from '../../modules/ContentHeader/ContentHeader';
+import Button from '../../../atoms/Button/RoundButton';
+import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 // import Header from '../../modules/Header/Header';
-import PageNumberButtonGroup from '../../modules/PageNumberButtonGroup/PageNumberButtonGroup';
+import PageNumberButtonGroup from '../../../modules/PageNumberButtonGroup/PageNumberButtonGroup';
 // import Button from '../../atoms/Button/Button';
-import Table from '../../modules/Table/TableWithRowAction';
+import Table from '../../../modules/Table/TableWithRowAction';
 // for redux
-import { getMenuList } from '../../../modules/menu';
+import { getMenuList } from '../../../../modules/menu';
 import CreateMenu from './CreateMenu';
 
 const Wrapper = styled.div`

@@ -6,7 +6,7 @@ import {
   createMenuApi,
   deleteMenuApi,
   updateMenuApi
-} from '../libs/API/menu';
+} from '../libs/api/menu';
 
 // 메뉴 리스트 조회 / 성공 / 실패
 const GET_MENU_LIST = 'menu/GET_MENU_LIST';

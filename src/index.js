@@ -14,7 +14,6 @@ import theme from './styles/theme';
 import rootReducer, { rootSaga } from './modules';
 import reportWebVitals from './reportWebVitals';
 // msw
-console.log(process.env.REACT_APP_ENV);
 if (process.env.REACT_APP_ENV === 'development') {
   // eslint-disable-next-line global-require
   const { worker } = require('./mocks/browser');
