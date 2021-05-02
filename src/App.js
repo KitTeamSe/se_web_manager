@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CssBaseline, Container } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
@@ -20,14 +20,24 @@ const MainWrapper = styled.main`
   margin-left: ${props => (props.open ? 260 : 58)}px;
 `;
 
-const Routes = ({ items }) =>
-  items.map(el => (
-    <Route exact path={`${MANAGE_URL}/${el.to}`} key={el.to}>
-      {el.page}
-    </Route>
-  ));
+// const Routes = ({ items }) =>
+//   items.map(el => (
+//     <Route exact path={`${MANAGE_URL}/${el.to}`} key={el.to}>
+//       {el.page}
+//     </Route>
+//   ));
 
 function App() {
+  const menuRoutes = useState(
+    ManageListData.map(el => (
+      <Route path={`${MANAGE_URL}/${el.to}`} key={el.to} component={el.page} />
+    ))
+  );
+  const scheduleRoutes = useState(
+    ScheduleListData.map(el => (
+      <Route path={`${MANAGE_URL}/${el.to}`} key={el.to} component={el.page} />
+    ))
+  );
   const [open, setOpen] = useToggle();
   const manageItems = ManageListData;
   const scheduleItems = ScheduleListData;
@@ -42,8 +52,12 @@ function App() {
         <MainWrapper open={open}>
           <Container>
             <Toolbar height="72" />
-            <Routes items={manageItems} />
-            <Routes items={scheduleItems} />
+            <Switch>
+              {menuRoutes}
+              {scheduleRoutes}
+            </Switch>
+            {/* <Routes items={manageItems} />
+            <Routes items={scheduleItems} /> */}
             {/* <Redirect path="*" to={`${path}/${firstPage}`} /> */}
           </Container>
         </MainWrapper>

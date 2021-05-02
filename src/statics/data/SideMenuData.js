@@ -20,7 +20,7 @@ import Class from '@material-ui/icons/Class';
 import AuthGroupListPage from '../../components/templates/Manage/AuthGroupManagement/AuthGroupListPage';
 import AuthListPage from '../../components/templates/Manage/AuthManagement/AuthListPage';
 import PostMovePage from '../../components/templates/Manage/PostManagement/PostMovePage';
-import MenuListPage from '../../components/templates/Manage/MenuManagement/MenuListPage';
+import MenuRouter from '../../components/templates/Manage/MenuManagement/MenuRouter';
 import BoardListPage from '../../components/templates/Manage/BoardManagement/BoardListPage';
 import TagListPage from '../../components/templates/Manage/TagManagement/TagListPage';
 import JobInfoUploadPage from '../../components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
@@ -41,73 +41,73 @@ const ManageListData = [
     to: 'menu',
     name: '메뉴 관리',
     icon: <Menu />,
-    page: <MenuListPage />
+    page: MenuRouter
   },
   {
     to: 'board',
     name: '게시판 관리',
     icon: <Dashboard />,
-    page: <BoardListPage />
+    page: BoardListPage
   },
   {
     to: 'post',
     name: '게시글 이동',
     icon: <PostAdd />,
-    page: <PostMovePage />
+    page: PostMovePage
   },
   {
     to: 'tag',
     name: '태그 관리',
     icon: <Label />,
-    page: <TagListPage />
+    page: TagListPage
   },
   {
     to: 'job',
     name: '취업정보 업로드',
     icon: <Work />,
-    page: <JobInfoUploadPage />
+    page: JobInfoUploadPage
   },
   {
     to: 'log',
     name: '로그 관리',
     icon: <ViewList />,
-    page: <LogListPage />
+    page: LogListPage
   },
   {
     to: 'statistics',
     name: '통계 관리',
     icon: <Equalizer />,
-    page: <StatisticsPage />
+    page: StatisticsPage
   },
   {
     to: 'blacklist',
     name: 'IP차단 관리',
     icon: <Block />,
-    page: <BlacklistListPage />
+    page: BlacklistListPage
   },
   {
     to: 'notice',
     name: '알림 관리',
     icon: <Notifications />,
-    page: <NoticeListPage />
+    page: NoticeListPage
   },
   {
     to: 'report',
     name: '신고 관리',
     icon: <Report />,
-    page: <ReportListPage />
+    page: ReportListPage
   },
   {
     to: 'authority_group',
     name: '권한그룹 관리',
     icon: <Group />,
-    page: <AuthGroupListPage />
+    page: AuthGroupListPage
   },
   {
     to: 'authority',
     name: '권한 관리',
     icon: <Person />,
-    page: <AuthListPage />
+    page: AuthListPage
   }
 ];
 
@@ -116,31 +116,31 @@ const ScheduleListData = [
     to: 'lecture_room',
     name: '강의실 관리',
     icon: <MeetingRoom />,
-    page: <LectureRoomListPage />
+    page: LectureRoomListPage
   },
   {
     to: 'teacher',
     name: '교원 관리',
     icon: <Person />,
-    page: <TeacherListPage />
+    page: TeacherListPage
   },
   {
     to: 'subject',
     name: '교과 관리',
     icon: <Class />,
-    page: <SubjectListPage />
+    page: SubjectListPage
   },
   {
     to: 'period',
     name: '교시 관리',
     icon: <Schedule />,
-    page: <PeriodListPage />
+    page: PeriodListPage
   },
   {
     to: 'schedule',
     name: '시간표 관리',
     icon: <CalendarToday />,
-    page: <ScheduleListPage />
+    page: ScheduleListPage
   }
 ];
 
