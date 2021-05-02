@@ -24,6 +24,9 @@ const Table = ({ headData, rowData, hover }) => {
   const [rows, setRows] = useState();
 
   const renderRows = () => {
+    if (rowData === null || rowData.length === 0) {
+      return;
+    }
     const rowArray = rowData.map(row => {
       return (
         <StyledTableRow hover={hover} onClick={row.onRowClick}>

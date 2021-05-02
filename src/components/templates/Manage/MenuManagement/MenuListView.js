@@ -34,7 +34,7 @@ const MenuListView = ({ match }) => {
   const dispatch = useDispatch();
   const menuList = useSelector(state => state.menu.menuList);
   const [headData, setHeadData] = useState();
-  const [rowData, setRowData] = useState();
+  const [rowData, setRowData] = useState([]);
 
   // Modal의 open state
   const [menuCreateModalOpen, setMenuCreateModalOpen] = useState(false);
@@ -45,6 +45,9 @@ const MenuListView = ({ match }) => {
   };
   // bfs 느낌으로 depth와 순서를 표현할 수 있도록 해봤음
   const fillMenuRows = (menuRows, depth = 0, array) => {
+    if (array === null || array.length === 0) {
+      return;
+    }
     let depthStr = '';
     for (let index = 0; index < depth; index += 1) {
       depthStr += ' + ';
@@ -70,7 +73,7 @@ const MenuListView = ({ match }) => {
   };
   const arrangeMenuList = () => {
     // onRowClick을 각 row마다 설정하여 props로 내려주도록 함.
-    const arrayOfMenuList = Object.values(menuList);
+    const arrayOfMenuList = menuList ? Object.values(menuList) : null;
     const menuRows = [];
     fillMenuRows(menuRows, 0, arrayOfMenuList);
     setHeadData([

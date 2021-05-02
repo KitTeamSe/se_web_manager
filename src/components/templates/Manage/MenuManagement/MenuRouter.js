@@ -11,7 +11,7 @@ const MenuRouter = ({ match }) => {
   return (
     <div>
       <Switch>
-        <Route path={match.url} component={MenuListView} />
+        <Route exact path={match.url} component={MenuListView} />
         <Route path={`${match.url}/:id`} component={MenuByIdView} />
       </Switch>
     </div>
