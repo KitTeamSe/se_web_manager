@@ -30,10 +30,10 @@ import BlacklistListPage from '../../components/templates/Manage/BlacklistManage
 import NoticeListPage from '../../components/templates/Manage/NoticeManagement/NoticeListPage';
 import ReportListPage from '../../components/templates/Manage/ReportManagement/ReportListPage';
 
-import LectureRoomListPage from '../../components/templates/Schedule/LectureRoomManagement/LectureRoomListPage';
-import TeacherListPage from '../../components/templates/Schedule/TeacherManagement/TeacherListPage';
-import SubjectListPage from '../../components/templates/Schedule/SubjectManagement/SubjectListPage';
-import PeriodListPage from '../../components/templates/Schedule/PeriodManagement/PeriodListPage';
+import LectureRoomListPageContainer from '../../components/templates/Schedule/LectureRoomManagement/LectureRoomListPageContainer';
+import TeacherListPageContainer from '../../components/templates/Schedule/TeacherManagement/TeacherListPageContainer';
+import SubjectListPageContainer from '../../components/templates/Schedule/SubjectManagement/SubjectListPageContainer';
+import PeriodListPageContainer from '../../components/templates/Schedule/PeriodManagement/PeriodListPageContainer';
 import ScheduleListPage from '../../components/templates/Schedule/ScheduleManagement/ScheduleListPage';
 
 const ManageListData = [
@@ -116,25 +116,25 @@ const ScheduleListData = [
     to: 'lecture_room',
     name: '강의실 관리',
     icon: <MeetingRoom />,
-    page: <LectureRoomListPage />
+    page: <LectureRoomListPageContainer />
   },
   {
     to: 'teacher',
     name: '교원 관리',
     icon: <Person />,
-    page: <TeacherListPage />
+    page: <TeacherListPageContainer />
   },
   {
     to: 'subject',
     name: '교과 관리',
     icon: <Class />,
-    page: <SubjectListPage />
+    page: <SubjectListPageContainer />
   },
   {
     to: 'period',
     name: '교시 관리',
     icon: <Schedule />,
-    page: <PeriodListPage />
+    page: <PeriodListPageContainer />
   },
   {
     to: 'schedule',

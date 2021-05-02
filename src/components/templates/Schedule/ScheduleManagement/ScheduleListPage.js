@@ -55,43 +55,43 @@ const head = [
 
 const items = [
   {
-    createdBy: '김교수',
+    createdBy: 1,
     name: '테스트 시간표 1',
-    semester: '2',
+    semester: 2,
     status: SCHEDULE_STATUS[0],
-    timeTableId: '1',
+    timeTableId: 1,
     year: '2021'
   },
   {
-    createdBy: '임교수',
+    createdBy: 2,
     name: '테스트 시간표 2',
-    semester: '1',
+    semester: 1,
     status: SCHEDULE_STATUS[1],
-    timeTableId: '2',
+    timeTableId: 2,
     year: '2021'
   },
   {
-    createdBy: '황교수',
+    createdBy: 3,
     name: '테스트 시간표 3',
-    semester: '2',
+    semester: 2,
     status: SCHEDULE_STATUS[0],
-    timeTableId: '3',
+    timeTableId: 3,
     year: '2020'
   },
   {
-    createdBy: '이교수',
+    createdBy: 4,
     name: '테스트 시간표 4',
-    semester: '1',
+    semester: 1,
     status: SCHEDULE_STATUS[0],
-    timeTableId: '4',
+    timeTableId: 4,
     year: '2020'
   },
   {
-    createdBy: '학교수',
+    createdBy: 5,
     name: '테스트 시간표 5',
-    semester: '2',
+    semester: 2,
     status: SCHEDULE_STATUS[1],
-    timeTableId: '5',
+    timeTableId: 5,
     year: '2019'
   }
 ];

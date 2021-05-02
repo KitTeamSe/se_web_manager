@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialog from '../../../modules/AddDialog/AddDialog';
-import DeleteDialog from '../../../modules/DeleteDialog/DeleteDialog';
+import AddDialog from '../../Dialog/AddDialog/AddDialog';
+import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 
@@ -25,7 +26,7 @@ const Wrapper = styled.div``;
 
 const head = [
   {
-    key: 'lecture_room_id',
+    key: 'lectureRoomId',
     name: '#',
     type: 'id',
     width: '10%'
@@ -34,74 +35,43 @@ const head = [
     key: 'building',
     name: '건물',
     type: 'string',
-    width: '30%'
+    width: '20%'
   },
   {
-    key: 'room_number',
+    key: 'roomNumber',
     name: '호수',
     type: 'number',
-    width: '30%'
+    width: '20%'
   },
   {
     key: 'capacity',
     name: '정원',
     type: 'number',
+    width: '20%'
+  },
+  {
+    key: 'note',
+    name: '설명',
+    type: 'string',
     width: '30%'
   }
 ];
 
-const active = [
-  {
-    lecture_room_id: '1',
-    building: 'D',
-    room_number: 330,
-    capacity: 50
-  },
-  {
-    lecture_room_id: '2',
-    building: 'D',
-    room_number: 331,
-    capacity: 50
-  },
-  {
-    lecture_room_id: '3',
-    building: 'DB',
-    room_number: 111,
-    capacity: 80
-  },
-  {
-    lecture_room_id: '4',
-    building: 'G',
-    room_number: 111,
-    capacity: 30
-  },
-  {
-    lecture_room_id: '5',
-    building: 'D',
-    room_number: 438,
-    capacity: 30
-  }
-];
-
-const LectureRoomListView = () => {
-  const headItem = head;
+const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
   const title = '강의실';
   const headerTitle = `사전정보 - ${title}관리`;
-  const [rows, setRows] = useState([]);
   const [addOpen, setAddOpen] = useToggle();
   const [deleteOpen, setDeleteOpen] = useToggle();
   const [select, setSelect] = useState(null);
   const [failOpen, setFailOpen] = useToggle();
 
   useEffect(() => {
-    setRows(active);
+    console.log(head);
   }, []);
 
   useEffect(() => {
     if (failOpen) setFailOpen();
   }, [addOpen, deleteOpen, select]);
-
-  useEffect(() => {});
 
   const handleDeleteOpen = () => {
     if (!select && !failOpen) setFailOpen();
@@ -113,14 +83,23 @@ const LectureRoomListView = () => {
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
         <PaperStyled>
-          <PreInfoList
-            title={title}
-            head={headItem}
-            rows={rows}
-            select={select}
-            setSelect={setSelect}
-          />
-          {failOpen ? <NoCheckedDialog /> : null}
+          {error ? (
+            <div>error</div>
+          ) : (
+            !loading &&
+            lectureRooms && (
+              <>
+                <PreInfoList
+                  title={title}
+                  head={head}
+                  rows={lectureRooms.data.content}
+                  select={select}
+                  setSelect={setSelect}
+                />
+                {failOpen ? <NoCheckedDialog /> : null}
+              </>
+            )
+          )}
         </PaperStyled>
         <AddDeleteBox
           setAddOpen={setAddOpen}
@@ -140,7 +119,7 @@ const LectureRoomListView = () => {
         {!deleteOpen || (
           <DeleteDialog
             title={title}
-            head={rows[select]}
+            head={lectureRooms.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
             type="lectureRoom"
@@ -151,4 +130,26 @@ const LectureRoomListView = () => {
   );
 };
 
-export default LectureRoomListView;
+LectureRoomListPage.propTypes = {
+  lectureRooms: PropTypes.shape({
+    data: PropTypes.shape({
+      content: PropTypes.shape({
+        lectureRoomId: PropTypes.string.isRequired,
+        building: PropTypes.string.isRequired,
+        roomNumber: PropTypes.string.isRequired,
+        capacity: PropTypes.string.isRequired,
+        note: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired
+  }),
+  error: PropTypes.string,
+  loading: PropTypes.string
+};
+
+LectureRoomListPage.defaultProps = {
+  lectureRooms: null,
+  error: null,
+  loading: null
+};
+
+export default LectureRoomListPage;

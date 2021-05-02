@@ -87,7 +87,10 @@ const SigninPopover = ({ handleClose }) => {
       setError('로그인 실패');
     }
     if (auths) {
-      localStorage.setItem('token', JSON.stringify(auths.data.token));
+      localStorage.setItem(
+        'token',
+        JSON.stringify(auths.data.token).replaceAll('"', '')
+      );
       dispatch(initializeAuth());
       dispatch(initializeForm('signin'));
       handleClose();

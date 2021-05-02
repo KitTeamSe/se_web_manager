@@ -7,26 +7,32 @@ import { TableCell as TableCells } from '@material-ui/core';
 // 해서 테이블 제목 + 해당 셀 데이터 +
 
 const TableCell = ({ key, index, page, data, rowsPerPage, type }) => {
-  if (page > -1 || type === 'index') {
+  const pageIndexCell = () => {
     const cellIndex = page * rowsPerPage + index + 1;
     return (
       <TableCells key={key} component="th" scope="row" align="center">
         {cellIndex}
       </TableCells>
     );
-  }
-  if (type === 'index') {
+  };
+
+  const indexCell = () => {
     return (
       <TableCells key={key} component="th" scope="row" align="center">
         {index}
       </TableCells>
     );
-  }
-  return (
+  };
+
+  const defaultCell = () => (
     <TableCells key={key} align="center">
       {data}
     </TableCells>
   );
+
+  if (page > -1 || type === 'index') return pageIndexCell();
+  if (type === 'index') return indexCell();
+  return defaultCell();
 };
 
 TableCell.propTypes = {

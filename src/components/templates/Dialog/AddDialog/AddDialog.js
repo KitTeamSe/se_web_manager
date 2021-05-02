@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogInputContents from '../../atoms/DialogAddContents/DialogInputContents';
-import DialogFooter from '../../atoms/DialogFooter/DialogFooter';
+import DialogInputContents from '../../../modules/DialogInputContents/DialogInputContents';
+import DialogFooter from '../../../modules/DialogFooter/DialogFooter';
 
 const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
 `;
 
-const PreInfoAddDialog = ({ title, item, open, setOpen }) => {
+const AddDialog = ({ title, head, open, setOpen }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -18,23 +18,23 @@ const PreInfoAddDialog = ({ title, item, open, setOpen }) => {
   return (
     <Dialog open={open}>
       <DialogTitleStyled>{title} 추가</DialogTitleStyled>
-      <DialogInputContents item={item} />
+      <DialogInputContents head={head} />
       <DialogFooter handleClose={handleClose} type="add" />
     </Dialog>
   );
 };
 
-PreInfoAddDialog.propTypes = {
+AddDialog.propTypes = {
   title: PropTypes.string,
-  item: PropTypes.arrayOf(PropTypes.array),
+  head: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
   setOpen: PropTypes.func.isRequired
 };
 
-PreInfoAddDialog.defaultProps = {
+AddDialog.defaultProps = {
   title: '',
-  item: [],
+  head: [],
   open: false
 };
 
-export default PreInfoAddDialog;
+export default AddDialog;

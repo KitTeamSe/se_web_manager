@@ -1,20 +1,30 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import menu, { menuSaga } from './menu';
 
 import loading from './loading';
 import auth, { authSaga } from './auth';
 import lectureRoom, { lectureRoomSaga } from './schedule/lectureRoom';
+import period, { periodSaga } from './schedule/period';
+import subject, { subjectSaga } from './schedule/subject';
+import teacher, { teacherSaga } from './schedule/teacher';
 
 const rootReducer = combineReducers({
   loading,
   auth,
   lectureRoom,
-  menu
+  period,
+  subject,
+  teacher
 });
 
 export function* rootSaga() {
-  yield all([authSaga(), lectureRoomSaga(), menuSaga()]);
+  yield all([
+    authSaga(),
+    lectureRoomSaga(),
+    periodSaga(),
+    subjectSaga(),
+    teacherSaga()
+  ]);
 }
 
 export default rootReducer;

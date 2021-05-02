@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { DialogContent } from '@material-ui/core';
-import TextField from '../TextField/TextField';
+import TextField from '../../atoms/TextField/TextField';
 
 const InputWrapper = styled.div`
   display: flex;
@@ -16,12 +16,7 @@ const DialogInputContents = ({ head }) => {
         (el, i) =>
           i === 0 || (
             <InputWrapper>
-              {el.type === 'number' ? (
-                <TextField id={el.key} label={el.name} type="number" />
-              ) : null}
-              {el.type === 'string' ? (
-                <TextField id={el.key} label={el.name} />
-              ) : null}
+              <TextField id={el.key} label={el.name} type={el.type} />
             </InputWrapper>
           )
       )}

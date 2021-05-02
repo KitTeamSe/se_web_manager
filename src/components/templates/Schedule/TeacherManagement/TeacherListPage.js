@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialog from '../../../modules/AddDialog/AddDialog';
-import DeleteDialog from '../../../modules/DeleteDialog/DeleteDialog';
+import AddDialog from '../../Dialog/AddDialog/AddDialog';
+import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 
@@ -25,7 +26,7 @@ const Wrapper = styled.div``;
 
 const head = [
   {
-    key: 'teacher_id',
+    key: 'teacherId',
     name: '#',
     type: 'id',
     width: '10%'
@@ -50,34 +51,13 @@ const head = [
   }
 ];
 
-const active = [
-  {
-    teacher_id: '1',
-    name: '임은기',
-    type: '교수',
-    department: '컴퓨터소프트웨어공학과'
-  },
-  {
-    teacher_id: '2',
-    name: '홍길동',
-    type: '시간강사',
-    department: '외부강사'
-  }
-];
-
-const TeacherListView = () => {
-  const headItem = head;
+const TeacherListPage = ({ teachers, error, loading }) => {
   const title = '교원';
   const headerTitle = `사전정보 - ${title}관리`;
-  const [rows, setRows] = useState([]);
   const [addOpen, setAddOpen] = useToggle();
   const [deleteOpen, setDeleteOpen] = useToggle();
   const [select, setSelect] = useState(null);
   const [failOpen, setFailOpen] = useToggle();
-
-  useEffect(() => {
-    setRows(active);
-  }, []);
 
   useEffect(() => {
     if (failOpen) setFailOpen();
@@ -95,14 +75,23 @@ const TeacherListView = () => {
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
         <PaperStyled>
-          <PreInfoList
-            title={title}
-            head={headItem}
-            rows={rows}
-            select={select}
-            setSelect={setSelect}
-          />
-          {failOpen ? <NoCheckedDialog /> : null}
+          {error ? (
+            <div>error</div>
+          ) : (
+            !loading &&
+            teachers && (
+              <>
+                <PreInfoList
+                  title={title}
+                  head={head}
+                  rows={teachers.data.content}
+                  select={select}
+                  setSelect={setSelect}
+                />
+                {failOpen ? <NoCheckedDialog /> : null}
+              </>
+            )
+          )}
         </PaperStyled>
         <AddDeleteBox
           setAddOpen={setAddOpen}
@@ -115,17 +104,17 @@ const TeacherListView = () => {
             head={head}
             open={addOpen}
             setOpen={setAddOpen}
-            type="lectureRoom"
+            type="teacher"
           />
         )}
 
         {!deleteOpen || (
           <DeleteDialog
             title={title}
-            head={rows[select]}
+            head={teachers.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
-            type="lectureRoom"
+            type="teacher"
           />
         )}
       </ContentWrapper>
@@ -133,4 +122,33 @@ const TeacherListView = () => {
   );
 };
 
-export default TeacherListView;
+TeacherListPage.propTypes = {
+  teachers: PropTypes.shape({
+    data: PropTypes.shape({
+      content: PropTypes.shape({
+        autoCreated: PropTypes.bool.isRequired,
+        department: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        note: PropTypes.string.isRequired,
+        teacherId: PropTypes.number.isRequired,
+        type: PropTypes.oneOf([
+          'FULL_PROFESSOR',
+          'FIXED_TERM_PROFESSOR',
+          'ASSISTANT',
+          'STUDENT',
+          'ETC'
+        ]).isRequired
+      }).isRequired
+    }).isRequired
+  }),
+  error: PropTypes.string,
+  loading: PropTypes.string
+};
+
+TeacherListPage.defaultProps = {
+  teachers: null,
+  error: null,
+  loading: null
+};
+
+export default TeacherListPage;

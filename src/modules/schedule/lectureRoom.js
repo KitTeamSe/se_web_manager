@@ -49,7 +49,7 @@ const [
 
 export const loadLectureRooms = createAction(
   LOAD_LECTURE_ROOMS,
-  ({ page, size }) => ({ page, size })
+  ({ token, direction, page, size }) => ({ token, direction, page, size })
 );
 
 // export const addLectureRoom = createAction(
@@ -88,12 +88,12 @@ export function* lectureRoomSaga() {
 }
 
 const initialState = {
-  // addLectureRoom: {
-  //   building: '',
-  //   capacity: '',
-  //   note: '',
-  //   roomNumber: ''
-  // },
+  addLectureRoom: {
+    building: '',
+    capacity: '',
+    note: '',
+    roomNumber: ''
+  },
   // updateLectureRoom: {
   //   building: '',
   //   capacity: '',
@@ -101,20 +101,22 @@ const initialState = {
   //   note: '',
   //   roomNumber: ''
   // },
-  lectureRooms: null,
   // lectureRoom: null,
+  lectureRooms: null,
   error: null
 };
 
 export default handleActions(
   {
-    [LOAD_LECTURE_ROOMS_SUCCESS]: (state, { payload: posts }) => ({
+    [LOAD_LECTURE_ROOMS_SUCCESS]: (state, { payload: lectureRooms }) => ({
       ...state,
-      posts
+      lectureRooms,
+      error: null
     }),
-    [LOAD_LECTURE_ROOMS_FAILURE]: (state, { payload: posts }) => ({
+    [LOAD_LECTURE_ROOMS_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      posts
+      lectureRooms: null,
+      error
     })
     // [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
     //   produce(state, draft => {

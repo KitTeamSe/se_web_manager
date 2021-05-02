@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogDeleteContents from '../../atoms/DialogDeleteContents/DialogDeleteContents';
-import DialogFooter from '../../atoms/DialogFooter/DialogFooter';
+import DialogDeleteContents from '../../../modules/DialogDeleteContents/DialogDeleteContents';
+import DialogFooter from '../../../modules/DialogFooter/DialogFooter';
 
 const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;

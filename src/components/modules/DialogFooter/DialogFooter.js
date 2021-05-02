@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import DialogActions from '@material-ui/core/DialogActions';
-import Button from '../Button/Button';
+import Button from '../../atoms/Button/Button';
 
 const DialogActionsStyled = styled(DialogActions)`
   justify-content: center;

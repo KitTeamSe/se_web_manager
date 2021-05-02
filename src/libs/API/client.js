@@ -23,4 +23,10 @@ axios.interceptors.response.use(
   }
 );
 
+export const tokenHeader = token => ({
+  headers: {
+    'X-AUTH-TOKEN': token
+  }
+});
+
 export default client;
