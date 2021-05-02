@@ -40,10 +40,12 @@ const MenuByIdView = ({ match }) => {
     const tempMenuData = [
       { label: '메뉴ID', text: menuDataById.menuId },
       { label: '메뉴순서', text: menuDataById.menuOrder },
+      { label: '메뉴타입', text: menuDataById.menuType },
       { label: '영어이름', text: menuDataById.nameEng },
       { label: '한글이름', text: menuDataById.nameKor },
       { label: '설명', text: menuDataById.description },
-      { label: '부모 메뉴', text: menuDataById.parentId }
+      { label: '부모 메뉴', text: menuDataById.parentId },
+      { label: 'URL', text: menuDataById.url }
     ];
     setTextData(tempMenuData);
   };

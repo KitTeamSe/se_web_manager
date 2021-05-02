@@ -47,15 +47,22 @@ for (let index = 0; index < size; index++) {
     })
 }
 
-export const menuByIdMock = ({id}) => {
-    return {
-    description: `Menu_by_id Description`,
-    menuId: id,
-    menuOrder: 0,
-    nameEng: `Menu_by_id Name in Eng`,
-    nameKor: `Menu_by_id Name in Kor`,
-    parentId: 1
-}};
+export const menuByIdMock = ({id}) => (
+    {
+        message:"message",
+        code:1,
+        data:{
+            description: `Menu_by_id Description`,
+            menuId: id,
+            menuOrder: 0,
+            menuType: 'FOLDER',
+            nameEng: `Menu_by_id Name in Eng`,
+            nameKor: `Menu_by_id Name in Kor`,
+            parentId: 1,
+            url:'url'
+        }
+    }
+);
 
 // 메뉴 생성 여부 성공/실패를 번갈아가면서 반환하도록 함.
 export function* createMenuMockGenerator(){

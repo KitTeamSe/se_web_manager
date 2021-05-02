@@ -42,33 +42,8 @@ export const updateMenu = menuData => ({ type: UPDATE_MENU, menuData });
 
 // state 초기값
 const initialState = {
-  menuList: [
-    {
-      child: [],
-      description: 'Menu Description',
-      menuId: 1,
-      menuOrder: 0,
-      nameEng: 'Menu1_init Name in Eng',
-      nameKor: 'Menu1_init Name in Kor'
-    },
-    {
-      child: [],
-      description: 'Menu Description',
-      menuId: 2,
-      menuOrder: 0,
-      nameEng: 'Menu2_init Name in Eng',
-      nameKor: 'Menu2_init Name in Kor'
-    }
-  ],
-  menuById: {
-    child: [],
-    description: 'Menu Description',
-    menuId: 0,
-    menuOrder: 0,
-    nameEng: 'Menu Name in Eng',
-    nameKor: 'Menu Name in Kor',
-    parentId: 1
-  },
+  menuList: [],
+  menuById: {},
   menuCreateResult: { result: true },
   menuDeleteResult: { result: true }
 };
@@ -95,7 +70,7 @@ function* getMenuByIdSaga(action) {
 function* createMenuSaga(action) {
   try {
     const res = yield call(createMenuApi, action.menuData);
-    if (res.status === 201 && res.data.code === 1) {
+    if (res.data.code === 201) {
       yield put({ type: CREATE_MENU_SUCCESS, payload: res.data });
     } else {
       yield new Promise(resolve => {
@@ -113,14 +88,14 @@ function* deleteMenuSaga(action) {
   try {
     const res = yield call(deleteMenuApi, action.menuId);
     console.log(res);
-    if (res.status === 200 && res.data.code === 1) {
+    if (res.data.code === 201) {
       yield put({ type: DELETE_MENU_SUCCESS, payload: res.data });
     } else {
       yield new Promise(resolve => {
         alert('메뉴 삭제 실패');
         resolve();
       });
-      yield put({ type: CREATE_MENU_ERROR, payload: res.data });
+      yield put({ type: DELETE_MENU_ERROR, payload: res.data });
     }
   } catch (e) {
     yield put({ type: DELETE_MENU_ERROR, error: true, payload: e });
@@ -130,7 +105,7 @@ function* deleteMenuSaga(action) {
 function* updateMenuSaga(action) {
   try {
     const res = yield call(updateMenuApi, action.menuData);
-    if (res.status === 200 && res.data.code === 1) {
+    if (res.data.code === 200) {
       yield put({ type: UPDATE_MENU_SUCCESS, payload: res.data });
     } else {
       yield new Promise(resolve => {
