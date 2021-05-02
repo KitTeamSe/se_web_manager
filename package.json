@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "immer": "^9.0.1",
     "prop-types": "^15.7.2",
+    "qs": "^6.10.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.3",
@@ -31,7 +32,6 @@
     "start": "react-scripts start",
     "start:dev": "copy .\\.env.dev .\\.env && react-scripts start",
     "start:prod": "copy .\\.env.prod .\\.env && react-scripts start",
-    
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
