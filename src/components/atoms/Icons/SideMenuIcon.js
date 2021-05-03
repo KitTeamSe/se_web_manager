@@ -6,19 +6,23 @@ import { appbarIconSize } from './iconSize';
 
 const MenuIconStyles = styled(Menu)`
   ${appbarIconSize}
+  color: ${({ color }) =>
+    color === 'primary' ? props => props.theme.mainColor : color};
 `;
 
 const CloseIconStyles = styled(FirstPage)`
   ${appbarIconSize}
+  color: ${({ color }) =>
+    color === 'primary' ? props => props.theme.mainColor : color};
 `;
 
-const SideMenuIcon = ({ open, handleOpen }) => {
+const SideMenuIcon = ({ open, color }) => {
   return (
     <>
       {open ? (
-        <CloseIconStyles onClick={() => handleOpen()} />
+        <CloseIconStyles color={color} />
       ) : (
-        <MenuIconStyles onClick={() => handleOpen()} />
+        <MenuIconStyles color={color} />
       )}
     </>
   );
@@ -26,9 +30,11 @@ const SideMenuIcon = ({ open, handleOpen }) => {
 
 SideMenuIcon.propTypes = {
   open: PropTypes.bool.isRequired,
-  handleOpen: PropTypes.func.isRequired
+  color: PropTypes.string
 };
 
-SideMenuIcon.defaultProps = {};
+SideMenuIcon.defaultProps = {
+  color: null
+};
 
 export default SideMenuIcon;

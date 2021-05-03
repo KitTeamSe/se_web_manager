@@ -1,30 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { StylesProvider } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
+import createSagaMiddleware from 'redux-saga';
+// import rootReducer from './reducer';
 import './styles/reset.css';
-import AppContainer from './AppContainer';
+import { createLogger } from 'redux-logger';
+import App from './App';
 import theme from './styles/theme';
-import rootReducer from './modules';
-// import configureStore from './store/configureStore';
-// import reportWebVitals from './reportWebVitals';
+import rootReducer, { rootSaga } from './modules';
+import reportWebVitals from './reportWebVitals';
+// msw
+if (process.env.REACT_APP_ENV === 'development') {
+  // eslint-disable-next-line global-require
+  const { worker } = require('./mocks/browser');
+  worker.start();
+}
 
-const store = createStore(rootReducer);
+const logger = createLogger();
+const sagaMiddleware = createSagaMiddleware();
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer,
+  composeEnhancer(applyMiddleware(logger, sagaMiddleware))
+  // applyMiddleware(logger, sagaMiddleware)
+);
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
         <StylesProvider injectFirst>
           <BrowserRouter>
-            <AppContainer />
+            <App />
           </BrowserRouter>
         </StylesProvider>
-      </Provider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -32,4 +49,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();
+reportWebVitals();

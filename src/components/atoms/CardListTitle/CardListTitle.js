@@ -17,9 +17,10 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemText = styled(Typography)`
-  font-size: ${({ small }) => (small ? '0.9vw' : '1.1vw')};
+  font-size: ${({ small }) => (small ? '0.875rem' : '1rem')};
   text-align: center;
   font-weight: 600;
+  user-select: none;
 `;
 
 const CardListTitle = ({ head, small }) => {

@@ -22,7 +22,7 @@ const PaginationWrapper = styled.div`
 
 const rowsPerPage = 2;
 
-const PaginationTable = ({ head, rows }) => {
+const PaginationTable = ({ head, rows, change }) => {
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(1);
 
@@ -30,11 +30,13 @@ const PaginationTable = ({ head, rows }) => {
     setCount(Math.ceil(rows.length / rowsPerPage));
   }, [rows]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [change]);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
-  console.log();
 
   return (
     <TableContainerStyled component={Paper}>
@@ -45,6 +47,7 @@ const PaginationTable = ({ head, rows }) => {
           head={head}
           page={page - 1}
           rowsPerPage={rowsPerPage}
+          type="pagination"
         />
       </TableStyeld>
       <PaginationWrapper>
@@ -60,12 +63,14 @@ const PaginationTable = ({ head, rows }) => {
 
 PaginationTable.propTypes = {
   head: PropTypes.arrayOf(PropTypes.object),
-  rows: PropTypes.arrayOf(PropTypes.object)
+  rows: PropTypes.arrayOf(PropTypes.object),
+  change: PropTypes.string
 };
 
 PaginationTable.defaultProps = {
   head: [],
-  rows: []
+  rows: [],
+  change: null
 };
 
 export default PaginationTable;

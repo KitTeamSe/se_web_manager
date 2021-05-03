@@ -1,114 +1,82 @@
 import React from 'react';
-import {
-  Menu,
-  Dashboard,
-  PostAdd,
-  Label,
-  Work,
-  ViewList,
-  Equalizer,
-  Block,
-  Notifications,
-  Report,
-  Person,
-  Group,
-  Schedule,
-  Build,
-  CalendarToday,
-  MeetingRoom,
-  Class
-} from '@material-ui/icons';
-import AuthGroupListView from '../../components/templates/AuthGroupManagement/AuthGroupListView';
-import AuthListView from '../../components/templates/AuthManagement/AuthListView';
-import PostMoveView from '../../components/templates/PostManagement/PostMoveView';
-import MenuListView from '../../components/templates/MenuManagement/MenuListView';
-import BoardListView from '../../components/templates/BoardManagement/BoardListView';
-import TagListView from '../../components/templates/TagManagement/TagListView';
-import JobInfoUploadView from '../../components/templates/JobInfoUpload/JobInfoUploadView';
-import LogListView from '../../components/templates/LogManagement/LogListView';
-import StatisticsView from '../../components/templates/StatisticsManagement/StatisticsView';
-import BlacklistListView from '../../components/templates/BlacklistManagement/BlacklistListView';
-import NoticeListView from '../../components/templates/NoticeManagement/NoticeListView';
-import ReportListView from '../../components/templates/ReportManagement/ReportListView';
-import LectureRoomListView from '../../components/templates/LectureRoomManagement/LectureRoomListView';
-import TeacherListView from '../../components/templates/TeacherManagement/TeacherListView';
-import SubjectListView from '../../components/templates/SubjectManagement/SubjectListView';
-import PeriodListView from '../../components/templates/PeriodManagement/PeriodListView';
-
-const defaultPath = '/m';
+import Menu from '@material-ui/icons/Menu';
+import Dashboard from '@material-ui/icons/Dashboard';
+import PostAdd from '@material-ui/icons/PostAdd';
+import Label from '@material-ui/icons/Label';
+import Work from '@material-ui/icons/Work';
+import ViewList from '@material-ui/icons/ViewList';
+import Equalizer from '@material-ui/icons/Equalizer';
+import Block from '@material-ui/icons/Block';
+import Notifications from '@material-ui/icons/Notifications';
+import Report from '@material-ui/icons/Report';
+import Person from '@material-ui/icons/Person';
+import Group from '@material-ui/icons/Group';
+import Schedule from '@material-ui/icons/Schedule';
+import Build from '@material-ui/icons/Build';
+import CalendarToday from '@material-ui/icons/CalendarToday';
+import MeetingRoom from '@material-ui/icons/MeetingRoom';
+import Class from '@material-ui/icons/Class';
 
 const ManageListData = [
   {
     to: 'menu',
     name: '메뉴 관리',
-    icon: <Menu />,
-    page: <MenuListView />
+    icon: <Menu />
   },
   {
     to: 'board',
     name: '게시판 관리',
-    icon: <Dashboard />,
-    page: <BoardListView />
+    icon: <Dashboard />
   },
   {
     to: 'post',
     name: '게시글 이동',
-    icon: <PostAdd />,
-    page: <PostMoveView />
+    icon: <PostAdd />
   },
   {
     to: 'tag',
     name: '태그 관리',
-    icon: <Label />,
-    page: <TagListView />
+    icon: <Label />
   },
   {
     to: 'job',
     name: '취업정보 업로드',
-    icon: <Work />,
-    page: <JobInfoUploadView />
+    icon: <Work />
   },
   {
     to: 'log',
     name: '로그 관리',
-    icon: <ViewList />,
-    page: <LogListView />
+    icon: <ViewList />
   },
   {
     to: 'statistics',
     name: '통계 관리',
-    icon: <Equalizer />,
-    page: <StatisticsView />
+    icon: <Equalizer />
   },
   {
     to: 'blacklist',
     name: 'IP차단 관리',
-    icon: <Block />,
-    page: <BlacklistListView />
+    icon: <Block />
   },
   {
     to: 'notice',
     name: '알림 관리',
-    icon: <Notifications />,
-    page: <NoticeListView />
+    icon: <Notifications />
   },
   {
     to: 'report',
     name: '신고 관리',
-    icon: <Report />,
-    page: <ReportListView />
+    icon: <Report />
   },
   {
     to: 'authority_group',
     name: '권한그룹 관리',
-    icon: <Group />,
-    page: <AuthGroupListView />
+    icon: <Group />
   },
   {
     to: 'authority',
     name: '권한 관리',
-    icon: <Person />,
-    page: <AuthListView />
+    icon: <Person />
   }
 ];
 
@@ -116,32 +84,27 @@ const ScheduleListData = [
   {
     to: 'lecture_room',
     name: '강의실 관리',
-    icon: <MeetingRoom />,
-    page: <LectureRoomListView />
+    icon: <MeetingRoom />
   },
   {
     to: 'teacher',
     name: '교원 관리',
-    icon: <Person />,
-    page: <TeacherListView />
+    icon: <Person />
   },
   {
     to: 'subject',
     name: '교과 관리',
-    icon: <Class />,
-    page: <SubjectListView />
+    icon: <Class />
   },
   {
     to: 'period',
     name: '교시 관리',
-    icon: <Schedule />,
-    page: <PeriodListView />
+    icon: <Schedule />
   },
   {
     to: 'schedule',
     name: '시간표 관리',
-    icon: <CalendarToday />,
-    page: <>시간4표</>
+    icon: <CalendarToday />
   }
 ];
 
@@ -156,7 +119,6 @@ const ScheduleNestedData = {
 };
 
 export {
-  defaultPath,
   ManageListData,
   ScheduleListData,
   ManageNestedData,

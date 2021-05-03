@@ -23,7 +23,8 @@ const RoundButton = ({
   disabled,
   href,
   size,
-  onClick
+  onClick,
+  type
 }) => {
   return (
     <ButtonStyled
@@ -33,6 +34,7 @@ const RoundButton = ({
       href={href}
       size={size}
       onClick={onClick}
+      type={type}
     >
       {children}
     </ButtonStyled>
@@ -46,7 +48,8 @@ RoundButton.propTypes = {
   disabled: PropTypes.bool,
   href: PropTypes.string,
   size: PropTypes.string,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  type: PropTypes.string
 };
 
 RoundButton.defaultProps = {
@@ -55,7 +58,8 @@ RoundButton.defaultProps = {
   color: 'primary',
   disabled: false,
   href: null,
-  size: 'small'
+  size: 'small',
+  type: ''
 };
 
 export default RoundButton;
