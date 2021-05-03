@@ -6,6 +6,7 @@ import Toolbar from './components/atoms/Toolbar/Toolbar';
 import Header from './components/templates/Header/Header';
 import useToggle from './libs/useToggle';
 import { ManageListData, ScheduleListData } from './statics/data/SideMenuData';
+import { ManageRouteData, ScheduleRouteData } from './statics/data/RouteData';
 import { MANAGE_URL } from './statics/data/config';
 
 const Wrapper = styled.div`
@@ -21,17 +22,17 @@ const MainWrapper = styled.main`
 `;
 
 const Routes = ({ items }) =>
-  items.map(el => (
-    <Route exact path={`${MANAGE_URL}/${el.to}`} key={el.to}>
-      {el.page}
-    </Route>
-  ));
+  items.map(el => {
+    return (
+      <Route path={`${MANAGE_URL}/${el.to}`} key={el.to}>
+        {el.page}
+      </Route>
+    );
+  });
 
 function App() {
   const [open, setOpen] = useToggle();
-  const manageItems = ManageListData;
-  const scheduleItems = ScheduleListData;
-  const menuItems = [manageItems, scheduleItems];
+  const menuItems = [ManageListData, ScheduleListData];
 
   return (
     <Wrapper>
@@ -42,8 +43,8 @@ function App() {
         <MainWrapper open={open}>
           <Container>
             <Toolbar height="72" />
-            <Routes items={manageItems} />
-            <Routes items={scheduleItems} />
+            <Routes items={ManageRouteData} />
+            <Routes items={ScheduleRouteData} />
             {/* <Redirect path="*" to={`${path}/${firstPage}`} /> */}
           </Container>
         </MainWrapper>

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
-import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
+// import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
 import AddDialog from '../../Dialog/AddDialog/AddDialog';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
+import Pagination from '../../../atoms/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -17,9 +18,11 @@ const ContentWrapper = styled.div`
 
 const PaperStyled = styled(Paper)`
   width: 95%;
-  height: 520px;
-  justify-content: center;
+  height: 100%;
   border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const Wrapper = styled.div``;
 
@@ -87,19 +90,25 @@ const PeriodListPage = ({ periods, error, loading }) => {
       <ContentWrapper>
         <PaperStyled>
           {error ? (
-            <div>error</div>
+            <div>loading...</div>
           ) : (
             !loading &&
             periods && (
               <>
                 <PreInfoList
+                  page={periods.data.pageable.pageNumber}
                   title={title}
                   head={head}
                   rows={periods.data.content}
                   select={select}
                   setSelect={setSelect}
                 />
-                {failOpen ? <NoCheckedDialog /> : null}
+                <Pagination
+                  totalPage={periods.data.totalPages}
+                  page={periods.data.pageable.pageNumber + 1}
+                  link="m/period"
+                />
+                {failOpen || null}
               </>
             )
           )}
@@ -143,7 +152,11 @@ PeriodListPage.propTypes = {
         startTime: PropTypes.string.isRequired,
         endTime: PropTypes.string.isRequired,
         note: PropTypes.string.isRequired
-      }).isRequired
+      }).isRequired,
+      totalPages: PropTypes.number,
+      pageable: PropTypes.shape({
+        pageNumber: PropTypes.number
+      })
     }).isRequired
   }),
   error: PropTypes.string,

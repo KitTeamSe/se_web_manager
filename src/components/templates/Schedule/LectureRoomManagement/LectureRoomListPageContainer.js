@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import qs from 'qs';
+import qs from 'qs';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,10 +17,8 @@ const LectureRoomListViewContainer = ({ location }) => {
   );
 
   useEffect(() => {
-    // const { direction, page, size } = qs.parse(location.search, {
-    //   ignoreQueryPrefix: true
-    // });
-    const { direction, page, size } = { direction: 'ASC', page: 1, size: 10 };
+    const { direction, size } = { direction: 'ASC', size: 10 };
+    const { page = 1 } = qs.parse(location.search, { ignoreQueryPrefix: true });
     const token = localStorage.getItem('token');
     dispatch(loadLectureRooms({ direction, page, size, token }));
   }, [dispatch, location.search]);

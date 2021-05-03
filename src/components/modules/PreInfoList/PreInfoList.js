@@ -8,20 +8,22 @@ const Wrapper = styled.div`
   display: flex;
   height: 100%;
   flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
 `;
 
 const NoDataComment = styled.div`
   font-weight: 600;
+  padding: 1rem;
   user-select: none;
   color: #666666;
 `;
 
 const PaperWrapper = styled.div`
-  height: 430px;
   overflow-y: auto;
+  align-self: stretch;
   &::-webkit-scrollbar {
     width: 1px;
     height: 1px;
@@ -40,7 +42,7 @@ const PaperWrapper = styled.div`
   }
 `;
 
-const PreInfoList = ({ head, rows, select, setSelect }) => {
+const PreInfoList = ({ page, head, rows, select, setSelect }) => {
   const a = false;
   const handleOnSelect = (index, num) =>
     index === num ? setSelect(null) : setSelect(index);
@@ -56,7 +58,7 @@ const PreInfoList = ({ head, rows, select, setSelect }) => {
               <PreInfoItemCard
                 item={row}
                 head={head}
-                index={index}
+                index={page * 10 + index}
                 select={select}
                 onClick={() => handleOnSelect(index, select)}
               />
@@ -73,6 +75,7 @@ const PreInfoList = ({ head, rows, select, setSelect }) => {
 };
 
 PreInfoList.propTypes = {
+  page: PropTypes.number,
   head: PropTypes.arrayOf(PropTypes.array),
   rows: PropTypes.arrayOf(PropTypes.array),
   select: PropTypes.number,
@@ -80,6 +83,7 @@ PreInfoList.propTypes = {
 };
 
 PreInfoList.defaultProps = {
+  page: 1,
   head: [],
   rows: [],
   select: null,

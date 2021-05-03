@@ -12,10 +12,10 @@ const ListStyled = styled(List)`
 `;
 
 const MenuList = ({ items }) =>
-  items.map((el, index) =>
-    index % 4 === 0 ? (
+  items.map((el, index) => {
+    return (
       <>
-        <Divider />
+        {index % 4 === 0 && <Divider />}
         <SideMenuListItem
           count={index}
           to={`${MANAGE_URL}/${el.to}`}
@@ -25,17 +25,8 @@ const MenuList = ({ items }) =>
           {el.icon}
         </SideMenuListItem>
       </>
-    ) : (
-      <SideMenuListItem
-        count={index}
-        to={`${MANAGE_URL}/${el.to}`}
-        name={el.name}
-        key={el.name}
-      >
-        {el.icon}
-      </SideMenuListItem>
-    )
-  );
+    );
+  });
 
 const SideMenuList = ({ itemData, items }) => {
   const [open, setOpen] = useToggle();

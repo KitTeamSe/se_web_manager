@@ -14,7 +14,8 @@ export const createRequestSaga = (type, request) => {
       const res = yield call(request, action.payload);
       yield put({
         type: SUCCESS,
-        payload: res.data
+        payload: res.data,
+        meta: res
       });
     } catch (err) {
       yield put({

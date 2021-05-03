@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
-import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
+// import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
 import AddDialog from '../../Dialog/AddDialog/AddDialog';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
+import LectureRoomData from '../../../../statics/data/LectureRoomData';
+import Pagination from '../../../atoms/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -17,45 +19,14 @@ const ContentWrapper = styled.div`
 
 const PaperStyled = styled(Paper)`
   width: 95%;
-  height: 520px;
-  justify-content: center;
+  height: 100%;
   border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Wrapper = styled.div``;
-
-const head = [
-  {
-    key: 'lectureRoomId',
-    name: '#',
-    type: 'id',
-    width: '10%'
-  },
-  {
-    key: 'building',
-    name: '건물',
-    type: 'string',
-    width: '20%'
-  },
-  {
-    key: 'roomNumber',
-    name: '호수',
-    type: 'number',
-    width: '20%'
-  },
-  {
-    key: 'capacity',
-    name: '정원',
-    type: 'number',
-    width: '20%'
-  },
-  {
-    key: 'note',
-    name: '설명',
-    type: 'string',
-    width: '30%'
-  }
-];
 
 const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
   const title = '강의실';
@@ -64,10 +35,6 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
   const [deleteOpen, setDeleteOpen] = useToggle();
   const [select, setSelect] = useState(null);
   const [failOpen, setFailOpen] = useToggle();
-
-  useEffect(() => {
-    console.log(head);
-  }, []);
 
   useEffect(() => {
     if (failOpen) setFailOpen();
@@ -82,7 +49,7 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
     <Wrapper>
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
-        <PaperStyled>
+        <PaperStyled component="div">
           {error ? (
             <div>error</div>
           ) : (
@@ -90,13 +57,19 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
             lectureRooms && (
               <>
                 <PreInfoList
+                  page={lectureRooms.data.pageable.pageNumber}
                   title={title}
-                  head={head}
+                  head={LectureRoomData}
                   rows={lectureRooms.data.content}
                   select={select}
                   setSelect={setSelect}
                 />
-                {failOpen ? <NoCheckedDialog /> : null}
+                <Pagination
+                  totalPage={lectureRooms.data.totalPages}
+                  page={lectureRooms.data.pageable.pageNumber + 1}
+                  link="m/lecture-room"
+                />
+                {failOpen || null}
               </>
             )
           )}
@@ -106,17 +79,17 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
           setDeleteOpen={handleDeleteOpen}
         />
 
-        {!addOpen || (
+        {addOpen && (
           <AddDialog
             title={title}
-            head={head}
+            head={LectureRoomData}
             open={addOpen}
             setOpen={setAddOpen}
             type="lectureRoom"
           />
         )}
 
-        {!deleteOpen || (
+        {deleteOpen && (
           <DeleteDialog
             title={title}
             head={lectureRooms.data.content[select]}
@@ -139,7 +112,11 @@ LectureRoomListPage.propTypes = {
         roomNumber: PropTypes.string.isRequired,
         capacity: PropTypes.string.isRequired,
         note: PropTypes.string.isRequired
-      }).isRequired
+      }).isRequired,
+      totalPages: PropTypes.number,
+      pageable: PropTypes.shape({
+        pageNumber: PropTypes.number
+      })
     }).isRequired
   }),
   error: PropTypes.string,

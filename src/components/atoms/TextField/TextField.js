@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField as TextFields } from '@material-ui/core';
 
-const TextField = ({ id, name, value, label, onChange, err, type }) => {
-  const SearchField = () => (
+const TextField = ({ id, name, value, label, onChange, err, type, line }) => {
+  const searchField = () => (
     <TextFields
       id={id}
       name={name}
@@ -11,11 +11,12 @@ const TextField = ({ id, name, value, label, onChange, err, type }) => {
       onChange={onChange}
       error={err}
       defaultValue={value}
+      fullWidth
       type="search"
     />
   );
 
-  const PasswordField = () => (
+  const passwordField = () => (
     <TextFields
       id={id}
       name={name}
@@ -23,12 +24,13 @@ const TextField = ({ id, name, value, label, onChange, err, type }) => {
       onChange={onChange}
       error={err}
       defaultValue={value}
+      fullWidth
       autoComplete="current-password"
       type="password"
     />
   );
 
-  const NumberField = () => {
+  const numberField = () => {
     const inputProps = { inputProps: { min: 0 } };
     const inputLabelProps = { shrink: true };
     return (
@@ -40,13 +42,14 @@ const TextField = ({ id, name, value, label, onChange, err, type }) => {
         error={err}
         defaultValue={value}
         InputProps={inputProps}
+        fullWidth
         InputLabelProps={inputLabelProps}
         type="number"
       />
     );
   };
 
-  const ReadonlyField = () => {
+  const readonlyField = () => {
     const inputProps = { readOnly: true };
     return (
       <TextFields
@@ -56,12 +59,13 @@ const TextField = ({ id, name, value, label, onChange, err, type }) => {
         onChange={onChange}
         error={err}
         defaultValue={value}
+        fullWidth
         InputProps={inputProps}
       />
     );
   };
 
-  const DefaultField = () => (
+  const multilineField = () => (
     <TextFields
       id={id}
       name={name}
@@ -69,14 +73,30 @@ const TextField = ({ id, name, value, label, onChange, err, type }) => {
       onChange={onChange}
       error={err}
       defaultValue={value}
+      multiline
+      fullWidth
+      rows={line}
     />
   );
 
-  if (type === 'search') return <SearchField />;
-  if (type === 'readonly') return <ReadonlyField />;
-  if (type === 'password') return <PasswordField />;
-  if (type === 'number') return <NumberField />;
-  return <DefaultField />;
+  const defaultField = () => (
+    <TextFields
+      id={id}
+      name={name}
+      label={label}
+      onChange={onChange}
+      error={err}
+      fullWidth
+      defaultValue={value}
+    />
+  );
+
+  if (type === 'search') return searchField();
+  if (type === 'readonly') return readonlyField();
+  if (type === 'password') return passwordField();
+  if (type === 'number') return numberField();
+  if (type === 'multiline') return multilineField();
+  return defaultField();
 };
 
 TextField.propTypes = {
@@ -86,7 +106,8 @@ TextField.propTypes = {
   label: PropTypes.string,
   onChange: PropTypes.func,
   err: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  line: PropTypes.number
 };
 
 TextField.defaultProps = {
@@ -96,7 +117,8 @@ TextField.defaultProps = {
   label: '',
   onChange: () => {},
   err: '',
-  type: 'text'
+  type: 'text',
+  line: 4
 };
 
 export default TextField;

@@ -9,6 +9,7 @@ import AddDialog from '../../Dialog/AddDialog/AddDialog';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
+import Pagination from '../../../atoms/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -17,15 +18,15 @@ const ContentWrapper = styled.div`
 
 const PaperStyled = styled(Paper)`
   width: 95%;
-  height: 520px;
-  justify-content: center;
+  height: 100%;
   border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Wrapper = styled.div``;
 
-// "autoCreated": false,
-// "note": "비고 입력",
 const head = [
   {
     key: 'subjectId',
@@ -89,8 +90,6 @@ const SubjectListPage = ({ subjects, error, loading }) => {
     if (failOpen) setFailOpen();
   }, [addOpen, deleteOpen, select]);
 
-  useEffect(() => {});
-
   const handleDeleteOpen = () => {
     if (!select && !failOpen) setFailOpen();
     if (select !== null) setDeleteOpen();
@@ -108,11 +107,17 @@ const SubjectListPage = ({ subjects, error, loading }) => {
             subjects && (
               <>
                 <PreInfoList
+                  page={subjects.data.pageable.pageNumber}
                   title={title}
                   head={head}
                   rows={subjects.data.content}
                   select={select}
                   setSelect={setSelect}
+                />
+                <Pagination
+                  totalPage={subjects.data.totalPages}
+                  page={subjects.data.pageable.pageNumber + 1}
+                  link="m/subject"
                 />
                 {failOpen ? <NoCheckedDialog /> : null}
               </>
@@ -162,7 +167,11 @@ SubjectListPage.propTypes = {
         semester: PropTypes.string.isRequired,
         subjectId: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired
-      }).isRequired
+      }).isRequired,
+      totalPages: PropTypes.number,
+      pageable: PropTypes.shape({
+        pageNumber: PropTypes.number
+      })
     }).isRequired
   }),
   error: PropTypes.string,
