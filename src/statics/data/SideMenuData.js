@@ -17,97 +17,66 @@ import CalendarToday from '@material-ui/icons/CalendarToday';
 import MeetingRoom from '@material-ui/icons/MeetingRoom';
 import Class from '@material-ui/icons/Class';
 
-import AuthGroupListPage from '../../components/templates/Manage/AuthGroupManagement/AuthGroupListPage';
-import AuthListPage from '../../components/templates/Manage/AuthManagement/AuthListPage';
-import PostMovePage from '../../components/templates/Manage/PostManagement/PostMovePage';
-import MenuListPage from '../../components/templates/Manage/MenuManagement/MenuListPage';
-import BoardListPage from '../../components/templates/Manage/BoardManagement/BoardListPage';
-import TagListPage from '../../components/templates/Manage/TagManagement/TagListPage';
-import JobInfoUploadPage from '../../components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
-import LogListPage from '../../components/templates/Manage/LogManagement/LogListPage';
-import StatisticsPage from '../../components/templates/Manage/StatisticsManagement/StatisticsPage';
-import BlacklistListPage from '../../components/templates/Manage/BlacklistManagement/BlacklistListPage';
-import NoticeListPage from '../../components/templates/Manage/NoticeManagement/NoticeListPage';
-import ReportListPage from '../../components/templates/Manage/ReportManagement/ReportListPage';
-
-import LectureRoomListPageContainer from '../../components/templates/Schedule/LectureRoomManagement/LectureRoomListPageContainer';
-import TeacherListPageContainer from '../../components/templates/Schedule/TeacherManagement/TeacherListPageContainer';
-import SubjectListPageContainer from '../../components/templates/Schedule/SubjectManagement/SubjectListPageContainer';
-import PeriodListPageContainer from '../../components/templates/Schedule/PeriodManagement/PeriodListPageContainer';
-import ScheduleListPage from '../../components/templates/Schedule/ScheduleManagement/ScheduleListPage';
-
 const ManageListData = [
   {
     to: 'menu',
     name: '메뉴 관리',
-    icon: <Menu />,
-    page: <MenuListPage />
+    icon: <Menu />
   },
   {
     to: 'board',
     name: '게시판 관리',
-    icon: <Dashboard />,
-    page: <BoardListPage />
+    icon: <Dashboard />
   },
   {
     to: 'post',
     name: '게시글 이동',
-    icon: <PostAdd />,
-    page: <PostMovePage />
+    icon: <PostAdd />
   },
   {
     to: 'tag',
     name: '태그 관리',
-    icon: <Label />,
-    page: <TagListPage />
+    icon: <Label />
   },
   {
     to: 'job',
     name: '취업정보 업로드',
-    icon: <Work />,
-    page: <JobInfoUploadPage />
+    icon: <Work />
   },
   {
     to: 'log',
     name: '로그 관리',
-    icon: <ViewList />,
-    page: <LogListPage />
+    icon: <ViewList />
   },
   {
     to: 'statistics',
     name: '통계 관리',
-    icon: <Equalizer />,
-    page: <StatisticsPage />
+    icon: <Equalizer />
   },
   {
     to: 'blacklist',
     name: 'IP차단 관리',
-    icon: <Block />,
-    page: <BlacklistListPage />
+    icon: <Block />
   },
   {
     to: 'notice',
     name: '알림 관리',
-    icon: <Notifications />,
-    page: <NoticeListPage />
+    icon: <Notifications />
   },
   {
     to: 'report',
     name: '신고 관리',
-    icon: <Report />,
-    page: <ReportListPage />
+    icon: <Report />
   },
   {
     to: 'authority_group',
     name: '권한그룹 관리',
-    icon: <Group />,
-    page: <AuthGroupListPage />
+    icon: <Group />
   },
   {
     to: 'authority',
     name: '권한 관리',
-    icon: <Person />,
-    page: <AuthListPage />
+    icon: <Person />
   }
 ];
 
@@ -115,32 +84,27 @@ const ScheduleListData = [
   {
     to: 'lecture_room',
     name: '강의실 관리',
-    icon: <MeetingRoom />,
-    page: <LectureRoomListPageContainer />
+    icon: <MeetingRoom />
   },
   {
     to: 'teacher',
     name: '교원 관리',
-    icon: <Person />,
-    page: <TeacherListPageContainer />
+    icon: <Person />
   },
   {
     to: 'subject',
     name: '교과 관리',
-    icon: <Class />,
-    page: <SubjectListPageContainer />
+    icon: <Class />
   },
   {
     to: 'period',
     name: '교시 관리',
-    icon: <Schedule />,
-    page: <PeriodListPageContainer />
+    icon: <Schedule />
   },
   {
     to: 'schedule',
     name: '시간표 관리',
-    icon: <CalendarToday />,
-    page: <ScheduleListPage />
+    icon: <CalendarToday />
   }
 ];
 
