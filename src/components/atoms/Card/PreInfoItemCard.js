@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Card, Typography } from '@material-ui/core';
 
 const CardStyled = styled(Card)`
+  user-select: none;
   margin: 5px 10px;
   padding: 8px 8px 8px 2px;
   display: flex;
