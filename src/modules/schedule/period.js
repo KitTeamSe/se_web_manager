@@ -85,7 +85,7 @@ export function* periodSaga() {
 }
 
 const initialState = {
-  addPeriod: {
+  period: {
     endTime: '',
     name: '',
     note: '',

@@ -15,7 +15,7 @@ const DialogFooter = ({ handleClose, type }) => {
       <Button onClick={handleClose} color="secondary" autoFocus>
         취 소
       </Button>
-      <Button onClick={handleClose} color="primary">
+      <Button type="submit" color="primary">
         생 성
       </Button>
     </DialogActionsStyled>

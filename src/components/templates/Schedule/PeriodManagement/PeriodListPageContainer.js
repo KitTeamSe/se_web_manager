@@ -12,7 +12,8 @@ const PeriodListViewContainer = ({ location }) => {
     ({ period, loading }) => ({
       periodsData: period.periods,
       error: period.error,
-      loadingData: loading['periods/LOAD_PERIODS']
+      loadingData: loading['periods/LOAD_PERIODS'],
+      select: period.select
     })
   );
 

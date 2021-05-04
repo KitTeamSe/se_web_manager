@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
-import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
 import AddDialog from '../../Dialog/AddDialog/AddDialog';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
+import SubjectData from '../../../../statics/data/SubjectData';
 import Pagination from '../../../atoms/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
@@ -26,57 +26,6 @@ const PaperStyled = styled(Paper)`
 `;
 
 const Wrapper = styled.div``;
-
-const head = [
-  {
-    key: 'subjectId',
-    name: '#',
-    type: 'id',
-    width: '3%'
-  },
-  {
-    key: 'curriculum',
-    name: '교육과정',
-    type: 'string',
-    width: '33%'
-  },
-  {
-    key: 'type',
-    name: '교과구분',
-    type: 'string',
-    width: '7%'
-  },
-  {
-    key: 'code',
-    name: '교과목코드',
-    type: 'string',
-    width: '14%'
-  },
-  {
-    key: 'name',
-    name: '교과목명',
-    type: 'string',
-    width: '19%'
-  },
-  {
-    key: 'grade',
-    name: '학년',
-    type: 'number',
-    width: '7%'
-  },
-  {
-    key: 'semester',
-    name: '학기',
-    type: 'string',
-    width: '7%'
-  },
-  {
-    key: 'credit',
-    name: '학점',
-    type: 'number',
-    width: '7%'
-  }
-];
 
 const SubjectListPage = ({ subjects, error, loading }) => {
   const title = '교과';
@@ -101,7 +50,7 @@ const SubjectListPage = ({ subjects, error, loading }) => {
       <ContentWrapper>
         <PaperStyled>
           {error ? (
-            <div>error</div>
+            <div>loading</div>
           ) : (
             !loading &&
             subjects && (
@@ -109,7 +58,7 @@ const SubjectListPage = ({ subjects, error, loading }) => {
                 <PreInfoList
                   page={subjects.data.pageable.pageNumber}
                   title={title}
-                  head={head}
+                  head={SubjectData}
                   rows={subjects.data.content}
                   select={select}
                   setSelect={setSelect}
@@ -119,7 +68,7 @@ const SubjectListPage = ({ subjects, error, loading }) => {
                   page={subjects.data.pageable.pageNumber + 1}
                   link="m/subject"
                 />
-                {failOpen ? <NoCheckedDialog /> : null}
+                {failOpen || null}
               </>
             )
           )}
@@ -132,7 +81,7 @@ const SubjectListPage = ({ subjects, error, loading }) => {
         {!addOpen || (
           <AddDialog
             title={title}
-            head={head}
+            head={SubjectData}
             open={addOpen}
             setOpen={setAddOpen}
             type="subject"
