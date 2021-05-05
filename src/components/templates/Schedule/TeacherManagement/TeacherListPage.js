@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import TeacherAddDialog from '../../Dialog/AddDialog/TeacherAddDialog';
+import AddDialogContainer from '../../Dialog/AddDialog/AddDialogContainer';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
@@ -81,12 +81,12 @@ const TeacherListPage = ({ teachers, error, loading }) => {
         />
 
         {!addOpen || (
-          <TeacherAddDialog
+          <AddDialogContainer
             title={title}
             head={TeacherData}
             open={addOpen}
             setOpen={setAddOpen}
-            type="teacher"
+            addType="teacher"
           />
         )}
 

@@ -8,6 +8,24 @@ export const getPeriods = ({ direction, page, size, token }) => {
   return client.get(`${url}?${queryString}`, tokenHeader(token));
 };
 export const getPeriod = id => client.get(`${url}/${id}`);
-export const addPeriod = () => client.post(`${url}`);
+export const addPeriod = ({
+  periodOrder,
+  name,
+  endTime,
+  startTime,
+  note,
+  token
+}) =>
+  client.post(
+    `${url}`,
+    {
+      periodOrder,
+      name,
+      endTime,
+      startTime,
+      note
+    },
+    tokenHeader(token)
+  );
 export const updatePeriod = () => client.put(`${url}`);
 export const removePeriod = id => client.delete(`${url}/${id}`);

@@ -10,8 +10,8 @@ const LectureRoomListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { lectureRoomsData, error, loadingData } = useSelector(
     ({ lectureRoom, loading }) => ({
-      lectureRoomsData: lectureRoom.lectureRooms,
-      error: lectureRoom.error,
+      lectureRoomsData: lectureRoom.list,
+      error: lectureRoom.listError,
       loadingData: loading['lectureRooms/LOAD_LECTURE_ROOMS']
     })
   );

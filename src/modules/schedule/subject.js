@@ -1,14 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
-// import produce from 'immer';
+import produce from 'immer';
 import * as api from '../../libs/api/schedule/subject';
 import {
   createRequestSaga,
   createRequestActionTypes
 } from '../../libs/createRequestSaga';
 
-// const CHANGE_FIELD = 'subject/CHANGE_FIELD';
-// const INITIALIZE = 'subject/INITIALIZE';
+const INITIALIZE = 'subject/INITIALIZE';
+const CHANGE_FIELD = 'subject/CHANGE_FIELD';
 
 // const [
 //   LOAD_SUBJECT,
@@ -22,11 +22,11 @@ const [
   LOAD_SUBJECTS_FAILURE
 ] = createRequestActionTypes('subject/LOAD_SUBJECTS');
 
-// const [
-//   ADD_SUBJECT,
-//   ADD_SUBJECT_SUCCESS,
-//   ADD_SUBJECT_FAILURE
-// ] = createRequestActionTypes('subject/ADD_SUBJECT');
+const [
+  ADD_SUBJECT,
+  ADD_SUBJECT_SUCCESS,
+  ADD_SUBJECT_FAILURE
+] = createRequestActionTypes('subject/ADD_SUBJECT');
 
 // const [
 //   UPDATE_SUBJECT,
@@ -40,16 +40,41 @@ const [
 //   REMOVE_SUBJECT_FAILURE
 // ] = createRequestActionTypes('subject/REMOVE_SUBJECT');
 
-// export const changeField = createAction(
-//   CHANGE_FIELD,
-//   ({ form, key, value }) => ({ form, key, value })
-// );
-
-// export const initialize = createAction(INITIALIZE, form => form);
+export const initialize = createAction(INITIALIZE);
+export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
+  key,
+  value
+}));
 
 export const loadSubjects = createAction(
   LOAD_SUBJECTS,
   ({ token, direction, page, size }) => ({ token, direction, page, size })
+);
+
+export const initializeAdd = createAction(ADD_SUBJECT);
+export const addSubject = createAction(
+  ADD_SUBJECT,
+  ({
+    subjectId,
+    curriculum,
+    type,
+    code,
+    name,
+    grade,
+    semester,
+    credit,
+    token
+  }) => ({
+    subjectId,
+    curriculum,
+    type,
+    code,
+    name,
+    grade,
+    semester,
+    credit,
+    token
+  })
 );
 
 // export const addsubject = createAction(
@@ -75,47 +100,69 @@ export const loadSubjects = createAction(
 
 const loadSubjectsSaga = createRequestSaga(LOAD_SUBJECTS, api.getSubjects);
 
+const addSubjectSaga = createRequestSaga(ADD_SUBJECT, api.addSubject);
 // const addSaga = createRequestSaga(ADD_SUBJECT, api.signup);
 // const updateSaga = createRequestSaga(UPDATE_SUBJECT, api.signin);
 
 export function* subjectSaga() {
   yield takeLatest(LOAD_SUBJECTS, loadSubjectsSaga);
-  // yield takeLatest(ADD_SUBJECT, addSaga);
+  yield takeLatest(ADD_SUBJECT, addSubjectSaga);
   // yield takeLatest(UPDATE_SUBJECT, updateSaga);
 }
 
 const initialState = {
-  addSubject: {
-    endTime: '',
+  subject: {
+    subjectId: '',
+    curriculum: '',
+    type: '',
+    code: '',
     name: '',
-    note: '',
-    subjectOrder: '',
-    startTime: ''
+    grade: '',
+    semester: '',
+    credit: ''
   },
-  // updatesubject: {
-  // endTime: '',
-  // name: '',
-  // note: '',
-  // subjectId: '',
-  // subjectOrder: '',
-  // startTime: ''
-  // },
-  // subject: null,
-  subjects: null,
-  error: null
+  add: null,
+  addError: null,
+  update: null,
+  updateError: null,
+  delete: null,
+  deleteError: null,
+  info: null,
+  infoError: null,
+  list: null,
+  listError: null
 };
 
 export default handleActions(
   {
-    [LOAD_SUBJECTS_SUCCESS]: (state, { payload: subjects }) => ({
+    [INITIALIZE]: () => initialState,
+    [CHANGE_FIELD]: (state, { payload: { key, value } }) =>
+      produce(state, draft => {
+        draft.subject[key] = value;
+      }),
+    [LOAD_SUBJECTS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
-      subjects,
-      error: null
+      list,
+      listError: null
     }),
-    [LOAD_SUBJECTS_FAILURE]: (state, { payload: error }) => ({
+    [LOAD_SUBJECTS_FAILURE]: (state, { payload: listError }) => ({
       ...state,
-      subjects: null,
-      error
+      list: null,
+      listError
+    }),
+    [ADD_SUBJECT]: state => ({
+      ...state,
+      add: null,
+      addError: null
+    }),
+    [ADD_SUBJECT_SUCCESS]: (state, { payload: add }) => ({
+      ...state,
+      add,
+      addError: null
+    }),
+    [ADD_SUBJECT_FAILURE]: (state, { payload: addError }) => ({
+      ...state,
+      addError
     })
     // [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
     //   produce(state, draft => {

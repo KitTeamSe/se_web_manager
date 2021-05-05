@@ -10,8 +10,8 @@ const SubjectListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { subjectsData, error, loadingData } = useSelector(
     ({ subject, loading }) => ({
-      subjectsData: subject.subjects,
-      error: subject.error,
+      subjectsData: subject.list,
+      error: subject.listError,
       loadingData: loading['subjects/LOAD_SUBJECTS']
     })
   );

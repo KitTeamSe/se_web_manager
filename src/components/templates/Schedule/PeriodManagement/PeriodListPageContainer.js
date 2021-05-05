@@ -10,8 +10,8 @@ const PeriodListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { periodsData, error, loadingData } = useSelector(
     ({ period, loading }) => ({
-      periodsData: period.periods,
-      error: period.error,
+      periodsData: period.list,
+      error: period.listError,
       loadingData: loading['periods/LOAD_PERIODS'],
       select: period.select
     })
