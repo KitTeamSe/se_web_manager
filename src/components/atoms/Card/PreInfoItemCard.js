@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Card, Typography } from '@material-ui/core';
+// import { TeacherTypeItems } from '../../../statics/data/TeacherData';
 
 const CardStyled = styled(Card)`
   user-select: none;
@@ -49,9 +50,9 @@ const PreInfoItemCard = ({ item, head, index, small, select, onClick }) => {
       case 'FULL_PROFESSOR':
         return '전공교수';
       case 'FIXED_TERM_PROFESSOR':
-        return '부교수';
+        return '기간제교수';
       case 'ASSISTANT':
-        return '어시';
+        return '조교';
       case 'STUDENT':
         return '학생';
       case 'ETC':

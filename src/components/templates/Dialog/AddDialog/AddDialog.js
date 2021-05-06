@@ -29,7 +29,6 @@ const AddDialog = ({
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(form);
 
   return (
     <Dialog open={open}>
@@ -37,7 +36,6 @@ const AddDialog = ({
       <DialogContent>
         <FormStyled onSubmit={onSubmit}>
           {head.map((el, i) => {
-            console.log(el);
             return (
               i !== 0 && (
                 <TextField
@@ -45,8 +43,10 @@ const AddDialog = ({
                   name={el.key}
                   label={el.name}
                   type={el.type}
+                  placeholder={el.placeholder}
                   value={form[el.key]}
                   onChange={onChange}
+                  items={el.items}
                 />
               )
             );
