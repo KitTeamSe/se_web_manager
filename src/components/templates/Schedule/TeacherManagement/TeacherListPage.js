@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialogContainer from '../../Dialog/AddDialog/AddDialogContainer';
+import AddDialogContainer from '../../Dialog/AddDialog/TeacherAddDialogContainer';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
@@ -38,8 +38,6 @@ const TeacherListPage = ({ teachers, error, loading }) => {
   useEffect(() => {
     if (failOpen) setFailOpen();
   }, [addOpen, deleteOpen, select]);
-
-  useEffect(() => {});
 
   const handleDeleteOpen = () => {
     if (!select && !failOpen) setFailOpen();
@@ -86,14 +84,13 @@ const TeacherListPage = ({ teachers, error, loading }) => {
             head={TeacherData}
             open={addOpen}
             setOpen={setAddOpen}
-            addType="teacher"
           />
         )}
 
         {!deleteOpen || (
           <DeleteDialog
             title={title}
-            head={teachers.data.content[select]}
+            data={teachers.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
             type="teacher"

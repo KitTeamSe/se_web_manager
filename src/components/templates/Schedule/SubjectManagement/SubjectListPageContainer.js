@@ -3,7 +3,7 @@ import qs from 'qs';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadSubjects } from '../../../../modules/schedule/subject';
+import { loadSubjects, initialize } from '../../../../modules/schedule/subject';
 import SubjectListPage from './SubjectListPage';
 
 const SubjectListViewContainer = ({ location }) => {
@@ -16,6 +16,9 @@ const SubjectListViewContainer = ({ location }) => {
     })
   );
 
+  useEffect(() => {
+    dispatch(initialize());
+  }, []);
   useEffect(() => {
     const { direction, size } = { direction: 'ASC', size: 10 };
     const { page = 1 } = qs.parse(location.search, { ignoreQueryPrefix: true });

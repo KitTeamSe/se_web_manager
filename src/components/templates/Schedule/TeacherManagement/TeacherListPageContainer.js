@@ -3,7 +3,7 @@ import qs from 'qs';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadTeachers } from '../../../../modules/schedule/teacher';
+import { loadTeachers, initialize } from '../../../../modules/schedule/teacher';
 import TeacherListPage from './TeacherListPage';
 
 const TeacherListViewContainer = ({ location }) => {
@@ -15,6 +15,10 @@ const TeacherListViewContainer = ({ location }) => {
       loadingData: loading['teachers/LOAD_TEACHERS']
     })
   );
+
+  useEffect(() => {
+    dispatch(initialize());
+  }, []);
 
   useEffect(() => {
     const { direction, size } = { direction: 'ASC', size: 10 };

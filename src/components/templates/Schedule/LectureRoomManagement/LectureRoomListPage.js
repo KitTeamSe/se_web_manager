@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialogContainer from '../../Dialog/AddDialog/AddDialogContainer';
+import AddDialogContainer from '../../Dialog/AddDialog/LectureRoomAddDialogContainer';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
@@ -84,14 +84,13 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
             head={LectureRoomData}
             open={addOpen}
             setOpen={setAddOpen}
-            addType="lectureRoom"
           />
         )}
 
         {deleteOpen && (
           <DeleteDialog
             title={title}
-            head={lectureRooms.data.content[select]}
+            data={lectureRooms.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
             type="lectureRoom"

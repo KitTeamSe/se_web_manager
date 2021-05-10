@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialogContainer from '../../Dialog/AddDialog/AddDialogContainer';
+import AddDialogContainer from '../../Dialog/AddDialog/SubjectAddDialogContainer';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
@@ -84,14 +84,13 @@ const SubjectListPage = ({ subjects, error, loading }) => {
             head={SubjectData}
             open={addOpen}
             setOpen={setAddOpen}
-            addType="subject"
           />
         )}
 
         {!deleteOpen || (
           <DeleteDialog
             title={title}
-            head={subjects.data.content[select]}
+            data={subjects.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
             type="subject"
