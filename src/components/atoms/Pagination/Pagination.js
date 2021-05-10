@@ -21,7 +21,6 @@ const PaginationStyled = styled(Paginations)`
 `;
 
 const Pagination = ({ color, totalPage, page, link }) => {
-  console.log(page);
   return (
     /* eslint-disable react/jsx-props-no-spreading */
     <PaginationStyled
