@@ -3,19 +3,22 @@ import qs from 'qs';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadSubjects } from '../../../../modules/schedule/subject';
+import { loadSubjects, initialize } from '../../../../modules/schedule/subject';
 import SubjectListPage from './SubjectListPage';
 
 const SubjectListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { subjectsData, error, loadingData } = useSelector(
     ({ subject, loading }) => ({
-      subjectsData: subject.subjects,
-      error: subject.error,
+      subjectsData: subject.list,
+      error: subject.listError,
       loadingData: loading['subjects/LOAD_SUBJECTS']
     })
   );
 
+  useEffect(() => {
+    dispatch(initialize());
+  }, []);
   useEffect(() => {
     const { direction, size } = { direction: 'ASC', size: 10 };
     const { page = 1 } = qs.parse(location.search, { ignoreQueryPrefix: true });

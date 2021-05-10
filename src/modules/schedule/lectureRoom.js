@@ -1,14 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
-// import produce from 'immer';
+import produce from 'immer';
 import * as api from '../../libs/api/schedule/lectureRoom';
 import {
   createRequestSaga,
   createRequestActionTypes
 } from '../../libs/createRequestSaga';
 
-// const CHANGE_FIELD = 'lectureRoom/CHANGE_FIELD';
-// const INITIALIZE = 'lectureRoom/INITIALIZE';
+const INITIALIZE = 'lectureRoom/INITIALIZE';
+const CHANGE_FIELD = 'lectureRoom/CHANGE_FIELD';
 
 // const [
 //   LOAD_LECTURE_ROOM,
@@ -22,11 +22,11 @@ const [
   LOAD_LECTURE_ROOMS_FAILURE
 ] = createRequestActionTypes('lectureRoom/LOAD_LECTURE_ROOMS');
 
-// const [
-//   ADD_LECTURE_ROOM,
-//   ADD_LECTURE_ROOM_SUCCESS,
-//   ADD_LECTURE_ROOM_FAILURE
-// ] = createRequestActionTypes('lectureRoom/ADD_LECTURE_ROOM');
+const [
+  ADD_LECTURE_ROOM,
+  ADD_LECTURE_ROOM_SUCCESS,
+  ADD_LECTURE_ROOM_FAILURE
+] = createRequestActionTypes('lectureRoom/ADD_LECTURE_ROOM');
 
 // const [
 //   UPDATE_LECTURE_ROOM,
@@ -40,16 +40,27 @@ const [
 //   REMOVE_LECTURE_ROOM_FAILURE
 // ] = createRequestActionTypes('lectureRoom/REMOVE_LECTURE_ROOM');
 
-// export const changeField = createAction(
-//   CHANGE_FIELD,
-//   ({ form, key, value }) => ({ form, key, value })
-// );
-
-// export const initialize = createAction(INITIALIZE, form => form);
+export const initialize = createAction(INITIALIZE);
+export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
+  key,
+  value
+}));
 
 export const loadLectureRooms = createAction(
   LOAD_LECTURE_ROOMS,
   ({ token, direction, page, size }) => ({ token, direction, page, size })
+);
+
+export const initializeAdd = createAction(ADD_LECTURE_ROOM);
+export const addLectureRoom = createAction(
+  ADD_LECTURE_ROOM,
+  ({ building, roomNumber, capacity, note, token }) => ({
+    building,
+    roomNumber,
+    capacity,
+    note,
+    token
+  })
 );
 
 // export const addLectureRoom = createAction(
@@ -77,46 +88,69 @@ const loadLectureRoomsSaga = createRequestSaga(
   LOAD_LECTURE_ROOMS,
   api.getLectureRooms
 );
+const addLectureRoomSaga = createRequestSaga(
+  ADD_LECTURE_ROOM,
+  api.addLectureRoom
+);
 
 // const addSaga = createRequestSaga(ADD_LECTURE_ROOM, api.signup);
 // const updateSaga = createRequestSaga(UPDATE_LECTURE_ROOM, api.signin);
 
 export function* lectureRoomSaga() {
   yield takeLatest(LOAD_LECTURE_ROOMS, loadLectureRoomsSaga);
-  // yield takeLatest(ADD_LECTURE_ROOM, addSaga);
+  yield takeLatest(ADD_LECTURE_ROOM, addLectureRoomSaga);
   // yield takeLatest(UPDATE_LECTURE_ROOM, updateSaga);
 }
 
 const initialState = {
-  addLectureRoom: {
+  lectureRoom: {
     building: '',
+    roomNumber: '',
     capacity: '',
-    note: '',
-    roomNumber: ''
+    note: ''
   },
-  // updateLectureRoom: {
-  //   building: '',
-  //   capacity: '',
-  //   lectureRoomId: '',
-  //   note: '',
-  //   roomNumber: ''
-  // },
-  // lectureRoom: null,
-  lectureRooms: null,
-  error: null
+  add: null,
+  addError: null,
+  update: null,
+  updateError: null,
+  delete: null,
+  deleteError: null,
+  info: null,
+  infoError: null,
+  list: null,
+  listError: null
 };
 
 export default handleActions(
   {
-    [LOAD_LECTURE_ROOMS_SUCCESS]: (state, { payload: lectureRooms }) => ({
+    [INITIALIZE]: () => initialState,
+    [CHANGE_FIELD]: (state, { payload: { key, value } }) =>
+      produce(state, draft => {
+        draft.lectureRoom[key] = value;
+      }),
+    [LOAD_LECTURE_ROOMS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
-      lectureRooms,
-      error: null
+      list,
+      listError: null
     }),
-    [LOAD_LECTURE_ROOMS_FAILURE]: (state, { payload: error }) => ({
+    [LOAD_LECTURE_ROOMS_FAILURE]: (state, { payload: listError }) => ({
       ...state,
-      lectureRooms: null,
-      error
+      list: null,
+      listError
+    }),
+    [ADD_LECTURE_ROOM]: state => ({
+      ...state,
+      add: null,
+      addError: null
+    }),
+    [ADD_LECTURE_ROOM_SUCCESS]: (state, { payload: add }) => ({
+      ...state,
+      add,
+      addError: null
+    }),
+    [ADD_LECTURE_ROOM_FAILURE]: (state, { payload: addError }) => ({
+      ...state,
+      addError
     })
     // [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
     //   produce(state, draft => {

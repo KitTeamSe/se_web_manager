@@ -15,17 +15,17 @@ const DialogFooter = ({ handleClose, type }) => {
       <Button onClick={handleClose} color="secondary" autoFocus>
         취 소
       </Button>
-      <Button onClick={handleClose} color="primary">
+      <Button type="submit" color="primary">
         생 성
       </Button>
     </DialogActionsStyled>
   );
   const deleteButton = () => (
     <DialogActionsStyled>
-      <Button onClick={() => handleClose()} color="primary" autoFocus>
+      <Button onClick={handleClose} color="primary" autoFocus>
         취 소
       </Button>
-      <Button onClick={() => handleClose()} color="secondary">
+      <Button onClick={handleClose} color="secondary">
         삭 제
       </Button>
     </DialogActionsStyled>
@@ -33,7 +33,7 @@ const DialogFooter = ({ handleClose, type }) => {
 
   const defaultButton = () => (
     <DialogActionsStyled>
-      <Button onClick={() => handleClose()} color="primary" autoFocus>
+      <Button onClick={handleClose} color="primary" autoFocus>
         확 인
       </Button>
     </DialogActionsStyled>

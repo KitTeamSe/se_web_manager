@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
-// import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialog from '../../Dialog/AddDialog/AddDialog';
+import AddDialogContainer from '../../Dialog/AddDialog/LectureRoomAddDialogContainer';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
@@ -51,7 +50,7 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
       <ContentWrapper>
         <PaperStyled component="div">
           {error ? (
-            <div>error</div>
+            <div>loading</div>
           ) : (
             !loading &&
             lectureRooms && (
@@ -67,7 +66,7 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
                 <Pagination
                   totalPage={lectureRooms.data.totalPages}
                   page={lectureRooms.data.pageable.pageNumber + 1}
-                  link="m/lecture-room"
+                  link="m/lecture_room"
                 />
                 {failOpen || null}
               </>
@@ -80,19 +79,18 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
         />
 
         {addOpen && (
-          <AddDialog
+          <AddDialogContainer
             title={title}
             head={LectureRoomData}
             open={addOpen}
             setOpen={setAddOpen}
-            type="lectureRoom"
           />
         )}
 
         {deleteOpen && (
           <DeleteDialog
             title={title}
-            head={lectureRooms.data.content[select]}
+            data={lectureRooms.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
             type="lectureRoom"

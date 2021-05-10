@@ -7,22 +7,30 @@ import DeleteIcon from '../../atoms/Icons/DeleteIcon';
 
 const ButtonWrapper = styled.div`
   width: 5%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-item: center;
+`;
+
+const Wrapper = styled.div`
   display: flex;
-  flex: wrap;
-  flex-direction: column;
-  align-heads: center;
+  justify-content: center;
 `;
 
 const AddDeleteBox = ({ setAddOpen, setDeleteOpen }) => {
   return (
     <>
       <ButtonWrapper>
-        <IconButton onClick={() => setAddOpen()}>
-          <AddIcon />
-        </IconButton>
-        <IconButton onClick={() => setDeleteOpen()}>
-          <DeleteIcon />
-        </IconButton>
+        <Wrapper>
+          <IconButton onClick={() => setAddOpen()}>
+            <AddIcon />
+          </IconButton>
+        </Wrapper>
+        <Wrapper>
+          <IconButton onClick={() => setDeleteOpen()}>
+            <DeleteIcon />
+          </IconButton>
+        </Wrapper>
       </ButtonWrapper>
     </>
   );

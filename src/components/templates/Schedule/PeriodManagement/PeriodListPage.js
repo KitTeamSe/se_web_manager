@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
-// import NoCheckedDialog from '../../../atoms/NoCheckedDialog/NoCheckedDialog';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialog from '../../Dialog/AddDialog/AddDialog';
+import AddDialogContainer from '../../Dialog/AddDialog/PeriodAddDialogContainer';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
+import PeriodData from '../../../../statics/data/PeriodData';
 import Pagination from '../../../atoms/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
@@ -24,46 +24,8 @@ const PaperStyled = styled(Paper)`
   flex-direction: column;
   justify-content: space-between;
 `;
-const Wrapper = styled.div``;
 
-const head = [
-  {
-    key: 'periodId',
-    name: '#',
-    type: 'id',
-    width: '10%'
-  },
-  {
-    key: 'periodOrder',
-    name: '순서',
-    type: 'number',
-    width: '10%'
-  },
-  {
-    key: 'name',
-    name: '이름',
-    type: 'string',
-    width: '10%'
-  },
-  {
-    key: 'startTime',
-    name: '시작시간',
-    type: 'string',
-    width: '15%'
-  },
-  {
-    key: 'endTime',
-    name: '종료시간',
-    type: 'string',
-    width: '15%'
-  },
-  {
-    key: 'note',
-    name: '비고',
-    type: 'string',
-    width: '40%'
-  }
-];
+const Wrapper = styled.div``;
 
 const PeriodListPage = ({ periods, error, loading }) => {
   const title = '교시';
@@ -77,8 +39,6 @@ const PeriodListPage = ({ periods, error, loading }) => {
     if (failOpen) setFailOpen();
   }, [addOpen, deleteOpen, select]);
 
-  useEffect(() => {});
-
   const handleDeleteOpen = () => {
     if (!select && !failOpen) setFailOpen();
     if (select !== null) setDeleteOpen();
@@ -90,7 +50,7 @@ const PeriodListPage = ({ periods, error, loading }) => {
       <ContentWrapper>
         <PaperStyled>
           {error ? (
-            <div>loading...</div>
+            <div>loading</div>
           ) : (
             !loading &&
             periods && (
@@ -98,7 +58,7 @@ const PeriodListPage = ({ periods, error, loading }) => {
                 <PreInfoList
                   page={periods.data.pageable.pageNumber}
                   title={title}
-                  head={head}
+                  head={PeriodData}
                   rows={periods.data.content}
                   select={select}
                   setSelect={setSelect}
@@ -119,19 +79,18 @@ const PeriodListPage = ({ periods, error, loading }) => {
         />
 
         {!addOpen || (
-          <AddDialog
+          <AddDialogContainer
             title={title}
-            head={head}
+            head={PeriodData}
             open={addOpen}
             setOpen={setAddOpen}
-            type="period"
           />
         )}
 
         {!deleteOpen || (
           <DeleteDialog
             title={title}
-            head={periods.data.content[select]}
+            data={periods.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
             type="period"

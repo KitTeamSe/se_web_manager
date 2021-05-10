@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialog from '../../Dialog/AddDialog/AddDialog';
+import AddDialogContainer from '../../Dialog/AddDialog/TeacherAddDialogContainer';
 import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
+import TeacherData from '../../../../statics/data/TeacherData';
 import Pagination from '../../../atoms/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
@@ -26,33 +27,6 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const head = [
-  {
-    key: 'teacherId',
-    name: '#',
-    type: 'id',
-    width: '10%'
-  },
-  {
-    key: 'name',
-    name: '이름',
-    type: 'string',
-    width: '20%'
-  },
-  {
-    key: 'type',
-    name: '교원구분',
-    type: 'string',
-    width: '20%'
-  },
-  {
-    key: 'department',
-    name: '소속',
-    type: 'string',
-    width: '50%'
-  }
-];
-
 const TeacherListPage = ({ teachers, error, loading }) => {
   const title = '교원';
   const headerTitle = `사전정보 - ${title}관리`;
@@ -65,8 +39,6 @@ const TeacherListPage = ({ teachers, error, loading }) => {
     if (failOpen) setFailOpen();
   }, [addOpen, deleteOpen, select]);
 
-  useEffect(() => {});
-
   const handleDeleteOpen = () => {
     if (!select && !failOpen) setFailOpen();
     if (select !== null) setDeleteOpen();
@@ -78,14 +50,15 @@ const TeacherListPage = ({ teachers, error, loading }) => {
       <ContentWrapper>
         <PaperStyled>
           {error ? (
-            <div>error</div>
+            <div>loading</div>
           ) : (
             !loading &&
             teachers && (
               <>
                 <PreInfoList
+                  page={teachers.data.pageable.pageNumber}
                   title={title}
-                  head={head}
+                  head={TeacherData}
                   rows={teachers.data.content}
                   select={select}
                   setSelect={setSelect}
@@ -106,19 +79,18 @@ const TeacherListPage = ({ teachers, error, loading }) => {
         />
 
         {!addOpen || (
-          <AddDialog
+          <AddDialogContainer
             title={title}
-            head={head}
+            head={TeacherData}
             open={addOpen}
             setOpen={setAddOpen}
-            type="teacher"
           />
         )}
 
         {!deleteOpen || (
           <DeleteDialog
             title={title}
-            head={teachers.data.content[select]}
+            data={teachers.data.content[select]}
             open={deleteOpen}
             setOpen={setDeleteOpen}
             type="teacher"

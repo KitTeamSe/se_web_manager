@@ -3,18 +3,26 @@ import qs from 'qs';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadLectureRooms } from '../../../../modules/schedule/lectureRoom';
+import {
+  loadLectureRooms,
+  initialize
+} from '../../../../modules/schedule/lectureRoom';
 import LectureRoomListPage from './LectureRoomListPage';
 
 const LectureRoomListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
-  const { lectureRoomsData, error, loadingData } = useSelector(
+  const { lectureRoomsData, error, select, loadingData } = useSelector(
     ({ lectureRoom, loading }) => ({
-      lectureRoomsData: lectureRoom.lectureRooms,
-      error: lectureRoom.error,
+      lectureRoomsData: lectureRoom.list,
+      error: lectureRoom.listError,
+      select: lectureRoom.select,
       loadingData: loading['lectureRooms/LOAD_LECTURE_ROOMS']
     })
   );
+
+  useEffect(() => {
+    dispatch(initialize());
+  }, []);
 
   useEffect(() => {
     const { direction, size } = { direction: 'ASC', size: 10 };
@@ -26,6 +34,7 @@ const LectureRoomListViewContainer = ({ location }) => {
   return (
     <LectureRoomListPage
       lectureRooms={lectureRoomsData}
+      select={select}
       error={error}
       loading={loadingData}
     />

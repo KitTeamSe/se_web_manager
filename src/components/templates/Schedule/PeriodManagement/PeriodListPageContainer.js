@@ -3,18 +3,23 @@ import qs from 'qs';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPeriods } from '../../../../modules/schedule/period';
+import { loadPeriods, initialize } from '../../../../modules/schedule/period';
 import PeriodListPage from './PeriodListPage';
 
 const PeriodListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { periodsData, error, loadingData } = useSelector(
     ({ period, loading }) => ({
-      periodsData: period.periods,
-      error: period.error,
-      loadingData: loading['periods/LOAD_PERIODS']
+      periodsData: period.list,
+      error: period.listError,
+      loadingData: loading['periods/LOAD_PERIODS'],
+      select: period.select
     })
   );
+
+  useEffect(() => {
+    dispatch(initialize());
+  }, []);
 
   useEffect(() => {
     const { direction, size } = { direction: 'ASC', size: 10 };

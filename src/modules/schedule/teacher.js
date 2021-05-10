@@ -1,14 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
-// import produce from 'immer';
+import produce from 'immer';
 import * as api from '../../libs/api/schedule/teacher';
 import {
   createRequestSaga,
   createRequestActionTypes
 } from '../../libs/createRequestSaga';
 
-// const CHANGE_FIELD = 'teacher/CHANGE_FIELD';
-// const INITIALIZE = 'teacher/INITIALIZE';
+const INITIALIZE = 'teacher/INITIALIZE';
+const CHANGE_FIELD = 'teacher/CHANGE_FIELD';
 
 // const [
 //   LOAD_TEACHER,
@@ -22,11 +22,11 @@ const [
   LOAD_TEACHERS_FAILURE
 ] = createRequestActionTypes('teacher/LOAD_TEACHERS');
 
-// const [
-//   ADD_TEACHER,
-//   ADD_TEACHER_SUCCESS,
-//   ADD_TEACHER_FAILURE
-// ] = createRequestActionTypes('teacher/ADD_TEACHER');
+const [
+  ADD_TEACHER,
+  ADD_TEACHER_SUCCESS,
+  ADD_TEACHER_FAILURE
+] = createRequestActionTypes('teacher/ADD_TEACHER');
 
 // const [
 //   UPDATE_TEACHER,
@@ -40,27 +40,28 @@ const [
 //   REMOVE_TEACHER_FAILURE
 // ] = createRequestActionTypes('teacher/REMOVE_TEACHER');
 
-// export const changeField = createAction(
-//   CHANGE_FIELD,
-//   ({ form, key, value }) => ({ form, key, value })
-// );
-
-// export const initialize = createAction(INITIALIZE, form => form);
+export const initialize = createAction(INITIALIZE);
+export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
+  key,
+  value
+}));
 
 export const loadTeachers = createAction(
   LOAD_TEACHERS,
   ({ token, direction, page, size }) => ({ token, direction, page, size })
 );
 
-// export const addteacher = createAction(
-//   ADD_TEACHER,
-//   ({ building, capacity, note, roomNumber }) => ({
-//     building,
-//     capacity,
-//     note,
-//     roomNumber
-//   })
-// );
+export const initializeAdd = createAction(ADD_TEACHER);
+export const addTeacher = createAction(
+  ADD_TEACHER,
+  ({ department, name, note, type, token }) => ({
+    department,
+    name,
+    note,
+    type,
+    token
+  })
+);
 
 // export const updateteacher = createAction(
 //   UPDATE_TEACHER,
@@ -75,71 +76,66 @@ export const loadTeachers = createAction(
 
 const loadTeachersSaga = createRequestSaga(LOAD_TEACHERS, api.getTeachers);
 
-// const addSaga = createRequestSaga(ADD_TEACHER, api.signup);
+const addTeacherSaga = createRequestSaga(ADD_TEACHER, api.addTeacher);
 // const updateSaga = createRequestSaga(UPDATE_TEACHER, api.signin);
 
 export function* teacherSaga() {
   yield takeLatest(LOAD_TEACHERS, loadTeachersSaga);
+  yield takeLatest(ADD_TEACHER, addTeacherSaga);
   // yield takeLatest(ADD_TEACHER, addSaga);
   // yield takeLatest(UPDATE_TEACHER, updateSaga);
 }
 
 const initialState = {
-  addTeacher: {
-    endTime: '',
+  teacher: {
+    department: '',
     name: '',
     note: '',
-    teacherOrder: '',
-    startTime: ''
+    type: ''
   },
-  // updateteacher: {
-  // endTime: '',
-  // name: '',
-  // note: '',
-  // teacherId: '',
-  // teacherOrder: '',
-  // startTime: ''
-  // },
-  // teacher: null,
-  teachers: null,
-  error: null
+  add: null,
+  addError: null,
+  update: null,
+  updateError: null,
+  delete: null,
+  deleteError: null,
+  info: null,
+  infoError: null,
+  list: null,
+  listError: null
 };
 
 export default handleActions(
   {
-    [LOAD_TEACHERS_SUCCESS]: (state, { payload: teachers }) => ({
+    [INITIALIZE]: () => initialState,
+    [CHANGE_FIELD]: (state, { payload: { key, value } }) =>
+      produce(state, draft => {
+        draft.teacher[key] = value;
+      }),
+    [LOAD_TEACHERS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
-      teachers,
-      error: null
+      list,
+      listError: null
     }),
-    [LOAD_TEACHERS_FAILURE]: (state, { payload: error }) => ({
+    [LOAD_TEACHERS_FAILURE]: (state, { payload: listError }) => ({
       ...state,
-      teachers: null,
-      error
+      list: null,
+      listError
+    }),
+    [ADD_TEACHER]: state => ({
+      ...state,
+      add: null,
+      addError: null
+    }),
+    [ADD_TEACHER_SUCCESS]: (state, { payload: add }) => ({
+      ...state,
+      add,
+      addError: null
+    }),
+    [ADD_TEACHER_FAILURE]: (state, { payload: addError }) => ({
+      ...state,
+      addError
     })
-    // [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
-    //   produce(state, draft => {
-    //     draft[form][key] = value;
-    //   }),
-    // [INITIALIZE]: (state, { payload: form }) => ({
-    //   ...state,
-    //   [form]: initialState[form],
-    //   authError: null
-    // }),
-    // [INITIALIZE_AUTH]: state => ({
-    //   ...state,
-    //   auth: null,
-    //   authError: null
-    // }),
-    // [SIGNUP_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNUP_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // }),
     // [SIGNIN_SUCCESS]: (state, { payload: auth }) => ({
     //   ...state,
     //   authError: null,

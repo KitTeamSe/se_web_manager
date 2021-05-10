@@ -12,30 +12,48 @@ const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
 `;
 
-const InputWrapper = styled.div`
+const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
 `;
 
-const AddDialog = ({ title, head, open, setOpen }) => {
+const AddDialog = ({
+  title,
+  head,
+  open,
+  setOpen,
+  form,
+  onSubmit,
+  onChange
+}) => {
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
-    <Dialog open={open}>
+    <Dialog onClose={handleClose} open={open} disableBackdropClick>
       <DialogTitleStyled>{title} 추가</DialogTitleStyled>
       <DialogContent>
-        <InputWrapper>
-          {head.map(
-            (el, i) =>
+        <FormStyled onSubmit={onSubmit}>
+          {head.map((el, i) => {
+            return (
               i !== 0 && (
-                <TextField id={el.key} label={el.name} type={el.type} />
+                <TextField
+                  id={el.key}
+                  name={el.key}
+                  label={el.name}
+                  type={el.type}
+                  placeholder={el.placeholder}
+                  value={form[el.key]}
+                  onChange={onChange}
+                  items={el.items}
+                />
               )
-          )}
-        </InputWrapper>
+            );
+          })}
+          <DialogFooter handleClose={handleClose} type="add" />
+        </FormStyled>
       </DialogContent>
-      <DialogFooter handleClose={handleClose} type="add" />
     </Dialog>
   );
 };
@@ -44,13 +62,19 @@ AddDialog.propTypes = {
   title: PropTypes.string,
   head: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
-  setOpen: PropTypes.func.isRequired
+  setOpen: PropTypes.func.isRequired,
+  form: PropTypes.objectOf(PropTypes.object),
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 AddDialog.defaultProps = {
   title: '',
   head: [],
-  open: false
+  open: false,
+  form: null,
+  onSubmit: null,
+  onChange: null
 };
 
 export default AddDialog;
