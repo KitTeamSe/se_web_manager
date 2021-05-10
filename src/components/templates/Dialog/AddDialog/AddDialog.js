@@ -31,7 +31,7 @@ const AddDialog = ({
   };
 
   return (
-    <Dialog open={open}>
+    <Dialog onClose={handleClose} open={open} disableBackdropClick>
       <DialogTitleStyled>{title} 추가</DialogTitleStyled>
       <DialogContent>
         <FormStyled onSubmit={onSubmit}>
