@@ -28,4 +28,5 @@ export const addPeriod = ({
     tokenHeader(token)
   );
 export const updatePeriod = () => client.put(`${url}`);
-export const removePeriod = id => client.delete(`${url}/${id}`);
+export const removePeriod = ({ id, token }) =>
+  client.delete(`${url}/${id}`, tokenHeader(token));

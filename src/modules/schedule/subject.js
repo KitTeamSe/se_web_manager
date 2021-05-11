@@ -34,11 +34,11 @@ const [
 //   UPDATE_SUBJECT_FAILURE
 // ] = createRequestActionTypes('subject/UPDATE_SUBJECT');
 
-// const [
-//   REMOVE_SUBJECT,
-//   REMOVE_SUBJECT_SUCCESS,
-//   REMOVE_SUBJECT_FAILURE
-// ] = createRequestActionTypes('subject/REMOVE_SUBJECT');
+const [
+  REMOVE_SUBJECT,
+  REMOVE_SUBJECT_SUCCESS,
+  REMOVE_SUBJECT_FAILURE
+] = createRequestActionTypes('subject/REMOVE_SUBJECT');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
@@ -77,15 +77,10 @@ export const addSubject = createAction(
   })
 );
 
-// export const addsubject = createAction(
-//   ADD_SUBJECT,
-//   ({ building, capacity, note, roomNumber }) => ({
-//     building,
-//     capacity,
-//     note,
-//     roomNumber
-//   })
-// );
+export const removeSubject = createAction(REMOVE_SUBJECT, ({ id, token }) => ({
+  id,
+  token
+}));
 
 // export const updatesubject = createAction(
 //   UPDATE_SUBJECT,
@@ -101,12 +96,13 @@ export const addSubject = createAction(
 const loadSubjectsSaga = createRequestSaga(LOAD_SUBJECTS, api.getSubjects);
 
 const addSubjectSaga = createRequestSaga(ADD_SUBJECT, api.addSubject);
-// const addSaga = createRequestSaga(ADD_SUBJECT, api.signup);
-// const updateSaga = createRequestSaga(UPDATE_SUBJECT, api.signin);
+
+const removeSubjectSaga = createRequestSaga(REMOVE_SUBJECT, api.removeSubject);
 
 export function* subjectSaga() {
   yield takeLatest(LOAD_SUBJECTS, loadSubjectsSaga);
   yield takeLatest(ADD_SUBJECT, addSubjectSaga);
+  yield takeLatest(REMOVE_SUBJECT, removeSubjectSaga);
   // yield takeLatest(UPDATE_SUBJECT, updateSaga);
 }
 
@@ -163,39 +159,16 @@ export default handleActions(
     [ADD_SUBJECT_FAILURE]: (state, { payload: addError }) => ({
       ...state,
       addError
+    }),
+    [REMOVE_SUBJECT_SUCCESS]: (state, { payload: remove }) => ({
+      ...state,
+      remove,
+      removeError: null
+    }),
+    [REMOVE_SUBJECT_FAILURE]: (state, { payload: removeError }) => ({
+      ...state,
+      removeError
     })
-    // [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
-    //   produce(state, draft => {
-    //     draft[form][key] = value;
-    //   }),
-    // [INITIALIZE]: (state, { payload: form }) => ({
-    //   ...state,
-    //   [form]: initialState[form],
-    //   authError: null
-    // }),
-    // [INITIALIZE_AUTH]: state => ({
-    //   ...state,
-    //   auth: null,
-    //   authError: null
-    // }),
-    // [SIGNUP_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNUP_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // }),
-    // [SIGNIN_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNIN_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // })
   },
   initialState
 );

@@ -21,4 +21,5 @@ export const addLectureRoom = ({
     tokenHeader(token)
   );
 export const updateLectureRoom = () => client.put(`${url}`);
-export const removeLectureRoom = id => client.delete(`${url}/${id}`);
+export const removeLectureRoom = ({ id, token }) =>
+  client.delete(`${url}/${id}`, tokenHeader(token));

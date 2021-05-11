@@ -15,7 +15,7 @@ const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
 `;
 
-const DeleteDialog = ({ title, head, open, setOpen, type }) => {
+const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -30,8 +30,8 @@ const DeleteDialog = ({ title, head, open, setOpen, type }) => {
 
   const contentsComment = () => {
     if (type === 'lectureRoom')
-      return `강의실 ${head.building} ${head.roomNumber}`;
-    return `이름 ${head.name}`;
+      return `강의실 ${data.building} ${data.roomNumber}`;
+    return `이름 ${data.name}`;
   };
 
   return (
@@ -45,22 +45,23 @@ const DeleteDialog = ({ title, head, open, setOpen, type }) => {
           <Typography>{contentsComment()}</Typography>
         </InputWrapper>
       </DialogContent>
-      <DialogFooter handleClose={handleClose} type="delete" />
+      <DialogFooter onClick={onClick} handleClose={handleClose} type="delete" />
     </Dialog>
   );
 };
 
 DeleteDialog.propTypes = {
   title: PropTypes.string,
-  head: PropTypes.arrayOf(PropTypes.array),
+  data: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
   setOpen: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 DeleteDialog.defaultProps = {
   title: '',
-  head: [],
+  data: [],
   open: false
 };
 

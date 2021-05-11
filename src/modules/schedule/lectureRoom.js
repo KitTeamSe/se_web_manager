@@ -34,11 +34,11 @@ const [
 //   UPDATE_LECTURE_ROOM_FAILURE
 // ] = createRequestActionTypes('lectureRoom/UPDATE_LECTURE_ROOM');
 
-// const [
-//   REMOVE_LECTURE_ROOM,
-//   REMOVE_LECTURE_ROOM_SUCCESS,
-//   REMOVE_LECTURE_ROOM_FAILURE
-// ] = createRequestActionTypes('lectureRoom/REMOVE_LECTURE_ROOM');
+const [
+  REMOVE_LECTURE_ROOM,
+  REMOVE_LECTURE_ROOM_SUCCESS,
+  REMOVE_LECTURE_ROOM_FAILURE
+] = createRequestActionTypes('lectureRoom/REMOVE_LECTURE_ROOM');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
@@ -59,6 +59,14 @@ export const addLectureRoom = createAction(
     roomNumber,
     capacity,
     note,
+    token
+  })
+);
+
+export const removeLectureRoom = createAction(
+  REMOVE_LECTURE_ROOM,
+  ({ id, token }) => ({
+    id,
     token
   })
 );
@@ -88,17 +96,23 @@ const loadLectureRoomsSaga = createRequestSaga(
   LOAD_LECTURE_ROOMS,
   api.getLectureRooms
 );
+
 const addLectureRoomSaga = createRequestSaga(
   ADD_LECTURE_ROOM,
   api.addLectureRoom
 );
 
+const removeLectureRoomSaga = createRequestSaga(
+  REMOVE_LECTURE_ROOM,
+  api.removeLectureRoom
+);
 // const addSaga = createRequestSaga(ADD_LECTURE_ROOM, api.signup);
 // const updateSaga = createRequestSaga(UPDATE_LECTURE_ROOM, api.signin);
 
 export function* lectureRoomSaga() {
   yield takeLatest(LOAD_LECTURE_ROOMS, loadLectureRoomsSaga);
   yield takeLatest(ADD_LECTURE_ROOM, addLectureRoomSaga);
+  yield takeLatest(REMOVE_LECTURE_ROOM, removeLectureRoomSaga);
   // yield takeLatest(UPDATE_LECTURE_ROOM, updateSaga);
 }
 
@@ -133,6 +147,11 @@ export default handleActions(
       list,
       listError: null
     }),
+    [LOAD_LECTURE_ROOMS_SUCCESS]: (state, { payload: list }) => ({
+      ...state,
+      list,
+      listError: null
+    }),
     [LOAD_LECTURE_ROOMS_FAILURE]: (state, { payload: listError }) => ({
       ...state,
       list: null,
@@ -151,39 +170,16 @@ export default handleActions(
     [ADD_LECTURE_ROOM_FAILURE]: (state, { payload: addError }) => ({
       ...state,
       addError
+    }),
+    [REMOVE_LECTURE_ROOM_SUCCESS]: (state, { payload: remove }) => ({
+      ...state,
+      remove,
+      removeError: null
+    }),
+    [REMOVE_LECTURE_ROOM_FAILURE]: (state, { payload: removeError }) => ({
+      ...state,
+      removeError
     })
-    // [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
-    //   produce(state, draft => {
-    //     draft[form][key] = value;
-    //   }),
-    // [INITIALIZE]: (state, { payload: form }) => ({
-    //   ...state,
-    //   [form]: initialState[form],
-    //   authError: null
-    // }),
-    // [INITIALIZE_AUTH]: state => ({
-    //   ...state,
-    //   auth: null,
-    //   authError: null
-    // }),
-    // [SIGNUP_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNUP_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // }),
-    // [SIGNIN_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNIN_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // })
   },
   initialState
 );

@@ -34,4 +34,5 @@ export const addSubject = ({
     tokenHeader(token)
   );
 export const updateSubject = () => client.put(`${url}`);
-export const removeSubject = id => client.delete(`${url}/${id}`);
+export const removeSubject = ({ id, token }) =>
+  client.delete(`${url}/${id}`, tokenHeader(token));

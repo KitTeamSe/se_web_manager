@@ -34,11 +34,11 @@ const [
 //   UPDATE_TEACHER_FAILURE
 // ] = createRequestActionTypes('teacher/UPDATE_TEACHER');
 
-// const [
-//   REMOVE_TEACHER,
-//   REMOVE_TEACHER_SUCCESS,
-//   REMOVE_TEACHER_FAILURE
-// ] = createRequestActionTypes('teacher/REMOVE_TEACHER');
+const [
+  REMOVE_TEACHER,
+  REMOVE_TEACHER_SUCCESS,
+  REMOVE_TEACHER_FAILURE
+] = createRequestActionTypes('teacher/REMOVE_TEACHER');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
@@ -63,6 +63,11 @@ export const addTeacher = createAction(
   })
 );
 
+export const removeTeacher = createAction(REMOVE_TEACHER, ({ id, token }) => ({
+  id,
+  token
+}));
+
 // export const updateteacher = createAction(
 //   UPDATE_TEACHER,
 //   ({ building, capacity, teacherId, note, roomNumber }) => ({
@@ -77,12 +82,13 @@ export const addTeacher = createAction(
 const loadTeachersSaga = createRequestSaga(LOAD_TEACHERS, api.getTeachers);
 
 const addTeacherSaga = createRequestSaga(ADD_TEACHER, api.addTeacher);
-// const updateSaga = createRequestSaga(UPDATE_TEACHER, api.signin);
+
+const removeTeacherSaga = createRequestSaga(REMOVE_TEACHER, api.removeTeacher);
 
 export function* teacherSaga() {
   yield takeLatest(LOAD_TEACHERS, loadTeachersSaga);
   yield takeLatest(ADD_TEACHER, addTeacherSaga);
-  // yield takeLatest(ADD_TEACHER, addSaga);
+  yield takeLatest(REMOVE_TEACHER, removeTeacherSaga);
   // yield takeLatest(UPDATE_TEACHER, updateSaga);
 }
 
@@ -97,8 +103,8 @@ const initialState = {
   addError: null,
   update: null,
   updateError: null,
-  delete: null,
-  deleteError: null,
+  remove: null,
+  removeError: null,
   info: null,
   infoError: null,
   list: null,
@@ -135,16 +141,16 @@ export default handleActions(
     [ADD_TEACHER_FAILURE]: (state, { payload: addError }) => ({
       ...state,
       addError
+    }),
+    [REMOVE_TEACHER_SUCCESS]: (state, { payload: remove }) => ({
+      ...state,
+      remove,
+      removeError: null
+    }),
+    [REMOVE_TEACHER_FAILURE]: (state, { payload: removeError }) => ({
+      ...state,
+      removeError
     })
-    // [SIGNIN_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNIN_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // })
   },
   initialState
 );

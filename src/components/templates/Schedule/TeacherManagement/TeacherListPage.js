@@ -5,11 +5,12 @@ import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
 import AddDialogContainer from '../../Dialog/AddDialog/TeacherAddDialogContainer';
-import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
+// import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import TeacherData from '../../../../statics/data/TeacherData';
 import Pagination from '../../../atoms/Pagination/Pagination';
+import DeleteDialogContainer from '../../Dialog/DeleteDialog/TeacherDeleteDialogContainer';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -88,7 +89,7 @@ const TeacherListPage = ({ teachers, error, loading }) => {
         )}
 
         {!deleteOpen || (
-          <DeleteDialog
+          <DeleteDialogContainer
             title={title}
             data={teachers.data.content[select]}
             open={deleteOpen}
