@@ -34,11 +34,11 @@ const [
 //   UPDATE_PERIOD_FAILURE
 // ] = createRequestActionTypes('period/UPDATE_PERIOD');
 
-// const [
-//   REMOVE_PERIOD,
-//   REMOVE_PERIOD_SUCCESS,
-//   REMOVE_PERIOD_FAILURE
-// ] = createRequestActionTypes('period/REMOVE_PERIOD');
+const [
+  REMOVE_PERIOD,
+  REMOVE_PERIOD_SUCCESS,
+  REMOVE_PERIOD_FAILURE
+] = createRequestActionTypes('period/REMOVE_PERIOD');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
@@ -64,15 +64,10 @@ export const addPeriod = createAction(
   })
 );
 
-// export const addperiod = createAction(
-//   ADD_PERIOD,
-//   ({ building, capacity, note, roomNumber }) => ({
-//     building,
-//     capacity,
-//     note,
-//     roomNumber
-//   })
-// );
+export const removePeriod = createAction(REMOVE_PERIOD, ({ id, token }) => ({
+  id,
+  token
+}));
 
 // export const updateperiod = createAction(
 //   UPDATE_PERIOD,
@@ -88,12 +83,13 @@ export const addPeriod = createAction(
 const loadPeriodsSaga = createRequestSaga(LOAD_PERIODS, api.getPeriods);
 
 const addPeriodSaga = createRequestSaga(ADD_PERIOD, api.addPeriod);
-// const addSaga = createRequestSaga(ADD_PERIOD, api.signup);
-// const updateSaga = createRequestSaga(UPDATE_PERIOD, api.signin);
+
+const removePeriodSaga = createRequestSaga(REMOVE_PERIOD, api.removePeriod);
 
 export function* periodSaga() {
   yield takeLatest(LOAD_PERIODS, loadPeriodsSaga);
   yield takeLatest(ADD_PERIOD, addPeriodSaga);
+  yield takeLatest(REMOVE_PERIOD, removePeriodSaga);
   // yield takeLatest(UPDATE_PERIOD, updateSaga);
 }
 
@@ -101,8 +97,8 @@ const initialState = {
   period: {
     periodOrder: '',
     name: '',
-    endTime: [],
-    startTime: [],
+    endTime: '',
+    startTime: '',
     note: ''
   },
   add: null,
@@ -147,39 +143,16 @@ export default handleActions(
     [ADD_PERIOD_FAILURE]: (state, { payload: addError }) => ({
       ...state,
       addError
+    }),
+    [REMOVE_PERIOD_SUCCESS]: (state, { payload: remove }) => ({
+      ...state,
+      remove,
+      removeError: null
+    }),
+    [REMOVE_PERIOD_FAILURE]: (state, { payload: removeError }) => ({
+      ...state,
+      removeError
     })
-    // [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
-    //   produce(state, draft => {
-    //     draft[form][key] = value;
-    //   }),
-    // [INITIALIZE]: (state, { payload: form }) => ({
-    //   ...state,
-    //   [form]: initialState[form],
-    //   authError: null
-    // }),
-    // [INITIALIZE_AUTH]: state => ({
-    //   ...state,
-    //   auth: null,
-    //   authError: null
-    // }),
-    // [SIGNUP_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNUP_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // }),
-    // [SIGNIN_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth
-    // }),
-    // [SIGNIN_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error
-    // })
   },
   initialState
 );

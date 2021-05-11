@@ -9,7 +9,7 @@ const DialogActionsStyled = styled(DialogActions)`
   margin: 10px;
 `;
 
-const DialogFooter = ({ handleClose, type }) => {
+const DialogFooter = ({ handleClose, onClick, type }) => {
   const addButton = () => (
     <DialogActionsStyled>
       <Button onClick={handleClose} color="secondary" autoFocus>
@@ -25,7 +25,7 @@ const DialogFooter = ({ handleClose, type }) => {
       <Button onClick={handleClose} color="primary" autoFocus>
         취 소
       </Button>
-      <Button onClick={handleClose} color="secondary">
+      <Button onClick={onClick} color="secondary">
         삭 제
       </Button>
     </DialogActionsStyled>

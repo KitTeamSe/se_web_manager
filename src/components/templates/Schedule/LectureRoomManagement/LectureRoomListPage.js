@@ -5,7 +5,7 @@ import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
 import AddDialogContainer from '../../Dialog/AddDialog/LectureRoomAddDialogContainer';
-import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
+import DeleteDialog from '../../Dialog/DeleteDialog/LectureRoomDeleteDialogContainer';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import LectureRoomData from '../../../../statics/data/LectureRoomData';
