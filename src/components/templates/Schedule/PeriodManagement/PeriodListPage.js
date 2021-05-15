@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
@@ -9,7 +9,7 @@ import DeleteDialog from '../../Dialog/DeleteDialog/PeriodDeleteDialogContainer'
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import PeriodData from '../../../../statics/data/PeriodData';
-import Pagination from '../../../atoms/Pagination/Pagination';
+import Pagination from '../../../modules/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -27,12 +27,11 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const PeriodListPage = ({ periods, error, loading }) => {
+const PeriodListPage = ({ periods, error, loading, select, handleSelect }) => {
   const title = '교시';
   const headerTitle = `사전정보 - ${title}관리`;
   const [addOpen, setAddOpen] = useToggle();
   const [deleteOpen, setDeleteOpen] = useToggle();
-  const [select, setSelect] = useState(null);
   const [failOpen, setFailOpen] = useToggle();
 
   useEffect(() => {
@@ -61,7 +60,7 @@ const PeriodListPage = ({ periods, error, loading }) => {
                   head={PeriodData}
                   rows={periods.data.content}
                   select={select}
-                  setSelect={setSelect}
+                  handleSelect={handleSelect}
                 />
                 <Pagination
                   totalPage={periods.data.totalPages}
@@ -76,6 +75,7 @@ const PeriodListPage = ({ periods, error, loading }) => {
         <AddDeleteBox
           setAddOpen={setAddOpen}
           setDeleteOpen={handleDeleteOpen}
+          select={select}
         />
 
         {!addOpen || (
@@ -119,13 +119,16 @@ PeriodListPage.propTypes = {
     }).isRequired
   }),
   error: PropTypes.string,
-  loading: PropTypes.string
+  loading: PropTypes.string,
+  select: PropTypes.string,
+  handleSelect: PropTypes.func.isRequired
 };
 
 PeriodListPage.defaultProps = {
   periods: null,
   error: null,
-  loading: null
+  loading: null,
+  select: null
 };
 
 export default PeriodListPage;

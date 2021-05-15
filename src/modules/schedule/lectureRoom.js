@@ -10,6 +10,7 @@ import {
 const INITIALIZE = 'lectureRoom/INITIALIZE';
 const CHANGE_FIELD = 'lectureRoom/CHANGE_FIELD';
 
+const CHANGE_SELECT = 'lectureRoom/CHANGE_SELECT';
 // const [
 //   LOAD_LECTURE_ROOM,
 //   LOAD_LECTURE_ROOM_SUCCESS,
@@ -45,7 +46,9 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
 }));
-
+export const changeSelect = createAction(CHANGE_SELECT, ({ value }) => ({
+  value
+}));
 export const loadLectureRooms = createAction(
   LOAD_LECTURE_ROOMS,
   ({ token, direction, page, size }) => ({ token, direction, page, size })
@@ -123,6 +126,7 @@ const initialState = {
     capacity: '',
     note: ''
   },
+  select: null,
   add: null,
   addError: null,
   update: null,
@@ -142,6 +146,10 @@ export default handleActions(
       produce(state, draft => {
         draft.lectureRoom[key] = value;
       }),
+    [CHANGE_SELECT]: (state, { payload: { value } }) => ({
+      ...state,
+      select: value
+    }),
     [LOAD_LECTURE_ROOMS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
       list,

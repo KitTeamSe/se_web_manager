@@ -42,12 +42,7 @@ const PaperWrapper = styled.div`
   }
 `;
 
-const PreInfoList = ({ page, head, rows, select, setSelect }) => {
-  const a = false;
-  const handleOnSelect = (index, num) =>
-    index === num ? setSelect(null) : setSelect(index);
-  if (a) return <CardListTitle head={head} />;
-
+const PreInfoList = ({ page, head, rows, select, handleSelect }) => {
   return (
     <>
       <CardListTitle head={head} />
@@ -58,9 +53,12 @@ const PreInfoList = ({ page, head, rows, select, setSelect }) => {
               <PreInfoItemCard
                 item={row}
                 head={head}
-                index={page * 10 + index}
+                page={page}
+                index={index}
                 select={select}
-                onClick={() => handleOnSelect(index, select)}
+                onClick={() =>
+                  select === index ? handleSelect(null) : handleSelect(index)
+                }
               />
             );
           })
@@ -79,15 +77,15 @@ PreInfoList.propTypes = {
   head: PropTypes.arrayOf(PropTypes.array),
   rows: PropTypes.arrayOf(PropTypes.array),
   select: PropTypes.number,
-  setSelect: PropTypes.func
+  handleSelect: PropTypes.func
 };
 
 PreInfoList.defaultProps = {
-  page: 1,
+  page: 0,
   head: [],
   rows: [],
   select: null,
-  setSelect: null
+  handleSelect: null
 };
 
 export default PreInfoList;

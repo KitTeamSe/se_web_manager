@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
@@ -9,7 +9,7 @@ import DeleteDialog from '../../Dialog/DeleteDialog/LectureRoomDeleteDialogConta
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import LectureRoomData from '../../../../statics/data/LectureRoomData';
-import Pagination from '../../../atoms/Pagination/Pagination';
+import Pagination from '../../../modules/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -27,12 +27,17 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
+const LectureRoomListPage = ({
+  lectureRooms,
+  error,
+  loading,
+  select,
+  handleSelect
+}) => {
   const title = '강의실';
   const headerTitle = `사전정보 - ${title}관리`;
   const [addOpen, setAddOpen] = useToggle();
   const [deleteOpen, setDeleteOpen] = useToggle();
-  const [select, setSelect] = useState(null);
   const [failOpen, setFailOpen] = useToggle();
 
   useEffect(() => {
@@ -61,7 +66,7 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
                   head={LectureRoomData}
                   rows={lectureRooms.data.content}
                   select={select}
-                  setSelect={setSelect}
+                  handleSelect={handleSelect}
                 />
                 <Pagination
                   totalPage={lectureRooms.data.totalPages}
@@ -76,6 +81,7 @@ const LectureRoomListPage = ({ lectureRooms, error, loading }) => {
         <AddDeleteBox
           setAddOpen={setAddOpen}
           setDeleteOpen={handleDeleteOpen}
+          select={select}
         />
 
         {addOpen && (
@@ -118,13 +124,16 @@ LectureRoomListPage.propTypes = {
     }).isRequired
   }),
   error: PropTypes.string,
-  loading: PropTypes.string
+  loading: PropTypes.string,
+  select: PropTypes.string,
+  handleSelect: PropTypes.func.isRequired
 };
 
 LectureRoomListPage.defaultProps = {
   lectureRooms: null,
   error: null,
-  loading: null
+  loading: null,
+  select: null
 };
 
 export default LectureRoomListPage;

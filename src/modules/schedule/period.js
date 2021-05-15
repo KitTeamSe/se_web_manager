@@ -10,6 +10,7 @@ import {
 const INITIALIZE = 'period/INITIALIZE';
 const CHANGE_FIELD = 'period/CHANGE_FIELD';
 
+const CHANGE_SELECT = 'period/CHANGE_SELECT';
 // const [
 //   LOAD_PERIOD,
 //   LOAD_PERIOD_SUCCESS,
@@ -45,7 +46,9 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
 }));
-
+export const changeSelect = createAction(CHANGE_SELECT, ({ value }) => ({
+  value
+}));
 export const loadPeriods = createAction(
   LOAD_PERIODS,
   ({ token, direction, page, size }) => ({ token, direction, page, size })
@@ -101,6 +104,7 @@ const initialState = {
     startTime: '',
     note: ''
   },
+  select: null,
   add: null,
   addError: null,
   update: null,
@@ -120,6 +124,10 @@ export default handleActions(
       produce(state, draft => {
         draft.period[key] = value;
       }),
+    [CHANGE_SELECT]: (state, { payload: { value } }) => ({
+      ...state,
+      select: value
+    }),
     [LOAD_PERIODS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
       list,

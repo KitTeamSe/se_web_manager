@@ -33,7 +33,15 @@ const ItemText = styled(Typography)`
   font-weight: 500;
 `;
 
-const PreInfoItemCard = ({ item, head, index, small, select, onClick }) => {
+const PreInfoItemCard = ({
+  item,
+  head,
+  index,
+  page,
+  small,
+  select,
+  onClick
+}) => {
   const fillZero = (num, digit) => {
     if (num >= 10 ** (digit - 1)) return num;
     const empty = num ? digit - num / 10 : digit - num / 10 - 1;
@@ -83,7 +91,7 @@ const PreInfoItemCard = ({ item, head, index, small, select, onClick }) => {
         if (i === 0) {
           return (
             <ItemWrapper width={head[i].width}>
-              <ItemText small={small}>{index + 1}</ItemText>
+              <ItemText small={small}>{page * 10 + index + 1}</ItemText>
             </ItemWrapper>
           );
         }
@@ -106,7 +114,8 @@ PreInfoItemCard.propTypes = {
   index: PropTypes.number,
   small: PropTypes.string,
   select: PropTypes.number,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  page: PropTypes.number
 };
 
 PreInfoItemCard.defaultProps = {
@@ -114,7 +123,8 @@ PreInfoItemCard.defaultProps = {
   head: [],
   index: 1,
   small: false,
-  select: null
+  select: null,
+  page: 0
 };
 
 export default PreInfoItemCard;

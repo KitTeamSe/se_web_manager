@@ -5,18 +5,19 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   loadLectureRooms,
-  initialize
+  initialize,
+  changeSelect
 } from '../../../../modules/schedule/lectureRoom';
 import LectureRoomListPage from './LectureRoomListPage';
 
 const LectureRoomListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
-  const { lectureRoomsData, error, select, loadingData } = useSelector(
+  const { lectureRoomsData, error, loadingData, select } = useSelector(
     ({ lectureRoom, loading }) => ({
       lectureRoomsData: lectureRoom.list,
       error: lectureRoom.listError,
-      select: lectureRoom.select,
-      loadingData: loading['lectureRooms/LOAD_LECTURE_ROOMS']
+      loadingData: loading['lectureRooms/LOAD_LECTURE_ROOMS'],
+      select: lectureRoom.select
     })
   );
 
@@ -31,12 +32,18 @@ const LectureRoomListViewContainer = ({ location }) => {
     dispatch(loadLectureRooms({ direction, page, size, token }));
   }, [dispatch, location.search]);
 
+  const handleSelect = i => {
+    const { value = null } = { value: i };
+    dispatch(changeSelect({ value }));
+  };
+
   return (
     <LectureRoomListPage
       lectureRooms={lectureRoomsData}
-      select={select}
       error={error}
       loading={loadingData}
+      select={select}
+      handleSelect={handleSelect}
     />
   );
 };

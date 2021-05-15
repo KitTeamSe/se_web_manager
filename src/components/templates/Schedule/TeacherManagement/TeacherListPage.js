@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
@@ -9,7 +9,7 @@ import AddDialogContainer from '../../Dialog/AddDialog/TeacherAddDialogContainer
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import TeacherData from '../../../../statics/data/TeacherData';
-import Pagination from '../../../atoms/Pagination/Pagination';
+import Pagination from '../../../modules/Pagination/Pagination';
 import DeleteDialogContainer from '../../Dialog/DeleteDialog/TeacherDeleteDialogContainer';
 
 const ContentWrapper = styled.div`
@@ -28,12 +28,17 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const TeacherListPage = ({ teachers, error, loading }) => {
+const TeacherListPage = ({
+  teachers,
+  error,
+  loading,
+  select,
+  handleSelect
+}) => {
   const title = '교원';
   const headerTitle = `사전정보 - ${title}관리`;
   const [addOpen, setAddOpen] = useToggle();
   const [deleteOpen, setDeleteOpen] = useToggle();
-  const [select, setSelect] = useState(null);
   const [failOpen, setFailOpen] = useToggle();
 
   useEffect(() => {
@@ -62,7 +67,7 @@ const TeacherListPage = ({ teachers, error, loading }) => {
                   head={TeacherData}
                   rows={teachers.data.content}
                   select={select}
-                  setSelect={setSelect}
+                  handleSelect={handleSelect}
                 />
                 <Pagination
                   totalPage={teachers.data.totalPages}
@@ -77,6 +82,7 @@ const TeacherListPage = ({ teachers, error, loading }) => {
         <AddDeleteBox
           setAddOpen={setAddOpen}
           setDeleteOpen={handleDeleteOpen}
+          select={select}
         />
 
         {!addOpen || (
@@ -126,13 +132,16 @@ TeacherListPage.propTypes = {
     }).isRequired
   }),
   error: PropTypes.string,
-  loading: PropTypes.string
+  loading: PropTypes.string,
+  select: PropTypes.string,
+  handleSelect: PropTypes.func.isRequired
 };
 
 TeacherListPage.defaultProps = {
   teachers: null,
   error: null,
-  loading: null
+  loading: null,
+  select: null
 };
 
 export default TeacherListPage;
