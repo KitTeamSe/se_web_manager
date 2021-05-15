@@ -13,8 +13,8 @@ const TableCellStyled = styled(TableCell)`
   font-weight: 700;
 `;
 
-const TableHead = ({ row }) => {
-  const tableCell = row.map(data => (
+const TableHead = ({ head }) => {
+  const tableCell = head.map(data => (
     <TableCellStyled
       key={data.name}
       align="center"
@@ -32,11 +32,11 @@ const TableHead = ({ row }) => {
 };
 
 TableHead.propTypes = {
-  row: PropTypes.arrayOf(PropTypes.object)
+  head: PropTypes.arrayOf(PropTypes.object)
 };
 
 TableHead.defaultProps = {
-  row: []
+  head: []
 };
 
 export default TableHead;

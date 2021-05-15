@@ -9,6 +9,7 @@ import {
 
 const INITIALIZE = 'teacher/INITIALIZE';
 const CHANGE_FIELD = 'teacher/CHANGE_FIELD';
+const CHANGE_SELECT = 'teacher/CHANGE_SELECT';
 
 // const [
 //   LOAD_TEACHER,
@@ -43,6 +44,10 @@ const [
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
+  value
+}));
+
+export const changeSelect = createAction(CHANGE_SELECT, ({ value }) => ({
   value
 }));
 
@@ -99,6 +104,7 @@ const initialState = {
     note: '',
     type: ''
   },
+  select: null,
   add: null,
   addError: null,
   update: null,
@@ -118,6 +124,10 @@ export default handleActions(
       produce(state, draft => {
         draft.teacher[key] = value;
       }),
+    [CHANGE_SELECT]: (state, { payload: { value } }) => ({
+      ...state,
+      select: value
+    }),
     [LOAD_TEACHERS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
       list,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
@@ -9,7 +9,7 @@ import DeleteDialog from '../../Dialog/DeleteDialog/SubjectDeleteDialogContainer
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import SubjectData from '../../../../statics/data/SubjectData';
-import Pagination from '../../../atoms/Pagination/Pagination';
+import Pagination from '../../../modules/Pagination/Pagination';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -27,12 +27,17 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const SubjectListPage = ({ subjects, error, loading }) => {
+const SubjectListPage = ({
+  subjects,
+  error,
+  loading,
+  select,
+  handleSelect
+}) => {
   const title = '교과';
   const headerTitle = `사전정보 - ${title}관리`;
   const [addOpen, setAddOpen] = useToggle();
   const [deleteOpen, setDeleteOpen] = useToggle();
-  const [select, setSelect] = useState(null);
   const [failOpen, setFailOpen] = useToggle();
 
   useEffect(() => {
@@ -61,7 +66,7 @@ const SubjectListPage = ({ subjects, error, loading }) => {
                   head={SubjectData}
                   rows={subjects.data.content}
                   select={select}
-                  setSelect={setSelect}
+                  handleSelect={handleSelect}
                 />
                 <Pagination
                   totalPage={subjects.data.totalPages}
@@ -76,6 +81,7 @@ const SubjectListPage = ({ subjects, error, loading }) => {
         <AddDeleteBox
           setAddOpen={setAddOpen}
           setDeleteOpen={handleDeleteOpen}
+          select={select}
         />
 
         {!addOpen || (
@@ -123,13 +129,16 @@ SubjectListPage.propTypes = {
     }).isRequired
   }),
   error: PropTypes.string,
-  loading: PropTypes.string
+  loading: PropTypes.string,
+  select: PropTypes.string,
+  handleSelect: PropTypes.func.isRequired
 };
 
 SubjectListPage.defaultProps = {
   subjects: null,
   error: null,
-  loading: null
+  loading: null,
+  select: null
 };
 
 export default SubjectListPage;

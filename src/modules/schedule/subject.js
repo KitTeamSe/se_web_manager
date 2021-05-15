@@ -10,6 +10,7 @@ import {
 const INITIALIZE = 'subject/INITIALIZE';
 const CHANGE_FIELD = 'subject/CHANGE_FIELD';
 
+const CHANGE_SELECT = 'subject/CHANGE_SELECT';
 // const [
 //   LOAD_SUBJECT,
 //   LOAD_SUBJECT_SUCCESS,
@@ -45,7 +46,9 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
 }));
-
+export const changeSelect = createAction(CHANGE_SELECT, ({ value }) => ({
+  value
+}));
 export const loadSubjects = createAction(
   LOAD_SUBJECTS,
   ({ token, direction, page, size }) => ({ token, direction, page, size })
@@ -117,6 +120,7 @@ const initialState = {
     semester: '',
     credit: ''
   },
+  select: null,
   add: null,
   addError: null,
   update: null,
@@ -136,6 +140,10 @@ export default handleActions(
       produce(state, draft => {
         draft.subject[key] = value;
       }),
+    [CHANGE_SELECT]: (state, { payload: { value } }) => ({
+      ...state,
+      select: value
+    }),
     [LOAD_SUBJECTS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
       list,
