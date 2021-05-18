@@ -1,33 +1,63 @@
 import React from 'react';
+// import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Table as Tables, TableContainer, Paper } from '@material-ui/core';
-import TableHead from '../../atoms/TableHead/TableHead';
-// import TableContent from '../../atoms/TableContent/TableContent';
-import TableRow from '../../atoms/TableRow/TableRow';
+import {
+  Table as Tables,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '@material-ui/core';
+import { MenuTypeItems } from '../../../statics/data/MenuData';
 
-const TableContainerStyled = styled(TableContainer)`
-  margin-top: 20px;
-`;
+const Head = ({ head }) => {
+  return (
+    <TableHead>
+      <TableRow>
+        {head.map(e => (
+          <TableCell align="center">{e.name}</TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+};
 
-const TableStyeld = styled(Tables)``;
+const Body = ({ head, rows }) => {
+  return (
+    <TableBody>
+      {rows.map(e => (
+        <TableRow hover>
+          {head.map(el => {
+            if (el.key in e && el.key === 'menuType') {
+              return (
+                <TableCell align="center">{MenuTypeItems[e[el.key]]}</TableCell>
+              );
+            }
+            return el.key in e ? (
+              <TableCell align="center">{e[el.key]}</TableCell>
+            ) : null;
+          })}
+        </TableRow>
+      ))}
+    </TableBody>
+  );
+};
 
 const Table = ({ head, rows }) => {
   return (
-    <TableContainerStyled component={Paper}>
-      <TableStyeld>
-        <TableHead head={head} />
-        {rows.map(e => (
-          <TableRow head={head} data={e} />
-        ))}
-      </TableStyeld>
-    </TableContainerStyled>
+    <TableContainer>
+      <Tables>
+        <Head head={head} />
+        <Body head={head} rows={rows} />
+      </Tables>
+    </TableContainer>
   );
 };
 
 Table.propTypes = {
-  head: PropTypes.arrayOf(PropTypes.object),
-  rows: PropTypes.arrayOf(PropTypes.object)
+  head: PropTypes.arrayOf(PropTypes.array),
+  rows: PropTypes.arrayOf(PropTypes.array)
 };
 
 Table.defaultProps = {

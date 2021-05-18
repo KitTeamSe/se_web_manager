@@ -15,23 +15,21 @@ const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;
 `;
 
+const headData = {
+  lectureRoom: '강의실',
+  teacher: '교사',
+  subject: '과목',
+  period: '교시'
+};
+
 const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
   const handleClose = () => {
     setOpen(false);
   };
 
-  const headComment = () => {
-    if (type === 'lectureRoom') return `강의실`;
-    if (type === 'teacher') return `교사`;
-    if (type === 'subject') return `과목`;
-    if (type === 'period') return `교시`;
-    return null;
-  };
-
   const contentsComment = () => {
-    if (type === 'lectureRoom')
-      return `강의실 ${data.building} ${data.roomNumber}`;
-    return `이름 ${data.name}`;
+    if (type === 'lectureRoom') return `${data.building} ${data.roomNumber}`;
+    return `${data.name}`;
   };
 
   return (
@@ -39,7 +37,7 @@ const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
       <DialogTitleStyled>{title} 삭제</DialogTitleStyled>
       <DialogContent>
         <InputWrapper>
-          <Typography>{headComment()} 정보를 삭제하시겠습니까</Typography>
+          <Typography>{headData[type]} 정보를 삭제하시겠습니까</Typography>
         </InputWrapper>
         <InputWrapper>
           <Typography>{contentsComment()}</Typography>

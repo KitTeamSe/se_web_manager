@@ -2,7 +2,7 @@ import React from 'react';
 import AuthGroupListPage from '../../components/templates/Manage/AuthGroupManagement/AuthGroupListPage';
 import AuthListPage from '../../components/templates/Manage/AuthManagement/AuthListPage';
 import PostMovePage from '../../components/templates/Manage/PostManagement/PostMovePage';
-import MenuListPage from '../../components/templates/Manage/MenuManagement/MenuListPage';
+import MenuListPageContainer from '../../components/templates/Manage/MenuManagement/MenuListPageContainer';
 import BoardListPage from '../../components/templates/Manage/BoardManagement/BoardListPage';
 import TagListPage from '../../components/templates/Manage/TagManagement/TagListPage';
 import JobInfoUploadPage from '../../components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
@@ -21,7 +21,7 @@ import ScheduleListPage from '../../components/templates/Schedule/ScheduleManage
 const ManageRouteData = [
   {
     to: 'menu',
-    page: <MenuListPage />
+    page: <MenuListPageContainer />
   },
   {
     to: 'board',

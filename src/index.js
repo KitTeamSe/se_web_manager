@@ -6,7 +6,6 @@ import { StylesProvider } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
-// import rootReducer from './reducer';
 import './styles/reset.css';
 import { createLogger } from 'redux-logger';
 import App from './App';

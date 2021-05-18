@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import Button from '../../../atoms/Button/RoundButton';
+import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
 // import Table from '../../../modules/Table/Table';
-import PaginationTable from '../../../modules/Table/PaginationTable';
 
 const Wrapper = styled.div``;
 
@@ -114,7 +114,7 @@ const BoardListView = () => {
       </ContentHeader>
       <ContentWrapper>
         {/* <Table head={headItem} rows={tableItems} /> */}
-        <PaginationTable head={headItem} rows={tableItems} />
+        <PreInfoList head={headItem} rows={tableItems} />
       </ContentWrapper>
     </Wrapper>
   );
