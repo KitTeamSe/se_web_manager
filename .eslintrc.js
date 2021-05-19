@@ -31,7 +31,8 @@ module.exports = {
       {
         endOfLine: 'auto'
       }
-    ]
+    ],
+    'react/prop-types': 'off'
   },
   settings: {
     'import/resolver': { node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] } }
