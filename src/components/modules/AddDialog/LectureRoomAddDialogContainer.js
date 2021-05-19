@@ -7,24 +7,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddDialog from './AddDialog';
 
 import {
-  changeField as subjectChangeField,
-  addSubject,
-  loadSubjects,
-  initializeAdd as subjectInitializeAdd
-} from '../../../../modules/schedule/subject';
+  changeField as lectureRoomChangeField,
+  addLectureRoom,
+  loadLectureRooms,
+  initializeAdd as lectureRoomInitializeAdd
+} from '../../../modules/schedule/lectureRoom';
 
 const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const dispatch = useDispatch();
-  const { form, add, error } = useSelector(({ subject }) => ({
-    form: subject.subject,
-    add: subject.add,
-    addError: subject.addError
+  const { form, add, error } = useSelector(({ lectureRoom }) => ({
+    form: lectureRoom.lectureRoom,
+    add: lectureRoom.add,
+    addError: lectureRoom.addError
   }));
 
   const onChange = e => {
     const { value, name } = e.target;
     dispatch(
-      subjectChangeField({
+      lectureRoomChangeField({
         key: name,
         value
       })
@@ -34,29 +34,8 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const onSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const {
-      subjectId,
-      curriculum,
-      type,
-      code,
-      name,
-      grade,
-      semester,
-      credit
-    } = form;
-    dispatch(
-      addSubject({
-        subjectId,
-        curriculum,
-        type,
-        code,
-        name,
-        grade,
-        semester,
-        credit,
-        token
-      })
-    );
+    const { building, roomNumber, capacity, note } = form;
+    dispatch(addLectureRoom({ building, roomNumber, capacity, note, token }));
   };
 
   useEffect(() => {
@@ -69,14 +48,14 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
         ignoreQueryPrefix: true
       });
       const token = localStorage.getItem('token');
-      dispatch(loadSubjects({ direction, page, size, token }));
+      dispatch(loadLectureRooms({ direction, page, size, token }));
       setOpen();
     }
   }, [add, error, dispatch]);
 
   useEffect(() => {
     return () => {
-      dispatch(subjectInitializeAdd());
+      dispatch(lectureRoomInitializeAdd());
     };
   }, [dispatch]);
 

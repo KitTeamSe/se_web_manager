@@ -5,8 +5,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 // import DialogInputContents from '../../../modules/DialogInputContents/DialogInputContents';
 import { DialogContent } from '@material-ui/core';
-import TextField from '../../../atoms/TextField/TextField';
-import DialogFooter from '../../../modules/DialogFooter/DialogFooter';
+import TextField from '../../atoms/TextField/TextField';
+import DialogFooter from '../DialogFooter/DialogFooter';
 
 const DialogTitleStyled = styled(DialogTitle)`
   padding: 16px 24px 0 24px;

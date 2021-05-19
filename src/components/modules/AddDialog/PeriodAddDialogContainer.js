@@ -7,24 +7,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddDialog from './AddDialog';
 
 import {
-  loadTeachers,
-  changeField,
-  addTeacher,
-  initializeAdd
-} from '../../../../modules/schedule/teacher';
+  changeField as periodChangeField,
+  addPeriod,
+  loadPeriods,
+  initializeAdd as periodInitializeAdd
+} from '../../../modules/schedule/period';
 
 const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const dispatch = useDispatch();
-  const { form, add, error } = useSelector(({ teacher }) => ({
-    form: teacher.teacher,
-    add: teacher.add,
-    addError: teacher.addError
+  const { form, add, error } = useSelector(({ period }) => ({
+    form: period.period,
+    add: period.add,
+    addError: period.addError
   }));
 
   const onChange = e => {
     const { value, name } = e.target;
     dispatch(
-      changeField({
+      periodChangeField({
         key: name,
         value
       })
@@ -34,8 +34,8 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const onSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const { department, name, note, type } = form;
-    dispatch(addTeacher({ department, name, note, type, token }));
+    const { periodOrder, name, endTime, startTime, note } = form;
+    dispatch(addPeriod({ periodOrder, name, endTime, startTime, note, token }));
   };
 
   useEffect(() => {
@@ -48,14 +48,14 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
         ignoreQueryPrefix: true
       });
       const token = localStorage.getItem('token');
-      dispatch(loadTeachers({ direction, page, size, token }));
+      dispatch(loadPeriods({ direction, page, size, token }));
       setOpen();
     }
   }, [add, error, dispatch]);
 
   useEffect(() => {
     return () => {
-      dispatch(initializeAdd());
+      dispatch(periodInitializeAdd());
     };
   }, [dispatch]);
 

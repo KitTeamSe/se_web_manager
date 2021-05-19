@@ -7,24 +7,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddDialog from './AddDialog';
 
 import {
-  changeField as periodChangeField,
-  addPeriod,
-  loadPeriods,
-  initializeAdd as periodInitializeAdd
-} from '../../../../modules/schedule/period';
+  changeField as subjectChangeField,
+  addSubject,
+  loadSubjects,
+  initializeAdd as subjectInitializeAdd
+} from '../../../modules/schedule/subject';
 
 const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const dispatch = useDispatch();
-  const { form, add, error } = useSelector(({ period }) => ({
-    form: period.period,
-    add: period.add,
-    addError: period.addError
+  const { form, add, error } = useSelector(({ subject }) => ({
+    form: subject.subject,
+    add: subject.add,
+    addError: subject.addError
   }));
 
   const onChange = e => {
     const { value, name } = e.target;
     dispatch(
-      periodChangeField({
+      subjectChangeField({
         key: name,
         value
       })
@@ -34,8 +34,29 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const onSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const { periodOrder, name, endTime, startTime, note } = form;
-    dispatch(addPeriod({ periodOrder, name, endTime, startTime, note, token }));
+    const {
+      subjectId,
+      curriculum,
+      type,
+      code,
+      name,
+      grade,
+      semester,
+      credit
+    } = form;
+    dispatch(
+      addSubject({
+        subjectId,
+        curriculum,
+        type,
+        code,
+        name,
+        grade,
+        semester,
+        credit,
+        token
+      })
+    );
   };
 
   useEffect(() => {
@@ -48,14 +69,14 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
         ignoreQueryPrefix: true
       });
       const token = localStorage.getItem('token');
-      dispatch(loadPeriods({ direction, page, size, token }));
+      dispatch(loadSubjects({ direction, page, size, token }));
       setOpen();
     }
   }, [add, error, dispatch]);
 
   useEffect(() => {
     return () => {
-      dispatch(periodInitializeAdd());
+      dispatch(subjectInitializeAdd());
     };
   }, [dispatch]);
 

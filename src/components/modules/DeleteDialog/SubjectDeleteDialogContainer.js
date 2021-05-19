@@ -5,10 +5,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteDialog from './DeleteDialog';
-import {
-  removeLectureRoom,
-  loadLectureRooms
-} from '../../../../modules/schedule/lectureRoom';
+import { removeSubject, loadSubjects } from '../../../modules/schedule/subject';
 
 const DeleteDialogContainer = ({
   location,
@@ -19,16 +16,16 @@ const DeleteDialogContainer = ({
   type
 }) => {
   const dispatch = useDispatch();
-  const { remove, error } = useSelector(({ lectureRoom }) => ({
-    remove: lectureRoom.remove,
-    error: lectureRoom.removeError
+  const { remove, error } = useSelector(({ subject }) => ({
+    remove: subject.remove,
+    error: subject.removeError
   }));
 
   const onDelete = () => {
     const token = localStorage.getItem('token');
-    const id = data.lectureRoomId;
-    console.log(data.lectureRoomId);
-    dispatch(removeLectureRoom({ id, token }));
+    const id = data.subjectId;
+    console.log(data.subjectId);
+    dispatch(removeSubject({ id, token }));
   };
 
   useEffect(() => {
@@ -41,7 +38,7 @@ const DeleteDialogContainer = ({
         ignoreQueryPrefix: true
       });
       const token = localStorage.getItem('token');
-      dispatch(loadLectureRooms({ direction, page, size, token }));
+      dispatch(loadSubjects({ direction, page, size, token }));
       setOpen();
     }
   }, [remove, error, dispatch]);

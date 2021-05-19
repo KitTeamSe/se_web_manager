@@ -5,7 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { DialogContent, Typography } from '@material-ui/core';
 // import DialogDeleteContents from '../../../modules/DialogDeleteContents/DialogDeleteContents';
-import DialogFooter from '../../../modules/DialogFooter/DialogFooter';
+import DialogFooter from '../DialogFooter/DialogFooter';
 
 const InputWrapper = styled.div`
   display: flex;
