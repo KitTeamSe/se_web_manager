@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CssBaseline } from '@material-ui/core';
-import { Route } from 'react-router-dom';
 import Toolbar from './components/atoms/Toolbar/Toolbar';
 import Header from './components/templates/Header/Header';
 import useToggle from './libs/useToggle';
 import { ManageListData, ScheduleListData } from './statics/data/SideMenuData';
-import { ManageRouteData, ScheduleRouteData } from './statics/data/RouteData';
-import { MANAGE_URL } from './statics/data/config';
+import Routes from './Router';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
@@ -21,15 +19,6 @@ const MainWrapper = styled.main`
   margin-right: 100px;
 `;
 
-const Routes = ({ items }) =>
-  items.map(el => {
-    return (
-      <Route path={`${MANAGE_URL}/${el.to}`} key={el.to}>
-        {el.page}
-      </Route>
-    );
-  });
-
 function App() {
   const [open, setOpen] = useToggle();
   const menuItems = [ManageListData, ScheduleListData];
@@ -41,9 +30,7 @@ function App() {
 
       <MainWrapper open={open}>
         <Toolbar height="72" />
-        <Routes items={ManageRouteData} />
-        <Routes items={ScheduleRouteData} />
-        {/* <Redirect path="*" to={`${path}/${firstPage}`} /> */}
+        <Routes />
       </MainWrapper>
     </Wrapper>
   );
