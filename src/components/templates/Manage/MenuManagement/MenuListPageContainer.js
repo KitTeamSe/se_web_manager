@@ -3,14 +3,14 @@ import qs from 'qs';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadMenus, initialize } from '../../../../modules/manage/menu';
 import MenuListPage from './MenuListPage';
+import { loadMenus, initialize } from '../../../../modules/manage/menu';
 
-const MenuListViewContainer = ({ location }) => {
+const MenuListViewContainer = ({ menuData, location }) => {
   const dispatch = useDispatch();
-  const { menusData, error, loadingData } = useSelector(
+  const { menuListData, error, loadingData } = useSelector(
     ({ menu, loading }) => ({
-      menusData: menu.list,
+      menuListData: menu.list,
       error: menu.listError,
       loadingData: loading['menus/LOAD_SUBJECTS']
     })
@@ -30,7 +30,8 @@ const MenuListViewContainer = ({ location }) => {
 
   return (
     <MenuListPage
-      menu={menusData}
+      menuList={menuListData}
+      menuData={menuData}
       error={error}
       loading={loadingData}
       page={newPage}

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialogContainer from '../../Dialog/AddDialog/PeriodAddDialogContainer';
-import DeleteDialog from '../../Dialog/DeleteDialog/PeriodDeleteDialogContainer';
+import AddDialogContainer from '../../../modules/AddDialog/PeriodAddDialogContainer';
+import DeleteDialog from '../../../modules/DeleteDialog/PeriodDeleteDialogContainer';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import PeriodData from '../../../../statics/data/PeriodData';
@@ -25,8 +25,6 @@ const PaperStyled = styled(Paper)`
   justify-content: space-between;
 `;
 
-const Wrapper = styled.div``;
-
 const PeriodListPage = ({ periods, error, loading, select, handleSelect }) => {
   const title = '교시';
   const headerTitle = `사전정보 - ${title}관리`;
@@ -44,7 +42,7 @@ const PeriodListPage = ({ periods, error, loading, select, handleSelect }) => {
   };
 
   return (
-    <Wrapper>
+    <>
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
         <PaperStyled>
@@ -97,7 +95,7 @@ const PeriodListPage = ({ periods, error, loading, select, handleSelect }) => {
           />
         )}
       </ContentWrapper>
-    </Wrapper>
+    </>
   );
 };
 

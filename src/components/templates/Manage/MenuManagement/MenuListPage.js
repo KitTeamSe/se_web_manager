@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
-import MenuData from '../../../../statics/data/MenuData';
 import Pagination from '../../../modules/Pagination/Pagination';
 import Table from '../../../modules/Table/Table';
+import MenuData from '../../../../statics/data/MenuData';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 
 const PAGE_DATA_LENGTH = 10;
@@ -25,10 +25,10 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const MenuListPage = ({ menu, error, loading, page }) => {
+const MenuListPage = ({ menuList, error, loading, page }) => {
   const title = '메뉴';
   const headerTitle = `${title}관리`;
-  const [menuData, setMenuData] = useState([]);
+  const [menuListData, setmenuListData] = useState([]);
 
   const handleChildData = parent => {
     const result = [];
@@ -53,10 +53,10 @@ const MenuListPage = ({ menu, error, loading, page }) => {
   };
 
   useEffect(() => {
-    if (menu) {
-      setMenuData(handleMenuData(menu.data));
+    if (menuList) {
+      setmenuListData(handleMenuData(menuList.data));
     }
-  }, [menu]);
+  }, [menuList]);
 
   return (
     <Wrapper>
@@ -67,17 +67,19 @@ const MenuListPage = ({ menu, error, loading, page }) => {
             <div>loading</div>
           ) : (
             !loading &&
-            menu && (
+            menuList && (
               <>
                 <Table
                   head={MenuData}
-                  rows={menuData.slice(
+                  rows={menuListData.slice(
                     PAGE_DATA_LENGTH * (page - 1),
                     PAGE_DATA_LENGTH * (page - 1) + PAGE_DATA_LENGTH
                   )}
+                  type="menu"
+                  typeId="menuId"
                 />
                 <Pagination
-                  totalPage={Math.ceil(menuData.length / PAGE_DATA_LENGTH)}
+                  totalPage={Math.ceil(menuListData.length / PAGE_DATA_LENGTH)}
                   page={page}
                   link="m/menu"
                 />

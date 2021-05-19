@@ -10,11 +10,11 @@ import {
 const INITIALIZE = 'menu/INITIALIZE';
 const CHANGE_FIELD = 'menu/CHANGE_FIELD';
 
-// const [
-//   LOAD_MENU,
-//   LOAD_MENU_SUCCESS,
-//   LOAD_MENU_FAILURE
-// ] = createRequestActionTypes('menu/LOAD_MENU');
+const [
+  LOAD_MENU,
+  LOAD_MENU_SUCCESS,
+  LOAD_MENU_FAILURE
+] = createRequestActionTypes('menu/LOAD_MENU');
 
 const [
   LOAD_MENUS,
@@ -42,6 +42,11 @@ export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
+}));
+
+export const loadMenu = createAction(LOAD_MENU, ({ id, token }) => ({
+  id,
+  token
 }));
 
 export const loadMenus = createAction(LOAD_MENUS, ({ token }) => ({ token }));
@@ -75,6 +80,8 @@ export const removeMenu = createAction(REMOVE_MENU, ({ id, token }) => ({
 //   })
 // );
 
+const loadMenuSaga = createRequestSaga(LOAD_MENU, api.getMenu);
+
 const loadMenusSaga = createRequestSaga(LOAD_MENUS, api.getMenus);
 
 const addMenuSaga = createRequestSaga(ADD_MENU, api.addMenu);
@@ -82,6 +89,7 @@ const addMenuSaga = createRequestSaga(ADD_MENU, api.addMenu);
 const removeMenuSaga = createRequestSaga(REMOVE_MENU, api.removeMenu);
 
 export function* menuSaga() {
+  yield takeLatest(LOAD_MENU, loadMenuSaga);
   yield takeLatest(LOAD_MENUS, loadMenusSaga);
   yield takeLatest(ADD_MENU, addMenuSaga);
   yield takeLatest(REMOVE_MENU, removeMenuSaga);
@@ -117,6 +125,16 @@ export default handleActions(
       produce(state, draft => {
         draft.menu[key] = value;
       }),
+    [LOAD_MENU_SUCCESS]: (state, { payload: info }) => ({
+      ...state,
+      info,
+      infoError: null
+    }),
+    [LOAD_MENU_FAILURE]: (state, { payload: infoError }) => ({
+      ...state,
+      info: null,
+      infoError
+    }),
     [LOAD_MENUS_SUCCESS]: (state, { payload: list }) => ({
       ...state,
       list,

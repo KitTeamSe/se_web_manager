@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialogContainer from '../../Dialog/AddDialog/TeacherAddDialogContainer';
+import AddDialogContainer from '../../../modules/AddDialog/TeacherAddDialogContainer';
 // import DeleteDialog from '../../Dialog/DeleteDialog/DeleteDialog';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import TeacherData from '../../../../statics/data/TeacherData';
 import Pagination from '../../../modules/Pagination/Pagination';
-import DeleteDialogContainer from '../../Dialog/DeleteDialog/TeacherDeleteDialogContainer';
+import DeleteDialogContainer from '../../../modules/DeleteDialog/TeacherDeleteDialogContainer';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -25,8 +25,6 @@ const PaperStyled = styled(Paper)`
   flex-direction: column;
   justify-content: space-between;
 `;
-
-const Wrapper = styled.div``;
 
 const TeacherListPage = ({
   teachers,
@@ -51,7 +49,7 @@ const TeacherListPage = ({
   };
 
   return (
-    <Wrapper>
+    <>
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
         <PaperStyled>
@@ -104,7 +102,7 @@ const TeacherListPage = ({
           />
         )}
       </ContentWrapper>
-    </Wrapper>
+    </>
   );
 };
 

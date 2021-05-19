@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialogContainer from '../../Dialog/AddDialog/SubjectAddDialogContainer';
-import DeleteDialog from '../../Dialog/DeleteDialog/SubjectDeleteDialogContainer';
+import AddDialogContainer from '../../../modules/AddDialog/SubjectAddDialogContainer';
+import DeleteDialog from '../../../modules/DeleteDialog/SubjectDeleteDialogContainer';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import SubjectData from '../../../../statics/data/SubjectData';
@@ -24,8 +24,6 @@ const PaperStyled = styled(Paper)`
   flex-direction: column;
   justify-content: space-between;
 `;
-
-const Wrapper = styled.div``;
 
 const SubjectListPage = ({
   subjects,
@@ -50,7 +48,7 @@ const SubjectListPage = ({
   };
 
   return (
-    <Wrapper>
+    <>
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
         <PaperStyled>
@@ -103,7 +101,7 @@ const SubjectListPage = ({
           />
         )}
       </ContentWrapper>
-    </Wrapper>
+    </>
   );
 };
 

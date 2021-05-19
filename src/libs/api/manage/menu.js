@@ -1,13 +1,10 @@
-import qs from 'qs';
 import client, { tokenHeader } from '../client';
 
 const URL = `menu`;
 
-export const getMenus = ({ direction, page, size, token }) => {
-  const queryString = qs.stringify({ direction, page, size });
-  return client.get(`${URL}?${queryString}`, tokenHeader(token));
-};
-export const getMenu = id => client.get(`${URL}/${id}`);
+export const getMenus = ({ token }) => client.get(`${URL}`, tokenHeader(token));
+export const getMenu = ({ id, token }) =>
+  client.get(`${URL}/${id}`, tokenHeader(token));
 export const addMenu = ({
   description,
   menuOrder,
