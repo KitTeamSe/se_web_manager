@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-import AddDialogContainer from '../../Dialog/AddDialog/LectureRoomAddDialogContainer';
-import DeleteDialog from '../../Dialog/DeleteDialog/LectureRoomDeleteDialogContainer';
+import AddDialogContainer from '../../../modules/AddDialog/LectureRoomAddDialogContainer';
+import DeleteDialog from '../../../modules/DeleteDialog/LectureRoomDeleteDialogContainer';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import LectureRoomData from '../../../../statics/data/LectureRoomData';
@@ -24,8 +24,6 @@ const PaperStyled = styled(Paper)`
   flex-direction: column;
   justify-content: space-between;
 `;
-
-const Wrapper = styled.div``;
 
 const LectureRoomListPage = ({
   lectureRooms,
@@ -50,7 +48,7 @@ const LectureRoomListPage = ({
   };
 
   return (
-    <Wrapper>
+    <>
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
         <PaperStyled component="div">
@@ -103,7 +101,7 @@ const LectureRoomListPage = ({
           />
         )}
       </ContentWrapper>
-    </Wrapper>
+    </>
   );
 };
 

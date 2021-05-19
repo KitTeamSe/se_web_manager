@@ -10,47 +10,34 @@ const DialogActionsStyled = styled(DialogActions)`
 `;
 
 const DialogFooter = ({ handleClose, onClick, type }) => {
-  const addButton = () => (
-    <DialogActionsStyled>
-      <Button onClick={handleClose} color="secondary" autoFocus>
-        취 소
-      </Button>
-      <Button type="submit" color="primary">
-        생 성
-      </Button>
-    </DialogActionsStyled>
-  );
-  const deleteButton = () => (
+  return (
     <DialogActionsStyled>
       <Button onClick={handleClose} color="primary" autoFocus>
         취 소
       </Button>
-      <Button onClick={onClick} color="secondary">
-        삭 제
-      </Button>
+      {type === 'add' && (
+        <Button type="submit" color="secondary">
+          생 성
+        </Button>
+      )}
+      {type === 'delete' && (
+        <Button onClick={onClick} color="secondary">
+          삭 제
+        </Button>
+      )}
     </DialogActionsStyled>
   );
-
-  const defaultButton = () => (
-    <DialogActionsStyled>
-      <Button onClick={handleClose} color="primary" autoFocus>
-        확 인
-      </Button>
-    </DialogActionsStyled>
-  );
-
-  if (type === 'add') return addButton();
-  if (type === 'delete') return deleteButton();
-  return defaultButton();
 };
 
 DialogFooter.propTypes = {
   handleClose: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   type: PropTypes.string
 };
 
 DialogFooter.defaultProps = {
-  type: 'default'
+  onClick: null,
+  type: null
 };
 
 export default DialogFooter;

@@ -20,7 +20,7 @@ const PaginationStyled = styled(Paginations)`
   }
 `;
 
-const Pagination = ({ color, totalPage, page, link }) => {
+const Pagination = ({ color, totalPage, page, link, onChange }) => {
   return (
     /* eslint-disable react/jsx-props-no-spreading */
     <PaginationStyled
@@ -28,6 +28,7 @@ const Pagination = ({ color, totalPage, page, link }) => {
       component="div"
       count={totalPage}
       page={parseInt(page, 10)}
+      onChange={onChange}
       renderItem={item => {
         return (
           <PaginationItem
@@ -47,12 +48,14 @@ Pagination.propTypes = {
   color: PropTypes.string,
   totalPage: PropTypes.number,
   page: PropTypes.number.isRequired,
-  link: PropTypes.string.isRequired
+  link: PropTypes.string.isRequired,
+  onChange: PropTypes.func
 };
 
 Pagination.defaultProps = {
   color: 'primary',
-  totalPage: 1
+  totalPage: 1,
+  onChange: null
 };
 
 export default Pagination;

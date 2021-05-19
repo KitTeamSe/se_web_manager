@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import DeleteDialog from './DeleteDialog';
-import { removePeriod, loadPeriods } from '../../../../modules/schedule/period';
+import { removePeriod, loadPeriods } from '../../../modules/schedule/period';
 
 const DeleteDialogContainer = ({
   location,

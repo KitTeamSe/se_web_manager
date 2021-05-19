@@ -7,24 +7,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddDialog from './AddDialog';
 
 import {
-  changeField as lectureRoomChangeField,
-  addLectureRoom,
-  loadLectureRooms,
-  initializeAdd as lectureRoomInitializeAdd
-} from '../../../../modules/schedule/lectureRoom';
+  loadTeachers,
+  changeField,
+  addTeacher,
+  initializeAdd
+} from '../../../modules/schedule/teacher';
 
 const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const dispatch = useDispatch();
-  const { form, add, error } = useSelector(({ lectureRoom }) => ({
-    form: lectureRoom.lectureRoom,
-    add: lectureRoom.add,
-    addError: lectureRoom.addError
+  const { form, add, error } = useSelector(({ teacher }) => ({
+    form: teacher.teacher,
+    add: teacher.add,
+    addError: teacher.addError
   }));
 
   const onChange = e => {
     const { value, name } = e.target;
     dispatch(
-      lectureRoomChangeField({
+      changeField({
         key: name,
         value
       })
@@ -34,8 +34,8 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
   const onSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const { building, roomNumber, capacity, note } = form;
-    dispatch(addLectureRoom({ building, roomNumber, capacity, note, token }));
+    const { department, name, note, type } = form;
+    dispatch(addTeacher({ department, name, note, type, token }));
   };
 
   useEffect(() => {
@@ -48,14 +48,14 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
         ignoreQueryPrefix: true
       });
       const token = localStorage.getItem('token');
-      dispatch(loadLectureRooms({ direction, page, size, token }));
+      dispatch(loadTeachers({ direction, page, size, token }));
       setOpen();
     }
   }, [add, error, dispatch]);
 
   useEffect(() => {
     return () => {
-      dispatch(lectureRoomInitializeAdd());
+      dispatch(initializeAdd());
     };
   }, [dispatch]);
 

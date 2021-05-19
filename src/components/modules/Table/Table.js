@@ -1,33 +1,78 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Table as Tables, TableContainer, Paper } from '@material-ui/core';
-import TableHead from '../../atoms/TableHead/TableHead';
-// import TableContent from '../../atoms/TableContent/TableContent';
-import TableRow from '../../atoms/TableRow/TableRow';
+import PropTypes from 'prop-types';
+import {
+  Table as Tables,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '@material-ui/core';
+import { MenuTypeItems } from '../../../statics/data/MenuData';
+import { MANAGE_URL } from '../../../statics/data/config';
 
-const TableContainerStyled = styled(TableContainer)`
-  margin-top: 20px;
+const LinkStyled = styled(Link)`
+  text-decoration: none;
 `;
 
-const TableStyeld = styled(Tables)``;
+const TableRowStyled = styled(TableRow)`
+  cursor: pointer;
+`;
 
-const Table = ({ head, rows }) => {
+const Head = ({ head }) => {
   return (
-    <TableContainerStyled component={Paper}>
-      <TableStyeld>
-        <TableHead head={head} />
-        {rows.map(e => (
-          <TableRow head={head} data={e} />
+    <TableHead>
+      <TableRow>
+        {head.map(e => (
+          <TableCell align="center">{e.name}</TableCell>
         ))}
-      </TableStyeld>
-    </TableContainerStyled>
+      </TableRow>
+    </TableHead>
+  );
+};
+
+const Body = ({ head, rows, type, typeId }) => {
+  return (
+    <TableBody>
+      {rows.map(e => (
+        <TableRowStyled
+          component={LinkStyled}
+          to={`${MANAGE_URL}/${type}/${e[typeId]}`}
+          key={`${type}/${e[typeId]}`}
+          hover
+        >
+          {head.map(el => {
+            if (el.key in e && el.key === 'menuType') {
+              return (
+                <TableCell align="center">{MenuTypeItems[e[el.key]]}</TableCell>
+              );
+            }
+            return el.key in e ? (
+              <TableCell align="center">{e[el.key]}</TableCell>
+            ) : null;
+          })}
+        </TableRowStyled>
+      ))}
+    </TableBody>
+  );
+};
+
+const Table = ({ head, rows, type, typeId }) => {
+  return (
+    <TableContainer>
+      <Tables>
+        <Head head={head} />
+        <Body head={head} rows={rows} type={type} typeId={typeId} />
+      </Tables>
+    </TableContainer>
   );
 };
 
 Table.propTypes = {
-  head: PropTypes.arrayOf(PropTypes.object),
-  rows: PropTypes.arrayOf(PropTypes.object)
+  head: PropTypes.arrayOf(PropTypes.array),
+  rows: PropTypes.arrayOf(PropTypes.array)
 };
 
 Table.defaultProps = {

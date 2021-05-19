@@ -4,7 +4,6 @@ import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import Button from '../../../atoms/Button/RoundButton';
 import DropDown from '../../../atoms/DropDown/DropDown';
 import Tabs from '../../../atoms/Tabs/Tabs';
-import PaginationTable from '../../../modules/Table/PaginationTable';
 import useToggle from '../../../../libs/useToggle';
 import LoadingData from '../../../modules/LoadingData/LoadingData';
 
@@ -167,11 +166,7 @@ const ScheduleListPage = () => {
       <ContentWrapper>
         <Tabs select={status} setSelect={setSchedule} items={SCHEDULE_ITEMS} />
         {tableItems.length ? (
-          <PaginationTable
-            head={headItem}
-            rows={tableItems}
-            change={tableItems}
-          />
+          <i>{headItem}</i>
         ) : (
           <LoadingData isLoading={isLoading} />
         )}
