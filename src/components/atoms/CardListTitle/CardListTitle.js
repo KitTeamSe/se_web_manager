@@ -21,6 +21,9 @@ const ItemText = styled(Typography)`
   text-align: center;
   font-weight: 600;
   user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const CardListTitle = ({ head, small }) => {

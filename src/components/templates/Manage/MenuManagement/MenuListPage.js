@@ -27,7 +27,7 @@ const Wrapper = styled.div``;
 
 const MenuListPage = ({ menuList, error, loading, page }) => {
   const title = '메뉴';
-  const headerTitle = `${title}관리`;
+  const headerTitle = `${title} 목록 조회`;
   const [menuListData, setmenuListData] = useState([]);
 
   const handleChildData = parent => {
