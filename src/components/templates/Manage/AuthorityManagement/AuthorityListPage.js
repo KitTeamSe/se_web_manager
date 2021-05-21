@@ -27,8 +27,6 @@ const AuthorityListPage = ({ authorityList, error, loading }) => {
   const title = '권한';
   const headerTitle = `${title} 목록 조회`;
 
-  console.log(AuthorityData);
-
   return (
     <Wrapper>
       <ContentHeader title={headerTitle} />

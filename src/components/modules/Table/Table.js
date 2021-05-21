@@ -54,7 +54,6 @@ const Body = ({ head, rows, type, typeId }) => {
           key={`${type}/${e[typeId]}`}
           hover
         >
-          {console.log(e)}
           {head.map(el => {
             if (el.key in e && el.key === 'menuType') {
               return (
