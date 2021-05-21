@@ -5,6 +5,7 @@ import loading from './loading';
 import auth, { authSaga } from './auth';
 import menu, { menuSaga } from './manage/menu';
 import board, { boardSaga } from './manage/board';
+import authority, { authoritySaga } from './manage/authority';
 
 import lectureRoom, { lectureRoomSaga } from './schedule/lectureRoom';
 import period, { periodSaga } from './schedule/period';
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   period,
   subject,
   teacher,
-  board
+  board,
+  authority
 });
 
 export function* rootSaga() {
@@ -30,7 +32,8 @@ export function* rootSaga() {
     subjectSaga(),
     teacherSaga(),
     menuSaga(),
-    boardSaga()
+    boardSaga(),
+    authoritySaga()
   ]);
 }
 

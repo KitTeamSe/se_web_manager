@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BoardListPage from './BoardListPage';
 import { loadBoards, initialize } from '../../../../modules/manage/board';
 
-const BoardListViewContainer = ({ boardData, location }) => {
+const BoardListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { boardListData, error, loadingData } = useSelector(
     ({ board, loading }) => ({
@@ -31,7 +31,6 @@ const BoardListViewContainer = ({ boardData, location }) => {
   return (
     <BoardListPage
       boardList={boardListData}
-      boardData={boardData}
       error={error}
       loading={loadingData}
       page={newPage}

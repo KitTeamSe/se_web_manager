@@ -63,7 +63,9 @@ const ManageInfoCard = ({
   loading,
   head,
   setDeleteOpen,
-  setUpdateOpen
+  setUpdateOpen,
+  disabledDelete,
+  disabledUpdate
 }) => {
   const goBack = () => {
     history.goBack();
@@ -95,12 +97,16 @@ const ManageInfoCard = ({
       </Wrapper>
       <ButtonWrapper>
         <RoundButton onClick={goBack}>취 소</RoundButton>
-        <RoundButton color="secondary" onClick={setUpdateOpen}>
-          수 정
-        </RoundButton>
-        <RoundButton color="secondary" onClick={setDeleteOpen}>
-          삭 제
-        </RoundButton>
+        {disabledUpdate || (
+          <RoundButton color="secondary" onClick={setUpdateOpen}>
+            수 정
+          </RoundButton>
+        )}
+        {disabledDelete || (
+          <RoundButton color="secondary" onClick={setDeleteOpen}>
+            삭 제
+          </RoundButton>
+        )}
       </ButtonWrapper>
     </CardStyled>
   );
