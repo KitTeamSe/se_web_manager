@@ -1,123 +1,120 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Paper } from '@material-ui/core';
+import Pagination from '../../../modules/Pagination/Pagination';
+import Table from '../../../modules/Table/Table';
+import BoardData from '../../../../statics/data/BoardData';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
-import Button from '../../../atoms/Button/RoundButton';
-import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
-// import Table from '../../../modules/Table/Table';
+import RoundButton from '../../../atoms/Button/RoundButton';
+import useToggle from '../../../../libs/useToggle';
+import AddDialogContainer from '../../../modules/AddDialog/BoardAddDialogContainer';
 
-const Wrapper = styled.div``;
+const PAGE_DATA_LENGTH = 10;
 
 const ContentWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   padding: 8px;
 `;
 
-const head = [
-  {
-    key: 'count',
-    name: '#',
-    width: '10%'
-  },
-  {
-    key: 'name',
-    name: '게시판 명',
-    width: '25%'
-  },
-  {
-    key: 'state',
-    name: '상태',
-    width: '25%'
-  },
-  {
-    key: 'order',
-    name: '순번',
-    width: '10%'
-  },
-  {
-    key: 'registrant_member_id',
-    name: '등록자',
-    width: '15%'
-  },
-  {
-    key: 'last_modify_member_id',
-    name: '수정자',
-    width: '15%'
-  }
-];
+const PaperStyled = styled(Paper)`
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
-const items = [
-  {
-    id: '1',
-    name: 'ㄱㄱ 게시판',
-    state: 'ㄱㄱ 게시판 상태',
-    order: '1',
-    registrant_member_id: '1',
-    last_modify_member_id: '1'
-  },
-  {
-    id: '2',
-    name: 'ㄴㄴ 게시판',
-    state: 'ㄴㄴ 게시판 상태',
-    order: '2',
-    registrant_member_id: '2',
-    last_modify_member_id: '2'
-  },
-  {
-    id: '3',
-    name: 'ㄷㄷ 게시판',
-    state: 'ㄷㄷ 게시판 상태',
-    order: '3',
-    registrant_member_id: '3',
-    last_modify_member_id: '3'
-  },
-  {
-    id: '4',
-    name: 'ㄹㄹ 게시판',
-    state: 'ㄹㄹ 게시판 상태',
-    order: '4',
-    registrant_member_id: '4',
-    last_modify_member_id: '4'
-  },
-  {
-    id: '5',
-    name: 'ㅇㅇ 게시판',
-    state: 'ㅇㅇ 게시판 상태',
-    order: '5',
-    registrant_member_id: '5',
-    last_modify_member_id: '5'
-  }
-];
+const Wrapper = styled.div``;
 
-// const Wrapper = styled.div`
-//   display: block;
-// `;
+const BoardListPage = ({ boardList, error, loading, page, setPage }) => {
+  const title = '게시판';
+  const headerTitle = `${title} 목록 조회`;
+  const [boardListData, setboardListData] = useState([]);
+  const [addOpen, setAddOpen] = useToggle();
 
-const BoardListView = () => {
-  const headItem = head;
-  const tableItems = items;
-  // const [headItem, setHeadItem] = useState(head);
-  // const [tableItems, setTableItems] = useState(items);
+  const handleAddOpen = () => {
+    setAddOpen(true);
+  };
 
-  // useEffect(() => {
-  //   setHeadItem(head);
-  //   setTableItems(items);
-  // }, []);
+  useEffect(() => {
+    if (boardList) {
+      setboardListData(boardList.data);
+    }
+  }, [boardList]);
+
+  console.log(BoardData);
 
   return (
     <Wrapper>
-      <ContentHeader title="게시판 관리">
-        <Button variant="contained" color="primary">
-          게시판추가
-        </Button>
+      <ContentHeader title={headerTitle}>
+        <RoundButton color="secondary" onClick={handleAddOpen}>
+          {title} 추가
+        </RoundButton>
       </ContentHeader>
       <ContentWrapper>
-        {/* <Table head={headItem} rows={tableItems} /> */}
-        <PreInfoList head={headItem} rows={tableItems} />
+        <PaperStyled component="div">
+          {error ? (
+            <div>loading</div>
+          ) : (
+            !loading &&
+            boardList && (
+              <>
+                <Table
+                  head={BoardData}
+                  rows={boardListData.slice(
+                    PAGE_DATA_LENGTH * (page - 1),
+                    PAGE_DATA_LENGTH * (page - 1) + PAGE_DATA_LENGTH
+                  )}
+                  type="board"
+                  typeId="boardId"
+                />
+                <Pagination
+                  totalPage={Math.ceil(boardListData.length / PAGE_DATA_LENGTH)}
+                  page={page}
+                  link="m/board"
+                />
+              </>
+            )
+          )}
+        </PaperStyled>
       </ContentWrapper>
+
+      {addOpen && (
+        <AddDialogContainer
+          title={title}
+          head={BoardData}
+          open={addOpen}
+          setOpen={setAddOpen}
+          setPage={setPage}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default BoardListView;
+BoardListPage.propTypes = {
+  board: PropTypes.shape({
+    data: PropTypes.shape({
+      content: PropTypes.shape({
+        boardId: PropTypes.string.isRequired,
+        building: PropTypes.string.isRequired,
+        roomNumber: PropTypes.string.isRequired,
+        capacity: PropTypes.string.isRequired,
+        note: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired
+  }),
+  error: PropTypes.string,
+  loading: PropTypes.string,
+  page: PropTypes.number.isRequired
+};
+
+BoardListPage.defaultProps = {
+  board: null,
+  error: null,
+  loading: null
+};
+
+export default BoardListPage;

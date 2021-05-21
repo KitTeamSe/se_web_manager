@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import useToggle from '../../../../libs/useToggle';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
-import MenuDeleteDialogContainer from '../../../modules/DeleteDialog/MenuDeleteDialogContainer';
+import BoardDeleteDialogContainer from '../../../modules/DeleteDialog/BoardDeleteDialogContainer';
 import ManageInfoCard from '../../../modules/ManageInfoCard/ManageInfoCard';
-import UpdateDialogContainer from '../../../modules/UpdateDialog/MenuUpdateDialogContainer';
-import MenuData from '../../../../statics/data/MenuData';
+import UpdateDialogContainer from '../../../modules/UpdateDialog/BoardUpdateDialogContainer';
+import BoardData from '../../../../statics/data/BoardData';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -13,19 +13,16 @@ const ContentWrapper = styled.div`
   justify-content: center;
 `;
 
-const MenuInfoData = {
-  menuId: 'ID',
+const BoardInfoData = {
+  boardId: 'ID',
   nameEng: '영어이름',
   nameKor: '이름',
-  menuOrder: '순서',
-  menuType: '타입',
-  parentId: '상위폴더ID',
-  url: 'URL',
-  description: '비고'
+  menuNameEng: '메뉴이름',
+  menuNameKor: '메뉴영어이름'
 };
 
-const MenuInfoPage = ({ menu, error, loading }) => {
-  const title = '메뉴';
+const BoardInfoPage = ({ board, error, loading }) => {
+  const title = '게시판';
   const headerTitle = `${title} 정보 조회`;
   const [deleteOpen, setDeleteOpen] = useToggle();
   const [updateOpen, setUpdateOpen] = useToggle();
@@ -35,27 +32,27 @@ const MenuInfoPage = ({ menu, error, loading }) => {
       <ContentHeader title={headerTitle} />
       <ContentWrapper>
         <ManageInfoCard
-          data={menu}
+          data={board}
           error={error}
           loading={loading}
-          head={MenuInfoData}
+          head={BoardInfoData}
           setDeleteOpen={setDeleteOpen}
           setUpdateOpen={setUpdateOpen}
         />
         {!deleteOpen || (
-          <MenuDeleteDialogContainer
+          <BoardDeleteDialogContainer
             title={title}
-            data={menu.data}
+            data={board.data}
             open={deleteOpen}
             setOpen={setDeleteOpen}
-            type="menu"
+            type="board"
           />
         )}
         {!updateOpen || (
           <UpdateDialogContainer
             title={title}
-            data={menu.data}
-            head={MenuData}
+            data={board.data}
+            head={BoardData}
             open={updateOpen}
             setOpen={setUpdateOpen}
           />
@@ -65,8 +62,8 @@ const MenuInfoPage = ({ menu, error, loading }) => {
   );
 };
 
-MenuInfoPage.propTypes = {};
+BoardInfoPage.propTypes = {};
 
-MenuInfoPage.defaultProps = {};
+BoardInfoPage.defaultProps = {};
 
-export default MenuInfoPage;
+export default BoardInfoPage;

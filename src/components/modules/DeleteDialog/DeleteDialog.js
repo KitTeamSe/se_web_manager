@@ -30,6 +30,7 @@ const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
   const contentsComment = () => {
     if (type === 'lectureRoom') return `${data.building} ${data.roomNumber}`;
     if (type === 'menu') return `${data.nameKor}`;
+    if (type === 'board') return `${data.nameKor}`;
     return `${data.name}`;
   };
   console.log(data.nameKor);
