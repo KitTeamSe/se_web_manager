@@ -4,6 +4,8 @@ import { all } from 'redux-saga/effects';
 import loading from './loading';
 import auth, { authSaga } from './auth';
 import menu, { menuSaga } from './manage/menu';
+import board, { boardSaga } from './manage/board';
+
 import lectureRoom, { lectureRoomSaga } from './schedule/lectureRoom';
 import period, { periodSaga } from './schedule/period';
 import subject, { subjectSaga } from './schedule/subject';
@@ -16,7 +18,8 @@ const rootReducer = combineReducers({
   lectureRoom,
   period,
   subject,
-  teacher
+  teacher,
+  board
 });
 
 export function* rootSaga() {
@@ -26,7 +29,8 @@ export function* rootSaga() {
     periodSaga(),
     subjectSaga(),
     teacherSaga(),
-    menuSaga()
+    menuSaga(),
+    boardSaga()
   ]);
 }
 

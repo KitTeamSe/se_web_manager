@@ -17,6 +17,8 @@ const FormStyled = styled.form`
   flex-direction: column;
 `;
 
+const idData = ['menuId', 'boardId'];
+
 const UpdateDialog = ({
   id,
   title,
@@ -38,7 +40,7 @@ const UpdateDialog = ({
       <DialogContent>
         <FormStyled onSubmit={onSubmit}>
           {head.map(el =>
-            el.key === 'menuId' ? (
+            idData.indexOf(el.key) > -1 ? (
               <TextField
                 id={el.key}
                 name={el.key}

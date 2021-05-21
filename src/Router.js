@@ -4,10 +4,11 @@ import { MANAGE_URL } from './statics/data/config';
 
 import MenuListPageContainer from './components/templates/Manage/MenuManagement/MenuListPageContainer';
 import MenuInfoPageContainer from './components/templates/Manage/MenuManagement/MenuInfoPageContainer';
+import BoardListPageContainer from './components/templates/Manage/BoardManagement/BoardListPageContainer';
+import BoardInfoPageContainer from './components/templates/Manage/BoardManagement/BoardInfoPageContainer';
 import AuthGroupListPage from './components/templates/Manage/AuthGroupManagement/AuthGroupListPage';
 import AuthListPage from './components/templates/Manage/AuthManagement/AuthListPage';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
-import BoardListPage from './components/templates/Manage/BoardManagement/BoardListPage';
 import TagListPage from './components/templates/Manage/TagManagement/TagListPage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
 import LogListPage from './components/templates/Manage/LogManagement/LogListPage';
@@ -36,14 +37,11 @@ const ManageRoute = () => (
     <Router to="menu/:id">
       <MenuInfoPageContainer />
     </Router>
-    <Router to="menu/add">
-      <></>
+    <Router exact to="board">
+      <BoardListPageContainer />
     </Router>
-    <Router to="menu/update">
-      <></>
-    </Router>
-    <Router to="board">
-      <BoardListPage />
+    <Router to="board/:id">
+      <BoardInfoPageContainer />
     </Router>
     <Router to="post">
       <PostMovePage />

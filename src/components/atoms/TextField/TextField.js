@@ -117,6 +117,7 @@ const TextField = ({
   if (type === 'multiline') return multilineField();
   if (type === 'dropdown') return dropdownField();
   if (type === 'time') return timeField();
+  if (type === 'empty') return null;
   return defaultField();
 };
 
