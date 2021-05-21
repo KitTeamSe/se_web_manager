@@ -20,6 +20,11 @@ const DialogFooter = ({ handleClose, onClick, type }) => {
           생 성
         </Button>
       )}
+      {type === 'update' && (
+        <Button type="submit" color="secondary">
+          수 정
+        </Button>
+      )}
       {type === 'delete' && (
         <Button onClick={onClick} color="secondary">
           삭 제

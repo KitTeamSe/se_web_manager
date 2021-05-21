@@ -73,6 +73,18 @@ const TextField = ({
     return defaultField(props);
   };
 
+  const timeField = () => {
+    const inputProps = { step: 600 };
+    const inputLabelProps = { shrink: true };
+    const props = {
+      inputProps: { inputProps },
+      inputLabelProps: { inputLabelProps },
+      type: 'time',
+      defaultValue: '00:00'
+    };
+    return defaultField(props);
+  };
+
   const dropdownField = () => {
     const handleChange = e => {
       setCurrency(e.target.value);
@@ -104,6 +116,7 @@ const TextField = ({
   if (type === 'number') return numberField();
   if (type === 'multiline') return multilineField();
   if (type === 'dropdown') return dropdownField();
+  if (type === 'time') return timeField();
   return defaultField();
 };
 

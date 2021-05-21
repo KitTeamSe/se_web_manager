@@ -29,9 +29,10 @@ const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
 
   const contentsComment = () => {
     if (type === 'lectureRoom') return `${data.building} ${data.roomNumber}`;
+    if (type === 'menu') return `${data.nameKor}`;
     return `${data.name}`;
   };
-
+  console.log(data.nameKor);
   return (
     <Dialog open={open}>
       <DialogTitleStyled>{title} 삭제</DialogTitleStyled>

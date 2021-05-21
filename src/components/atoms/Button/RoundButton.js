@@ -3,11 +3,22 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Buttons from '@material-ui/core/Button';
 
+const padding = {
+  small: '4px 12px',
+  normal: '5px 16px'
+};
+
+const fontSize = {
+  small: '0.875rem',
+  normal: '1rem'
+};
+
 const ButtonStyled = styled(Buttons)`
-  margin: 0 2px;
+  min-width: 75px;
   border-radius: 32px;
   font-weight: bold;
-  padding: ${({ size }) => (size === 'small' ? '4px 12px' : null)};
+  padding: ${({ size }) => padding[size] || size};
+  font-size: ${({ size }) => fontSize[size] || size};
   background: ${({ color }) =>
     color === 'primary' ? props => props.theme.mainColor : color};
   &:hover {

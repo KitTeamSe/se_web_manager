@@ -6,6 +6,9 @@ import Pagination from '../../../modules/Pagination/Pagination';
 import Table from '../../../modules/Table/Table';
 import MenuData from '../../../../statics/data/MenuData';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
+import RoundButton from '../../../atoms/Button/RoundButton';
+import useToggle from '../../../../libs/useToggle';
+import AddDialogContainer from '../../../modules/AddDialog/MenuAddDialogContainer';
 
 const PAGE_DATA_LENGTH = 10;
 
@@ -25,10 +28,11 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const MenuListPage = ({ menuList, error, loading, page }) => {
+const MenuListPage = ({ menuList, error, loading, page, setPage }) => {
   const title = '메뉴';
-  const headerTitle = `${title}관리`;
+  const headerTitle = `${title} 목록 조회`;
   const [menuListData, setmenuListData] = useState([]);
+  const [addOpen, setAddOpen] = useToggle();
 
   const handleChildData = parent => {
     const result = [];
@@ -52,15 +56,25 @@ const MenuListPage = ({ menuList, error, loading, page }) => {
     return result;
   };
 
+  const handleAddOpen = () => {
+    setAddOpen(true);
+  };
+
   useEffect(() => {
     if (menuList) {
       setmenuListData(handleMenuData(menuList.data));
     }
   }, [menuList]);
 
+  console.log(MenuData);
+
   return (
     <Wrapper>
-      <ContentHeader title={headerTitle} />
+      <ContentHeader title={headerTitle}>
+        <RoundButton color="secondary" onClick={handleAddOpen}>
+          {title} 추가
+        </RoundButton>
+      </ContentHeader>
       <ContentWrapper>
         <PaperStyled component="div">
           {error ? (
@@ -88,6 +102,16 @@ const MenuListPage = ({ menuList, error, loading, page }) => {
           )}
         </PaperStyled>
       </ContentWrapper>
+
+      {addOpen && (
+        <AddDialogContainer
+          title={title}
+          head={MenuData}
+          open={addOpen}
+          setOpen={setAddOpen}
+          setPage={setPage}
+        />
+      )}
     </Wrapper>
   );
 };

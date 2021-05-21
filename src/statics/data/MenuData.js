@@ -4,11 +4,26 @@ export const MenuTypeItems = {
   REDIRECT: '링크'
 };
 
+export const TeacherTypeItems = [
+  {
+    value: 'BOARD',
+    label: '게시판'
+  },
+  {
+    value: 'FOLDER',
+    label: '폴더'
+  },
+  {
+    value: 'REDIRECT',
+    label: '링크'
+  }
+];
+
 const MenuData = [
   {
     key: 'menuId',
     name: 'id',
-    type: 'id',
+    type: 'readonly',
     width: '10%',
     placeholder: '0'
   },
@@ -37,6 +52,7 @@ const MenuData = [
     key: 'menuType',
     name: '타입',
     type: 'dropdown',
+    items: TeacherTypeItems,
     width: '10%',
     placeholder: 'dropdown'
   },

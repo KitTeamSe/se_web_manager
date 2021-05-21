@@ -9,6 +9,7 @@ import {
 
 const INITIALIZE = 'menu/INITIALIZE';
 const CHANGE_FIELD = 'menu/CHANGE_FIELD';
+const CHANGE_FIELD_ALL = 'menu/CHANGE_FIELD_ALL';
 
 const [
   LOAD_MENU,
@@ -26,11 +27,11 @@ const [ADD_MENU, ADD_MENU_SUCCESS, ADD_MENU_FAILURE] = createRequestActionTypes(
   'menu/ADD_MENU'
 );
 
-// const [
-//   UPDATE_MENU,
-//   UPDATE_MENU_SUCCESS,
-//   UPDATE_MENU_FAILURE
-// ] = createRequestActionTypes('menu/UPDATE_MENU');
+const [
+  UPDATE_MENU,
+  UPDATE_MENU_SUCCESS,
+  UPDATE_MENU_FAILURE
+] = createRequestActionTypes('menu/UPDATE_MENU');
 
 const [
   REMOVE_MENU,
@@ -44,6 +45,19 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value
 }));
 
+export const changeFieldAll = createAction(
+  CHANGE_FIELD_ALL,
+  ({ description, menuOrder, menuType, nameEng, nameKor, parentId, url }) => ({
+    description,
+    menuOrder,
+    menuType,
+    nameEng,
+    nameKor,
+    parentId,
+    url
+  })
+);
+
 export const loadMenu = createAction(LOAD_MENU, ({ id, token }) => ({
   id,
   token
@@ -52,14 +66,26 @@ export const loadMenu = createAction(LOAD_MENU, ({ id, token }) => ({
 export const loadMenus = createAction(LOAD_MENUS, ({ token }) => ({ token }));
 
 export const initializeAdd = createAction(ADD_MENU);
+export const initializeUpdate = createAction(UPDATE_MENU);
 export const addMenu = createAction(
   ADD_MENU,
-  ({ menuOrder, name, endTime, startTime, note, token }) => ({
+  ({
+    description,
     menuOrder,
-    name,
-    endTime,
-    startTime,
-    note,
+    menuType,
+    nameEng,
+    nameKor,
+    parentId,
+    url,
+    token
+  }) => ({
+    description,
+    menuOrder,
+    menuType,
+    nameEng,
+    nameKor,
+    parentId,
+    url,
     token
   })
 );
@@ -69,16 +95,30 @@ export const removeMenu = createAction(REMOVE_MENU, ({ id, token }) => ({
   token
 }));
 
-// export const updatemenu = createAction(
-//   UPDATE_MENU,
-//   ({ building, capacity, menuId, note, roomNumber }) => ({
-//     building,
-//     capacity,
-//     menuId,
-//     note,
-//     roomNumber
-//   })
-// );
+export const updateMenu = createAction(
+  UPDATE_MENU,
+  ({
+    menuId,
+    description,
+    menuOrder,
+    menuType,
+    nameEng,
+    nameKor,
+    parentId,
+    url,
+    token
+  }) => ({
+    menuId,
+    description,
+    menuOrder,
+    menuType,
+    nameEng,
+    nameKor,
+    parentId,
+    url,
+    token
+  })
+);
 
 const loadMenuSaga = createRequestSaga(LOAD_MENU, api.getMenu);
 
@@ -88,12 +128,14 @@ const addMenuSaga = createRequestSaga(ADD_MENU, api.addMenu);
 
 const removeMenuSaga = createRequestSaga(REMOVE_MENU, api.removeMenu);
 
+const updateMenuSaga = createRequestSaga(UPDATE_MENU, api.updateMenu);
+
 export function* menuSaga() {
   yield takeLatest(LOAD_MENU, loadMenuSaga);
   yield takeLatest(LOAD_MENUS, loadMenusSaga);
   yield takeLatest(ADD_MENU, addMenuSaga);
   yield takeLatest(REMOVE_MENU, removeMenuSaga);
-  // yield takeLatest(UPDATE_MENU, updateSaga);
+  yield takeLatest(UPDATE_MENU, updateMenuSaga);
 }
 
 const initialState = {
@@ -124,6 +166,31 @@ export default handleActions(
     [CHANGE_FIELD]: (state, { payload: { key, value } }) =>
       produce(state, draft => {
         draft.menu[key] = value;
+      }),
+    [CHANGE_FIELD_ALL]: (
+      state,
+      {
+        payload: {
+          description,
+          menuOrder,
+          menuType,
+          nameEng,
+          nameKor,
+          parentId,
+          url
+        }
+      }
+    ) =>
+      produce(state, draft => {
+        draft.menu = {
+          description,
+          menuOrder,
+          menuType,
+          nameEng,
+          nameKor,
+          parentId,
+          url
+        };
       }),
     [LOAD_MENU_SUCCESS]: (state, { payload: info }) => ({
       ...state,
@@ -167,6 +234,15 @@ export default handleActions(
     [REMOVE_MENU_FAILURE]: (state, { payload: removeError }) => ({
       ...state,
       removeError
+    }),
+    [UPDATE_MENU_SUCCESS]: (state, { payload: update }) => ({
+      ...state,
+      update,
+      updateError: null
+    }),
+    [UPDATE_MENU_FAILURE]: (state, { payload: updateError }) => ({
+      ...state,
+      updateError
     })
   },
   initialState

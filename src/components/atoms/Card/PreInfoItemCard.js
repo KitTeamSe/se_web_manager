@@ -25,12 +25,15 @@ const CardStyled = styled(Card)`
 
 const ItemWrapper = styled.div`
   width: ${({ width }) => width};
+  text-overflow: ellipsis;
 `;
 
 const ItemText = styled(Typography)`
   font-size: ${({ small }) => (small ? '0.875rem' : '1rem')};
   text-align: ${({ align }) => align || 'center'};
-  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const PreInfoItemCard = ({

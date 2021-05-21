@@ -21,12 +21,18 @@ const TableRowStyled = styled(TableRow)`
   cursor: pointer;
 `;
 
+const TableCellStyled = styled(TableCell)`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const Head = ({ head }) => {
   return (
     <TableHead>
       <TableRow>
         {head.map(e => (
-          <TableCell align="center">{e.name}</TableCell>
+          <TableCellStyled align="center">{e.name}</TableCellStyled>
         ))}
       </TableRow>
     </TableHead>
