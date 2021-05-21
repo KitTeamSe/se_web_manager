@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import RoundButton from '../../atoms/Button/RoundButton';
@@ -55,7 +56,23 @@ const DataText = styled(Typography)`
   word-break: break-all;
 `;
 
-const ManageInfoCard = ({ data, error, loading, head }) => {
+const ManageInfoCard = ({
+  history,
+  data,
+  error,
+  loading,
+  head,
+  setDeleteOpen,
+  setUpdateOpen
+}) => {
+  const goBack = () => {
+    history.goBack();
+  };
+
+  useEffect(() => {
+    console.log(history);
+  }, [history]);
+
   return (
     <CardStyled>
       <Wrapper>
@@ -77,9 +94,13 @@ const ManageInfoCard = ({ data, error, loading, head }) => {
         )}
       </Wrapper>
       <ButtonWrapper>
-        <RoundButton>취 소</RoundButton>
-        <RoundButton color="secondary">수 정</RoundButton>
-        <RoundButton color="secondary">삭 제</RoundButton>
+        <RoundButton onClick={goBack}>취 소</RoundButton>
+        <RoundButton color="secondary" onClick={setUpdateOpen}>
+          수 정
+        </RoundButton>
+        <RoundButton color="secondary" onClick={setDeleteOpen}>
+          삭 제
+        </RoundButton>
       </ButtonWrapper>
     </CardStyled>
   );
@@ -89,4 +110,4 @@ ManageInfoCard.propTypes = {};
 
 ManageInfoCard.defaultProps = {};
 
-export default ManageInfoCard;
+export default withRouter(ManageInfoCard);

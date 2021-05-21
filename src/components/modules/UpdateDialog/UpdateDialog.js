@@ -17,7 +17,8 @@ const FormStyled = styled.form`
   flex-direction: column;
 `;
 
-const AddDialog = ({
+const UpdateDialog = ({
+  id,
   title,
   head,
   open,
@@ -29,37 +30,46 @@ const AddDialog = ({
   const handleClose = () => {
     setOpen(false);
   };
+  console.log(id);
 
   return (
     <Dialog onClose={handleClose} open={open} disableBackdropClick>
-      <DialogTitleStyled>{title} 추가</DialogTitleStyled>
+      <DialogTitleStyled>{title} 수정</DialogTitleStyled>
       <DialogContent>
         <FormStyled onSubmit={onSubmit}>
-          {head.map((el, i) => {
-            console.log(el);
-            return (
-              i !== 0 && (
-                <TextField
-                  id={el.key}
-                  name={el.key}
-                  label={el.name}
-                  type={el.type}
-                  placeholder={el.placeholder}
-                  value={form[el.key]}
-                  onChange={onChange}
-                  items={el.items}
-                />
-              )
-            );
-          })}
-          <DialogFooter handleClose={handleClose} type="add" />
+          {head.map(el =>
+            el.key === 'menuId' ? (
+              <TextField
+                id={el.key}
+                name={el.key}
+                label={el.name}
+                type={el.type}
+                placeholder={el.placeholder}
+                value={id}
+                onChange={onChange}
+                items={el.items}
+              />
+            ) : (
+              <TextField
+                id={el.key}
+                name={el.key}
+                label={el.name}
+                type={el.type}
+                placeholder={el.placeholder}
+                value={form[el.key]}
+                onChange={onChange}
+                items={el.items}
+              />
+            )
+          )}
+          <DialogFooter handleClose={handleClose} type="update" />
         </FormStyled>
       </DialogContent>
     </Dialog>
   );
 };
 
-AddDialog.propTypes = {
+UpdateDialog.propTypes = {
   title: PropTypes.string,
   head: PropTypes.arrayOf(PropTypes.array),
   open: PropTypes.bool,
@@ -69,7 +79,7 @@ AddDialog.propTypes = {
   onChange: PropTypes.func
 };
 
-AddDialog.defaultProps = {
+UpdateDialog.defaultProps = {
   title: '',
   head: [],
   open: false,
@@ -78,4 +88,4 @@ AddDialog.defaultProps = {
   onChange: null
 };
 
-export default AddDialog;
+export default UpdateDialog;

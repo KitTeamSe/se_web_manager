@@ -35,6 +35,7 @@ const MenuListViewContainer = ({ menuData, location }) => {
       error={error}
       loading={loadingData}
       page={newPage}
+      setPage={setNewPage}
     />
   );
 };

@@ -5,7 +5,7 @@ import { Paper } from '@material-ui/core';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
 import PreInfoList from '../../../modules/PreInfoList/PreInfoList';
 import AddDialogContainer from '../../../modules/AddDialog/PeriodAddDialogContainer';
-import DeleteDialog from '../../../modules/DeleteDialog/PeriodDeleteDialogContainer';
+import DeleteDialogContainer from '../../../modules/DeleteDialog/PeriodDeleteDialogContainer';
 import AddDeleteBox from '../../../modules/AddDeleteBox/AddDeleteBox';
 import useToggle from '../../../../libs/useToggle';
 import PeriodData from '../../../../statics/data/PeriodData';
@@ -86,7 +86,7 @@ const PeriodListPage = ({ periods, error, loading, select, handleSelect }) => {
         )}
 
         {!deleteOpen || (
-          <DeleteDialog
+          <DeleteDialogContainer
             title={title}
             data={periods.data.content[select]}
             open={deleteOpen}
