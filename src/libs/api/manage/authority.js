@@ -1,6 +1,11 @@
-import client from '../client';
+import qs from 'qs';
+import client, { tokenHeader } from '../client';
 
-const url = `authority`;
+const URL = `authority`;
 
-export const getAuthorities = () => client.get(`${url}`);
-export const getAuthority = id => client.get(`${url}/${id}`);
+export const getAuthoritys = ({ direction, page, size, token }) => {
+  const queryString = qs.stringify({ direction, page, size });
+  return client.get(`${URL}?${queryString}`, tokenHeader(token));
+};
+export const getAuthority = ({ id, token }) =>
+  client.get(`${URL}/${id}`, tokenHeader(token));

@@ -25,6 +25,11 @@ const TableCellStyled = styled(TableCell)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 14px 16px;
+`;
+
+const TableHeadCellStyled = styled(TableCell)`
+  padding: 14px 16px;
 `;
 
 const Head = ({ head }) => {
@@ -32,7 +37,7 @@ const Head = ({ head }) => {
     <TableHead>
       <TableRow>
         {head.map(e => (
-          <TableCellStyled align="center">{e.name}</TableCellStyled>
+          <TableHeadCellStyled align="center">{e.name}</TableHeadCellStyled>
         ))}
       </TableRow>
     </TableHead>
@@ -49,14 +54,17 @@ const Body = ({ head, rows, type, typeId }) => {
           key={`${type}/${e[typeId]}`}
           hover
         >
+          {console.log(e)}
           {head.map(el => {
             if (el.key in e && el.key === 'menuType') {
               return (
-                <TableCell align="center">{MenuTypeItems[e[el.key]]}</TableCell>
+                <TableCellStyled align="center">
+                  {MenuTypeItems[e[el.key]]}
+                </TableCellStyled>
               );
             }
             return el.key in e ? (
-              <TableCell align="center">{e[el.key]}</TableCell>
+              <TableCellStyled align="center">{e[el.key]}</TableCellStyled>
             ) : null;
           })}
         </TableRowStyled>

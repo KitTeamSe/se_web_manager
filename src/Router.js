@@ -7,7 +7,8 @@ import MenuInfoPageContainer from './components/templates/Manage/MenuManagement/
 import BoardListPageContainer from './components/templates/Manage/BoardManagement/BoardListPageContainer';
 import BoardInfoPageContainer from './components/templates/Manage/BoardManagement/BoardInfoPageContainer';
 import AuthGroupListPage from './components/templates/Manage/AuthGroupManagement/AuthGroupListPage';
-import AuthListPage from './components/templates/Manage/AuthManagement/AuthListPage';
+import AuthorityListPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityListPageContainer';
+import AuthorityInfoPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityInfoPageContainer';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
 import TagListPage from './components/templates/Manage/TagManagement/TagListPage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
@@ -70,8 +71,11 @@ const ManageRoute = () => (
     <Router to="authority_group">
       <AuthGroupListPage />
     </Router>
-    <Router to="authority">
-      <AuthListPage />
+    <Router exact to="authority">
+      <AuthorityListPageContainer />
+    </Router>
+    <Router to="authority/:id">
+      <AuthorityInfoPageContainer />
     </Router>
   </>
 );

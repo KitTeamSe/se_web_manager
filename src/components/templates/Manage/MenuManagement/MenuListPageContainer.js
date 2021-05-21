@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuListPage from './MenuListPage';
 import { loadMenus, initialize } from '../../../../modules/manage/menu';
 
-const MenuListViewContainer = ({ menuData, location }) => {
+const MenuListViewContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { menuListData, error, loadingData } = useSelector(
     ({ menu, loading }) => ({
@@ -31,7 +31,6 @@ const MenuListViewContainer = ({ menuData, location }) => {
   return (
     <MenuListPage
       menuList={menuListData}
-      menuData={menuData}
       error={error}
       loading={loadingData}
       page={newPage}
