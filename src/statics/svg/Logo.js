@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 const LogoStyled = styled.text`
   user-select: none;
   dominant-baseline: hanging;
-  font: 1.5rem NanumSquareEB;
+  font: 1.5rem NanumSquareEB !important;
   fill: ${({ color }) => color || (props => props.theme.mainColor)};
 `;
 
 const SecondStyled = styled.tspan`
-  font-family: NanumSquareR;
+  font-family: NanumSquareR !important;
 `;
 
 const Logo = ({ color }) => {
