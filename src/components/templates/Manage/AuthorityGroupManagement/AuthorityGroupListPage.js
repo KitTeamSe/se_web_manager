@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Paper } from '@material-ui/core';
 import Pagination from '../../../modules/Pagination/Pagination';
 import Table from '../../../modules/Table/Table';
-import BoardData from '../../../../statics/data/BoardData';
+import AuthorityGroupData from '../../../../statics/data/AuthorityGroupData';
 import ContentHeader from '../../../modules/ContentHeader/ContentHeader';
-import RoundButton from '../../../atoms/Button/RoundButton';
+import AddDialogContainer from '../../../modules/AddDialog/AuthorityGroupAddDialogContainer';
 import useToggle from '../../../../libs/useToggle';
-import AddDialogContainer from '../../../modules/AddDialog/BoardAddDialogContainer';
-
-const PAGE_DATA_LENGTH = 10;
+import RoundButton from '../../../atoms/Button/RoundButton';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -28,21 +26,14 @@ const PaperStyled = styled(Paper)`
 
 const Wrapper = styled.div``;
 
-const BoardListPage = ({ boardList, error, loading, page, setPage }) => {
-  const title = '게시판';
+const AuthorityGroupListPage = ({ authorityGroupList, error, loading }) => {
+  const title = '권한 그룹';
   const headerTitle = `${title} 목록 조회`;
-  const [boardListData, setboardListData] = useState([]);
   const [addOpen, setAddOpen] = useToggle();
 
   const handleAddOpen = () => {
     setAddOpen(true);
   };
-
-  useEffect(() => {
-    if (boardList) {
-      setboardListData(boardList.data);
-    }
-  }, [boardList]);
 
   return (
     <Wrapper>
@@ -57,46 +48,41 @@ const BoardListPage = ({ boardList, error, loading, page, setPage }) => {
             <div>loading</div>
           ) : (
             !loading &&
-            boardList && (
+            authorityGroupList && (
               <>
                 <Table
-                  head={BoardData}
-                  rows={boardListData.slice(
-                    PAGE_DATA_LENGTH * (page - 1),
-                    PAGE_DATA_LENGTH * (page - 1) + PAGE_DATA_LENGTH
-                  )}
-                  type="board"
-                  typeId="boardId"
+                  head={AuthorityGroupData}
+                  rows={authorityGroupList.data.content}
+                  type="authority_group"
+                  typeId="authorityGroupId"
                 />
                 <Pagination
-                  totalPage={Math.ceil(boardListData.length / PAGE_DATA_LENGTH)}
-                  page={page}
-                  link="m/board"
+                  totalPage={authorityGroupList.data.totalPages}
+                  page={authorityGroupList.data.pageable.pageNumber + 1}
+                  link="m/authority_group"
                 />
               </>
             )
           )}
         </PaperStyled>
       </ContentWrapper>
-
       {addOpen && (
         <AddDialogContainer
           title={title}
-          head={BoardData}
+          head={AuthorityGroupData}
           open={addOpen}
           setOpen={setAddOpen}
-          setPage={setPage}
         />
       )}
     </Wrapper>
   );
 };
 
-BoardListPage.propTypes = {
-  board: PropTypes.shape({
+AuthorityGroupListPage.propTypes = {
+  authorityGroup: PropTypes.shape({
     data: PropTypes.shape({
       content: PropTypes.shape({
-        boardId: PropTypes.string.isRequired,
+        authorityGroupId: PropTypes.string.isRequired,
         building: PropTypes.string.isRequired,
         roomNumber: PropTypes.string.isRequired,
         capacity: PropTypes.string.isRequired,
@@ -105,14 +91,13 @@ BoardListPage.propTypes = {
     }).isRequired
   }),
   error: PropTypes.string,
-  loading: PropTypes.string,
-  page: PropTypes.number.isRequired
+  loading: PropTypes.string
 };
 
-BoardListPage.defaultProps = {
-  board: null,
+AuthorityGroupListPage.defaultProps = {
+  authorityGroup: null,
   error: null,
   loading: null
 };
 
-export default BoardListPage;
+export default AuthorityGroupListPage;

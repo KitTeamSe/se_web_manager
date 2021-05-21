@@ -6,9 +6,10 @@ import MenuListPageContainer from './components/templates/Manage/MenuManagement/
 import MenuInfoPageContainer from './components/templates/Manage/MenuManagement/MenuInfoPageContainer';
 import BoardListPageContainer from './components/templates/Manage/BoardManagement/BoardListPageContainer';
 import BoardInfoPageContainer from './components/templates/Manage/BoardManagement/BoardInfoPageContainer';
-import AuthGroupListPage from './components/templates/Manage/AuthGroupManagement/AuthGroupListPage';
 import AuthorityListPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityListPageContainer';
 import AuthorityInfoPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityInfoPageContainer';
+import AuthorityGroupListPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupListPageContainer';
+import AuthorityGroupInfoPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupInfoPageContainer';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
 import TagListPage from './components/templates/Manage/TagManagement/TagListPage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
@@ -68,14 +69,17 @@ const ManageRoute = () => (
     <Router to="report">
       <ReportListPage />
     </Router>
-    <Router to="authority_group">
-      <AuthGroupListPage />
-    </Router>
     <Router exact to="authority">
       <AuthorityListPageContainer />
     </Router>
     <Router to="authority/:id">
       <AuthorityInfoPageContainer />
+    </Router>
+    <Router exact to="authority_group">
+      <AuthorityGroupListPageContainer />
+    </Router>
+    <Router to="authority_group/:id">
+      <AuthorityGroupInfoPageContainer />
     </Router>
   </>
 );

@@ -66,8 +66,6 @@ const MenuListPage = ({ menuList, error, loading, page, setPage }) => {
     }
   }, [menuList]);
 
-  console.log(MenuData);
-
   return (
     <Wrapper>
       <ContentHeader title={headerTitle}>

@@ -17,7 +17,7 @@ const FormStyled = styled.form`
   flex-direction: column;
 `;
 
-const idData = ['menuId', 'boardId'];
+const idData = ['menuId', 'boardId', 'authorityGroupId'];
 
 const UpdateDialog = ({
   id,
