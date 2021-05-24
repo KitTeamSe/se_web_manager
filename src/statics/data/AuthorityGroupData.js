@@ -16,7 +16,7 @@ const AuthorityGroupData = [
   {
     key: 'description',
     name: '비고',
-    type: 'string',
+    type: 'multiline',
     width: '10%',
     placeholder: '비로그인 사용자'
   },

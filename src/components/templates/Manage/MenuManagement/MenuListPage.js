@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import Pagination from '../../../modules/Pagination/Pagination';
 import Table from '../../../modules/Table/Table';
@@ -31,6 +32,7 @@ const Wrapper = styled.div``;
 const MenuListPage = ({ menuList, error, loading, page, setPage }) => {
   const title = '메뉴';
   const headerTitle = `${title} 목록 조회`;
+  const link = 'menu';
   const [menuListData, setmenuListData] = useState([]);
   const [addOpen, setAddOpen] = useToggle();
 
@@ -56,10 +58,6 @@ const MenuListPage = ({ menuList, error, loading, page, setPage }) => {
     return result;
   };
 
-  const handleAddOpen = () => {
-    setAddOpen(true);
-  };
-
   useEffect(() => {
     if (menuList) {
       setmenuListData(handleMenuData(menuList.data));
@@ -69,9 +67,12 @@ const MenuListPage = ({ menuList, error, loading, page, setPage }) => {
   return (
     <Wrapper>
       <ContentHeader title={headerTitle}>
-        <RoundButton color="secondary" onClick={handleAddOpen}>
+        <RoundButton component={Link} to={`${link}/add`} color="secondary">
           {title} 추가
         </RoundButton>
+        {/* <RoundButton color="secondary" onClick={handleAddOpen}>
+          {title} 추가
+        </RoundButton> */}
       </ContentHeader>
       <ContentWrapper>
         <PaperStyled component="div">
@@ -87,13 +88,13 @@ const MenuListPage = ({ menuList, error, loading, page, setPage }) => {
                     PAGE_DATA_LENGTH * (page - 1),
                     PAGE_DATA_LENGTH * (page - 1) + PAGE_DATA_LENGTH
                   )}
-                  type="menu"
+                  type={link}
                   typeId="menuId"
                 />
                 <Pagination
                   totalPage={Math.ceil(menuListData.length / PAGE_DATA_LENGTH)}
                   page={page}
-                  link="m/menu"
+                  link={`m/${link}`}
                 />
               </>
             )

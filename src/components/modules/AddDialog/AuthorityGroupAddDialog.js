@@ -23,14 +23,12 @@ const AddDialog = ({
   open,
   setOpen,
   form,
-  error,
   onSubmit,
   onChange
 }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(error);
 
   return (
     <Dialog onClose={handleClose} open={open} disableBackdropClick>
@@ -38,6 +36,7 @@ const AddDialog = ({
       <DialogContent>
         <FormStyled onSubmit={onSubmit}>
           {head.map((el, i) => {
+            console.log(el);
             return (
               i !== 0 && (
                 <TextField

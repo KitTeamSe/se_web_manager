@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import Pagination from '../../../modules/Pagination/Pagination';
 import Table from '../../../modules/Table/Table';
@@ -29,18 +30,22 @@ const Wrapper = styled.div``;
 const AuthorityGroupListPage = ({ authorityGroupList, error, loading }) => {
   const title = '권한 그룹';
   const headerTitle = `${title} 목록 조회`;
+  const link = 'authority_group';
   const [addOpen, setAddOpen] = useToggle();
 
-  const handleAddOpen = () => {
-    setAddOpen(true);
-  };
+  // const handleAddOpen = () => {
+  //   setAddOpen(true);
+  // };
 
   return (
     <Wrapper>
       <ContentHeader title={headerTitle}>
-        <RoundButton color="secondary" onClick={handleAddOpen}>
+        <RoundButton component={Link} to={`${link}/add`} color="secondary">
           {title} 추가
         </RoundButton>
+        {/* <RoundButton color="secondary" onClick={handleAddOpen}>
+          {title} 추가
+        </RoundButton> */}
       </ContentHeader>
       <ContentWrapper>
         <PaperStyled component="div">
@@ -53,13 +58,13 @@ const AuthorityGroupListPage = ({ authorityGroupList, error, loading }) => {
                 <Table
                   head={AuthorityGroupData}
                   rows={authorityGroupList.data.content}
-                  type="authority_group"
+                  type={link}
                   typeId="authorityGroupId"
                 />
                 <Pagination
                   totalPage={authorityGroupList.data.totalPages}
                   page={authorityGroupList.data.pageable.pageNumber + 1}
-                  link="m/authority_group"
+                  link={`m/${link}`}
                 />
               </>
             )

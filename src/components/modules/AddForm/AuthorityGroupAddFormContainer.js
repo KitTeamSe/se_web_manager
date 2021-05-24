@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import qs from 'qs';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import AddDialog from './AddDialog';
+import AuthorityGroupAddForm from './AddForm';
 
 import {
-  loadAuthorityGroups,
   changeField,
   addAuthorityGroup,
-  initializeAdd
+  initialize
 } from '../../../modules/manage/authorityGroup';
+import AuthorityGroupData from '../../../statics/data/AuthorityGroupData';
 
-const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
+const AddFormContainer = ({ history }) => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
   const { form, add, addError } = useSelector(({ authorityGroup }) => ({
@@ -21,6 +18,10 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
     add: authorityGroup.add,
     addError: authorityGroup.addError
   }));
+
+  const goBack = () => {
+    history.goBack();
+  };
 
   const onChange = e => {
     const { value, name } = e.target;
@@ -51,43 +52,27 @@ const AddDialogContainer = ({ location, title, head, open, setOpen }) => {
       console.log(error);
     }
     if (add) {
-      const { direction, size } = { direction: 'ASC', size: 10 };
-      const { page = 1 } = qs.parse(location.search, {
-        ignoreQueryPrefix: true
-      });
-      const token = localStorage.getItem('token');
-      dispatch(loadAuthorityGroups({ direction, page, size, token }));
-      setOpen();
-      dispatch(initializeAdd());
+      goBack();
+      setError();
     }
   }, [add, addError, dispatch]);
 
   useEffect(() => {
     return () => {
-      dispatch(initializeAdd());
+      dispatch(initialize());
     };
   }, []);
 
   return (
-    <AddDialog
-      title={title}
-      head={head}
-      open={open}
-      setOpen={setOpen}
+    <AuthorityGroupAddForm
+      head={AuthorityGroupData}
       form={form}
       error={error}
       onSubmit={onSubmit}
       onChange={onChange}
+      goBack={goBack}
     />
   );
 };
 
-AddDialogContainer.propTypes = {
-  location: ReactRouterPropTypes.location.isRequired,
-  title: PropTypes.string.isRequired,
-  head: PropTypes.arrayOf(PropTypes.array).isRequired,
-  open: PropTypes.bool.isRequired,
-  setOpen: PropTypes.func.isRequired
-};
-
-export default withRouter(AddDialogContainer);
+export default withRouter(AddFormContainer);

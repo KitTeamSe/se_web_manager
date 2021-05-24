@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import Pagination from '../../../modules/Pagination/Pagination';
 import Table from '../../../modules/Table/Table';
@@ -31,12 +32,9 @@ const Wrapper = styled.div``;
 const BoardListPage = ({ boardList, error, loading, page, setPage }) => {
   const title = '게시판';
   const headerTitle = `${title} 목록 조회`;
+  const link = 'board';
   const [boardListData, setboardListData] = useState([]);
   const [addOpen, setAddOpen] = useToggle();
-
-  const handleAddOpen = () => {
-    setAddOpen(true);
-  };
 
   useEffect(() => {
     if (boardList) {
@@ -47,9 +45,12 @@ const BoardListPage = ({ boardList, error, loading, page, setPage }) => {
   return (
     <Wrapper>
       <ContentHeader title={headerTitle}>
-        <RoundButton color="secondary" onClick={handleAddOpen}>
+        <RoundButton component={Link} to={`${link}/add`} color="secondary">
           {title} 추가
         </RoundButton>
+        {/* <RoundButton color="secondary" onClick={handleAddOpen}>
+          {title} 추가
+        </RoundButton> */}
       </ContentHeader>
       <ContentWrapper>
         <PaperStyled component="div">
@@ -65,13 +66,13 @@ const BoardListPage = ({ boardList, error, loading, page, setPage }) => {
                     PAGE_DATA_LENGTH * (page - 1),
                     PAGE_DATA_LENGTH * (page - 1) + PAGE_DATA_LENGTH
                   )}
-                  type="board"
+                  type={link}
                   typeId="boardId"
                 />
                 <Pagination
                   totalPage={Math.ceil(boardListData.length / PAGE_DATA_LENGTH)}
                   page={page}
-                  link="m/board"
+                  link={`m/${link}`}
                 />
               </>
             )
