@@ -50,7 +50,7 @@ const Body = ({ head, rows, type, typeId }) => {
       {rows.map(e => (
         <TableRowStyled
           component={LinkStyled}
-          to={`${MANAGE_URL}/${type}/${e[typeId]}`}
+          to={`${MANAGE_URL}/${type}/info/${e[typeId]}`}
           key={`${type}/${e[typeId]}`}
           hover
         >

@@ -19,6 +19,17 @@ export const TeacherTypeItems = [
   }
 ];
 
+export const MenuHeadData = {
+  menuId: 'ID',
+  nameEng: '영어이름',
+  nameKor: '이름',
+  menuOrder: '순서',
+  menuType: '타입',
+  parentId: '상위폴더ID',
+  url: 'URL',
+  description: '비고'
+};
+
 const MenuData = [
   {
     key: 'menuId',

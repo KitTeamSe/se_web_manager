@@ -2,12 +2,18 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { MANAGE_URL } from './statics/data/config';
 
+import MenuAddPage from './components/templates/Manage/MenuManagement/MenuAddPage';
+import MenuUpdatePage from './components/templates/Manage/MenuManagement/MenuUpdatePage';
 import MenuListPageContainer from './components/templates/Manage/MenuManagement/MenuListPageContainer';
 import MenuInfoPageContainer from './components/templates/Manage/MenuManagement/MenuInfoPageContainer';
+import BoardAddPage from './components/templates/Manage/BoardManagement/BoardAddPage';
+import BoardUpdatePage from './components/templates/Manage/BoardManagement/BoardUpdatePage';
 import BoardListPageContainer from './components/templates/Manage/BoardManagement/BoardListPageContainer';
 import BoardInfoPageContainer from './components/templates/Manage/BoardManagement/BoardInfoPageContainer';
 import AuthorityListPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityListPageContainer';
 import AuthorityInfoPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityInfoPageContainer';
+import AuthorityGroupAddPage from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupAddPage';
+import AuthorityGroupUpdatePage from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupUpdatePage';
 import AuthorityGroupListPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupListPageContainer';
 import AuthorityGroupInfoPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupInfoPageContainer';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
@@ -31,20 +37,72 @@ const Router = ({ exact, to, children }) => (
   </Route>
 );
 
-const ManageRoute = () => (
+const MenuRoute = () => (
   <>
     <Router exact to="menu">
       <MenuListPageContainer />
     </Router>
-    <Router to="menu/:id">
+    <Router to="menu/info/:id">
       <MenuInfoPageContainer />
     </Router>
+    <Router exact to="menu/add">
+      <MenuAddPage />
+    </Router>
+    <Router to="menu/update/:id">
+      <MenuUpdatePage />
+    </Router>
+  </>
+);
+
+const BoardRoute = () => (
+  <>
     <Router exact to="board">
       <BoardListPageContainer />
     </Router>
-    <Router to="board/:id">
+    <Router to="board/info/:id">
       <BoardInfoPageContainer />
     </Router>
+    <Router exact to="board/add">
+      <BoardAddPage />
+    </Router>
+    <Router to="board/update/:id">
+      <BoardUpdatePage />
+    </Router>
+  </>
+);
+
+const AuthorityRoute = () => (
+  <>
+    <Router exact to="authority">
+      <AuthorityListPageContainer />
+    </Router>
+    <Router to="authority/info/:id">
+      <AuthorityInfoPageContainer />
+    </Router>
+  </>
+);
+
+const AuthorityGroupRoute = () => (
+  <>
+    <Router exact to="authority_group">
+      <AuthorityGroupListPageContainer />
+    </Router>
+    <Router to="authority_group/info/:id">
+      <AuthorityGroupInfoPageContainer />
+    </Router>
+    <Router exact to="authority_group/add">
+      <AuthorityGroupAddPage />
+    </Router>
+    <Router to="authority_group/update/:id">
+      <AuthorityGroupUpdatePage />
+    </Router>
+  </>
+);
+
+const ManageRoute = () => (
+  <>
+    <MenuRoute />
+    <BoardRoute />
     <Router to="post">
       <PostMovePage />
     </Router>
@@ -69,18 +127,8 @@ const ManageRoute = () => (
     <Router to="report">
       <ReportListPage />
     </Router>
-    <Router exact to="authority">
-      <AuthorityListPageContainer />
-    </Router>
-    <Router to="authority/:id">
-      <AuthorityInfoPageContainer />
-    </Router>
-    <Router exact to="authority_group">
-      <AuthorityGroupListPageContainer />
-    </Router>
-    <Router to="authority_group/:id">
-      <AuthorityGroupInfoPageContainer />
-    </Router>
+    <AuthorityRoute />
+    <AuthorityGroupRoute />
   </>
 );
 

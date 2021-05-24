@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import RoundButton from '../../atoms/Button/RoundButton';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 450px;
+  min-height: 450px;
   padding: 1rem 2rem;
 `;
 
@@ -58,15 +58,17 @@ const DataText = styled(Typography)`
 
 const ManageInfoCard = ({
   history,
+  match,
   data,
   error,
   loading,
   head,
   setDeleteOpen,
-  setUpdateOpen,
+  // setUpdateOpen,
   disabledDelete,
   disabledUpdate
 }) => {
+  const { id } = match.params;
   const goBack = () => {
     history.goBack();
   };
@@ -94,9 +96,16 @@ const ManageInfoCard = ({
       <ButtonWrapper>
         <RoundButton onClick={goBack}>취 소</RoundButton>
         {disabledUpdate || (
-          <RoundButton color="secondary" onClick={setUpdateOpen}>
+          <RoundButton
+            component={Link}
+            to={`../update/${id}`}
+            color="secondary"
+          >
             수 정
           </RoundButton>
+          // <RoundButton color="secondary" onClick={setUpdateOpen}>
+          //   수 정
+          // </RoundButton>
         )}
         {disabledDelete || (
           <RoundButton color="secondary" onClick={setDeleteOpen}>

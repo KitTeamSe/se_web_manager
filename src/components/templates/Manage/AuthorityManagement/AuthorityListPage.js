@@ -25,6 +25,7 @@ const Wrapper = styled.div``;
 
 const AuthorityListPage = ({ authorityList, error, loading }) => {
   const title = '권한';
+  const link = 'authority';
   const headerTitle = `${title} 목록 조회`;
 
   return (
@@ -41,13 +42,13 @@ const AuthorityListPage = ({ authorityList, error, loading }) => {
                 <Table
                   head={AuthorityData}
                   rows={authorityList.data.content}
-                  type="authority"
+                  type={link}
                   typeId="authorityId"
                 />
                 <Pagination
                   totalPage={authorityList.data.totalPages}
                   page={authorityList.data.pageable.pageNumber + 1}
-                  link="m/authority"
+                  link={`m/${link}`}
                 />
               </>
             )

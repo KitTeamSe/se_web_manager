@@ -8,10 +8,11 @@ const TextField = ({
   value,
   label,
   onChange,
-  err,
+  error,
   type,
   line,
   placeholder,
+  helperText,
   items
 }) => {
   /* eslint-disable react/jsx-props-no-spreading */
@@ -25,7 +26,8 @@ const TextField = ({
       onChange={onChange}
       defaultValue={value}
       placeholder={placeholder}
-      error={err}
+      error={error}
+      helperText={helperText}
       fullWidth
       {...props}
     />

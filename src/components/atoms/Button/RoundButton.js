@@ -35,7 +35,9 @@ const RoundButton = ({
   href,
   size,
   onClick,
-  type
+  type,
+  component,
+  to
 }) => {
   return (
     <ButtonStyled
@@ -46,6 +48,8 @@ const RoundButton = ({
       size={size}
       onClick={onClick}
       type={type}
+      component={component}
+      to={to}
     >
       {children}
     </ButtonStyled>
