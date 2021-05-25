@@ -51,7 +51,7 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const idData = ['menuId', 'boardId', 'authorityGroupId'];
+const idData = ['menuId', 'boardId', 'authorityGroupId', 'tagId'];
 
 const UpdateForm = ({ id, head, goBack, form, onSubmit, onChange, error }) => {
   return (

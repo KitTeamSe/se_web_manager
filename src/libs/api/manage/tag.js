@@ -1,10 +1,17 @@
-import client from '../client';
+import qs from 'qs';
+import client, { tokenHeader } from '../client';
 
-const url = `attach`;
+const URL = `tag`;
 
-export const getAttachs = () => client.get(`${url}`);
-export const getAttach = id => client.get(`${url}/${id}`);
-export const addAttach = () => client.post(`${url}`);
-export const updateAttach = () => client.put(`${url}`);
-export const removeAttach = id => client.delete(`${url}/${id}`);
-export const getAttachByText = text => client.get(`${url}/match/${text}`);
+export const getTags = ({ direction, page, size, token }) => {
+  const queryString = qs.stringify({ direction, page, size });
+  return client.get(`${URL}?${queryString}`, tokenHeader(token));
+};
+export const getTag = ({ id, token }) =>
+  client.get(`${URL}/${id}`, tokenHeader(token));
+export const addTag = ({ text, token }) =>
+  client.post(`${URL}`, { text }, tokenHeader(token));
+export const updateTag = ({ tagId, text, token }) =>
+  client.put(`${URL}`, { tagId, text }, tokenHeader(token));
+export const removeTag = ({ id, token }) =>
+  client.delete(`${URL}/${id}`, tokenHeader(token));
