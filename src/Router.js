@@ -10,6 +10,10 @@ import BoardAddPage from './components/templates/Manage/BoardManagement/BoardAdd
 import BoardUpdatePage from './components/templates/Manage/BoardManagement/BoardUpdatePage';
 import BoardListPageContainer from './components/templates/Manage/BoardManagement/BoardListPageContainer';
 import BoardInfoPageContainer from './components/templates/Manage/BoardManagement/BoardInfoPageContainer';
+import TagAddPage from './components/templates/Manage/TagManagement/TagAddPage';
+import TagUpdatePage from './components/templates/Manage/TagManagement/TagUpdatePage';
+import TagListPageContainer from './components/templates/Manage/TagManagement/TagListPageContainer';
+import TagInfoPageContainer from './components/templates/Manage/TagManagement/TagInfoPageContainer';
 import AuthorityListPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityListPageContainer';
 import AuthorityInfoPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityInfoPageContainer';
 import AuthorityGroupAddPage from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupAddPage';
@@ -17,7 +21,6 @@ import AuthorityGroupUpdatePage from './components/templates/Manage/AuthorityGro
 import AuthorityGroupListPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupListPageContainer';
 import AuthorityGroupInfoPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupInfoPageContainer';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
-import TagListPage from './components/templates/Manage/TagManagement/TagListPage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
 import LogListPage from './components/templates/Manage/LogManagement/LogListPage';
 import StatisticsPage from './components/templates/Manage/StatisticsManagement/StatisticsPage';
@@ -99,6 +102,23 @@ const AuthorityGroupRoute = () => (
   </>
 );
 
+const TagRoute = () => (
+  <>
+    <Router exact to="tag">
+      <TagListPageContainer />
+    </Router>
+    <Router to="tag/info/:id">
+      <TagInfoPageContainer />
+    </Router>
+    <Router exact to="tag/add">
+      <TagAddPage />
+    </Router>
+    <Router to="tag/update/:id">
+      <TagUpdatePage />
+    </Router>
+  </>
+);
+
 const ManageRoute = () => (
   <>
     <MenuRoute />
@@ -106,9 +126,7 @@ const ManageRoute = () => (
     <Router to="post">
       <PostMovePage />
     </Router>
-    <Router to="tag">
-      <TagListPage />
-    </Router>
+    <TagRoute />
     <Router to="job">
       <JobInfoUploadPage />
     </Router>

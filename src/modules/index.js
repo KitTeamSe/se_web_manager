@@ -7,6 +7,7 @@ import menu, { menuSaga } from './manage/menu';
 import board, { boardSaga } from './manage/board';
 import authority, { authoritySaga } from './manage/authority';
 import authorityGroup, { authorityGroupSaga } from './manage/authorityGroup';
+import tag, { tagSaga } from './manage/tag';
 
 import lectureRoom, { lectureRoomSaga } from './schedule/lectureRoom';
 import period, { periodSaga } from './schedule/period';
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   teacher,
   board,
   authority,
-  authorityGroup
+  authorityGroup,
+  tag
 });
 
 export function* rootSaga() {
@@ -36,7 +38,8 @@ export function* rootSaga() {
     menuSaga(),
     boardSaga(),
     authoritySaga(),
-    authorityGroupSaga()
+    authorityGroupSaga(),
+    tagSaga()
   ]);
 }
 
