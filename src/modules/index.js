@@ -7,6 +7,7 @@ import menu, { menuSaga } from './manage/menu';
 import board, { boardSaga } from './manage/board';
 import authority, { authoritySaga } from './manage/authority';
 import authorityGroup, { authorityGroupSaga } from './manage/authorityGroup';
+import accountMapping, { accountMappingSaga } from './manage/accountMapping';
 import authorityMapping, {
   authorityMappingSaga
 } from './manage/authorityMapping';
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   authority,
   authorityGroup,
   authorityMapping,
+  accountMapping,
   tag
 });
 
@@ -44,6 +46,7 @@ export function* rootSaga() {
     authoritySaga(),
     authorityGroupSaga(),
     authorityMappingSaga(),
+    accountMappingSaga(),
     tagSaga()
   ]);
 }

@@ -99,7 +99,7 @@ export function* authorityMappingSaga() {
 }
 
 const initialState = {
-  authorityMapping: { description: '', name: '', type: 'NORMAL' },
+  authorityMapping: { authorityId: '', groupId: '' },
   add: null,
   addError: null,
   update: null,
