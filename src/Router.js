@@ -20,6 +20,9 @@ import AuthorityGroupAddPage from './components/templates/Manage/AuthorityGroupM
 import AuthorityGroupUpdatePage from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupUpdatePage';
 import AuthorityGroupListPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupListPageContainer';
 import AuthorityGroupInfoPageContainer from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupInfoPageContainer';
+import AuthorityMappingAddPage from './components/templates/Manage/AuthorityMappingManagement/AuthorityMappingAddPage';
+import AuthorityMappingListPageContainer from './components/templates/Manage/AuthorityMappingManagement/AuthorityMappingListPageContainer';
+import AuthorityMappingInfoPageContainer from './components/templates/Manage/AuthorityMappingManagement/AuthorityMappingInfoPageContainer';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
 import LogListPage from './components/templates/Manage/LogManagement/LogListPage';
@@ -27,7 +30,6 @@ import StatisticsPage from './components/templates/Manage/StatisticsManagement/S
 import BlacklistListPage from './components/templates/Manage/BlacklistManagement/BlacklistListPage';
 import NoticeListPage from './components/templates/Manage/NoticeManagement/NoticeListPage';
 import ReportListPage from './components/templates/Manage/ReportManagement/ReportListPage';
-
 import LectureRoomListPageContainer from './components/templates/Schedule/LectureRoomManagement/LectureRoomListPageContainer';
 import TeacherListPageContainer from './components/templates/Schedule/TeacherManagement/TeacherListPageContainer';
 import SubjectListPageContainer from './components/templates/Schedule/SubjectManagement/SubjectListPageContainer';
@@ -102,6 +104,20 @@ const AuthorityGroupRoute = () => (
   </>
 );
 
+const AuthorityMappingRoute = () => (
+  <>
+    <Router exact to="authority_mapping">
+      <AuthorityMappingListPageContainer />
+    </Router>
+    <Router to="authority_mapping/info/:id">
+      <AuthorityMappingInfoPageContainer />
+    </Router>
+    <Router exact to="authority_mapping/add">
+      <AuthorityMappingAddPage />
+    </Router>
+  </>
+);
+
 const TagRoute = () => (
   <>
     <Router exact to="tag">
@@ -147,6 +163,7 @@ const ManageRoute = () => (
     </Router>
     <AuthorityRoute />
     <AuthorityGroupRoute />
+    <AuthorityMappingRoute />
   </>
 );
 

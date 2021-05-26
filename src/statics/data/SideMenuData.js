@@ -10,6 +10,7 @@ import Block from '@material-ui/icons/Block';
 import Notifications from '@material-ui/icons/Notifications';
 import Report from '@material-ui/icons/Report';
 import Person from '@material-ui/icons/Person';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 import Group from '@material-ui/icons/Group';
 import Schedule from '@material-ui/icons/Schedule';
 import Build from '@material-ui/icons/Build';
@@ -64,9 +65,9 @@ const ManageListData = [
     icon: <Notifications />
   },
   {
-    to: 'report',
-    name: '신고 관리',
-    icon: <Report />
+    to: 'authority',
+    name: '권한 관리',
+    icon: <Person />
   },
   {
     to: 'authority_group',
@@ -74,9 +75,14 @@ const ManageListData = [
     icon: <Group />
   },
   {
-    to: 'authority',
-    name: '권한 관리',
-    icon: <Person />
+    to: 'authority_mapping',
+    name: '권한-권한그룹 매핑',
+    icon: <PersonAdd />
+  },
+  {
+    to: 'report',
+    name: '신고 관리',
+    icon: <Report />
   }
 ];
 
