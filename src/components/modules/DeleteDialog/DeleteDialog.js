@@ -27,6 +27,8 @@ const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
     if (type === 'tag') return `${data.text}`;
     if (type === 'authorityMapping')
       return `[${data.authorityIdNameKor}] - [${data.groupName}]`;
+    if (type === 'accountMapping')
+      return `[${data.accountIdString}] - [${data.groupName}]`;
     return `${data.name}`;
   };
   return (

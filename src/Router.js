@@ -23,6 +23,9 @@ import AuthorityGroupInfoPageContainer from './components/templates/Manage/Autho
 import AuthorityMappingAddPage from './components/templates/Manage/AuthorityMappingManagement/AuthorityMappingAddPage';
 import AuthorityMappingListPageContainer from './components/templates/Manage/AuthorityMappingManagement/AuthorityMappingListPageContainer';
 import AuthorityMappingInfoPageContainer from './components/templates/Manage/AuthorityMappingManagement/AuthorityMappingInfoPageContainer';
+import AccountMappingAddPage from './components/templates/Manage/AccountMappingManagement/AccountMappingAddPage';
+import AccountMappingListPageContainer from './components/templates/Manage/AccountMappingManagement/AccountMappingListPageContainer';
+import AccountMappingInfoPageContainer from './components/templates/Manage/AccountMappingManagement/AccountMappingInfoPageContainer';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
 import LogListPage from './components/templates/Manage/LogManagement/LogListPage';
@@ -118,6 +121,20 @@ const AuthorityMappingRoute = () => (
   </>
 );
 
+const AccountMappingRoute = () => (
+  <>
+    <Router exact to="account_mapping">
+      <AccountMappingListPageContainer />
+    </Router>
+    <Router to="account_mapping/info/:id">
+      <AccountMappingInfoPageContainer />
+    </Router>
+    <Router exact to="account_mapping/add">
+      <AccountMappingAddPage />
+    </Router>
+  </>
+);
+
 const TagRoute = () => (
   <>
     <Router exact to="tag">
@@ -164,6 +181,7 @@ const ManageRoute = () => (
     <AuthorityRoute />
     <AuthorityGroupRoute />
     <AuthorityMappingRoute />
+    <AccountMappingRoute />
   </>
 );
 

@@ -80,6 +80,11 @@ const ManageListData = [
     icon: <PersonAdd />
   },
   {
+    to: 'account_mapping',
+    name: '사용자-권한그룹 매핑',
+    icon: <PersonAdd />
+  },
+  {
     to: 'report',
     name: '신고 관리',
     icon: <Report />
