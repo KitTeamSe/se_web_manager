@@ -14,6 +14,9 @@ import TagAddPage from './components/templates/Manage/TagManagement/TagAddPage';
 import TagUpdatePage from './components/templates/Manage/TagManagement/TagUpdatePage';
 import TagListPageContainer from './components/templates/Manage/TagManagement/TagListPageContainer';
 import TagInfoPageContainer from './components/templates/Manage/TagManagement/TagInfoPageContainer';
+import AccountListPageContainer from './components/templates/Manage/AccountManagement/AccountListPageContainer';
+import AccountInfoPageContainer from './components/templates/Manage/AccountManagement/AccountInfoPageContainer';
+import AccountUpdatePage from './components/templates/Manage/AccountManagement/AccountUpdatePage';
 import AuthorityListPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityListPageContainer';
 import AuthorityInfoPageContainer from './components/templates/Manage/AuthorityManagement/AuthorityInfoPageContainer';
 import AuthorityGroupAddPage from './components/templates/Manage/AuthorityGroupManagement/AuthorityGroupAddPage';
@@ -75,6 +78,20 @@ const BoardRoute = () => (
     </Router>
     <Router to="board/update/:id">
       <BoardUpdatePage />
+    </Router>
+  </>
+);
+
+const AccountRoute = () => (
+  <>
+    <Router exact to="account">
+      <AccountListPageContainer />
+    </Router>
+    <Router to="account/info/:id">
+      <AccountInfoPageContainer />
+    </Router>
+    <Router to="account/update/:id">
+      <AccountUpdatePage />
     </Router>
   </>
 );
@@ -178,6 +195,7 @@ const ManageRoute = () => (
     <Router to="report">
       <ReportListPage />
     </Router>
+    <AccountRoute />
     <AuthorityRoute />
     <AuthorityGroupRoute />
     <AuthorityMappingRoute />

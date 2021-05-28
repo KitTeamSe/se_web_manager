@@ -1,0 +1,123 @@
+export const AccountTypeItems = [
+  {
+    value: 'STUDENT',
+    label: '학생'
+  },
+  {
+    value: 'PROFESSOR',
+    label: '교수'
+  },
+  {
+    value: 'ASSISTANT',
+    label: '조교'
+  },
+  {
+    value: 'OUTSIDER',
+    label: '외부인'
+  }
+];
+
+export const AccountUpdateData = [
+  {
+    key: 'id',
+    name: '유저ID',
+    type: 'readonly',
+    placeholder: '0'
+  },
+  {
+    key: 'studentId',
+    name: '학번',
+    type: 'string',
+    placeholder: '0'
+  },
+  {
+    key: 'name',
+    name: '이름',
+    type: 'string',
+    placeholder: 'name'
+  },
+  {
+    key: 'nickname',
+    name: '별명',
+    type: 'string',
+    placeholder: 'nickname'
+  },
+  {
+    key: 'password',
+    name: '비밀번호',
+    type: 'password',
+    placeholder: '********'
+  },
+  {
+    key: 'informationOpenAgree',
+    name: '정보공유',
+    type: 'readonly',
+    placeholder: 'AGREE'
+  },
+  {
+    key: 'type',
+    name: '타입',
+    type: 'dropdown',
+    items: AccountTypeItems,
+    placeholder: 'type'
+  }
+];
+
+const AccountData = [
+  {
+    key: 'accountId',
+    name: 'account ID',
+    type: 'empty',
+    placeholder: '0'
+  },
+  {
+    key: 'idString',
+    name: '유저ID',
+    type: '',
+    placeholder: '0'
+  },
+  {
+    key: 'name',
+    name: '이름',
+    type: '',
+    placeholder: 'name'
+  },
+  {
+    key: 'nickname',
+    name: '별명',
+    type: '',
+    placeholder: 'nickname'
+  },
+  {
+    key: 'email',
+    name: '이메일',
+    type: '',
+    placeholder: 'abc123@efg.com'
+  },
+  {
+    key: 'type',
+    name: '타입',
+    type: '',
+    placeholder: 'STUDENT'
+  },
+  {
+    key: 'phoneNumber',
+    name: '휴대폰',
+    type: '',
+    placeholder: '01011112222'
+  },
+  {
+    key: 'studentId',
+    name: '학번',
+    type: '',
+    placeholder: '20000000'
+  },
+  {
+    key: 'informationOpenAgree',
+    name: '정보공유',
+    type: '',
+    placeholder: 'AGREE'
+  }
+];
+
+export default AccountData;
