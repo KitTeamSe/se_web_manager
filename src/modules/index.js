@@ -5,6 +5,7 @@ import loading from './loading';
 import auth, { authSaga } from './auth';
 import menu, { menuSaga } from './manage/menu';
 import board, { boardSaga } from './manage/board';
+import account, { accountSaga } from './manage/account';
 import authority, { authoritySaga } from './manage/authority';
 import authorityGroup, { authorityGroupSaga } from './manage/authorityGroup';
 import accountMapping, { accountMappingSaga } from './manage/accountMapping';
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   subject,
   teacher,
   board,
+  account,
   authority,
   authorityGroup,
   authorityMapping,
@@ -43,6 +45,7 @@ export function* rootSaga() {
     teacherSaga(),
     menuSaga(),
     boardSaga(),
+    accountSaga(),
     authoritySaga(),
     authorityGroupSaga(),
     authorityMappingSaga(),

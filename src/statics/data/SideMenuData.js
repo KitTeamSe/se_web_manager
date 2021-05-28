@@ -1,24 +1,52 @@
 import React from 'react';
-import Menu from '@material-ui/icons/Menu';
-import Dashboard from '@material-ui/icons/Dashboard';
-import PostAdd from '@material-ui/icons/PostAdd';
-import Label from '@material-ui/icons/Label';
-import Work from '@material-ui/icons/Work';
-import ViewList from '@material-ui/icons/ViewList';
-import Equalizer from '@material-ui/icons/Equalizer';
-import Block from '@material-ui/icons/Block';
-import Notifications from '@material-ui/icons/Notifications';
-import Report from '@material-ui/icons/Report';
-import Person from '@material-ui/icons/Person';
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import Group from '@material-ui/icons/Group';
-import Schedule from '@material-ui/icons/Schedule';
-import Build from '@material-ui/icons/Build';
-import CalendarToday from '@material-ui/icons/CalendarToday';
-import MeetingRoom from '@material-ui/icons/MeetingRoom';
-import Class from '@material-ui/icons/Class';
+import {
+  Menu,
+  Dashboard,
+  PostAdd,
+  Label,
+  Work,
+  ViewList,
+  Equalizer,
+  Block,
+  Notifications,
+  Report,
+  Person,
+  PersonAdd,
+  Group,
+  Schedule,
+  Build,
+  CalendarToday,
+  MeetingRoom,
+  Class,
+  HowToReg
+} from '@material-ui/icons';
 
 const ManageListData = [
+  {
+    to: 'account',
+    name: '사용자 관리',
+    icon: <Person />
+  },
+  {
+    to: 'authority',
+    name: '권한 관리',
+    icon: <HowToReg />
+  },
+  {
+    to: 'authority_group',
+    name: '권한그룹 관리',
+    icon: <Group />
+  },
+  {
+    to: 'authority_mapping',
+    name: '권한-권한그룹 매핑',
+    icon: <PersonAdd />
+  },
+  {
+    to: 'account_mapping',
+    name: '사용자-권한그룹 매핑',
+    icon: <PersonAdd />
+  },
   {
     to: 'menu',
     name: '메뉴 관리',
@@ -65,26 +93,6 @@ const ManageListData = [
     icon: <Notifications />
   },
   {
-    to: 'authority',
-    name: '권한 관리',
-    icon: <Person />
-  },
-  {
-    to: 'authority_group',
-    name: '권한그룹 관리',
-    icon: <Group />
-  },
-  {
-    to: 'authority_mapping',
-    name: '권한-권한그룹 매핑',
-    icon: <PersonAdd />
-  },
-  {
-    to: 'account_mapping',
-    name: '사용자-권한그룹 매핑',
-    icon: <PersonAdd />
-  },
-  {
     to: 'report',
     name: '신고 관리',
     icon: <Report />
@@ -120,13 +128,13 @@ const ScheduleListData = [
 ];
 
 const ManageNestedData = {
-  name: '시간표 관리',
-  icon: <CalendarToday />
+  name: '사이트 관리',
+  icon: <Build />
 };
 
 const ScheduleNestedData = {
-  name: '사이트 관리',
-  icon: <Build />
+  name: '시간표 관리',
+  icon: <CalendarToday />
 };
 
 export {
