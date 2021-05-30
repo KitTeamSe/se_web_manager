@@ -2,6 +2,9 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { MANAGE_URL } from './statics/data/config';
 
+import BlacklistAddPage from './components/templates/Manage/BlacklistManagement/BlacklistAddPage';
+import BlacklistListPageContainer from './components/templates/Manage/BlacklistManagement/BlacklistListPageContainer';
+import BlacklistInfoPageContainer from './components/templates/Manage/BlacklistManagement/BlacklistInfoPageContainer';
 import MenuAddPage from './components/templates/Manage/MenuManagement/MenuAddPage';
 import MenuUpdatePage from './components/templates/Manage/MenuManagement/MenuUpdatePage';
 import MenuListPageContainer from './components/templates/Manage/MenuManagement/MenuListPageContainer';
@@ -33,7 +36,6 @@ import PostMovePage from './components/templates/Manage/PostManagement/PostMoveP
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
 import LogListPage from './components/templates/Manage/LogManagement/LogListPage';
 import StatisticsPage from './components/templates/Manage/StatisticsManagement/StatisticsPage';
-import BlacklistListPage from './components/templates/Manage/BlacklistManagement/BlacklistListPage';
 import NoticeListPage from './components/templates/Manage/NoticeManagement/NoticeListPage';
 import ReportListPage from './components/templates/Manage/ReportManagement/ReportListPage';
 import LectureRoomListPageContainer from './components/templates/Schedule/LectureRoomManagement/LectureRoomListPageContainer';
@@ -169,6 +171,20 @@ const TagRoute = () => (
   </>
 );
 
+const BlacklistRoute = () => (
+  <>
+    <Router exact to="blacklist">
+      <BlacklistListPageContainer />
+    </Router>
+    <Router to="blacklist/info/:id">
+      <BlacklistInfoPageContainer />
+    </Router>
+    <Router exact to="blacklist/add">
+      <BlacklistAddPage />
+    </Router>
+  </>
+);
+
 const ManageRoute = () => (
   <>
     <MenuRoute />
@@ -186,15 +202,13 @@ const ManageRoute = () => (
     <Router to="statistics">
       <StatisticsPage />
     </Router>
-    <Router to="blacklist">
-      <BlacklistListPage />
-    </Router>
     <Router to="notice">
       <NoticeListPage />
     </Router>
     <Router to="report">
       <ReportListPage />
     </Router>
+    <BlacklistRoute />
     <AccountRoute />
     <AuthorityRoute />
     <AuthorityGroupRoute />

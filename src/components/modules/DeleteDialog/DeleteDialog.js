@@ -21,15 +21,16 @@ const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
   };
 
   const contentsComment = () => {
-    if (type === 'lectureRoom') return `${data.building} ${data.roomNumber}`;
-    if (type === 'menu') return `${data.nameKor}`;
-    if (type === 'board') return `${data.nameKor}`;
-    if (type === 'tag') return `${data.text}`;
+    if (type === 'lectureRoom') return `[${data.building} ${data.roomNumber}]`;
+    if (type === 'menu') return `[${data.nameKor}]`;
+    if (type === 'board') return `[${data.nameKor}]`;
+    if (type === 'tag') return `[${data.text}]`;
     if (type === 'authorityMapping')
       return `[${data.authorityIdNameKor}] - [${data.groupName}]`;
     if (type === 'accountMapping')
       return `[${data.accountIdString}] - [${data.groupName}]`;
-    return `${data.name}`;
+    if (type === 'blacklist') return `[${data.ip}]`;
+    return `[${data.name}]`;
   };
   return (
     <Dialog open={open}>

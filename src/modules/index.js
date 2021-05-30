@@ -13,6 +13,7 @@ import authorityMapping, {
   authorityMappingSaga
 } from './manage/authorityMapping';
 import tag, { tagSaga } from './manage/tag';
+import blacklist, { blacklistSaga } from './manage/blacklist';
 
 import lectureRoom, { lectureRoomSaga } from './schedule/lectureRoom';
 import period, { periodSaga } from './schedule/period';
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   authorityGroup,
   authorityMapping,
   accountMapping,
+  blacklist,
   tag
 });
 
@@ -50,6 +52,7 @@ export function* rootSaga() {
     authorityGroupSaga(),
     authorityMappingSaga(),
     accountMappingSaga(),
+    blacklistSaga(),
     tagSaga()
   ]);
 }
