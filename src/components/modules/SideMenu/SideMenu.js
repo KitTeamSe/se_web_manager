@@ -3,28 +3,32 @@ import PropTypes from 'prop-types';
 import SideMenuContainer from '../../atoms/SideMenuContainer/SideMenuContainer';
 import SideMenuList from '../SideMenuList/SideMenuList';
 import {
+  ManageListData,
+  ScheduleListData,
+  DevelopListData,
+  ManageNestedData,
   ScheduleNestedData,
-  ManageNestedData
+  DevelopNestedData
 } from '../../../statics/data/SideMenuData';
 
-const SideMenu = ({ open, items }) => {
-  const [manageItem, scheduleItem] = items;
-
+const SideMenu = ({ open }) => {
   return (
     <SideMenuContainer open={open}>
-      <SideMenuList itemData={ManageNestedData} items={manageItem} />
-      <SideMenuList itemData={ScheduleNestedData} items={scheduleItem} />
+      <SideMenuList itemData={ManageNestedData} items={ManageListData} />
+      <SideMenuList itemData={ScheduleNestedData} items={ScheduleListData} />
+      <SideMenuList
+        itemData={DevelopNestedData}
+        items={DevelopListData}
+        redirect
+      />
     </SideMenuContainer>
   );
 };
 
 SideMenu.propTypes = {
-  open: PropTypes.bool.isRequired,
-  items: PropTypes.arrayOf(PropTypes.array)
+  open: PropTypes.bool.isRequired
 };
 
-SideMenu.defaultProps = {
-  items: []
-};
+SideMenu.defaultProps = {};
 
 export default SideMenu;

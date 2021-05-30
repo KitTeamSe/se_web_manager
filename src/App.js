@@ -4,7 +4,6 @@ import { CssBaseline } from '@material-ui/core';
 import Toolbar from './components/atoms/Toolbar/Toolbar';
 import Header from './components/templates/Header/Header';
 import useToggle from './libs/useToggle';
-import { ManageListData, ScheduleListData } from './statics/data/SideMenuData';
 import Routes from './Router';
 
 const Wrapper = styled.div`
@@ -21,12 +20,10 @@ const MainWrapper = styled.main`
 
 function App() {
   const [open, setOpen] = useToggle();
-  const menuItems = [ManageListData, ScheduleListData];
-
   return (
     <Wrapper>
       <CssBaseline />
-      <Header open={open} setOpen={setOpen} menuItems={menuItems} />
+      <Header open={open} setOpen={setOpen} />
 
       <MainWrapper open={open}>
         <Toolbar height="72" />
