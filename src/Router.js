@@ -32,12 +32,14 @@ import AuthorityMappingInfoPageContainer from './components/templates/Manage/Aut
 import AccountMappingAddPage from './components/templates/Manage/AccountMappingManagement/AccountMappingAddPage';
 import AccountMappingListPageContainer from './components/templates/Manage/AccountMappingManagement/AccountMappingListPageContainer';
 import AccountMappingInfoPageContainer from './components/templates/Manage/AccountMappingManagement/AccountMappingInfoPageContainer';
+import ReportListPageContainer from './components/templates/Manage/ReportManagement/ReportListPageContainer';
+import ReportInfoPageContainer from './components/templates/Manage/ReportManagement/ReportInfoPageContainer';
+import ReportUpdatePage from './components/templates/Manage/ReportManagement/ReportUpdatePage';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
 import LogListPage from './components/templates/Manage/LogManagement/LogListPage';
 import StatisticsPage from './components/templates/Manage/StatisticsManagement/StatisticsPage';
 import NoticeListPage from './components/templates/Manage/NoticeManagement/NoticeListPage';
-import ReportListPage from './components/templates/Manage/ReportManagement/ReportListPage';
 import LectureRoomListPageContainer from './components/templates/Schedule/LectureRoomManagement/LectureRoomListPageContainer';
 import TeacherListPageContainer from './components/templates/Schedule/TeacherManagement/TeacherListPageContainer';
 import SubjectListPageContainer from './components/templates/Schedule/SubjectManagement/SubjectListPageContainer';
@@ -185,6 +187,20 @@ const BlacklistRoute = () => (
   </>
 );
 
+const ReportRoute = () => (
+  <>
+    <Router exact to="report">
+      <ReportListPageContainer />
+    </Router>
+    <Router to="report/info/:id">
+      <ReportInfoPageContainer />
+    </Router>
+    <Router to="report/update/:id">
+      <ReportUpdatePage />
+    </Router>
+  </>
+);
+
 const ManageRoute = () => (
   <>
     <MenuRoute />
@@ -205,15 +221,13 @@ const ManageRoute = () => (
     <Router to="notice">
       <NoticeListPage />
     </Router>
-    <Router to="report">
-      <ReportListPage />
-    </Router>
     <BlacklistRoute />
     <AccountRoute />
     <AuthorityRoute />
     <AuthorityGroupRoute />
     <AuthorityMappingRoute />
     <AccountMappingRoute />
+    <ReportRoute />
   </>
 );
 
