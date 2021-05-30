@@ -20,6 +20,8 @@ import {
   Class,
   HowToReg
 } from '@material-ui/icons';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ManageListData = [
   {
@@ -127,6 +129,34 @@ const ScheduleListData = [
   }
 ];
 
+const DevelopListData = [
+  {
+    to: 'http://swagger.se-testboard.duckdns.org/swagger-ui.html',
+    name: 'Swagger (API)',
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+  },
+  {
+    to: 'http://npm.se-testboard.duckdns.org/',
+    name: 'Nginx Proxy Manager',
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+  },
+  {
+    to: 'http://portainer.se-testboard.duckdns.org/',
+    name: '포테이너',
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+  },
+  {
+    to: 'http://jenkins.se-testboard.duckdns.org/',
+    name: '젠킨스',
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+  },
+  {
+    to: 'http://filetest.se-testboard.duckdns.org/',
+    name: '파일 서버 테스트',
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+  }
+];
+
 const ManageNestedData = {
   name: '사이트 관리',
   icon: <Build />
@@ -137,9 +167,16 @@ const ScheduleNestedData = {
   icon: <CalendarToday />
 };
 
+const DevelopNestedData = {
+  name: '개발 관리',
+  icon: <FontAwesomeIcon icon={faLink} size="lg" />
+};
+
 export {
   ManageListData,
   ScheduleListData,
+  DevelopListData,
   ManageNestedData,
-  ScheduleNestedData
+  ScheduleNestedData,
+  DevelopNestedData
 };
