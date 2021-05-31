@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { MANAGE_URL } from './statics/data/config';
 
 import BlacklistAddPage from './components/templates/Manage/BlacklistManagement/BlacklistAddPage';
@@ -47,9 +47,22 @@ import PeriodListPageContainer from './components/templates/Schedule/PeriodManag
 import ScheduleListPage from './components/templates/Schedule/ScheduleManagement/ScheduleListPage';
 
 const Router = ({ exact, to, children }) => (
-  <Route exact={exact} path={`${MANAGE_URL}/${to}`} key={to}>
-    {children}
-  </Route>
+  <Route
+    exact={exact}
+    path={`${MANAGE_URL}/${to}`}
+    key={to}
+    render={() =>
+      localStorage.getItem('token') ? (
+        children
+      ) : (
+        <Redirect
+          to={{
+            pathname: `/${MANAGE_URL}/account`
+          }}
+        />
+      )
+    }
+  />
 );
 
 const MenuRoute = () => (

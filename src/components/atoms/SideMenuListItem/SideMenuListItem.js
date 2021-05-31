@@ -19,7 +19,6 @@ const ListItemIconStyled = styled(ListItemIcon)`
 `;
 
 const SideMenuListItem = ({ children, name, to, redirect }) => {
-  console.log(to);
   if (redirect)
     return (
       <RedirectLink href={to} target="_blank" rel="noreferrer">

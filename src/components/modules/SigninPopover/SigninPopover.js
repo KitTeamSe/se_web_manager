@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import {
@@ -12,7 +11,6 @@ import {
 } from '../../../modules/auth';
 import TextField from '../../atoms/TextField/TextField';
 import RoundButton from '../../atoms/Button/RoundButton';
-import { MANAGE_URL } from '../../../statics/data/config';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,13 +31,6 @@ const Wrapper = styled.div`
 const ButtonWrapper = styled.div`
   padding-top: 10px;
 `;
-const LinkWrapper = styled.div`
-  text-align: right;
-`;
-
-const LinkStyled = styled(Link)`
-  font-size: 0.8vw;
-`;
 
 const ErrorMessage = styled.div`
   color: red;
@@ -48,7 +39,7 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const SigninPopover = ({ handleClose }) => {
+const SigninPopover = ({ handleClose, type }) => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const { form, auths, authError } = useSelector(({ auth }) => ({
@@ -99,7 +90,7 @@ const SigninPopover = ({ handleClose }) => {
 
   return (
     <Wrapper>
-      <Typography variant="h6">로그인</Typography>
+      {type !== 'page' && <Typography variant="h6">로그인</Typography>}
       <form onSubmit={onSubmit}>
         <TextField
           id="id"
@@ -107,6 +98,7 @@ const SigninPopover = ({ handleClose }) => {
           label="ID"
           onChange={onChange}
           value={form.id}
+          type="id"
         />
         <TextField
           id="pw"
@@ -118,12 +110,11 @@ const SigninPopover = ({ handleClose }) => {
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <ButtonWrapper>
-          <RoundButton type="submit">로그인</RoundButton>
+          <RoundButton color="secondary" type="submit">
+            로그인
+          </RoundButton>
         </ButtonWrapper>
       </form>
-      <LinkWrapper>
-        <LinkStyled to={`${MANAGE_URL}/signup`}>회원가입</LinkStyled>
-      </LinkWrapper>
     </Wrapper>
   );
 };

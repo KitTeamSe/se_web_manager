@@ -16,11 +16,7 @@ const SideMenu = ({ open }) => {
     <SideMenuContainer open={open}>
       <SideMenuList itemData={ManageNestedData} items={ManageListData} />
       <SideMenuList itemData={ScheduleNestedData} items={ScheduleListData} />
-      <SideMenuList
-        itemData={DevelopNestedData}
-        items={DevelopListData}
-        redirect
-      />
+      <SideMenuList itemData={DevelopNestedData} items={DevelopListData} />
     </SideMenuContainer>
   );
 };
