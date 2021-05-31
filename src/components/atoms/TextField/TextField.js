@@ -40,10 +40,32 @@ const TextField = ({
     return defaultField(props);
   };
 
+  const idField = () => {
+    const props = {
+      variant: 'outlined',
+      required: true,
+      size: 'small',
+      fullWidth: true,
+      margin: 'normal',
+      InputLabelProps: {
+        shrink: true
+      }
+    };
+    return defaultField(props);
+  };
+
   const passwordField = () => {
     const props = {
       autoComplete: 'current-password',
-      type: 'password'
+      type: 'password',
+      variant: 'outlined',
+      required: true,
+      size: 'small',
+      fullWidth: true,
+      margin: 'normal',
+      InputLabelProps: {
+        shrink: true
+      }
     };
     return defaultField(props);
   };
@@ -114,6 +136,7 @@ const TextField = ({
 
   if (type === 'search') return searchField();
   if (type === 'readonly') return readonlyField();
+  if (type === 'id') return idField();
   if (type === 'password') return passwordField();
   if (type === 'number') return numberField();
   if (type === 'multiline') return multilineField();

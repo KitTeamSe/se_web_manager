@@ -1,10 +1,15 @@
-import client, { tokenHeader } from '../client';
+import client, { tokenHeader, checkToken } from '../client';
 
 const URL = `menu`;
 
-export const getMenus = ({ token }) => client.get(`${URL}`, tokenHeader(token));
+export const getMenus = ({ token }) =>
+  client.get(`${URL}`, tokenHeader(token)).catch(error => {
+    checkToken(error);
+  });
 export const getMenu = ({ id, token }) =>
-  client.get(`${URL}/${id}`, tokenHeader(token));
+  client.get(`${URL}/${id}`, tokenHeader(token)).catch(error => {
+    checkToken(error);
+  });
 export const addMenu = ({
   description,
   menuOrder,
@@ -15,11 +20,15 @@ export const addMenu = ({
   url,
   token
 }) =>
-  client.post(
-    `${URL}`,
-    { description, menuOrder, menuType, nameEng, nameKor, parentId, url },
-    tokenHeader(token)
-  );
+  client
+    .post(
+      `${URL}`,
+      { description, menuOrder, menuType, nameEng, nameKor, parentId, url },
+      tokenHeader(token)
+    )
+    .catch(error => {
+      checkToken(error);
+    });
 export const updateMenu = ({
   menuId,
   description,
@@ -31,19 +40,25 @@ export const updateMenu = ({
   url,
   token
 }) =>
-  client.put(
-    `${URL}`,
-    {
-      description,
-      menuId,
-      menuOrder,
-      menuType,
-      nameEng,
-      nameKor,
-      parentId,
-      url
-    },
-    tokenHeader(token)
-  );
+  client
+    .put(
+      `${URL}`,
+      {
+        description,
+        menuId,
+        menuOrder,
+        menuType,
+        nameEng,
+        nameKor,
+        parentId,
+        url
+      },
+      tokenHeader(token)
+    )
+    .catch(error => {
+      checkToken(error);
+    });
 export const removeMenu = ({ id, token }) =>
-  client.delete(`${URL}/${id}`, tokenHeader(token));
+  client.delete(`${URL}/${id}`, tokenHeader(token)).catch(error => {
+    checkToken(error);
+  });

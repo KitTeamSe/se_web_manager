@@ -75,16 +75,6 @@ const ManageListData = [
     icon: <Work />
   },
   {
-    to: 'log',
-    name: '로그 관리',
-    icon: <ViewList />
-  },
-  {
-    to: 'statistics',
-    name: '통계 관리',
-    icon: <Equalizer />
-  },
-  {
     to: 'blacklist',
     name: 'IP차단 관리',
     icon: <Block />
@@ -133,27 +123,42 @@ const DevelopListData = [
   {
     to: 'http://swagger.se-testboard.duckdns.org/swagger-ui.html',
     name: 'Swagger (API)',
-    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />,
+    redirect: true
   },
   {
     to: 'http://npm.se-testboard.duckdns.org/',
     name: 'Nginx Proxy Manager',
-    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />,
+    redirect: true
   },
   {
     to: 'http://portainer.se-testboard.duckdns.org/',
     name: '포테이너',
-    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />,
+    redirect: true
   },
   {
     to: 'http://jenkins.se-testboard.duckdns.org/',
     name: '젠킨스',
-    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />,
+    redirect: true
   },
   {
     to: 'http://filetest.se-testboard.duckdns.org/',
     name: '파일 서버 테스트',
-    icon: <FontAwesomeIcon icon={faLink} size="lg" />
+    icon: <FontAwesomeIcon icon={faLink} size="lg" />,
+    redirect: true
+  },
+  {
+    to: '',
+    name: '로그 관리',
+    icon: <ViewList />
+  },
+  {
+    to: '',
+    name: '통계 관리',
+    icon: <Equalizer />
   }
 ];
 

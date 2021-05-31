@@ -11,17 +11,17 @@ const ListStyled = styled(List)`
   padding: 2px 0;
 `;
 
-const MenuList = ({ items, redirect }) =>
+const MenuList = ({ items }) =>
   items.map((el, index) => {
     return (
       <>
         {index % 4 === 0 && <Divider />}
         <SideMenuListItem
           count={index}
-          to={redirect ? `${el.to}` : `${MANAGE_URL}/${el.to}`}
+          to={el.redirect ? `${el.to}` : `${MANAGE_URL}/${el.to}`}
           name={el.name}
           key={el.name}
-          redirect={redirect}
+          redirect={el.redirect}
         >
           {el.icon}
         </SideMenuListItem>
@@ -29,7 +29,7 @@ const MenuList = ({ items, redirect }) =>
     );
   });
 
-const SideMenuList = ({ itemData, items, redirect }) => {
+const SideMenuList = ({ itemData, items }) => {
   const [open, setOpen] = useToggle();
 
   return (
@@ -44,7 +44,7 @@ const SideMenuList = ({ itemData, items, redirect }) => {
       </SideMenuNestedList>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <ListStyled>
-          <MenuList items={items} redirect={redirect} />
+          <MenuList items={items} />
         </ListStyled>
       </Collapse>
     </ListStyled>

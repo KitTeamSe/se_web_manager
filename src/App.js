@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
-import Toolbar from './components/atoms/Toolbar/Toolbar';
-import Header from './components/templates/Header/Header';
 import useToggle from './libs/useToggle';
 import Routes from './Router';
+import SigninPage from './components/templates/Auth/SigninPage/SigninPage';
+import Toolbar from './components/atoms/Toolbar/Toolbar';
+import Header from './components/templates/Header/Header';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
@@ -21,16 +23,36 @@ const MainWrapper = styled.main`
 function App() {
   const [open, setOpen] = useToggle();
   return (
-    <Wrapper>
-      <CssBaseline />
-      <Header open={open} setOpen={setOpen} />
+    <>
+      {localStorage.getItem('token') ? (
+        <Wrapper>
+          <CssBaseline />
+          <Header open={open} setOpen={setOpen} />
 
-      <MainWrapper open={open}>
-        <Toolbar height="72" />
-        <Routes />
-      </MainWrapper>
-    </Wrapper>
+          <MainWrapper open={open}>
+            <Toolbar height="72" />
+            <Routes />
+          </MainWrapper>
+          <Redirect
+            to={{
+              pathname: `/m/account`
+            }}
+          />
+        </Wrapper>
+      ) : (
+        <>
+          <Route exact path="/signin" key="/signin">
+            <SigninPage />
+          </Route>
+          <Redirect
+            to={{
+              pathname: `/signin`
+            }}
+          />
+        </>
+      )}
+    </>
   );
 }
 
-export default App;
+export default withRouter(App);

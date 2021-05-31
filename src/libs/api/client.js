@@ -18,7 +18,6 @@ axios.interceptors.response.use(
     return response;
   },
   error => {
-    console.log(error);
     return Promise.reject(error);
   }
 );
@@ -28,5 +27,13 @@ export const tokenHeader = token => ({
     'X-AUTH-TOKEN': token
   }
 });
+
+export const checkToken = error => {
+  if (
+    error.response.status === 403 ||
+    (error.response.status === 400 && error.response.data.code === 'GE05')
+  )
+    localStorage.clear();
+};
 
 export default client;

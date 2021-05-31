@@ -24,12 +24,16 @@ const ButtonWrapper = styled.div`
   padding-top: 10px;
 `;
 
-const SigninPopover = ({ handleClose }) => {
+const SigninPopover = ({ handleClose, history }) => {
+  const goSignin = () => {
+    history.push(`/signin`);
+  };
+
   const onSignout = () => {
     localStorage.clear();
     handleClose();
+    goSignin();
   };
-
   return (
     <Wrapper>
       <ButtonWrapper>
