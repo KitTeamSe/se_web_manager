@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import createSagaMiddleware from 'redux-saga';
 import './styles/reset.css';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import App from './App';
 import theme from './styles/theme';
 import rootReducer, { rootSaga } from './modules';
@@ -19,12 +19,12 @@ if (process.env.REACT_APP_ENV === 'development') {
   worker.start();
 }
 
-const logger = createLogger();
+// const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  composeEnhancer(applyMiddleware(logger, sagaMiddleware))
+  composeEnhancer(applyMiddleware(sagaMiddleware))
   // applyMiddleware(logger, sagaMiddleware)
 );
 
