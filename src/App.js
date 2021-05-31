@@ -30,7 +30,7 @@ function App() {
           <Header open={open} setOpen={setOpen} />
 
           <MainWrapper open={open}>
-            <Toolbar height="72" />
+            <Toolbar height="68" />
             <Routes />
           </MainWrapper>
         </Wrapper>

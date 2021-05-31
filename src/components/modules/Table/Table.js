@@ -25,11 +25,11 @@ const TableCellStyled = styled(TableCell)`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 14px 16px;
+  padding: 12px 14px;
 `;
 
 const TableHeadCellStyled = styled(TableCell)`
-  padding: 14px 16px;
+  padding: 12px 14px;
 `;
 
 const Head = ({ head }) => {
