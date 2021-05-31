@@ -38,6 +38,7 @@ const BoardInfoPage = ({ board, error, loading }) => {
           head={BoardInfoData}
           setDeleteOpen={setDeleteOpen}
           setUpdateOpen={setUpdateOpen}
+          type="board"
         />
         {!deleteOpen || (
           <BoardDeleteDialogContainer

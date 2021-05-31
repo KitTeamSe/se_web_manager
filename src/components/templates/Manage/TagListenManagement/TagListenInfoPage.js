@@ -51,6 +51,7 @@ const TagListenInfoPage = ({ tagListen, error, loading }) => {
           head={TagListenInfoData}
           setDeleteOpen={setDeleteOpen}
           disabledUpdate
+          type="tagListen"
         />
         {!deleteOpen || (
           <TagListenDeleteDialogContainer

@@ -1,3 +1,16 @@
+export const ReportTypes = {
+  POST: '게시글',
+  REPLY: '댓글'
+};
+
+export const ReportStatusTypes = {
+  SUBMITTED: '제출',
+  REVIEWING: '검토',
+  PROCESSED: '처리됨',
+  REJECTED: '거절됨',
+  POSTPONED: '연기됨'
+};
+
 export const ReportTypeItems = [
   {
     value: 'POST',
@@ -9,7 +22,7 @@ export const ReportTypeItems = [
   }
 ];
 
-export const StatusItems = [
+export const StatusTypesItems = [
   {
     value: 'SUBMITTED',
     label: '제출'
@@ -42,7 +55,7 @@ export const ReportUpdateData = [
   {
     key: 'status',
     name: '상태',
-    items: StatusItems,
+    items: StatusTypesItems,
     type: 'dropdown',
     placeholder: '0'
   },
@@ -83,7 +96,7 @@ const ReportData = [
   {
     key: 'status',
     name: '상태',
-    items: StatusItems,
+    items: StatusTypesItems,
     type: 'dropdown',
     placeholder: '0'
   },

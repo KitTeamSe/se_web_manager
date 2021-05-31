@@ -40,6 +40,7 @@ const ReportInfoPage = ({ report, error, loading }) => {
           head={ReportInfoData}
           setDeleteOpen={setDeleteOpen}
           setUpdateOpen={setUpdateOpen}
+          type="report"
         />
         {!deleteOpen || (
           <ReportDeleteDialogContainer

@@ -1,3 +1,15 @@
+export const InfoOpenTypes = {
+  AGREE: '동의',
+  DISAGREE: '비동의'
+};
+
+export const AccountTypes = {
+  STUDENT: '학생',
+  PROFESSOR: '교수',
+  ASSISTANT: '조교',
+  OUTSIDER: '외부인'
+};
+
 export const AccountTypeItems = [
   {
     value: 'STUDENT',

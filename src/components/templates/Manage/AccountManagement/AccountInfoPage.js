@@ -38,6 +38,7 @@ const AccountInfoPage = ({ account, error, loading }) => {
           head={AccountInfoData}
           setDeleteOpen={setDeleteOpen}
           setUpdateOpen={setUpdateOpen}
+          type="account"
         />
         {!deleteOpen || (
           <AccountDeleteDialogContainer

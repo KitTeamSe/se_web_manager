@@ -1,3 +1,13 @@
+export const SubjectTypes = {
+  MAJOR: '전공',
+  MSC: 'MSC',
+  LIBERAL_ARTS: '교양',
+  TEACHER_EDUCATION: '교사교육',
+  MILITARY_SCIENCE: '군사교육',
+  COMMON: '공통',
+  ETC: '그 외'
+};
+
 export const SubjectTypeItems = [
   {
     value: 'MAJOR',

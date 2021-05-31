@@ -11,7 +11,7 @@ import {
   initializeUpdate,
   changeFieldAll
 } from '../../../modules/manage/menu';
-import MenuData from '../../../statics/data/MenuData';
+import { MenuUpdateData } from '../../../statics/data/MenuData';
 
 const UpdateFormContainer = ({ location, history, match }) => {
   const dispatch = useDispatch();
@@ -113,7 +113,7 @@ const UpdateFormContainer = ({ location, history, match }) => {
   return (
     <MenuUpdateForm
       id={id}
-      head={MenuData}
+      head={MenuUpdateData}
       error={error}
       form={menuData.data}
       onSubmit={onSubmit}

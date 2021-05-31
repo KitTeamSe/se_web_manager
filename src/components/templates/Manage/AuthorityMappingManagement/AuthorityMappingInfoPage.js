@@ -36,6 +36,7 @@ const AuthorityMappingInfoPage = ({ authorityMapping, error, loading }) => {
           head={AuthorityMappingInfoData}
           setDeleteOpen={setDeleteOpen}
           disabledUpdate
+          type="authorityMapping"
         />
         {!deleteOpen || (
           <AuthorityMappingDeleteDialogContainer

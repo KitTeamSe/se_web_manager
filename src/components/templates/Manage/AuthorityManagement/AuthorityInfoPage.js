@@ -30,6 +30,7 @@ const AuthorityInfoPage = ({ authority, error, loading }) => {
           head={AuthorityInfoData}
           disabledUpdate
           disabledDelete
+          type="authority"
         />
       </ContentWrapper>
     </>

@@ -16,7 +16,6 @@ const TextField = ({
   items
 }) => {
   /* eslint-disable react/jsx-props-no-spreading */
-  const [currency, setCurrency] = useState(value);
 
   const defaultField = props => (
     <TextFields
@@ -110,6 +109,7 @@ const TextField = ({
   };
 
   const dropdownField = () => {
+    const [currency, setCurrency] = useState(value);
     const handleChange = e => {
       setCurrency(e.target.value);
       onChange(e);
@@ -124,7 +124,11 @@ const TextField = ({
         value={currency}
         onChange={handleChange}
         defaultValue={currency}
+        SelectProps={{
+          native: true
+        }}
       >
+        <option>선택</option>
         {items.map(el => (
           <option key={el.value} value={el.value}>
             {el.label}

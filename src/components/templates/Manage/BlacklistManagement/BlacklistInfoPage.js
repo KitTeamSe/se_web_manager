@@ -33,6 +33,7 @@ const BlacklistInfoPage = ({ blacklist, error, loading }) => {
           head={BlacklistInfoData}
           setDeleteOpen={setDeleteOpen}
           disabledUpdate
+          type="blacklist"
         />
         {!deleteOpen || (
           <BlacklistDeleteDialogContainer

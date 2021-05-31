@@ -10,7 +10,7 @@ import {
   TableHead,
   TableRow
 } from '@material-ui/core';
-import { MenuTypeItems } from '../../../statics/data/MenuData';
+import TypeData from '../../../statics/data/TypeData';
 import { MANAGE_URL } from '../../../statics/data/config';
 
 const LinkStyled = styled(Link)`
@@ -45,6 +45,20 @@ const Head = ({ head }) => {
 };
 
 const Body = ({ head, rows, type, typeId }) => {
+  const handleTypes = (row, key, myType) => {
+    if (key === 'menuType') return TypeData.MenuTypes[row[key]];
+    if (key === 'reportType') return TypeData.ReportTypes[row[key]];
+    if (key === 'informationOpenAgree') return TypeData.InfoOpenTypes[row[key]];
+    if (key === 'status' && myType === 'report')
+      return TypeData.ReportStatusTypes[row[key]];
+    if (key === 'type') {
+      if (myType === 'account') return TypeData.AccountTypes[row[key]];
+      if (myType === 'subject') return TypeData.SubjectTypes[row[key]];
+      if (myType === 'teacher') return TypeData.TeacherTypes[row[key]];
+    }
+    return row[key];
+  };
+
   return (
     <TableBody>
       {rows.map(e => (
@@ -55,16 +69,13 @@ const Body = ({ head, rows, type, typeId }) => {
           hover
         >
           {head.map(el => {
-            if (el.key in e && el.key === 'menuType') {
+            if (el.key in e)
               return (
                 <TableCellStyled align="center">
-                  {MenuTypeItems[e[el.key]]}
+                  {handleTypes(e, el.key, type)}
                 </TableCellStyled>
               );
-            }
-            return el.key in e ? (
-              <TableCellStyled align="center">{e[el.key]}</TableCellStyled>
-            ) : null;
+            return null;
           })}
         </TableRowStyled>
       ))}
