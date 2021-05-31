@@ -70,6 +70,11 @@ const ManageListData = [
     icon: <Label />
   },
   {
+    to: 'tag_listen',
+    name: '수신 태그 관리',
+    icon: <Label />
+  },
+  {
     to: 'job',
     name: '취업정보 업로드',
     icon: <Work />

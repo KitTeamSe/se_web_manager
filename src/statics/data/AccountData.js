@@ -20,7 +20,7 @@ export const AccountTypeItems = [
 export const AccountUpdateData = [
   {
     key: 'id',
-    name: '유저ID',
+    name: '사용자 ID',
     type: 'readonly',
     placeholder: '0'
   },
@@ -72,7 +72,7 @@ const AccountData = [
   },
   {
     key: 'idString',
-    name: '유저ID',
+    name: '사용자 ID',
     type: '',
     placeholder: '0'
   },

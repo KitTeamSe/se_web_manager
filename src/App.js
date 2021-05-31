@@ -33,11 +33,6 @@ function App() {
             <Toolbar height="72" />
             <Routes />
           </MainWrapper>
-          <Redirect
-            to={{
-              pathname: `/m/account`
-            }}
-          />
         </Wrapper>
       ) : (
         <>
