@@ -9,9 +9,11 @@ export const getAuthoritys = ({ direction, page, size, token }) => {
     .get(`${URL}?${queryString}`, tokenHeader(token))
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 };
 export const getAuthority = ({ id, token }) =>
   client.get(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });

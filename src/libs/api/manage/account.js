@@ -9,11 +9,13 @@ export const getAccounts = ({ direction, page, size, token }) => {
     .get(`${URL}?${queryString}`, tokenHeader(token))
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 };
 export const getAccount = ({ id, token }) =>
   client.get(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });
 
 export const updateAccount = ({
@@ -40,9 +42,11 @@ export const updateAccount = ({
     )
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 
 export const removeAccount = ({ id, token }) =>
   client.delete(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });

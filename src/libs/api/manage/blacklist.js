@@ -8,12 +8,14 @@ export const getBlacklists = ({ direction, page, size, token }) => {
     .get(`${URL}?${queryString}`, tokenHeader(token))
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 };
 
 export const getBlacklist = ({ id, token }) =>
   client.get(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });
 
 export const addBlacklist = ({ ip, reason, token }) =>
@@ -28,9 +30,11 @@ export const addBlacklist = ({ ip, reason, token }) =>
     )
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 
 export const removeBlacklist = ({ id, token }) =>
   client.delete(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });

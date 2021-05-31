@@ -5,16 +5,19 @@ const URL = `board`;
 export const getBoards = ({ token }) =>
   client.get(`${URL}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });
 export const getBoard = ({ id, token }) =>
   client.get(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });
 export const addBoard = ({ nameEng, nameKor, token }) =>
   client
     .post(`${URL}`, { nameEng, nameKor }, tokenHeader(token))
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 export const updateBoard = ({
   boardId,
@@ -44,8 +47,10 @@ export const updateBoard = ({
     )
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 export const removeBoard = ({ id, token }) =>
   client.delete(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });

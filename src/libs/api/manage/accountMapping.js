@@ -8,12 +8,14 @@ export const getAccountMappings = ({ direction, page, size, token }) => {
     .get(`${URL}?${queryString}`, tokenHeader(token))
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 };
 
 export const getAccountMapping = ({ id, token }) =>
   client.get(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });
 
 export const addAccountMapping = ({ accountId, groupId, token }) =>
@@ -28,9 +30,11 @@ export const addAccountMapping = ({ accountId, groupId, token }) =>
     )
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 
 export const removeAccountMapping = ({ id, token }) =>
   client.delete(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });

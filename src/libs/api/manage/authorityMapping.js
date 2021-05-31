@@ -8,12 +8,14 @@ export const getAuthorityMappings = ({ direction, page, size, token }) => {
     .get(`${URL}?${queryString}`, tokenHeader(token))
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 };
 
 export const getAuthorityMapping = ({ id, token }) =>
   client.get(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });
 
 export const addAuthorityMapping = ({ authorityId, groupId, token }) =>
@@ -28,9 +30,11 @@ export const addAuthorityMapping = ({ authorityId, groupId, token }) =>
     )
     .catch(error => {
       checkToken(error);
+      throw error;
     });
 
 export const removeAuthorityMapping = ({ id, token }) =>
   client.delete(`${URL}/${id}`, tokenHeader(token)).catch(error => {
     checkToken(error);
+    throw error;
   });
