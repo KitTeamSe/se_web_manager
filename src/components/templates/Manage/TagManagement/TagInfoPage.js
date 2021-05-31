@@ -35,6 +35,7 @@ const TagInfoPage = ({ tag, error, loading }) => {
           head={TagInfoData}
           setDeleteOpen={setDeleteOpen}
           setUpdateOpen={setUpdateOpen}
+          type="tag"
         />
         {!deleteOpen || (
           <TagDeleteDialogContainer

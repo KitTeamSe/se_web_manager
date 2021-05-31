@@ -21,14 +21,14 @@ const MenuData = [
     placeholder: '자유게시판'
   },
   {
-    key: 'menuNameKor',
+    key: 'menuNameEng',
     name: '메뉴이름(eng)',
     type: 'empty',
     width: '10%',
     placeholder: 'freeboard'
   },
   {
-    key: 'menuNameEng',
+    key: 'menuNameKor',
     name: '메뉴이름(kor)',
     type: 'empty',
     width: '10%',

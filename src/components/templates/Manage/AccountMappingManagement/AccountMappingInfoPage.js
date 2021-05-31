@@ -35,6 +35,7 @@ const AccountMappingInfoPage = ({ accountMapping, error, loading }) => {
           head={AccountMappingInfoData}
           setDeleteOpen={setDeleteOpen}
           disabledUpdate
+          type="accountMapping"
         />
         {!deleteOpen || (
           <AccountMappingDeleteDialogContainer

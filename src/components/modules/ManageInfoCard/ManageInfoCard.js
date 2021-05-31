@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import RoundButton from '../../atoms/Button/RoundButton';
+import TypeData from '../../../statics/data/TypeData';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -60,17 +61,31 @@ const ManageInfoCard = ({
   history,
   match,
   data,
+  type,
   error,
   loading,
   head,
   setDeleteOpen,
-  // setUpdateOpen,
   disabledDelete,
   disabledUpdate
 }) => {
   const { id } = match.params;
   const goBack = () => {
     history.goBack();
+  };
+
+  const handleTypes = (row, key, myType) => {
+    if (key === 'menuType') return TypeData.MenuTypes[row[key]];
+    if (key === 'reportType') return TypeData.ReportTypes[row[key]];
+    if (key === 'informationOpenAgree') return TypeData.InfoOpenTypes[row[key]];
+    if (key === 'status' && myType === 'report')
+      return TypeData.ReportStatusTypes[row[key]];
+    if (key === 'type') {
+      if (myType === 'account') return TypeData.AccountTypes[row[key]];
+      if (myType === 'subject') return TypeData.SubjectTypes[row[key]];
+      if (myType === 'teacher') return TypeData.TeacherTypes[row[key]];
+    }
+    return row[key];
   };
 
   return (
@@ -87,7 +102,7 @@ const ManageInfoCard = ({
                 <KeyText>{head[e]}</KeyText>
               </Item>
               <Item>
-                <DataText>{data.data[e]}</DataText>
+                <DataText>{handleTypes(data.data, e, type)}</DataText>
               </Item>
             </InfoWrapper>
           ))

@@ -37,6 +37,7 @@ const AuthorityGroupInfoPage = ({ authorityGroup, error, loading }) => {
           head={AuthorityGroupInfoData}
           setDeleteOpen={setDeleteOpen}
           setUpdateOpen={setUpdateOpen}
+          type="authorityGroup"
         />
         {!deleteOpen || (
           <AuthorityGroupDeleteDialogContainer

@@ -41,6 +41,7 @@ const MenuInfoPage = ({ menu, error, loading }) => {
           head={MenuInfoData}
           setDeleteOpen={setDeleteOpen}
           setUpdateOpen={setUpdateOpen}
+          type="menu"
         />
         {!deleteOpen || (
           <MenuDeleteDialogContainer

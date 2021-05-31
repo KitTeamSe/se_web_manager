@@ -1,3 +1,11 @@
+export const TeacherTypes = {
+  FULL_PROFESSOR: '전임교수',
+  FIXED_TERM_PROFESSOR: '기간제교수',
+  ASSISTANT: '조교',
+  STUDENT: '학생',
+  ETC: '그 외'
+};
+
 export const TeacherTypeItems = [
   {
     value: 'FULL_PROFESSOR',

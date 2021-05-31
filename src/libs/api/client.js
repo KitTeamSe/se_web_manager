@@ -30,7 +30,8 @@ export const tokenHeader = token => ({
 
 export const checkToken = error => {
   if (
-    error.response.status === 403 ||
+    error.message === 'Network Error' ||
+    (error.response.status === 403 && error.response.data.code === 'GE03') ||
     (error.response.status === 400 && error.response.data.code === 'GE05')
   )
     localStorage.clear();

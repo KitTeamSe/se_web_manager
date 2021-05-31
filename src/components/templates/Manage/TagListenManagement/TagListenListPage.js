@@ -35,8 +35,6 @@ const TagListenListPage = ({ tagListenList, error, loading }) => {
   // const handleAddOpen = () => {
   //   setAddOpen(true);
   // };
-  console.log(link);
-
   return (
     <Wrapper>
       <ContentHeader title={headerTitle}>
