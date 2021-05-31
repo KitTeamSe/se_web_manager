@@ -31,6 +31,8 @@ const DeleteDialog = ({ title, data, open, setOpen, type, onClick }) => {
       return `[${data.accountIdString}] - [${data.groupName}]`;
     if (type === 'blacklist') return `[${data.ip}]`;
     if (type === 'report') return `[${data.reportId}]`;
+    if (type === 'tagListen')
+      return `[${data.accountIdString}] - [${data.tagName}]`;
     return `[${data.name}]`;
   };
   return (

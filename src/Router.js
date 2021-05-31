@@ -17,6 +17,10 @@ import TagAddPage from './components/templates/Manage/TagManagement/TagAddPage';
 import TagUpdatePage from './components/templates/Manage/TagManagement/TagUpdatePage';
 import TagListPageContainer from './components/templates/Manage/TagManagement/TagListPageContainer';
 import TagInfoPageContainer from './components/templates/Manage/TagManagement/TagInfoPageContainer';
+import TagListenListPageContainer from './components/templates/Manage/TagListenManagement/TagListenListPageContainer';
+import TagListenByAccountListPageContainer from './components/templates/Manage/TagListenManagement/TagListenByAccountListPageContainer';
+import TagListenInfoPageContainer from './components/templates/Manage/TagListenManagement/TagListenInfoPageContainer';
+import TagListenAddPage from './components/templates/Manage/TagListenManagement/TagListenAddPage';
 import AccountListPageContainer from './components/templates/Manage/AccountManagement/AccountListPageContainer';
 import AccountInfoPageContainer from './components/templates/Manage/AccountManagement/AccountInfoPageContainer';
 import AccountUpdatePage from './components/templates/Manage/AccountManagement/AccountUpdatePage';
@@ -37,8 +41,6 @@ import ReportInfoPageContainer from './components/templates/Manage/ReportManagem
 import ReportUpdatePage from './components/templates/Manage/ReportManagement/ReportUpdatePage';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
-import LogListPage from './components/templates/Manage/LogManagement/LogListPage';
-import StatisticsPage from './components/templates/Manage/StatisticsManagement/StatisticsPage';
 import NoticeListPage from './components/templates/Manage/NoticeManagement/NoticeListPage';
 import LectureRoomListPageContainer from './components/templates/Schedule/LectureRoomManagement/LectureRoomListPageContainer';
 import TeacherListPageContainer from './components/templates/Schedule/TeacherManagement/TeacherListPageContainer';
@@ -186,6 +188,23 @@ const TagRoute = () => (
   </>
 );
 
+const TagListenRoute = () => (
+  <>
+    <Router exact to="tag_listen">
+      <TagListenListPageContainer />
+    </Router>
+    <Router exact to="tag_listen/list/:id">
+      <TagListenByAccountListPageContainer />
+    </Router>
+    <Router to="tag_listen/info/:id">
+      <TagListenInfoPageContainer />
+    </Router>
+    <Router exact to="tag_listen/add">
+      <TagListenAddPage />
+    </Router>
+  </>
+);
+
 const BlacklistRoute = () => (
   <>
     <Router exact to="blacklist">
@@ -222,14 +241,9 @@ const ManageRoute = () => (
       <PostMovePage />
     </Router>
     <TagRoute />
+    <TagListenRoute />
     <Router to="job">
       <JobInfoUploadPage />
-    </Router>
-    <Router to="log">
-      <LogListPage />
-    </Router>
-    <Router to="statistics">
-      <StatisticsPage />
     </Router>
     <Router to="notice">
       <NoticeListPage />
