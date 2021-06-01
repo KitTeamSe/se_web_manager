@@ -41,7 +41,8 @@ import ReportInfoPageContainer from './components/templates/Manage/ReportManagem
 import ReportUpdatePage from './components/templates/Manage/ReportManagement/ReportUpdatePage';
 import PostMovePage from './components/templates/Manage/PostManagement/PostMovePage';
 import JobInfoUploadPage from './components/templates/Manage/JobInfoUpload/JobInfoUploadPage';
-import NoticeListPage from './components/templates/Manage/NoticeManagement/NoticeListPage';
+import NoticeListPageContainer from './components/templates/Manage/NoticeManagement/NoticeListPageContainer';
+import NoticeInfoPageContainer from './components/templates/Manage/NoticeManagement/NoticeInfoPageContainer';
 import LectureRoomListPageContainer from './components/templates/Schedule/LectureRoomManagement/LectureRoomListPageContainer';
 import TeacherListPageContainer from './components/templates/Schedule/TeacherManagement/TeacherListPageContainer';
 import SubjectListPageContainer from './components/templates/Schedule/SubjectManagement/SubjectListPageContainer';
@@ -233,6 +234,17 @@ const ReportRoute = () => (
   </>
 );
 
+const NoticeRoute = () => (
+  <>
+    <Router exact to="notice">
+      <NoticeListPageContainer />
+    </Router>
+    <Router to="notice/info/:id">
+      <NoticeInfoPageContainer />
+    </Router>
+  </>
+);
+
 const ManageRoute = () => (
   <>
     <MenuRoute />
@@ -245,9 +257,7 @@ const ManageRoute = () => (
     <Router to="job">
       <JobInfoUploadPage />
     </Router>
-    <Router to="notice">
-      <NoticeListPage />
-    </Router>
+    <NoticeRoute />
     <BlacklistRoute />
     <AccountRoute />
     <AuthorityRoute />

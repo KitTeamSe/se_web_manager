@@ -44,7 +44,7 @@ const Head = ({ head }) => {
   );
 };
 
-const Body = ({ head, rows, type, typeId }) => {
+const Body = ({ head, rows, type, typeId, pageNumber, pageSize }) => {
   const handleTypes = (row, key, myType) => {
     if (key === 'menuType') return TypeData.MenuTypes[row[key]];
     if (key === 'reportType') return TypeData.ReportTypes[row[key]];
@@ -61,10 +61,12 @@ const Body = ({ head, rows, type, typeId }) => {
 
   return (
     <TableBody>
-      {rows.map(e => (
+      {rows.map((e, i) => (
         <TableRowStyled
           component={LinkStyled}
-          to={`${MANAGE_URL}/${type}/info/${e[typeId]}`}
+          to={`${MANAGE_URL}/${type}/info/${
+            typeId ? e[typeId] : pageNumber * pageSize + i + 1
+          }`}
           key={`${type}/${e[typeId]}`}
           hover
         >
@@ -83,12 +85,19 @@ const Body = ({ head, rows, type, typeId }) => {
   );
 };
 
-const Table = ({ head, rows, type, typeId }) => {
+const Table = ({ head, rows, type, typeId, pageNumber, pageSize }) => {
   return (
     <TableContainer>
       <Tables>
         <Head head={head} />
-        <Body head={head} rows={rows} type={type} typeId={typeId} />
+        <Body
+          head={head}
+          rows={rows}
+          type={type}
+          typeId={typeId}
+          pageNumber={pageNumber}
+          pageSize={pageSize}
+        />
       </Tables>
     </TableContainer>
   );

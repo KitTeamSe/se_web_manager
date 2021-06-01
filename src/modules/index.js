@@ -16,6 +16,7 @@ import tag, { tagSaga } from './manage/tag';
 import tagListen, { tagListenSaga } from './manage/tagListen';
 import blacklist, { blacklistSaga } from './manage/blacklist';
 import report, { reportSaga } from './manage/report';
+import notice, { noticeSaga } from './manage/notice';
 
 import lectureRoom, { lectureRoomSaga } from './schedule/lectureRoom';
 import period, { periodSaga } from './schedule/period';
@@ -39,7 +40,8 @@ const rootReducer = combineReducers({
   blacklist,
   report,
   tag,
-  tagListen
+  tagListen,
+  notice
 });
 
 export function* rootSaga() {
@@ -59,7 +61,8 @@ export function* rootSaga() {
     blacklistSaga(),
     reportSaga(),
     tagSaga(),
-    tagListenSaga()
+    tagListenSaga(),
+    noticeSaga()
   ]);
 }
 
