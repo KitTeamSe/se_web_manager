@@ -3,19 +3,19 @@ const NoticeData = [
     key: 'url',
     name: 'URL',
     type: 'string',
-    placeholder: '자유게시판'
+    placeholder: 'url'
   },
   {
     key: 'title',
     name: '제목',
     type: 'readonly',
-    placeholder: '0'
+    placeholder: 'title'
   },
   {
     key: 'message',
     name: '메시지',
     type: 'string',
-    placeholder: 'freeboard'
+    placeholder: 'message'
   }
 ];
 

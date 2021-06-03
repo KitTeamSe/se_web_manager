@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 // import FormInputContents from '../../../modules/FormInputContents/FormInputContents';
+import { Edit } from '@material-ui/icons';
+// import { faSearch } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TextField from '../../atoms/TextField/TextField';
 import Button from '../../atoms/Button/Button';
 
@@ -50,7 +53,34 @@ const ErrorMessage = styled.div`
   font-size: 0.875rem;
   margin-top: 1rem;
 `;
+
+const TextFieldWrapper = styled.div`
+  display: flex;
+  align-items: baseline;
+`;
+
 const AddForm = ({ head, goBack, form, onSubmit, onChange, error }) => {
+  const handleErrorField = el => {
+    const errorIndex = error
+      ? error.data.errors.find(e => e.field === el.key)
+      : null;
+    const errorData = errorIndex ? errorIndex.reason : null;
+    return (
+      <TextField
+        id={el.key}
+        name={el.key}
+        label={el.name}
+        type={el.type}
+        placeholder={el.placeholder}
+        value={form[el.key]}
+        onChange={onChange}
+        items={el.items}
+        error={error && errorIndex}
+        helperText={errorData}
+      />
+    );
+  };
+
   return (
     <CardStyled>
       <FormStyled onSubmit={onSubmit}>
@@ -59,11 +89,10 @@ const AddForm = ({ head, goBack, form, onSubmit, onChange, error }) => {
             {head.map((el, i) => {
               if (i === 0) return null;
               if (error && 'errors' in error.data) {
-                const errorIndex = error
-                  ? error.data.errors.find(e => e.field === el.key)
-                  : null;
-                const errorData = errorIndex ? errorIndex.reason : null;
-                return (
+                return handleErrorField(el);
+              }
+              return (
+                <TextFieldWrapper>
                   <TextField
                     id={el.key}
                     name={el.key}
@@ -73,22 +102,9 @@ const AddForm = ({ head, goBack, form, onSubmit, onChange, error }) => {
                     value={form[el.key]}
                     onChange={onChange}
                     items={el.items}
-                    error={error && errorIndex}
-                    helperText={errorData}
                   />
-                );
-              }
-              return (
-                <TextField
-                  id={el.key}
-                  name={el.key}
-                  label={el.name}
-                  type={el.type}
-                  placeholder={el.placeholder}
-                  value={form[el.key]}
-                  onChange={onChange}
-                  items={el.items}
-                />
+                  {'hint' in el && <Edit />}
+                </TextFieldWrapper>
               );
             })}
             {error && <ErrorMessage>{error.data.message}</ErrorMessage>}

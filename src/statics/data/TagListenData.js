@@ -15,7 +15,7 @@ const TagListenData = [
     key: 'tagName',
     name: '태그 이름',
     type: 'empty',
-    placeholder: '0'
+    placeholder: '태그 이름'
   },
   {
     key: 'accountId',
@@ -27,7 +27,7 @@ const TagListenData = [
     key: 'accountIdString',
     name: '사용자 ID',
     type: 'empty',
-    placeholder: '태그이름'
+    placeholder: '사용자 ID'
   }
 ];
 

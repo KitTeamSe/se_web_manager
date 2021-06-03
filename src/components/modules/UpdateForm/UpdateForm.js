@@ -54,36 +54,50 @@ const ErrorMessage = styled.div`
 const idData = ['menuId', 'boardId', 'authorityGroupId', 'tagId', 'id'];
 
 const UpdateForm = ({ id, head, goBack, form, onSubmit, onChange, error }) => {
+  const handleErrorField = el => {
+    const errorIndex = error
+      ? error.data.errors.find(e => e.field === el.key)
+      : null;
+    const errorData = errorIndex ? errorIndex.reason : null;
+
+    return (
+      <TextField
+        id={el.key}
+        name={el.key}
+        label={el.name}
+        type={el.type}
+        placeholder={el.placeholder}
+        value={idData.indexOf(el.key) > -1 ? id : form[el.key]}
+        onChange={onChange}
+        items={el.items}
+        error={error && errorIndex}
+        helperText={errorData}
+      />
+    );
+  };
+
   return (
     <CardStyled>
       <FormStyled onSubmit={onSubmit}>
         <Wrapper>
           <InfoWrapper>
-            {head.map(el =>
-              idData.indexOf(el.key) > -1 ? (
+            {head.map(el => {
+              if (error && 'errors' in error.data) {
+                return handleErrorField(el);
+              }
+              return (
                 <TextField
                   id={el.key}
                   name={el.key}
                   label={el.name}
                   type={el.type}
                   placeholder={el.placeholder}
-                  value={id}
+                  value={idData.indexOf(el.key) > -1 ? id : form[el.key]}
                   onChange={onChange}
                   items={el.items}
                 />
-              ) : (
-                <TextField
-                  id={el.key}
-                  name={el.key}
-                  label={el.name}
-                  type={el.type}
-                  placeholder={el.placeholder}
-                  value={form[el.key]}
-                  onChange={onChange}
-                  items={el.items}
-                />
-              )
-            )}
+              );
+            })}
             {error && <ErrorMessage>{error.data.message}</ErrorMessage>}
           </InfoWrapper>
         </Wrapper>
