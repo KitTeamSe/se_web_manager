@@ -7,13 +7,14 @@ const AccountMappingData = [
   },
   {
     key: 'accountId',
-    name: '사용자 ID',
+    name: 'account ID',
     type: 'number',
+    hint: 'account',
     placeholder: '0'
   },
   {
     key: 'accountIdString',
-    name: '사용자 이름',
+    name: '사용자 ID',
     type: 'empty',
     placeholder: 'freeboard'
   },
@@ -21,6 +22,7 @@ const AccountMappingData = [
     key: 'groupId',
     name: '그룹 ID',
     type: 'number',
+    hint: 'authorityGroup',
     placeholder: '자유게시판'
   },
   {

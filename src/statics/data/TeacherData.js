@@ -42,7 +42,7 @@ const TeacherData = [
     name: '이름',
     type: 'string',
     width: '10%',
-    placeholder: 'ex) 이름'
+    placeholder: '이름'
   },
   {
     key: 'type',
@@ -57,7 +57,7 @@ const TeacherData = [
     name: '소속',
     type: 'string',
     width: '20%',
-    placeholder: 'ex) 컴퓨터소프트웨어공학과'
+    placeholder: '컴퓨터소프트웨어공학과'
   },
   {
     key: 'note',

@@ -4,11 +4,11 @@ export const ReportTypes = {
 };
 
 export const ReportStatusTypes = {
-  SUBMITTED: '제출',
-  REVIEWING: '검토',
-  PROCESSED: '처리됨',
-  REJECTED: '거절됨',
-  POSTPONED: '연기됨'
+  SUBMITTED: '⬜제출',
+  REVIEWING: '⬜검토중',
+  PROCESSED: '🟩처리됨',
+  REJECTED: '🟥거절됨',
+  POSTPONED: '🟨연기됨'
 };
 
 export const ReportTypeItems = [
@@ -25,23 +25,23 @@ export const ReportTypeItems = [
 export const StatusTypesItems = [
   {
     value: 'SUBMITTED',
-    label: '제출'
+    label: '⬜제출'
   },
   {
     value: 'REVIEWING',
-    label: '검토 중'
+    label: '⬜검토중'
   },
   {
     value: 'PROCESSED',
-    label: '처리됨'
+    label: '🟩처리됨'
   },
   {
     value: 'REJECTED',
-    label: '거절됨'
+    label: '🟥거절됨'
   },
   {
     value: 'POSTPONED',
-    label: '연기됨'
+    label: '🟨연기됨'
   }
 ];
 
@@ -57,13 +57,13 @@ export const ReportUpdateData = [
     name: '상태',
     items: StatusTypesItems,
     type: 'dropdown',
-    placeholder: '0'
+    placeholder: 'dropdown'
   },
   {
     key: 'description',
     name: '비고',
     type: 'string',
-    placeholder: '0'
+    placeholder: '비고'
   }
 ];
 
@@ -91,7 +91,7 @@ const ReportData = [
     key: 'description',
     name: '비고',
     type: 'string',
-    placeholder: '0'
+    placeholder: '비고'
   },
   {
     key: 'status',

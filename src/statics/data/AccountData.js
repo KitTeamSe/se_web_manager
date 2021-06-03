@@ -1,6 +1,6 @@
 export const InfoOpenTypes = {
-  AGREE: '동의',
-  DISAGREE: '비동의'
+  AGREE: '🟢',
+  DISAGREE: '❌'
 };
 
 export const AccountTypes = {
@@ -40,7 +40,7 @@ export const AccountUpdateData = [
     key: 'studentId',
     name: '학번',
     type: 'string',
-    placeholder: '0'
+    placeholder: '20000000'
   },
   {
     key: 'name',
@@ -50,7 +50,7 @@ export const AccountUpdateData = [
   },
   {
     key: 'nickname',
-    name: '별명',
+    name: '닉네임',
     type: 'string',
     placeholder: 'nickname'
   },
@@ -62,7 +62,7 @@ export const AccountUpdateData = [
   },
   {
     key: 'informationOpenAgree',
-    name: '정보공유',
+    name: '정보공유동의',
     type: 'readonly',
     placeholder: 'AGREE'
   },
@@ -96,9 +96,9 @@ const AccountData = [
   },
   {
     key: 'nickname',
-    name: '별명',
+    name: '닉네임',
     type: '',
-    placeholder: 'nickname'
+    placeholder: '닉네임'
   },
   {
     key: 'email',
@@ -116,7 +116,7 @@ const AccountData = [
     key: 'phoneNumber',
     name: '휴대폰',
     type: '',
-    placeholder: '01011112222'
+    placeholder: '01099999999'
   },
   {
     key: 'studentId',

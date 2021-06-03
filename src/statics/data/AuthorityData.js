@@ -7,15 +7,15 @@ const AuthorityData = [
   },
   {
     key: 'nameEng',
-    name: '이름(eng)',
+    name: '권한 이름(eng)',
     type: 'string',
-    placeholder: 'freeboard'
+    placeholder: 'authority name'
   },
   {
     key: 'nameKor',
-    name: '이름(kor)',
+    name: '권한 이름(kor)',
     type: 'string',
-    placeholder: '자유게시판'
+    placeholder: '권한 이름'
   }
 ];
 

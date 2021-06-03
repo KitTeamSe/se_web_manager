@@ -1,17 +1,17 @@
 export const MenuTypes = {
-  BOARD: '게시판',
-  FOLDER: '폴더',
-  REDIRECT: '링크'
+  BOARD: '📃게시판',
+  FOLDER: '📁폴더',
+  REDIRECT: '🔗링크'
 };
 
 export const MenuTypeItems = [
   {
     value: 'FOLDER',
-    label: '폴더'
+    label: '📁폴더'
   },
   {
     value: 'REDIRECT',
-    label: '링크'
+    label: '🔗링크'
   }
 ];
 
@@ -74,7 +74,7 @@ export const MenuUpdateData = [
     name: 'URL',
     type: 'string',
     width: '10%',
-    placeholder: 'freeboard'
+    placeholder: 'url ( / 제외한 url만 입력 )'
   },
   {
     key: 'description',
@@ -88,24 +88,24 @@ export const MenuUpdateData = [
 const MenuData = [
   {
     key: 'menuId',
-    name: 'id',
+    name: 'ID',
     type: 'readonly',
     width: '10%',
     placeholder: '0'
   },
   {
     key: 'nameEng',
-    name: '이름(eng)',
+    name: '메뉴 이름(eng)',
     type: 'string',
     width: '10%',
-    placeholder: 'freeboard'
+    placeholder: 'menu'
   },
   {
     key: 'nameKor',
-    name: '이름(kor)',
+    name: '메뉴 이름(kor)',
     type: 'string',
     width: '10%',
-    placeholder: '자유게시판'
+    placeholder: '메뉴'
   },
   {
     key: 'menuOrder',
@@ -116,7 +116,7 @@ const MenuData = [
   },
   {
     key: 'menuType',
-    name: '타입',
+    name: '메뉴 타입',
     type: 'dropdown',
     items: MenuTypeItems,
     width: '10%',
@@ -134,7 +134,7 @@ const MenuData = [
     name: 'URL',
     type: 'string',
     width: '10%',
-    placeholder: 'freeboard'
+    placeholder: 'url ( / 제외한 url만 입력 )'
   },
   {
     key: 'description',

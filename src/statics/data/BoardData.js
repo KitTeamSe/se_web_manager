@@ -1,4 +1,4 @@
-const MenuData = [
+const BoardData = [
   {
     key: 'boardId',
     name: 'id',
@@ -8,17 +8,17 @@ const MenuData = [
   },
   {
     key: 'nameEng',
-    name: '이름(eng)',
+    name: '게시판 이름(eng)',
     type: 'string',
     width: '10%',
-    placeholder: 'freeboard'
+    placeholder: 'board'
   },
   {
     key: 'nameKor',
-    name: '이름(kor)',
+    name: '게시판 이름(kor)',
     type: 'string',
     width: '10%',
-    placeholder: '자유게시판'
+    placeholder: '게시판'
   },
   {
     key: 'menuNameEng',
@@ -36,4 +36,4 @@ const MenuData = [
   }
 ];
 
-export default MenuData;
+export default BoardData;

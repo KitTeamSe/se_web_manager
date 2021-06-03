@@ -7,15 +7,15 @@ const AuthorityGroupData = [
   },
   {
     key: 'name',
-    name: '이름',
+    name: '권한 그룹 이름',
     type: 'string',
-    placeholder: 'DEFAULT'
+    placeholder: '권한 그룹'
   },
   {
     key: 'description',
     name: '비고',
     type: 'multiline',
-    placeholder: '비로그인 사용자'
+    placeholder: '비고'
   },
   {
     key: 'type',

@@ -1,4 +1,4 @@
-const AuthorityGroupData = [
+const TagDaga = [
   {
     key: 'tagId',
     name: 'id',
@@ -13,4 +13,4 @@ const AuthorityGroupData = [
   }
 ];
 
-export default AuthorityGroupData;
+export default TagDaga;
