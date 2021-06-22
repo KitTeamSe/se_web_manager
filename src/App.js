@@ -1,51 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import './App.css';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import ContentContainer from './components/atoms/ContentContainer/ContentContainer';
-import AppBar from './components/modules/AppBar/AppBar';
-import SideMenu from './components/modules/SideMenu/SideMenu';
-import { defaultPath, SideMenuListData } from './statics/data/SideMenuListData';
+import { Redirect, Route, withRouter } from 'react-router-dom';
+import { CssBaseline } from '@material-ui/core';
+import useToggle from './libs/useToggle';
+import Routes from './Router';
+import SigninPage from './components/templates/Auth/SigninPage/SigninPage';
+import Toolbar from './components/atoms/Toolbar/Toolbar';
+import Header from './components/templates/Header/Header';
 
 const Wrapper = styled.div`
   flex-shrink: 0;
   white-space: nowrap;
 `;
 
+const MainWrapper = styled.main`
+  overflow-x: hidden;
+  flex-grow: 1;
+  margin-left: ${props => (props.open ? 260 : 100)}px;
+  margin-right: 100px;
+`;
+
 function App() {
-  const menuItems = SideMenuListData;
-  const path = defaultPath;
-  const firstPage = menuItems[0].id;
-  const [open, setOpen] = useState(false);
-
-  // const doNothing = () => {
-  //   return '#';
-  // };
-
+  const [open, setOpen] = useToggle();
   return (
-    <Wrapper>
-      <CssBaseline />
-      <AppBar open={open} setOpen={setOpen} path={menuItems.path} />
-      <SideMenu open={open} items={menuItems} path={path} />
+    <>
+      {localStorage.getItem('token') ? (
+        <Wrapper>
+          <CssBaseline />
+          <Header open={open} setOpen={setOpen} />
 
-      <ContentContainer open={open} setOpen={setOpen}>
-        <Switch>
-          {menuItems.map(el => (
-            <Route exact path={`${path}/${el.id}`} key={el.id}>
-              {el.page}
-            </Route>
-          ))}
-          <Redirect path="*" to={`${path}/${firstPage}`} />
-        </Switch>
-      </ContentContainer>
-    </Wrapper>
+          <MainWrapper open={open}>
+            <Toolbar height="68" />
+            <Routes />
+          </MainWrapper>
+        </Wrapper>
+      ) : (
+        <>
+          <Route exact path="/signin" key="/signin">
+            <SigninPage />
+          </Route>
+          <Redirect
+            to={{
+              pathname: `/signin`
+            }}
+          />
+        </>
+      )}
+    </>
   );
 }
 
-// menuItems: PropTypes.shape({
-//   path: PropTypes.string,
-//   items: PropTypes.arrayOf(PropTypes.object)
-// })
-
-export default App;
+export default withRouter(App);

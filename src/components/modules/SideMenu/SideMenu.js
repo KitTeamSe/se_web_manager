@@ -1,32 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from '@material-ui/core';
-import SideMenuListItem from '../../atoms/SideMenuListItem/SideMenuListItem';
 import SideMenuContainer from '../../atoms/SideMenuContainer/SideMenuContainer';
+import SideMenuList from '../SideMenuList/SideMenuList';
+import {
+  ManageListData,
+  ScheduleListData,
+  DevelopListData,
+  ManageNestedData,
+  ScheduleNestedData,
+  DevelopNestedData
+} from '../../../statics/data/SideMenuData';
 
-const SideMenu = ({ open, items, path }) => {
+const SideMenu = ({ open }) => {
   return (
     <SideMenuContainer open={open}>
-      <List>
-        {items.map((el, index) => (
-          <SideMenuListItem count={index} data={el} path={path} key={el.name}>
-            {el.icon}
-          </SideMenuListItem>
-        ))}
-      </List>
+      <SideMenuList itemData={ManageNestedData} items={ManageListData} />
+      <SideMenuList itemData={ScheduleNestedData} items={ScheduleListData} />
+      <SideMenuList itemData={DevelopNestedData} items={DevelopListData} />
     </SideMenuContainer>
   );
 };
 
 SideMenu.propTypes = {
-  open: PropTypes.bool.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object),
-  path: PropTypes.string
+  open: PropTypes.bool.isRequired
 };
 
-SideMenu.defaultProps = {
-  items: [],
-  path: '/'
-};
+SideMenu.defaultProps = {};
 
 export default SideMenu;

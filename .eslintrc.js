@@ -12,6 +12,13 @@ module.exports = {
     'plugin:prettier/recommended'
   ],
   rules: {
+    'import/no-named-as-default': 0,
+    // immer 의 draft 사용을 위한 예외
+    // https://github.com/reduxjs/redux-toolkit/issues/521
+    'no-param-reassign': [
+      'error',
+      { props: true, ignorePropertyModificationsFor: ['draft'] }
+    ],
     'react/jsx-filename-extension': [
       'error',
       {
@@ -24,7 +31,8 @@ module.exports = {
       {
         endOfLine: 'auto'
       }
-    ]
+    ],
+    'react/prop-types': 'off'
   },
   settings: {
     'import/resolver': { node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] } }

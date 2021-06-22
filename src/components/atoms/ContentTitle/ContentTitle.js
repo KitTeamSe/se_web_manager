@@ -6,6 +6,7 @@ import { Typography } from '@material-ui/core';
 const TypographyStyled = styled(Typography)`
   font-weight: 600;
   font-size: 1.7rem;
+  user-select: none;
 `;
 
 const ContentTitle = ({ children }) => {

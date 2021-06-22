@@ -7,6 +7,8 @@ import { appbarIconSize } from './iconSize';
 
 const NotificationIconStyled = styled(Notifications)`
   ${appbarIconSize}
+  color: ${({ color }) =>
+    color === 'primary' ? props => props.theme.mainColor : color};
 `;
 
 const BadgeStyled = styled(Badge)`
